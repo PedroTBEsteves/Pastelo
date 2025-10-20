@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17b678c364b97948b4c333091ccb2ff, type: 3}
+  m_Name: Churrasco
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Churrasco
+  <Cost>k__BackingField: 0.8
+  <Value>k__BackingField: 4
+  <Icon>k__BackingField: {fileID: 2446269278895985266, guid: 063db1ef54da057428697bd79cb09890, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: 1797754281553256957, guid: 1dee61281becbb543b8f6e22ef32a329, type: 3}
+  _closedPastelDoughSprites:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: -8679182956094478198, guid: c493380d779441345af50705ed445b41, type: 3}
+    - Key: 1
+      Value: {fileID: -7316560665225682310, guid: 7815c5b9ebe2c544ab559648cc8e764d, type: 3}
+    - Key: 2
+      Value: {fileID: 1055745126767308587, guid: 1f7b7c51826318245993d0ad8648f62c, type: 3}

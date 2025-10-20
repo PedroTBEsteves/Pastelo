@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17b678c364b97948b4c333091ccb2ff, type: 3}
+  m_Name: Tradicional
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Tradicional
+  <Cost>k__BackingField: 0.5
+  <Value>k__BackingField: 1.5
+  <Icon>k__BackingField: {fileID: -5120585517933392877, guid: fb2a6a20623587a449f13ffc6387aeef, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: 1184430581610484425, guid: 3623ca88acd39184faa9982556296beb, type: 3}
+  _closedPastelDoughSprites:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: -8317522304409841102, guid: 1f496f483968b364baff76f393c29fe7, type: 3}
+    - Key: 1
+      Value: {fileID: 8974115523538674798, guid: ad54ba350bd4708408a725f127f16352, type: 3}
+    - Key: 2
+      Value: {fileID: -9164093154171501782, guid: 422c9f7a3543da24595024520884c1c3, type: 3}

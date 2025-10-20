@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17b678c364b97948b4c333091ccb2ff, type: 3}
+  m_Name: Queijo
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Queijo
+  <Cost>k__BackingField: 0.6
+  <Value>k__BackingField: 2
+  <Icon>k__BackingField: {fileID: -7106749182125489907, guid: 7a5834c66328554499cd7a5cf940a18d, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: -7136480523236505686, guid: a66a1ad6184776e47aeeb3dc04939f8b, type: 3}
+  _closedPastelDoughSprites:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 2784357545462207116, guid: 4a6dd6c7b8b80a144b3eddd1c275c443, type: 3}
+    - Key: 1
+      Value: {fileID: 7650548649315539944, guid: 5a8e400ad3f03ad46b90b93115b7114a, type: 3}
+    - Key: 2
+      Value: {fileID: 3025494830785094772, guid: 0ecd67f112cd20d4b81de6ad59996f30, type: 3}

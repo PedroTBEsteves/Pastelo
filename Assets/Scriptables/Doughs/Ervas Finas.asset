@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17b678c364b97948b4c333091ccb2ff, type: 3}
+  m_Name: Ervas Finas
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Ervas Finas
+  <Cost>k__BackingField: 0.8
+  <Value>k__BackingField: 3
+  <Icon>k__BackingField: {fileID: 7976486375383208650, guid: aabfbbd8f269b4441bff35e7bed7f774, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: 4054941489315323230, guid: 9f6409fd11135d244b0e54082dea369e, type: 3}
+  _closedPastelDoughSprites:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: -5536340196685505864, guid: e77bb1d3ba2d9b34e87bb7e4ea07274f, type: 3}
+    - Key: 1
+      Value: {fileID: 6375504994563717052, guid: 48d5749a3148401488a1244f33e142a2, type: 3}
+    - Key: 2
+      Value: {fileID: 1301891721129929922, guid: bda4261a1ffdebd468856552e69d1f40, type: 3}

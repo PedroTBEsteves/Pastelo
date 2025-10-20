@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ee069aa6b57b042a2b33888298d69f, type: 3}
+  m_Name: IngredientsStorageSettings
+  m_EditorClassIdentifier: 
+  _startingDoughs:
+  - {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
+  _startingFillings:
+  - {fileID: 11400000, guid: 28414d76e6b91e140b382b3f199e0986, type: 2}
+  - {fileID: 11400000, guid: 7356f64bd7c066147b19e9e08518dffa, type: 2}
+  _prices:
+  - 5
+  - 10
+  - 20
+  - 30
+  - 50
