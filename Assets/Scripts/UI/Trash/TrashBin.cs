@@ -21,7 +21,11 @@ public class TrashBin : MonoBehaviour
     {
         _raycaster.Raycast(eventData, _raycastResults);
 
-        return _raycastResults.Any(result => result.gameObject == gameObject);
+        var containsTrashBin = _raycastResults.Any(result => result.gameObject == gameObject);
+        
+        _raycastResults.Clear();
+        
+        return containsTrashBin;
     }
 
     public void PlayDiscardSound() => _audioSource.Play();

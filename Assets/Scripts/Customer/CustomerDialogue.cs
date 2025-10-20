@@ -78,15 +78,16 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         _customerSprite.sprite = order.Customer.Sprite;
         _deliveryBag.SetActive(true);
 
+        var dialogues = delivery.IsCorrectFor(order) ? _correctOrderDialogues : _incorrectOrderDialogues;
+        var dialogue = dialogues.GetRandomElement();
+        
         _dialogueSequence = Sequence.Create(Tween.Delay(2f, () =>
         {
-            var dialogues = delivery.IsCorrectFor(order) ? _correctOrderDialogues : _incorrectOrderDialogues;
-            var dialogue = dialogues.GetRandomElement();
             _dialogueObject.SetActive(true);
-            _text.SetText(dialogue.text);
             
             orderController.DeliverOrder(order, delivery);
         }))
+        .Chain(_dialogueWriter.WriteText(dialogue.text, _text, _audioSource))
         .Chain(Tween.Delay(2f, () =>
         {
             _dialogueObject.SetActive(false);
