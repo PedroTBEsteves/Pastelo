@@ -18,6 +18,12 @@ public class MoneyText : ValidatedMonoBehaviour
     [SerializeField]
     private Color _gainedMoneyColor;
 
+    [SerializeField]
+    private AudioSource _moneyGainedAudio;
+    
+    [SerializeField]
+    private AudioSource _moneyLostAudio;
+    
     [Inject]
     private readonly Money _money;
 
@@ -30,6 +36,9 @@ public class MoneyText : ValidatedMonoBehaviour
     private void OnMoneyChanged(Money.MoneyChangedEvent moneyChanged)
     {
         UpdateMoneyText(moneyChanged.Current);
+        
+        if (moneyChanged.Current > moneyChanged.Previous)
+            _moneyGainedAudio.Play();
     }
 
     private void UpdateMoneyText(float value)

@@ -18,11 +18,9 @@ public class OrderTakerBell : ValidatedMonoBehaviour, IPointerDownHandler
     [SerializeField]
     private AudioSource _bellSound;
 
-    private Tween _delay;
-
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_delay.isAlive || !_customerQueue.TryGetNext(out var customer))
+        if (_customerDialogue.IsPlaying || !_customerQueue.TryGetNext(out var customer))
             return;
 
         var order = _orderController.AcceptOrder(customer);

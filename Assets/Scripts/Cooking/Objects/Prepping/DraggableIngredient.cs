@@ -23,7 +23,8 @@ public abstract class DraggableIngredient<TIngredient> : Draggable where TIngred
             ~LayerMask.GetMask("Draggable"));
         
         if (!raycastHit 
-            || !raycastHit.collider.TryGetComponent<OpenPastelDoughArea>(out var openPastelDoughArea))
+            || !raycastHit.collider.TryGetComponent<OpenPastelDoughArea>(out var openPastelDoughArea)
+            || !_money.CanSpend(Ingredient.Cost))
         {
             Destroy(gameObject);
             return;
