@@ -9,6 +9,11 @@ public class QuitButton : ValidatedMonoBehaviour
 
     private void Awake()
     {
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            gameObject.SetActive(false);
+        }
+        
         _button.onClick.AddListener(Application.Quit);
     }
 }
