@@ -1,0 +1,1219 @@
+fileFormatVersion: 2
+guid: bd37e86c438819c4b9b1e119a4e54f36
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5122919342079187508
+    second: OilBubble_0
+  - first:
+      213: 4243256710134272392
+    second: OilBubble_1
+  - first:
+      213: 3845327937692925607
+    second: OilBubble_2
+  - first:
+      213: -9144489028606898900
+    second: OilBubble_3
+  - first:
+      213: 6147422217471635144
+    second: OilBubble_4
+  - first:
+      213: -5840729360544061009
+    second: OilBubble_5
+  - first:
+      213: 188060095066970447
+    second: OilBubble_6
+  - first:
+      213: 3452084756759755227
+    second: OilBubble_7
+  - first:
+      213: -3147618146209729951
+    second: OilBubble_8
+  - first:
+      213: -6851282759160752883
+    second: OilBubble_9
+  - first:
+      213: -3860737708692760498
+    second: OilBubble_10
+  - first:
+      213: -2808589758190183449
+    second: OilBubble_11
+  - first:
+      213: 3322781714149062220
+    second: OilBubble_12
+  - first:
+      213: 7240330177228182322
+    second: OilBubble_13
+  - first:
+      213: 1612419355511008113
+    second: OilBubble_14
+  - first:
+      213: -5317875272608949816
+    second: OilBubble_15
+  - first:
+      213: -255954908616652427
+    second: OilBubble_16
+  - first:
+      213: -7525957380243799336
+    second: OilBubble_17
+  - first:
+      213: -626921993700767218
+    second: OilBubble_18
+  - first:
+      213: 3656418660699189150
+    second: OilBubble_19
+  - first:
+      213: -1586586793214542487
+    second: OilBubble_20
+  - first:
+      213: 5034448084410814783
+    second: OilBubble_21
+  - first:
+      213: -4380952254269185354
+    second: OilBubble_22
+  - first:
+      213: -579016994250553254
+    second: OilBubble_23
+  - first:
+      213: -6909646484843517280
+    second: OilBubble_24
+  - first:
+      213: 675127369704029352
+    second: OilBubble_25
+  - first:
+      213: -606508937356451440
+    second: OilBubble_26
+  - first:
+      213: 3826792163155296722
+    second: OilBubble_27
+  - first:
+      213: 8104488741543644641
+    second: OilBubble_28
+  - first:
+      213: -5831041933086720305
+    second: OilBubble_29
+  - first:
+      213: 732629259450863521
+    second: OilBubble_30
+  - first:
+      213: 5376723106408787604
+    second: OilBubble_31
+  - first:
+      213: -270893701313774519
+    second: OilBubble_32
+  - first:
+      213: 4383152946816653488
+    second: OilBubble_33
+  - first:
+      213: -4909292240410619710
+    second: OilBubble_34
+  - first:
+      213: 6415339958332870033
+    second: OilBubble_35
+  - first:
+      213: -9102092170604595687
+    second: OilBubble_36
+  - first:
+      213: 776451497009642736
+    second: OilBubble_37
+  - first:
+      213: -4743242322943895178
+    second: OilBubble_38
+  - first:
+      213: 5870882087279443776
+    second: OilBubble_39
+  - first:
+      213: 7117936599452799446
+    second: OilBubble_40
+  - first:
+      213: -1400506689174573283
+    second: OilBubble_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: OilBubble_0
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 760
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc56462300cb7e8b0800000000000000
+      internalID: -5122919342079187508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_1
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 760
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88198520f7313ea30800000000000000
+      internalID: 4243256710134272392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_2
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 753
+        width: 112
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ae721bc2695d5530800000000000000
+      internalID: 3845327937692925607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_3
+      rect:
+        serializedVersion: 2
+        x: 1703
+        y: 740
+        width: 175
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2dcd659daf381180800000000000000
+      internalID: -9144489028606898900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_4
+      rect:
+        serializedVersion: 2
+        x: 2181
+        y: 726
+        width: 243
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ceadb4bfe7005550800000000000000
+      internalID: 6147422217471635144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_5
+      rect:
+        serializedVersion: 2
+        x: 2659
+        y: 712
+        width: 311
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa9a393979f81fea0800000000000000
+      internalID: -5840729360544061009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_6
+      rect:
+        serializedVersion: 2
+        x: 2596
+        y: 396
+        width: 35
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4994eaf8af1c9200800000000000000
+      internalID: 188060095066970447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_7
+      rect:
+        serializedVersion: 2
+        x: 2679
+        y: 422
+        width: 22
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd9b43ddbc448ef20800000000000000
+      internalID: 3452084756759755227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_8
+      rect:
+        serializedVersion: 2
+        x: 2753
+        y: 438
+        width: 8
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 162789a09f96154d0800000000000000
+      internalID: -3147618146209729951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_9
+      rect:
+        serializedVersion: 2
+        x: 2822
+        y: 434
+        width: 16
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d05177451aa5be0a0800000000000000
+      internalID: -6851282759160752883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_10
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 422
+        width: 23
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e48996e4287eb6ac0800000000000000
+      internalID: -3860737708692760498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_11
+      rect:
+        serializedVersion: 2
+        x: 2949
+        y: 396
+        width: 35
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eb1647de72e509d0800000000000000
+      internalID: -2808589758190183449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_12
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 406
+        width: 45
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c46b40a3d54ec1e20800000000000000
+      internalID: 3322781714149062220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_13
+      rect:
+        serializedVersion: 2
+        x: 2828
+        y: 400
+        width: 56
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2331a3e6fe1da7460800000000000000
+      internalID: 7240330177228182322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_14
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 185
+        width: 278
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17ba2326cd6706610800000000000000
+      internalID: 1612419355511008113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_15
+      rect:
+        serializedVersion: 2
+        x: 2161
+        y: 185
+        width: 278
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c95f486d9c1336b0800000000000000
+      internalID: -5317875272608949816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_16
+      rect:
+        serializedVersion: 2
+        x: 2629
+        y: 361
+        width: 43
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5790361ed5aa27cf0800000000000000
+      internalID: -255954908616652427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_17
+      rect:
+        serializedVersion: 2
+        x: 2917
+        y: 367
+        width: 31
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d2c6db03ad6e8790800000000000000
+      internalID: -7525957380243799336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_18
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 185
+        width: 380
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0a069fa4c9bc47f0800000000000000
+      internalID: -626921993700767218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_19
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 185
+        width: 354
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9fa51d36653eb230800000000000000
+      internalID: 3656418660699189150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_20
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 185
+        width: 329
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96dfe19b7bf4bf9e0800000000000000
+      internalID: -1586586793214542487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_21
+      rect:
+        serializedVersion: 2
+        x: 2529
+        y: 332
+        width: 56
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f31d37febd3fdd540800000000000000
+      internalID: 5034448084410814783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_22
+      rect:
+        serializedVersion: 2
+        x: 2594
+        y: 304
+        width: 21
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b2a652d22bb333c0800000000000000
+      internalID: -4380952254269185354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_23
+      rect:
+        serializedVersion: 2
+        x: 2965
+        y: 310
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5808ca8c1be6f7f0800000000000000
+      internalID: -579016994250553254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_24
+      rect:
+        serializedVersion: 2
+        x: 2997
+        y: 332
+        width: 56
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aa206381210c10a0800000000000000
+      internalID: -6909646484843517280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_25
+      rect:
+        serializedVersion: 2
+        x: 2512
+        y: 271
+        width: 60
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ac3a5904c88e5900800000000000000
+      internalID: 675127369704029352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_26
+      rect:
+        serializedVersion: 2
+        x: 2594
+        y: 237
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 091e4cbb55f3597f0800000000000000
+      internalID: -606508937356451440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_27
+      rect:
+        serializedVersion: 2
+        x: 2986
+        y: 262
+        width: 11
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d1ce1a723f7b1530800000000000000
+      internalID: 3826792163155296722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_28
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 271
+        width: 62
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ed8cdd229de87070800000000000000
+      internalID: 8104488741543644641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_29
+      rect:
+        serializedVersion: 2
+        x: 2537
+        y: 196
+        width: 55
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fce75fb814af31fa0800000000000000
+      internalID: -5831041933086720305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_30
+      rect:
+        serializedVersion: 2
+        x: 2965
+        y: 219
+        width: 27
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af40a90e62da2a00800000000000000
+      internalID: 732629259450863521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_31
+      rect:
+        serializedVersion: 2
+        x: 2988
+        y: 196
+        width: 55
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49e612d9d25fd9a40800000000000000
+      internalID: 5376723106408787604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_32
+      rect:
+        serializedVersion: 2
+        x: 2629
+        y: 183
+        width: 42
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94c3d492d979d3cf0800000000000000
+      internalID: -270893701313774519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_33
+      rect:
+        serializedVersion: 2
+        x: 2915
+        y: 179
+        width: 34
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b89637d16614dc30800000000000000
+      internalID: 4383152946816653488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_34
+      rect:
+        serializedVersion: 2
+        x: 2966
+        y: 148
+        width: 47
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c05eb7c7b0bedbb0800000000000000
+      internalID: -4909292240410619710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_35
+      rect:
+        serializedVersion: 2
+        x: 2618
+        y: 139
+        width: 37
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19dccc1c3bdd70950800000000000000
+      internalID: 6415339958332870033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_36
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 152
+        width: 45
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 916bf32556fdea180800000000000000
+      internalID: -9102092170604595687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_37
+      rect:
+        serializedVersion: 2
+        x: 2828
+        y: 152
+        width: 56
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fc7490d58286ca00800000000000000
+      internalID: 776451497009642736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_38
+      rect:
+        serializedVersion: 2
+        x: 2927
+        y: 117
+        width: 37
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6799451fc3e9c2eb0800000000000000
+      internalID: -4743242322943895178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_39
+      rect:
+        serializedVersion: 2
+        x: 2710
+        y: 111
+        width: 16
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04fbe723720997150800000000000000
+      internalID: 5870882087279443776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_40
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 102
+        width: 7
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d1d220ff9df7c260800000000000000
+      internalID: 7117936599452799446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OilBubble_41
+      rect:
+        serializedVersion: 2
+        x: 2866
+        y: 104
+        width: 16
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1fe03e1696609ce0800000000000000
+      internalID: -1400506689174573283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
