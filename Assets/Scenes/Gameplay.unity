@@ -565,8 +565,8 @@ VisualEffect:
   m_GameObject: {fileID: 76480311}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: bc1b825ae01d38c44ba7fe0418fa6cf6, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
@@ -603,11 +603,11 @@ Transform:
   m_GameObject: {fileID: 76480311}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.033638, y: -3.91, z: -0.023252115}
+  m_LocalPosition: {x: -0.033638, y: -3.93, z: 1.9767479}
   m_LocalScale: {x: 2.3625, y: 5.525, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 896401406}
+  m_Father: {fileID: 1056291914}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &77863036
 GameObject:
@@ -4653,8 +4653,8 @@ VisualEffect:
   m_GameObject: {fileID: 767703206}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: c2b7296fd0618b5468abc570d1d72dda, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
@@ -4671,7 +4671,10 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 1
+        m_Name: OilBubble_y
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -4691,11 +4694,11 @@ Transform:
   m_GameObject: {fileID: 767703206}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.043640137, y: -0.09, z: 0.057711158}
+  m_LocalPosition: {x: -0.043640137, y: -0.11, z: 2.0577111}
   m_LocalScale: {x: 1, y: 1.3475001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 896401406}
+  m_Father: {fileID: 1056291914}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &786222838
 GameObject:
@@ -5400,8 +5403,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1056291914}
-  - {fileID: 767703209}
-  - {fileID: 76480314}
   m_Father: {fileID: 635548947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &896401407
@@ -6532,6 +6533,9 @@ MonoBehaviour:
   _offSprite: {fileID: 4055822889370042801, guid: 1460cb2133f6abd44bf960b801d205cb, type: 3}
   _onSprite: {fileID: -7831237189974791720, guid: b773d14d70304864d9c5324658ebad44, type: 3}
   _heightTransform: {fileID: 135053459}
+  _visualEffects:
+  - {fileID: 767703208}
+  - {fileID: 76480313}
 --- !u!61 &1056291912
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6649,6 +6653,8 @@ Transform:
   - {fileID: 135053459}
   - {fileID: 1509946806}
   - {fileID: 596877890}
+  - {fileID: 767703209}
+  - {fileID: 76480314}
   m_Father: {fileID: 896401406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1056291915

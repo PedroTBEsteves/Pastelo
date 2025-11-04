@@ -3,6 +3,7 @@ using System.Linq;
 using KBCore.Refs;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.VFX;
 
 public class FryingArea : ValidatedMonoBehaviour
 {
@@ -30,6 +31,9 @@ public class FryingArea : ValidatedMonoBehaviour
     [SerializeField]
     private Transform _heightTransform;
     
+    [SerializeField]
+    private VisualEffect[] _visualEffects;
+    
     private readonly DraggableClosedPastel[] _fryingPastels = new DraggableClosedPastel[4];
 
     private bool _raised = true;
@@ -47,18 +51,27 @@ public class FryingArea : ValidatedMonoBehaviour
         {
             _fryingSource.Play();
             _stoveSound.Play();
+            foreach (var visualEffect in _visualEffects)
+                visualEffect.Play();
         }
         else
+        {
             _fryingSource.Stop();
+            foreach (var visualEffect in _visualEffects)
+                visualEffect.Stop();
+        }
         
         _spriteRenderer.sprite = _raised ? _offSprite : _onSprite;
     }
     
     public bool TryAdd(DraggableClosedPastel draggableClosedPastel, Vector3 position)
     {
-        if (!_raised || _fryingPastels.All(closed => closed != null))
+        if (_fryingPastels.All(closed => closed != null))
             return false;
 
+        if (_fryingPastels.All(closed => closed == null))
+            ToggleRaised();
+        
         var index = GetNearestSlotIndex(position);
         var newPosition = GetPositionForSlot(index);
         draggableClosedPastel.transform.position = newPosition;
@@ -116,9 +129,14 @@ public class FryingArea : ValidatedMonoBehaviour
     public void Remove(DraggableClosedPastel draggableClosedPastel)
     {
         var index = Array.IndexOf(_fryingPastels, draggableClosedPastel);
-        
+
         if (index != -1)
+        {
             _fryingPastels[index] = null;
+            
+            if (_fryingPastels.All(pastel => pastel == null))
+                ToggleRaised();
+        }
     }
     
     public void OnPointerDown(PointerEventData eventData)
