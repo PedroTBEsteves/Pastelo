@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using PrimeTween;
@@ -40,9 +41,29 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     [Inject]
     private DialogueWriter _dialogueWriter;
     
+    [Inject]
+    private readonly CustomerQueue _customerQueue;
+    
     private Sequence _dialogueSequence;
 
     public bool IsPlaying => _dialogueSequence.isAlive;
+
+    private void Start()
+    {
+        _customerQueue.CustomerArrived += customer =>
+        {
+            if (_customerSprite != null)
+                _customerSprite.sprite = customer.Sprite;
+        };
+
+        _customerQueue.CustomerExpired += customer =>
+        {
+            if (_customerQueue.TryPeek(out var nextCustomer))
+                _customerSprite.sprite = nextCustomer.Sprite;
+            else
+                _customerSprite.sprite = null;
+        };
+    }
 
     public Sequence OrderDialogue(Order order)
     {
@@ -67,7 +88,10 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             .Chain(Tween.Delay(_delayAfterTextIsDone, () =>
             {
                 _dialogueObject.SetActive(false);
-                _customerSprite.sprite = null;
+                if (_customerQueue.TryPeek(out var nextCustomer))
+                    _customerSprite.sprite = nextCustomer.Sprite;
+                else
+                    _customerSprite.sprite = null;
             }));
         
         return _dialogueSequence;
@@ -91,7 +115,10 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         .Chain(Tween.Delay(2f, () =>
         {
             _dialogueObject.SetActive(false);
-            _customerSprite.sprite = null;
+            if (_customerQueue.TryPeek(out var nextCustomer))
+                _customerSprite.sprite = nextCustomer.Sprite;
+            else
+                _customerSprite.sprite = null;
             _deliveryBag.SetActive(false);
         }));
 

@@ -47,6 +47,13 @@ public class CustomerQueue : ITickable
 
         return hasCustomer;
     }
+
+    public bool TryPeek(out Customer customer)
+    {
+        var hasNext =  _queue.TryPeek(out var status);
+        customer = hasNext ? status.Customer : null;
+        return hasNext;
+    }
     
     public void Tick(float deltaTime)
     {
