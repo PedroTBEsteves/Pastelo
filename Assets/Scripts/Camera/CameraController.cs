@@ -23,6 +23,16 @@ public class CameraController
 
     public event Action SectionTransitionStarted = delegate { };
     public event Action SectionTransitionFinished = delegate { };
+    public event Action CameraMoved = delegate { };
+
+    public Rect GetViewRect()
+    {
+        var height = _currentCamera.orthographicSize * 2;
+        var width = _currentCamera.aspect * height;
+        var size = new Vector3(width, height);
+        var position = _currentCamera.transform.position - size / 2;
+        return new Rect(position, size);
+    }
     
     public void GoToNextSection()
     {
