@@ -18,6 +18,7 @@ public class ClosedPastelDough
     public event Action<FriedLevel> FriedLevelChanged;
 
     public Dough Dough => _recipe.Dough;
+    public float FryingProgress => _timeFrying / _timeToIncreaseFriedLevelInSeconds;
     
     public void Fry(float deltaTime)
     {

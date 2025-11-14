@@ -3,6 +3,7 @@ using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DraggableClosedPastel : Draggable
 {
@@ -11,6 +12,12 @@ public class DraggableClosedPastel : Draggable
 
     [SerializeField, Self]
     private BoxCollider2D _collider;
+
+    [SerializeField, Child(Flag.Editable)]
+    private Slider _rawSlider;
+
+    [SerializeField, Child(Flag.Editable)]
+    private Slider _cookedSlider;
 
     [Inject]
     private readonly CameraController _cameraController;
@@ -22,38 +29,70 @@ public class DraggableClosedPastel : Draggable
 
     private FryingArea _fryingArea;
     private Vector3 _dragStartPosition;
-    private bool _raised = true;
-    
+    private bool _frying;
+
+    private Slider _activeSlider;
+
+    private void Start()
+    {
+        _rawSlider.gameObject.SetActive(false);
+        _cookedSlider.gameObject.SetActive(false);
+    }
+
     public void Initialize(ClosedPastelDough closedPastelDough)
     {
         _closedPastelDough = closedPastelDough;
-        _closedPastelDough.FriedLevelChanged += UpdateSprite;
-        UpdateSprite(FriedLevel.Raw);
-    }
-    
-    public void ToggleRaised()
-    {
-        _raised = !_raised;
-        _collider.enabled = _raised;
+        _closedPastelDough.FriedLevelChanged += OnFriedLevelChanged;
+        OnFriedLevelChanged(FriedLevel.Raw);
     }
 
     public Pastel GetPastel() => _closedPastelDough.Finish();
 
-    private void UpdateSprite(FriedLevel level) =>
+    private void OnFriedLevelChanged(FriedLevel level)
+    {
         _spriteRenderer.sprite = _closedPastelDough.Dough.GetClosedDoughSprite(level);
+
+        switch (level)
+        {
+            case FriedLevel.Raw:
+                _activeSlider = _rawSlider;
+                break;
+            case FriedLevel.Done:
+                _activeSlider = _cookedSlider;
+                break;
+            case FriedLevel.Burnt:
+                _activeSlider = null;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(level), level, null);
+        }
+    }
+        
 
     protected override void Update()
     {
         base.Update();
         
-        if (_raised || !_timeController.Running)
+        if (!_frying || !_timeController.Running)
             return;
         
         _closedPastelDough.Fry(Time.deltaTime);
+
+        if (_activeSlider != null)
+            _activeSlider.normalizedValue = _closedPastelDough.FryingProgress;
+    }
+    
+    private void SetFrying(bool frying)
+    {
+        _frying = frying;
+        _rawSlider.gameObject.SetActive(_frying);
+        _cookedSlider.gameObject.SetActive(_frying);
+        _collider.enabled = _frying;
     }
     
     protected override void OnHold(PointerEventData eventData)
     {
+        SetFrying(false);
         _fryingArea?.Remove(this);
         _dragStartPosition = _cameraController.ScreenToWorldPointy(eventData.position);
     }
@@ -71,15 +110,17 @@ public class DraggableClosedPastel : Draggable
             return;
 
         if (CheckFryingArea(raycastHit, mousePosition))
+        {
+            SetFrying(true);
             return;
+        }
+            
 
         if (CheckDelivery(raycastHit))
         {
             Destroy(gameObject);
             return;
         }
-        
-        transform.position = _dragStartPosition;
     }
 
     private bool CheckFryingArea(RaycastHit2D raycastHit2D, Vector2 mousePosition)
@@ -103,6 +144,4 @@ public class DraggableClosedPastel : Draggable
         
         return true;
     }
-
-    protected override bool CanDrag() => _raised;
 }

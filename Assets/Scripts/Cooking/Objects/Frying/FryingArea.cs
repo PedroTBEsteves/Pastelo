@@ -42,9 +42,6 @@ public class FryingArea : ValidatedMonoBehaviour
     
     public void ToggleRaised()
     {
-        foreach (var fryingPastel in _fryingPastels)
-            fryingPastel?.ToggleRaised();
-        
         _raised = !_raised;
 
         if (!_raised)
