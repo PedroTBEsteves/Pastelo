@@ -15,5 +15,5 @@ MonoBehaviour:
   <QueueWaitTimeLimit>k__BackingField: 60
   <MinCustomerArrivalTime>k__BackingField: 20
   <MaxCustomerArrivalTime>k__BackingField: 40
-  <OrderCompletionTimeLimit>k__BackingField: 120
+  <OrderCompletionTimeLimit>k__BackingField: 5
   <StrikesToFail>k__BackingField: 3

@@ -6,13 +6,22 @@
             "id": "c5b1370f-c993-4431-82ca-eb104b3df73c",
             "actions": [
                 {
-                    "name": "Click",
+                    "name": "Press",
                     "type": "Button",
                     "id": "084d2be6-9d5c-4178-9f29-642d6c80d389",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "51b0b3f8-ec37-42ad-a41f-cd686717719a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Drag",
@@ -32,18 +41,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Click",
+                    "action": "Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "991c4c1c-7e5e-4b45-9d63-f967944ff58b",
+                    "name": "One Modifier",
+                    "id": "e2f1e07a-568b-4009-b5a1-31ede63751b1",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drag",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "80917340-b24d-44a2-a599-03199b3cedf3",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drag",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "1dace67e-ca55-4c75-bfda-f3e4cd7470db",
                     "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Drag",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "52254c01-44b8-40b8-952e-23c9aa11749b",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

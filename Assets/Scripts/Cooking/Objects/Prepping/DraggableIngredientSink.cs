@@ -11,6 +11,9 @@ public abstract class DraggableIngredientSink<TIngredient> : DraggableSink<Dragg
     
     [Inject]
     private readonly IngredientsStorage _ingredientsStorage;
+    
+    [Inject]
+    private readonly IPopupTextService _popupTextService;
 
     [SerializeField, Child(Flag.ExcludeSelf)]
     private Transform _lockedIndicator;
@@ -39,6 +42,10 @@ public abstract class DraggableIngredientSink<TIngredient> : DraggableSink<Dragg
         if (_ingredientsStorage.TryBuyIngredient(ingredient))
         {
             _lockedIndicator.gameObject.SetActive(false);
+        }
+        else
+        {
+            _popupTextService.ShowError("Sem dinheiro suficiente!", transform.position);
         }
     }
 }

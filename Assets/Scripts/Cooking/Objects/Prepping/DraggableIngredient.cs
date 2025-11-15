@@ -13,6 +13,9 @@ public abstract class DraggableIngredient<TIngredient> : Draggable where TIngred
     [Inject]
     private readonly Money _money;
     
+    [Inject]
+    private readonly IPopupTextService _popupTextService;
+    
     protected sealed override void OnDrop(PointerEventData eventData)
     {
         var mousePosition = _cameraController.ScreenToWorldPointy(eventData.position);
@@ -23,16 +26,21 @@ public abstract class DraggableIngredient<TIngredient> : Draggable where TIngred
             ~LayerMask.GetMask("Draggable"));
         
         if (!raycastHit 
-            || !raycastHit.collider.TryGetComponent<OpenPastelDoughArea>(out var openPastelDoughArea)
-            || !_money.CanSpend(Ingredient.Cost))
+            || !raycastHit.collider.TryGetComponent<OpenPastelDoughArea>(out var openPastelDoughArea))
         {
             Destroy(gameObject);
             return;
         }
 
+        if (!_money.CanSpend(Ingredient.Cost))
+        {
+            Destroy(gameObject);
+            _popupTextService.ShowError("Sem dinheiro suficiente!", transform.position);
+            return;
+        }
+
         if (TryAddToOpenDough(openPastelDoughArea))
         {
-            Debug.Log("opa");
             _money.TrySpend(Ingredient.Cost);
         }
     }
