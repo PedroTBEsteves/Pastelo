@@ -14,6 +14,8 @@ public class Order
     public int Number { get; }
     public Customer Customer { get; }
     public Recipe Recipe { get; }
+    public float RemainingTime => _timeLimit - _elapsedTime;
+    public float NormalizedRemainingTime => RemainingTime / _timeLimit;
 
     public void Tick(float deltaTime)
     {

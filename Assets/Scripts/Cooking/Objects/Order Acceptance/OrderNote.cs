@@ -16,7 +16,7 @@ public class OrderNote : Draggable
     private TextMeshProUGUI _orderNumber;
     
     [SerializeField]
-    private OrderNoteFilling _fillingPrefab;
+    private OrderNoteFillingGroup _fillingGroupPrefab;
     
     [SerializeField]
     private Image _doughIcon;
@@ -26,6 +26,9 @@ public class OrderNote : Draggable
 
     [SerializeField]
     private AudioClip _failAudio;
+    
+    [SerializeField]
+    private Slider _remainingTimeSlider;
 
     private Vector3 _positionOnHold;
     
@@ -49,11 +52,23 @@ public class OrderNote : Draggable
         
         _doughIcon.sprite = order.Recipe.Dough.Icon;
 
+        var fillingGroup = Instantiate(_fillingGroupPrefab, _fillingsRoot); 
+        
         foreach (var (filling, amount) in order.Recipe.Fillings)
         {
-            var fillingNote = Instantiate(_fillingPrefab, _fillingsRoot);
-            fillingNote.Initialize(filling, amount);
+            if (!fillingGroup.TryAdd(filling, amount))
+            {
+                fillingGroup = Instantiate(_fillingGroupPrefab, _fillingsRoot);
+                fillingGroup.TryAdd(filling, amount);
+            }
+            else
+            {
+                fillingGroup.TryAdd(filling, amount);
+            }
         }
+        
+        _remainingTimeSlider.transform.SetAsLastSibling();
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
     }
 
     public void PostInitialize()
@@ -68,6 +83,13 @@ public class OrderNote : Draggable
         
         Destroy(gameObject);
         AudioPlayer.Instance.Play(_failAudio);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        _remainingTimeSlider.normalizedValue = Order.NormalizedRemainingTime;
     }
 
     protected override void OnHold(PointerEventData eventData)
