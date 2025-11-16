@@ -56,15 +56,11 @@ public class OrderNote : Draggable
         
         foreach (var (filling, amount) in order.Recipe.Fillings)
         {
-            if (!fillingGroup.TryAdd(filling, amount))
-            {
-                fillingGroup = Instantiate(_fillingGroupPrefab, _fillingsRoot);
-                fillingGroup.TryAdd(filling, amount);
-            }
-            else
-            {
-                fillingGroup.TryAdd(filling, amount);
-            }
+            if (fillingGroup.TryAdd(filling, amount))
+                continue;
+            
+            fillingGroup = Instantiate(_fillingGroupPrefab, _fillingsRoot);
+            fillingGroup.TryAdd(filling, amount);
         }
         
         _remainingTimeSlider.transform.SetAsLastSibling();
