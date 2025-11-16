@@ -2,7 +2,6 @@ using System;
 using KBCore.Refs;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
 public class SceneSection : ValidatedMonoBehaviour
 {
     [SerializeField, Self]
@@ -13,6 +12,14 @@ public class SceneSection : ValidatedMonoBehaviour
     
     [field: SerializeField]
     public SceneSection Previous { get; private set; }
+    
+    private float _size;
+
+    private void Awake()
+    {
+        _size = _sizeCollider.size.x - 0.005f;
+        Destroy(_sizeCollider);
+    }
 
     public void MoveNext()
     {
@@ -34,12 +41,13 @@ public class SceneSection : ValidatedMonoBehaviour
     
     public float GetXMin() => transform.position.x - GetHalfWidth();
 
-    private float GetHalfWidth() => _sizeCollider.size.x / 2;
+    public bool IsInside(float position) => position >= GetXMin() && position <= GetXMax();
+    
+    private float GetHalfWidth() => _size / 2;
     
     protected override void OnValidate()
     {
         base.OnValidate();
-        _sizeCollider.isTrigger = true;
         if (Next != null)
             Next.Previous = this;
         if (Previous != null)

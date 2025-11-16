@@ -16,6 +16,9 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
     [Inject]
     private readonly TrashBin _trashBin;
     
+    [Inject]
+    private readonly SectionController _sectionController;
+    
     private Vector2 _holdOffset;
     
     protected virtual void OnHold(PointerEventData eventData) { }
@@ -35,8 +38,8 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
         _sprite = GetComponent<SpriteRenderer>();
         _order = _sprite != null ? _sprite.sortingOrder : 0;
 
-        _cameraController.SectionTransitionStarted += OnCameraTransitionStarted;
-        _cameraController.SectionTransitionFinished += OnCameraTransitionFinished;
+        _cameraController.CameraBeganMoving += OnCameraTransitionStarted;
+        _cameraController.CameraEndedMoving += OnCameraTransitionFinished;
     }
 
     protected virtual void Update()
@@ -53,6 +56,7 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
             return;
         
         transform.position = _cameraController.ScreenToWorldPointy(eventData.position);
+        transform.parent = null;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -91,6 +95,7 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
         }
         
         _holdOffset = Vector2.zero;
+        _sectionController.AttachToSection(transform);
         OnDrop(eventData);
         _dragging = false;
     }

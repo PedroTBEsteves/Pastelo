@@ -604,8 +604,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.033638, y: -3.93, z: 1.9767479}
-  m_LocalScale: {x: 2.3625, y: 5.525, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1056291914}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5132,7 +5132,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -240.38}
-  m_SizeDelta: {x: 160, y: 300}
+  m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &830857751
 MonoBehaviour:
@@ -7980,23 +7980,9 @@ MonoBehaviour:
       Value: {x: 36.36364, y: 0, z: -10}
     - Key: 3
       Value: {x: 54.54546, y: 0, z: -10}
-  _cameraTransitionSettings:
-    duration: 0.7
-    ease: 28
-    customEase:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    cycles: 1
-    cycleMode: 0
-    startDelay: 0
-    endDelay: 0
-    useUnscaledTime: 0
-    _useFixedUpdate: 0
-    _updateType: 0
-  _transitionAudioSource: {fileID: 1464197134}
+  _cameraSpeed: 20
+  _cameraAcceleration: 200
+  _sectionController: {fileID: 635548946}
 --- !u!114 &1464197127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10245,7 +10231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939608415}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.0067304024, z: -0, w: 0.99997735}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10254,7 +10240,7 @@ Transform:
   - {fileID: 1958252927}
   - {fileID: 247462892}
   m_Father: {fileID: 635548947}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.771, z: 0}
 --- !u!114 &1939608418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10287,7 +10273,7 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: -30
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -11247,7 +11233,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 160, y: -240.38}
-  m_SizeDelta: {x: 160, y: 300}
+  m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2129319300
 MonoBehaviour:

@@ -1,4 +1,3 @@
-using System;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,42 +11,14 @@ public class SectionTransitionButton : MonoBehaviour, IPointerEnterHandler, IPoi
     
     [Inject]
     private readonly CameraController _cameraController;
-
-    [Inject]
-    private readonly ICustomerDialogue _customerDialogue;
-
-    private bool _pointeIsInside;
-
-    private void Awake()
-    {
-        _cameraController.SectionTransitionFinished += OnSectionTransitionFinished;
-    }
-
-    private void Transition()
-    {
-        if (_customerDialogue.IsPlaying)
-            return;
-        
-        if (_previous)
-            _cameraController.GoToPreviousSection();
-        else
-            _cameraController.GoToNextSection();
-    }
-
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Transition();
-        _pointeIsInside = true;
+        _cameraController.StartMoving(!_previous);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _pointeIsInside = false;
-    }
-
-    private void OnSectionTransitionFinished()
-    {
-        if (_pointeIsInside)
-            Transition();
+        _cameraController.StopMoving();
     }
 }

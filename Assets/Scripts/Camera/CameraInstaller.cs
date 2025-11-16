@@ -1,23 +1,28 @@
 using AYellowpaper.SerializedCollections;
-using PrimeTween;
+using KBCore.Refs;
 using Reflex.Core;
 using UnityEngine;
 
-public class CameraInstaller : MonoBehaviour, IInstaller
+public class CameraInstaller : ValidatedMonoBehaviour, IInstaller
 {
     [SerializeField]
     private SerializedDictionary<CameraSection, Vector3> _sectionPositions;
+
+    [SerializeField]
+    private float _cameraSpeed;
     
     [SerializeField]
-    private TweenSettings _cameraTransitionSettings;
+    private float _cameraAcceleration = 30f;
     
-    [SerializeField]
-    private AudioSource _transitionAudioSource;
+    [SerializeField, Scene]
+    private SectionController _sectionController;
     
     public void InstallBindings(ContainerBuilder containerBuilder)
     {
-        var cameraController = new CameraController(_sectionPositions, _cameraTransitionSettings, _transitionAudioSource);
+        var cameraController = new CameraController(_sectionPositions, _cameraSpeed, _cameraAcceleration);
         
-        containerBuilder.AddScoped(_ => cameraController, typeof(CameraController));
+        containerBuilder
+            .AddScoped(_ => cameraController, typeof(CameraController), typeof(ITickable))
+            .AddScoped(_ => _sectionController);
     }
 }

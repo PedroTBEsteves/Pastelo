@@ -87,7 +87,6 @@ public class DraggableClosedPastel : Draggable
         _frying = frying;
         _rawSlider.gameObject.SetActive(_frying);
         _cookedSlider.gameObject.SetActive(_frying);
-        _collider.enabled = _frying;
     }
     
     protected override void OnHold(PointerEventData eventData)
