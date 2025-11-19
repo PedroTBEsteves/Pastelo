@@ -1,11 +1,17 @@
+using System;
+using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class DraggableIngredient<TIngredient> : Draggable where TIngredient : Ingredient
+[RequireComponent(typeof(Draggable))]
+public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour where TIngredient : Ingredient
 {
     [SerializeField]
     public TIngredient Ingredient;
+    
+    [field: SerializeField, Self]
+    protected Draggable Draggable { get; private set; }
 
     [Inject]
     private readonly CameraController _cameraController;
@@ -15,8 +21,18 @@ public abstract class DraggableIngredient<TIngredient> : Draggable where TIngred
     
     [Inject]
     private readonly IPopupTextService _popupTextService;
-    
-    protected sealed override void OnDrop(PointerEventData eventData)
+
+    protected virtual void Awake()
+    {
+        Draggable.Dropped += OnDropped;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        Draggable.Dropped -= OnDropped;
+    }
+
+    private void OnDropped(PointerEventData eventData)
     {
         var mousePosition = _cameraController.ScreenToWorldPointy(eventData.position);
         var raycastHit = Physics2D.Raycast(

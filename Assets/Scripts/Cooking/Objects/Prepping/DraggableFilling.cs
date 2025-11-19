@@ -7,7 +7,21 @@ public class DraggableFilling : DraggableIngredient<Filling>
     private SpriteRenderer _spriteRenderer;
     
     private bool _addedToPastel;
-    
+
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        Draggable.AddCanDragHandler(CanDrag);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        
+        Draggable.RemoveCanDragHandler(CanDrag);
+    }
+
     protected override bool TryAddToOpenDough(OpenPastelDoughArea openPastelDoughArea)
     {
         _addedToPastel = openPastelDoughArea.TryAddFilling(this);
@@ -20,5 +34,5 @@ public class DraggableFilling : DraggableIngredient<Filling>
         return _addedToPastel;
     }
 
-    protected override bool CanDrag() => !_addedToPastel;
+    private bool CanDrag() => !_addedToPastel;
 }

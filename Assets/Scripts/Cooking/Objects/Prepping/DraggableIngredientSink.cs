@@ -4,8 +4,18 @@ using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class DraggableIngredientSink<TIngredient> : DraggableSink<DraggableIngredient<TIngredient>>, IPointerDownHandler where TIngredient : Ingredient
+[RequireComponent(typeof(DraggableSink))]
+public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehaviour, IPointerDownHandler where TIngredient : Ingredient
 {
+    [SerializeField] 
+    private TIngredient _ingredient;
+    
+    [SerializeField, Child(Flag.ExcludeSelf)]
+    private Transform _lockedIndicator;
+    
+    [SerializeField, Self]
+    private DraggableSink _draggableSink;
+    
     [Inject]
     private readonly Money _money;
     
@@ -15,31 +25,33 @@ public abstract class DraggableIngredientSink<TIngredient> : DraggableSink<Dragg
     [Inject]
     private readonly IPopupTextService _popupTextService;
 
-    [SerializeField, Child(Flag.ExcludeSelf)]
-    private Transform _lockedIndicator;
-
     private void Awake()
     {
-        var ingredient = DraggablePrefab.Ingredient;
-        var isUnlocked = _ingredientsStorage.Contains(ingredient);
+        var isUnlocked = _ingredientsStorage.Contains(_ingredient);
         
         _lockedIndicator.gameObject.SetActive(!isUnlocked);
+        
+        _draggableSink.AddCanCreateDraggableHandler(CanCreateDraggable);
     }
 
-    protected override bool CanCreateDraggable()
+    private void OnDestroy()
     {
-        return _ingredientsStorage.Contains(DraggablePrefab.Ingredient);
+        _draggableSink.RemoveCanCreateDraggableHandler(CanCreateDraggable);
+    }
+
+    private bool CanCreateDraggable()
+    {
+        return _ingredientsStorage.Contains(_ingredient);
     }
 
     public void OnPointerDown(PointerEventData eventData)
-    {
-        var ingredient = DraggablePrefab.Ingredient;
-        var isUnlocked = _ingredientsStorage.Contains(ingredient);
+    { ;
+        var isUnlocked = _ingredientsStorage.Contains(_ingredient);
 
         if (isUnlocked)
             return;
         
-        if (_ingredientsStorage.TryBuyIngredient(ingredient))
+        if (_ingredientsStorage.TryBuyIngredient(_ingredient))
         {
             _lockedIndicator.gameObject.SetActive(false);
         }

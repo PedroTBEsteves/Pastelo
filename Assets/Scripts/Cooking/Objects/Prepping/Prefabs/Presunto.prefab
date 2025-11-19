@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 8547888849210649473}
   - component: {fileID: 6050377562578718346}
   - component: {fileID: 5939942048187693033}
+  - component: {fileID: 3095736115967226448}
+  - component: {fileID: -8739866675996726071}
+  - component: {fileID: -816651892564908120}
   m_Layer: 0
   m_Name: Presunto
   m_TagString: Untagged
@@ -101,8 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef892416e1a754845b9dfe6ce9b6e2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDisposable: 1
   Ingredient: {fileID: 11400000, guid: 28414d76e6b91e140b382b3f199e0986, type: 2}
+  <Draggable>k__BackingField: {fileID: 3095736115967226448}
   _spriteRenderer: {fileID: 8547888849210649473}
 --- !u!114 &5939942048187693033
 MonoBehaviour:
@@ -117,3 +120,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _injectionStrategy: 2
+--- !u!114 &3095736115967226448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056743771432774934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bff05f1d2d97d4409d168375c457744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8739866675996726071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056743771432774934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e08b48f22dd464e98d11c0f6105822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _draggable: {fileID: 3095736115967226448}
+--- !u!114 &-816651892564908120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056743771432774934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d768d90775b7f488aaa59afb08cd7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _draggable: {fileID: 3095736115967226448}

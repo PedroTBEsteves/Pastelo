@@ -1,10 +1,12 @@
+using KBCore.Refs;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class OrderNote : Draggable
+[RequireComponent(typeof(Draggable))]
+public class OrderNote : ValidatedMonoBehaviour
 {
     [Inject]
     private readonly OrderController _orderController;
@@ -29,6 +31,9 @@ public class OrderNote : Draggable
     
     [SerializeField]
     private Slider _remainingTimeSlider;
+    
+    [SerializeField, Self]
+    private Draggable _draggable;
 
     private Vector3 _positionOnHold;
     
@@ -37,11 +42,15 @@ public class OrderNote : Draggable
     private void Awake()
     {
         _orderController.OrderExpired += OnOrderExpired;
+        _draggable.Held += OnHeld;
+        _draggable.Dropped += OnDropped;
     }
 
     private void OnDestroy()
     {
         _orderController.OrderExpired -= OnOrderExpired;
+        _draggable.Held -= OnHeld;
+        _draggable.Dropped -= OnDropped;
     }
 
     public void Initialize(Order order)
@@ -81,19 +90,17 @@ public class OrderNote : Draggable
         AudioPlayer.Instance.Play(_failAudio);
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-
         _remainingTimeSlider.normalizedValue = Order.NormalizedRemainingTime;
     }
 
-    protected override void OnHold(PointerEventData eventData)
+    private void OnHeld(PointerEventData _)
     {
         _positionOnHold = transform.position;
     }
 
-    protected override void OnDrop(PointerEventData eventData)
+    private void OnDropped(PointerEventData eventData)
     {
         var mousePosition = _cameraController.ScreenToWorldPointy(eventData.position);
         var raycastHit = Physics2D.Raycast(

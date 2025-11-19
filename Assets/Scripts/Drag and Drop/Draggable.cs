@@ -1,36 +1,28 @@
 using System;
-using KBCore.Refs;
+using System.Collections.Generic;
+using System.Linq;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField]
-    private bool _isDisposable;
-    
     [Inject]
     private readonly CameraController _cameraController;
-
-    [Inject]
-    private readonly TrashBin _trashBin;
-    
-    [Inject]
-    private readonly SectionController _sectionController;
     
     private Vector2 _holdOffset;
-    
-    protected virtual void OnHold(PointerEventData eventData) { }
-    protected virtual void OnDrop(PointerEventData eventData) { }
-
-    protected virtual bool CanDrag() => true;
     
     private SpriteRenderer _sprite;
     private int _order;
     
     private bool _dragging;
     private bool _transitioning;
+    
+    private readonly List<Func<bool>> _canDragHandlers = new();
+    
+    public event Action<PointerEventData> Held = delegate { };
+    public event Action<PointerEventData> Dropped = delegate { };
     
     private void Awake()
     {
@@ -42,7 +34,7 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
         _cameraController.CameraEndedMoving += OnCameraTransitionFinished;
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         if (!_transitioning)
             return;
@@ -56,7 +48,6 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
             return;
         
         transform.position = _cameraController.ScreenToWorldPointy(eventData.position);
-        transform.parent = null;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -68,9 +59,8 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
             _sprite.sortingOrder = 9;
         
         _holdOffset = transform.position - eventData.pointerCurrentRaycast.worldPosition;
-        OnHold(eventData);
+        Held(eventData);
         _dragging = true;
-        _trashBin.Show();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -81,24 +71,14 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
         if (_sprite != null)
             _sprite.sortingOrder = _order;
         
-        if (_isDisposable)
-        {
-            if (_trashBin.IsInside(eventData))
-            {
-                _trashBin.PlayDiscardSound();
-                _trashBin.Hide();
-                Destroy(gameObject);
-                return;
-            }
-            
-            _trashBin.Hide();
-        }
-        
         _holdOffset = Vector2.zero;
-        _sectionController.AttachToSection(transform);
-        OnDrop(eventData);
+        Dropped(eventData);
         _dragging = false;
     }
+    
+    public void AddCanDragHandler(Func<bool> handler) => _canDragHandlers.Add(handler);
+    
+    public void RemoveCanDragHandler(Func<bool> handler) =>  _canDragHandlers.Remove(handler);
 
     private void OnCameraTransitionStarted()
     {
@@ -112,4 +92,6 @@ public class Draggable : ValidatedMonoBehaviour, IDragHandler, IBeginDragHandler
     {
         _transitioning = false;
     }
+    
+    private bool CanDrag() => _canDragHandlers.Aggregate(true, (agg, handler) => agg && handler());
 }

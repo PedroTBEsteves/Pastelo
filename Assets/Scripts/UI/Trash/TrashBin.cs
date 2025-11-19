@@ -17,7 +17,23 @@ public class TrashBin : MonoBehaviour
     
     private List<RaycastResult> _raycastResults = new();
     
-    public bool IsInside(PointerEventData eventData)
+    public void Show()
+    {
+        _image.enabled = true;
+    }
+    
+    public void TryDiscard(Draggable draggable, PointerEventData eventData)
+    {
+        if (IsInside(eventData))
+        {
+            Destroy(draggable.gameObject);
+            PlayDiscardSound();
+        }
+        
+        Hide();
+    }
+    
+    private bool IsInside(PointerEventData eventData)
     {
         _raycaster.Raycast(eventData, _raycastResults);
 
@@ -28,15 +44,12 @@ public class TrashBin : MonoBehaviour
         return containsTrashBin;
     }
 
-    public void PlayDiscardSound() => _audioSource.Play();
-    
-    public void Show()
-    {
-        _image.enabled = true;
-    }
+    private void PlayDiscardSound() => _audioSource.Play();
 
-    public void Hide()
+    private void Hide()
     {
         _image.enabled = false;
     }
+
+    
 }

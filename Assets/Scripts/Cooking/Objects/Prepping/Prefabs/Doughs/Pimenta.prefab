@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8547888849210649473}
   - component: {fileID: -2035481593732986065}
   - component: {fileID: -9143432419971508112}
+  - component: {fileID: 3095736115967226448}
+  - component: {fileID: 8099231851693826219}
   m_Layer: 0
   m_Name: Pimenta
   m_TagString: Untagged
@@ -101,8 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25364c8626ad99e448fd75203552b61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDisposable: 1
   Ingredient: {fileID: 11400000, guid: 3bfc5e16d6e859a4cac6904982c2b7da, type: 2}
+  <Draggable>k__BackingField: {fileID: 3095736115967226448}
 --- !u!114 &-9143432419971508112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,3 +118,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _injectionStrategy: 2
+--- !u!114 &3095736115967226448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056743771432774934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bff05f1d2d97d4409d168375c457744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8099231851693826219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056743771432774934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d768d90775b7f488aaa59afb08cd7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _draggable: {fileID: 3095736115967226448}

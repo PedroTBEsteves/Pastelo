@@ -1,16 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class DraggableSink<TDraggable> : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler where TDraggable : Draggable
+public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField]
-    protected TDraggable DraggablePrefab;
+    private Draggable _draggablePrefab;
 
     [Inject]
     private readonly CameraController _cameraController;
 
     private Draggable _draggable;
+
+    private readonly List<Func<bool>> _canCreateDraggableHandlers = new();
+    
+    public void AddCanCreateDraggableHandler(Func<bool> handler) => _canCreateDraggableHandlers.Add(handler);
+    
+    public void RemoveCanCreateDraggableHandler(Func<bool> handler) =>  _canCreateDraggableHandlers.Remove(handler);
     
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -19,7 +28,7 @@ public abstract class DraggableSink<TDraggable> : MonoBehaviour, IBeginDragHandl
         
         var position = eventData.pointerCurrentRaycast.worldPosition;
         
-        _draggable = Instantiate(DraggablePrefab, position, Quaternion.identity);
+        _draggable = Instantiate(_draggablePrefab, position, Quaternion.identity);
         
         ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.beginDragHandler);
     }
@@ -41,5 +50,5 @@ public abstract class DraggableSink<TDraggable> : MonoBehaviour, IBeginDragHandl
         _draggable = null;
     }
     
-    protected virtual bool CanCreateDraggable() => true;
+    private bool CanCreateDraggable() => _canCreateDraggableHandlers.Aggregate(true, (agg, handler) => agg && handler());
 }

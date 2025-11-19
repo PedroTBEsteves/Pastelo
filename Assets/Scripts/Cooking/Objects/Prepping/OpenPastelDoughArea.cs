@@ -59,7 +59,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         var closedPastel = _pastel.Close(_pastelCookingSettings);
         _pastel = null;
         _spriteRenderer.sprite = null;
-        var draggableClosedPastel = Instantiate(_closedPastelPrefab, transform.position + Vector3.forward, Quaternion.identity);
+        var draggableClosedPastel = Instantiate(_closedPastelPrefab, transform.position + Vector3.forward, Quaternion.identity, transform.parent);
         draggableClosedPastel.Initialize(closedPastel);
         foreach (var fillings in _fillings)
             Destroy(fillings.gameObject);

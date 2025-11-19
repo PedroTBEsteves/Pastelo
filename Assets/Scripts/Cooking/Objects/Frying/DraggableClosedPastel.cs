@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggableClosedPastel : Draggable
+[RequireComponent(typeof(Draggable))]
+public class DraggableClosedPastel : ValidatedMonoBehaviour
 {
     [SerializeField, Self]
     private SpriteRenderer _spriteRenderer;
@@ -18,6 +19,9 @@ public class DraggableClosedPastel : Draggable
 
     [SerializeField, Child(Flag.Editable)]
     private Slider _cookedSlider;
+    
+    [SerializeField, Self]
+    private Draggable _draggable;
 
     [Inject]
     private readonly CameraController _cameraController;
@@ -32,6 +36,18 @@ public class DraggableClosedPastel : Draggable
     private bool _frying;
 
     private Slider _activeSlider;
+
+    private void Awake()
+    {
+        _draggable.Held += OnHeld;
+        _draggable.Dropped += OnDropped;
+    }
+
+    private void OnDestroy()
+    {
+        _draggable.Held -= OnHeld;
+        _draggable.Dropped -= OnDropped;
+    }
 
     private void Start()
     {
@@ -52,27 +68,18 @@ public class DraggableClosedPastel : Draggable
     {
         _spriteRenderer.sprite = _closedPastelDough.Dough.GetClosedDoughSprite(level);
 
-        switch (level)
+        _activeSlider = level switch
         {
-            case FriedLevel.Raw:
-                _activeSlider = _rawSlider;
-                break;
-            case FriedLevel.Done:
-                _activeSlider = _cookedSlider;
-                break;
-            case FriedLevel.Burnt:
-                _activeSlider = null;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(level), level, null);
-        }
+            FriedLevel.Raw => _rawSlider,
+            FriedLevel.Done => _cookedSlider,
+            FriedLevel.Burnt => null,
+            _ => throw new ArgumentOutOfRangeException(nameof(level), level, null)
+        };
     }
         
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-        
         if (!_frying || !_timeController.Running)
             return;
         
@@ -89,14 +96,14 @@ public class DraggableClosedPastel : Draggable
         _cookedSlider.gameObject.SetActive(_frying);
     }
     
-    protected override void OnHold(PointerEventData eventData)
+    private void OnHeld(PointerEventData eventData)
     {
         SetFrying(false);
         _fryingArea?.Remove(this);
         _dragStartPosition = _cameraController.ScreenToWorldPointy(eventData.position);
     }
 
-    protected override void OnDrop(PointerEventData eventData)
+    private void OnDropped(PointerEventData eventData)
     {
         var mousePosition = _cameraController.ScreenToWorldPointy(eventData.position);
         var raycastHit = Physics2D.Raycast(
