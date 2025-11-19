@@ -52,6 +52,7 @@ public class CameraController : ITickable
     public void GoImmediatelyToSection(CameraSection section)
     {
         _currentCamera.transform.position = _sectionPositions[section];
+        CameraMoved();
     }
     
     public Vector2 ScreenToWorldPointy(Vector2 screenPosition) => _currentCamera.ScreenToWorldPoint(screenPosition);
