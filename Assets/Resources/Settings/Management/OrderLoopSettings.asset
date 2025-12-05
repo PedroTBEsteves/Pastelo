@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451c5b8e01cddbf4f951edc4c674a94d, type: 3}
   m_Name: OrderLoopSettings
   m_EditorClassIdentifier: 
-  <QueueWaitTimeLimit>k__BackingField: 60
+  <QueueWaitTimeLimit>k__BackingField: 67
   <MinCustomerArrivalTime>k__BackingField: 20
   <MaxCustomerArrivalTime>k__BackingField: 40
-  <OrderCompletionTimeLimit>k__BackingField: 120
+  <OrderCompletionTimeLimit>k__BackingField: 123
   <StrikesToFail>k__BackingField: 3
