@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dfad65cad29c242a28ff2edfe2ed4d, type: 3}
   m_Name: PastelCookingSettings
   m_EditorClassIdentifier: 
-  <TimeToIncreaseFriedLevelInSeconds>k__BackingField: 20
+  <TimeToIncreaseFriedLevelInSeconds>k__BackingField: 10
