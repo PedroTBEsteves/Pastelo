@@ -9,18 +9,21 @@ public class GameOverScreen : MonoBehaviour
     private readonly StrikesController _strikesController;
     
     [SerializeField]
+    private GameObject _gameOverScreen;
+    
+    [SerializeField]
     private Button _restartButton;
 
     private void Awake()
     {
         _strikesController.GameOver += OnGameOver;
         _restartButton.onClick.AddListener(Restart);
-        gameObject.SetActive(false);
+        _gameOverScreen.SetActive(false);
     }
 
     private void OnGameOver()
     {
-        gameObject.SetActive(true);
+        _gameOverScreen.SetActive(true);
     }
 
     private static void Restart()
