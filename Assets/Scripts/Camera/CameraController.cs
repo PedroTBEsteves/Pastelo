@@ -11,8 +11,6 @@ public class CameraController : ITickable
     private readonly float _acceleration;
     
     private Tween _transitionTween;
-    private bool _moving;
-    private bool _right;
     private float _currentSpeed;
     
     public CameraController(IReadOnlyDictionary<CameraSection, Vector3> sectionPositions, float movementSpeed, float acceleration)
@@ -36,16 +34,17 @@ public class CameraController : ITickable
         return new Rect(position, size);
     }
 
-    public void StartMoving(bool right)
+    public void SetVelocityPercentage(float percentage)
     {
-        _moving = true;
-        _right = right;
-        CameraBeganMoving();
+        if (_currentSpeed == 0)
+            CameraBeganMoving();
+        
+        _currentSpeed = Mathf.LerpUnclamped(0,  _movementSpeed, percentage);
     }
 
     public void StopMoving()
     {
-        _moving = false;
+        _currentSpeed = 0;
         CameraEndedMoving();
     }
 
@@ -56,22 +55,13 @@ public class CameraController : ITickable
     }
     
     public Vector2 ScreenToWorldPointy(Vector2 screenPosition) => _currentCamera.ScreenToWorldPoint(screenPosition);
+    
     public void Tick(float deltaTime)
     {
-        if (!_moving)
-        {
-            _currentSpeed = Mathf.Max(0, _currentSpeed - _acceleration * deltaTime);
-        }
-        else
-        {
-            _currentSpeed = Mathf.Min(_movementSpeed, _currentSpeed + _movementSpeed * deltaTime);
-        }
-
         if (_currentSpeed == 0) 
             return;
         
-        var direction = _right ? Vector3.right : Vector3.left;
-        _currentCamera.transform.Translate(_currentSpeed * deltaTime * direction);
+        _currentCamera.transform.Translate(_currentSpeed * deltaTime * Vector3.right);
         CameraMoved();
     }
 }
