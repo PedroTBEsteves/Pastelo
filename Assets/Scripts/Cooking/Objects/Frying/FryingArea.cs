@@ -35,31 +35,8 @@ public class FryingArea : ValidatedMonoBehaviour
     private VisualEffect[] _visualEffects;
     
     private readonly DraggableClosedPastel[] _fryingPastels = new DraggableClosedPastel[4];
-
-    private bool _raised = true;
-
-    public Vector3 DiscardPosition => _discardPositionTransform.position;
     
-    public void ToggleRaised()
-    {
-        _raised = !_raised;
-
-        if (!_raised)
-        {
-            _fryingSource.Play();
-            _stoveSound.Play();
-            foreach (var visualEffect in _visualEffects)
-                visualEffect.Play();
-        }
-        else
-        {
-            _fryingSource.Stop();
-            foreach (var visualEffect in _visualEffects)
-                visualEffect.Stop();
-        }
-        
-        _spriteRenderer.sprite = _raised ? _offSprite : _onSprite;
-    }
+    public Vector3 DiscardPosition => _discardPositionTransform.position;
     
     public bool TryAdd(DraggableClosedPastel draggableClosedPastel, Vector3 position)
     {
@@ -67,7 +44,7 @@ public class FryingArea : ValidatedMonoBehaviour
             return false;
 
         if (_fryingPastels.All(closed => closed == null))
-            ToggleRaised();
+            StartFrying();
         
         var index = GetNearestSlotIndex(position);
         var newPosition = GetPositionForSlot(index);
@@ -75,54 +52,7 @@ public class FryingArea : ValidatedMonoBehaviour
         _fryingPastels[index] = draggableClosedPastel;
         return true;
     }
-
-    private int GetNearestSlotIndex(Vector3 position)
-    {
-        // var distanceToCenter = position - transform.position;
-        // Debug.Log(distanceToCenter);
-        //
-        // var index = (distanceToCenter.x <= 0 ? 0 : 1) + (distanceToCenter.y >= 0 ? 0 : 2);
-        // Debug.Log(index);
-        //
-        // if (_fryingPastels[index] == null)
-        //     return index;
-        //
-        // var offset = index % 2 == 0 ? 1 : -1;
-        // index += offset;
-        //
-        // if (_fryingPastels[index] == null)
-        //     return index;
-        //
-        // index -= offset;
-        // offset = index < 2 ? 2 : -2;
-        // index += offset;
-        //
-        // if (_fryingPastels[index] == null)
-        //     return index;
-        //
-        // offset = index % 2 == 0 ? 1 : -1;
-        // index += offset;
-        //
-        // return index;
-
-        return Array.IndexOf(_fryingPastels, null);
-    }
-
-    private Vector3 GetPositionForSlot(int index)
-    {
-        // var xOffset = _collider.size.x / 4;
-        // var yOffset = _collider.size.y / 4;
-        //
-        // var offset = new Vector3(index % 2 == 0 ? -xOffset : xOffset, index < 2 ? yOffset : -yOffset, -1);
-        //
-        // return transform.position + offset;
-
-        var size = _collider.size.x * 0.7f;
-
-        var offset = new Vector3(size/4 * (index - 2) + size/8, 0, -1);
-        return transform.position + offset;
-    }
-
+    
     public void Remove(DraggableClosedPastel draggableClosedPastel)
     {
         var index = Array.IndexOf(_fryingPastels, draggableClosedPastel);
@@ -132,12 +62,45 @@ public class FryingArea : ValidatedMonoBehaviour
             _fryingPastels[index] = null;
             
             if (_fryingPastels.All(pastel => pastel == null))
-                ToggleRaised();
+                StopFrying();
         }
     }
-    
-    public void OnPointerDown(PointerEventData eventData)
+
+    private void StartFrying()
     {
-        ToggleRaised();
+        _fryingSource.Play();
+        _stoveSound.Play();
+        foreach (var visualEffect in _visualEffects)
+            visualEffect.Play();
+        
+        _spriteRenderer.sprite = _onSprite;
+    }
+
+    private void StopFrying()
+    {
+        _fryingSource.Stop();
+        foreach (var visualEffect in _visualEffects)
+            visualEffect.Stop();
+        
+        _spriteRenderer.sprite = _offSprite;
+    }
+
+    private int GetNearestSlotIndex(Vector3 position)
+    {
+        return Array.IndexOf(_fryingPastels, null);
+    }
+
+    private Vector3 GetPositionForSlot(int index)
+    {
+        var size = _collider.size.x * 0.7f;
+
+        var offset = new Vector3(size/4 * (index - 2) + size/8, 0, -1);
+        return transform.position + offset;
+    }
+
+    private void Update()
+    {
+        foreach (var pastel in _fryingPastels.Where(pastel => pastel != null))
+            pastel.Fry(Time.deltaTime);
     }
 }

@@ -26,8 +26,9 @@ public class ClosedPastelDough
 
         if (_timeFrying >= _timeToIncreaseFriedLevelInSeconds && _friedLevel != FriedLevel.Burnt)
         {
-            _timeFrying -= _timeToIncreaseFriedLevelInSeconds;
             _friedLevel++;
+            if (_friedLevel != FriedLevel.Burnt)
+                _timeFrying -= _timeToIncreaseFriedLevelInSeconds;
             FriedLevelChanged?.Invoke(_friedLevel);
         }
     }

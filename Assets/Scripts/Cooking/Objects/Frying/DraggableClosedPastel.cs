@@ -71,22 +71,17 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         _activeSlider = level switch
         {
             FriedLevel.Raw => _rawSlider,
-            FriedLevel.Done => _cookedSlider,
-            FriedLevel.Burnt => null,
+            FriedLevel.Done or FriedLevel.Burnt => _cookedSlider,
             _ => throw new ArgumentOutOfRangeException(nameof(level), level, null)
         };
     }
         
 
-    private void Update()
+    public void Fry(float deltaTime)
     {
-        if (!_frying || !_timeController.Running)
-            return;
-        
-        _closedPastelDough.Fry(Time.deltaTime);
+        _closedPastelDough.Fry(deltaTime);
 
-        if (_activeSlider != null)
-            _activeSlider.normalizedValue = _closedPastelDough.FryingProgress;
+        _activeSlider.normalizedValue = _closedPastelDough.FryingProgress;
     }
     
     private void SetFrying(bool frying)
