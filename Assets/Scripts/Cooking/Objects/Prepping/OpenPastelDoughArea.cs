@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using KBCore.Refs;
 using PrimeTween;
 using Reflex.Attributes;
@@ -9,6 +10,9 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 {
     [SerializeField, Self]
     private SpriteRenderer _spriteRenderer;
+
+    [SerializeField, Child(Flag.ExcludeSelf)]
+    private BoxCollider2D _ingredientsArea;
 
     [SerializeField]
     private float _pressDuration;
@@ -52,6 +56,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         if (!_pastel.TryAddFilling(filling.Ingredient))
             return false;
 
+        SnapFillingToClosestAvailableSlot(filling);
         _fillings.Add(filling);
         return true;
     }
@@ -70,6 +75,46 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
             Destroy(fillings.gameObject);
         _fillings.Clear();
         //_cameraController.GoToNextSection();
+    }
+
+    private void SnapFillingToClosestAvailableSlot(DraggableFilling filling)
+    {
+        var availableSlotPositions = GetSlotPositions(filling.transform.position.z)
+            .Where(slotPosition => _fillings.All(existing => existing.transform.position != slotPosition))
+            .ToList();
+
+        if (availableSlotPositions.Count == 0)
+            return;
+
+        var closestSlotPosition = availableSlotPositions
+            .OrderBy(slotPosition => (filling.transform.position - slotPosition).sqrMagnitude)
+            .First();
+
+        filling.transform.SetParent(transform, true);
+        filling.transform.position = closestSlotPosition;
+    }
+
+    private IEnumerable<Vector3> GetSlotPositions(float zPosition)
+    {
+        var maxFillings = Mathf.Max(1, _recipeGeneratorSettings.MaxFillingsInclusive);
+        var columns = Mathf.CeilToInt(Mathf.Sqrt(maxFillings));
+        var rows = Mathf.CeilToInt(maxFillings / (float)columns);
+
+        var size = _ingredientsArea.bounds.size;
+        var min = _ingredientsArea.bounds.min;
+        var cellWidth = size.x / columns;
+        var cellHeight = size.y / rows;
+
+        for (var index = 0; index < maxFillings; index++)
+        {
+            var row = index / columns;
+            var column = index % columns;
+
+            yield return new Vector3(
+                min.x + (column + 0.5f) * cellWidth,
+                min.y + (row + 0.5f) * cellHeight,
+                zPosition);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
