@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using KBCore.Refs;
+using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.VFX;
@@ -33,13 +34,39 @@ public class FryingArea : ValidatedMonoBehaviour
     
     [SerializeField]
     private VisualEffect[] _visualEffects;
+
+    [Inject]
+    private readonly GameplayTutorialEvents _tutorialEvents;
+
+    [Inject]
+    private readonly GameplayInteractionGate _interactionGate;
+
+    [Inject]
+    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
     
     private readonly DraggableClosedPastel[] _fryingPastels = new DraggableClosedPastel[4];
+
+    private TutorialTarget _tutorialTarget;
     
     public Vector3 DiscardPosition => _discardPositionTransform.position;
+
+    private void Awake()
+    {
+        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
+        _tutorialTarget.Configure(TutorialTargetId.FryingArea);
+        _tutorialTargetRegistry.Register(_tutorialTarget);
+    }
+
+    private void OnDestroy()
+    {
+        _tutorialTargetRegistry.Unregister(_tutorialTarget);
+    }
     
     public bool TryAdd(DraggableClosedPastel draggableClosedPastel, Vector3 position)
     {
+        if (!_interactionGate.CanInteract(TutorialInteractionType.PlaceInFryer))
+            return false;
+
         if (_fryingPastels.All(closed => closed != null))
             return false;
 
@@ -50,6 +77,7 @@ public class FryingArea : ValidatedMonoBehaviour
         var newPosition = GetPositionForSlot(index);
         draggableClosedPastel.transform.position = newPosition;
         _fryingPastels[index] = draggableClosedPastel;
+        _tutorialEvents.PublishPastelPlacedInFryer(draggableClosedPastel);
         return true;
     }
     

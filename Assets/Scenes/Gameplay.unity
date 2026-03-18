@@ -11026,7 +11026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2057130440}
   - component: {fileID: 2057130441}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientsArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11068,16 +11068,16 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
@@ -11145,7 +11145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layoutGroup: {fileID: 2068300003}
   _spacing: 12
-  _labelFontSize: 30
   _iconPrefab: {fileID: 1026149190815403448, guid: 7652121c22cfce14eb20716b2dd668c5, type: 3}
 --- !u!114 &2068300003
 MonoBehaviour:

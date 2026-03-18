@@ -28,6 +28,15 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     
     [Inject]
     private readonly TimeController _timeController;
+
+    [Inject]
+    private readonly GameplayTutorialEvents _tutorialEvents;
+
+    [Inject]
+    private readonly GameplayInteractionGate _interactionGate;
+
+    [Inject]
+    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
     
     private ClosedPastelDough _closedPastelDough;
 
@@ -36,17 +45,26 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     private bool _frying;
 
     private Slider _activeSlider;
+    private TutorialTarget _tutorialTarget;
 
     private void Awake()
     {
+        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
+        _tutorialTarget.Configure(TutorialTargetId.CookedPastel, this);
+        _tutorialTargetRegistry.Register(_tutorialTarget);
         _draggable.Held += OnHeld;
         _draggable.Dropped += OnDropped;
+        _draggable.AddCanDragHandler(CanDragPastel);
     }
 
     private void OnDestroy()
     {
+        _tutorialTargetRegistry.Unregister(_tutorialTarget);
         _draggable.Held -= OnHeld;
         _draggable.Dropped -= OnDropped;
+        _draggable.RemoveCanDragHandler(CanDragPastel);
+        if (_closedPastelDough != null)
+            _closedPastelDough.FriedLevelChanged -= OnFriedLevelChanged;
     }
 
     private void Start()
@@ -74,6 +92,9 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
             FriedLevel.Done or FriedLevel.Burnt => _cookedSlider,
             _ => throw new ArgumentOutOfRangeException(nameof(level), level, null)
         };
+
+        if (level == FriedLevel.Done)
+            _tutorialEvents.PublishPastelReachedCooked(this);
     }
         
 
@@ -93,6 +114,9 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     
     private void OnHeld(PointerEventData eventData)
     {
+        if (_frying && _interactionGate.CanInteract(TutorialInteractionType.RemoveCookedPastel, this))
+            _tutorialEvents.PublishPastelRemovedFromFryer(this);
+
         SetFrying(false);
         _fryingArea?.Remove(this);
         _dragStartPosition = _cameraController.ScreenToWorldPointy(eventData.position);
@@ -144,5 +168,13 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
             transform.position = _fryingArea.DiscardPosition;
         
         return true;
+    }
+
+    private bool CanDragPastel()
+    {
+        if (!_frying)
+            return true;
+
+        return _interactionGate.CanInteract(TutorialInteractionType.RemoveCookedPastel, this);
     }
 }

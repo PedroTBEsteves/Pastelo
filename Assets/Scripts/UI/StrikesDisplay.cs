@@ -12,9 +12,6 @@ public class StrikesDisplay : ValidatedMonoBehaviour
 
     [SerializeField]
     private float _spacing = 12f;
-
-    [SerializeField]
-    private float _labelFontSize = 30f;
     
     [SerializeField]
     private GameObject _iconPrefab;

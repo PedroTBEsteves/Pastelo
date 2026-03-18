@@ -28,28 +28,58 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     [Inject]
     private readonly RecipeGeneratorSettings _recipeGeneratorSettings;
+
+    [Inject]
+    private readonly GameplayTutorialEvents _tutorialEvents;
+
+    [Inject]
+    private readonly GameplayInteractionGate _interactionGate;
+
+    [Inject]
+    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
     
     private OpenPastelDough _pastel;
 
     private Tween _pressTween;
     
     private List<DraggableFilling> _fillings = new List<DraggableFilling>();
+
+    private TutorialTarget _tutorialTarget;
     
     public int FillingsCount => _fillings.Count;
+
+    private void Awake()
+    {
+        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
+        _tutorialTarget.Configure(TutorialTargetId.ClosePastelArea);
+        _tutorialTargetRegistry.Register(_tutorialTarget);
+    }
+
+    private void OnDestroy()
+    {
+        _tutorialTargetRegistry.Unregister(_tutorialTarget);
+    }
     
     public bool TryOpenDough(Dough dough)
     {
+        if (!_interactionGate.CanInteract(TutorialInteractionType.UseDough, dough))
+            return false;
+
         if (_pastel != null)
             return false;
         
         _spriteRenderer.sprite = dough.OpenDoughSprite;
         _pastel = new OpenPastelDough(dough, _recipeGeneratorSettings.MaxFillingsInclusive);
+        _tutorialEvents.PublishDoughOpened(dough);
 
         return true;
     }
 
     public bool TryAddFilling(DraggableFilling filling)
     {
+        if (!_interactionGate.CanInteract(TutorialInteractionType.AddFilling, filling.Ingredient))
+            return false;
+
         if (_pastel == null)
             return false;
 
@@ -58,11 +88,15 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
         SnapFillingToClosestAvailableSlot(filling);
         _fillings.Add(filling);
+        _tutorialEvents.PublishFillingAdded(filling.Ingredient);
         return true;
     }
 
     private void Close()
     {
+        if (!_interactionGate.CanInteract(TutorialInteractionType.ClosePastel))
+            return;
+
         if (_pastel == null)
             return;
         
@@ -74,6 +108,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         foreach (var fillings in _fillings)
             Destroy(fillings.gameObject);
         _fillings.Clear();
+        _tutorialEvents.PublishPastelClosed();
         //_cameraController.GoToNextSection();
     }
 

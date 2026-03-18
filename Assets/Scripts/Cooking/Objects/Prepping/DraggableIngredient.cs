@@ -39,7 +39,7 @@ public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour 
             mousePosition,
             Vector2.zero,
             float.MaxValue,
-            ~LayerMask.GetMask("Draggable"));
+            ~LayerMask.GetMask("Draggable", "Ignore Raycast"));
         
         if (!raycastHit 
             || !raycastHit.collider.TryGetComponent<OpenPastelDoughArea>(out var openPastelDoughArea))

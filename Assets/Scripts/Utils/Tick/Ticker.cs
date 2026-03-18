@@ -9,6 +9,9 @@ public class Ticker : MonoBehaviour
 
     [Inject]
     private TimeController _timeController;
+
+    [Inject]
+    private GameplayTutorialController _gameplayTutorialController;
     
     private void Update()
     {

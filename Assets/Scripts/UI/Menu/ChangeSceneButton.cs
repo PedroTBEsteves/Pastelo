@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayButton : ValidatedMonoBehaviour
+public class ChangeSceneButton : ValidatedMonoBehaviour
 {
     [SerializeField, Self]
     private Button _button;

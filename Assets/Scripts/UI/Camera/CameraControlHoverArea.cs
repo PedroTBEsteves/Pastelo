@@ -12,8 +12,34 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
     [Inject]
     private readonly CameraController _cameraController;
 
+    [Inject]
+    private readonly GameplayInteractionGate _interactionGate;
+
+    [Inject]
+    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
+
+    private TutorialTarget _tutorialTarget;
+
+    private void Awake()
+    {
+        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
+        _tutorialTarget.Configure(_direction == Direction.Left ? TutorialTargetId.CameraMoveLeft : TutorialTargetId.CameraMoveRight);
+        _tutorialTargetRegistry.Register(_tutorialTarget);
+    }
+
+    private void OnDestroy()
+    {
+        _tutorialTargetRegistry.Unregister(_tutorialTarget);
+    }
+
     private void SetCameraMovePercentage(PointerEventData eventData)
     {
+        var directionValue = _direction == Direction.Left ? -1 : 1;
+        var targetSection = _cameraController.GetSectionInDirection(directionValue);
+
+        if (!_interactionGate.CanInteract(TutorialInteractionType.MoveCamera, targetSection))
+            return;
+
         switch (_direction)
         {
             case Direction.Left:

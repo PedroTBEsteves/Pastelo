@@ -14,6 +14,12 @@ public class OrderNote : ValidatedMonoBehaviour
     [Inject]
     private readonly CameraController _cameraController;
 
+    [Inject]
+    private readonly GameplayInteractionGate _interactionGate;
+
+    [Inject]
+    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
+
     [SerializeField]
     private TextMeshProUGUI _orderNumber;
     
@@ -36,6 +42,7 @@ public class OrderNote : ValidatedMonoBehaviour
     private Draggable _draggable;
 
     private Vector3 _positionOnHold;
+    private TutorialTarget _tutorialTarget;
     
     public Order Order { get; private set; }
 
@@ -44,6 +51,7 @@ public class OrderNote : ValidatedMonoBehaviour
         _orderController.OrderExpired += OnOrderExpired;
         _draggable.Held += OnHeld;
         _draggable.Dropped += OnDropped;
+        _draggable.AddCanDragHandler(CanDragOrderNote);
     }
 
     private void OnDestroy()
@@ -51,11 +59,16 @@ public class OrderNote : ValidatedMonoBehaviour
         _orderController.OrderExpired -= OnOrderExpired;
         _draggable.Held -= OnHeld;
         _draggable.Dropped -= OnDropped;
+        _draggable.RemoveCanDragHandler(CanDragOrderNote);
+        _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
 
     public void Initialize(Order order)
     {
         Order = order;
+        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
+        _tutorialTarget.Configure(TutorialTargetId.OrderNote, order);
+        _tutorialTargetRegistry.Register(_tutorialTarget);
 
         _orderNumber.SetText($"#{order.Number}");
         
@@ -121,4 +134,6 @@ public class OrderNote : ValidatedMonoBehaviour
         
         transform.position = _positionOnHold;
     }
+
+    private bool CanDragOrderNote() => _interactionGate.CanInteract(TutorialInteractionType.DeliverOrder, Order);
 }

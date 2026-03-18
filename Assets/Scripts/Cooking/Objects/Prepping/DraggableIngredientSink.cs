@@ -25,11 +25,23 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
     [Inject]
     private readonly IPopupTextService _popupTextService;
 
+    [Inject]
+    private readonly GameplayInteractionGate _interactionGate;
+
+    [Inject]
+    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
+
+    private TutorialTarget _tutorialTarget;
+
     private void Awake()
     {
         var isUnlocked = _ingredientsStorage.Contains(_ingredient);
         
         _lockedIndicator.gameObject.SetActive(!isUnlocked);
+
+        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
+        _tutorialTarget.Configure(typeof(TIngredient) == typeof(Dough) ? TutorialTargetId.DoughSource : TutorialTargetId.FillingSource, _ingredient);
+        _tutorialTargetRegistry.Register(_tutorialTarget);
         
         _draggableSink.AddCanCreateDraggableHandler(CanCreateDraggable);
     }
@@ -37,11 +49,17 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
     private void OnDestroy()
     {
         _draggableSink.RemoveCanCreateDraggableHandler(CanCreateDraggable);
+        _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
 
     private bool CanCreateDraggable()
     {
-        return _ingredientsStorage.Contains(_ingredient);
+        var interactionType = typeof(TIngredient) == typeof(Dough)
+            ? TutorialInteractionType.UseDough
+            : TutorialInteractionType.AddFilling;
+
+        return _ingredientsStorage.Contains(_ingredient)
+               && _interactionGate.CanInteract(interactionType, _ingredient);
     }
 
     public void OnPointerDown(PointerEventData eventData)

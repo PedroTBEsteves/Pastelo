@@ -35,6 +35,9 @@ public class CameraController
     public event Action CameraBeganMoving = delegate { };
     public event Action CameraEndedMoving = delegate { };
     public event Action CameraMoved = delegate { };
+    public event Action<CameraSection> CurrentSectionChanged = delegate { };
+
+    public CameraSection CurrentSection => _orderedSections.Length == 0 ? default : _orderedSections[_currentSectionIndex];
 
     private Rect GetViewRect()
     {
@@ -50,6 +53,15 @@ public class CameraController
         _queuedDirection = 0;
     }
 
+    public CameraSection GetSectionInDirection(int direction)
+    {
+        if (_orderedSections.Length == 0)
+            return default;
+
+        var targetIndex = WrapIndex(_currentSectionIndex + Mathf.Clamp(direction, -1, 1));
+        return _orderedSections[targetIndex];
+    }
+
     public void GoImmediatelyToSection(CameraSection section)
     {
         var wasMoving = _isMoving;
@@ -60,6 +72,7 @@ public class CameraController
         _currentCamera.transform.position = _sectionPositions[section];
         SyncSectionsToCamera();
         CameraMoved();
+        CurrentSectionChanged(CurrentSection);
         if (wasMoving)
             CameraEndedMoving();
     }
@@ -105,6 +118,7 @@ public class CameraController
             _currentCamera.transform.position = targetPosition;
             SyncSectionsToCamera();
             CameraMoved();
+            CurrentSectionChanged(CurrentSection);
             TryContinueQueuedMovement();
             return;
         }
@@ -124,6 +138,7 @@ public class CameraController
                 controller._currentSectionIndex = targetIndex;
                 controller.SyncSectionsToCamera();
                 controller.CameraMoved();
+                controller.CurrentSectionChanged(controller.CurrentSection);
                 controller.CameraEndedMoving();
                 controller.TryContinueQueuedMovement();
             });
