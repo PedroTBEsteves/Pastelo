@@ -13,9 +13,12 @@ public class RecipeGenerator
     public RecipeGenerator(RecipeGeneratorSettings settings, IngredientsStorage ingredientsStorage)
     {
         _ingredientsStorage = ingredientsStorage;
-        
-        _minFillings = settings.MinFillings;
-        _maxFillingsInclusive = settings.MaxFillingsInclusive;
+
+        var minFillings = Mathf.Max(0, settings.MinFillings);
+        var maxFillingsInclusive = Mathf.Max(0, settings.MaxFillingsInclusive);
+
+        _minFillings = Mathf.Min(minFillings, maxFillingsInclusive);
+        _maxFillingsInclusive = Mathf.Max(minFillings, maxFillingsInclusive);
         _maxMainPercentage = settings.MaxMainPercentage;
         _noMainProbability = settings.NoMainProbability;
     }

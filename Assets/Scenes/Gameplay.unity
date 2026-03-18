@@ -5160,7 +5160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9f5bd3a2744d10ae02df5a0004bbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rectTransform: {fileID: 830857750}
   _direction: 1
 --- !u!114 &830857753
 MonoBehaviour:
@@ -7951,8 +7950,8 @@ MonoBehaviour:
       Value: {x: 36.36364, y: 0, z: -10}
     - Key: 3
       Value: {x: 54.54546, y: 0, z: -10}
-  _cameraSpeed: 20
-  _cameraAcceleration: 200
+  _transitionDuration: 0.5
+  _transitionEase: 4
   _sectionController: {fileID: 635548946}
 --- !u!114 &1464197127
 MonoBehaviour:
@@ -10789,7 +10788,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1994325119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11230,7 +11229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9f5bd3a2744d10ae02df5a0004bbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rectTransform: {fileID: 2129319299}
   _direction: 0
 --- !u!114 &2129319302
 MonoBehaviour:

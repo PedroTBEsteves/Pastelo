@@ -21,6 +21,9 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
     
     [Inject]
     private readonly CameraController _cameraController;
+
+    [Inject]
+    private readonly RecipeGeneratorSettings _recipeGeneratorSettings;
     
     private OpenPastelDough _pastel;
 
@@ -36,7 +39,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
             return false;
         
         _spriteRenderer.sprite = dough.OpenDoughSprite;
-        _pastel = new OpenPastelDough(dough);
+        _pastel = new OpenPastelDough(dough, _recipeGeneratorSettings.MaxFillingsInclusive);
 
         return true;
     }
@@ -45,9 +48,11 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
     {
         if (_pastel == null)
             return false;
-        
+
+        if (!_pastel.TryAddFilling(filling.Ingredient))
+            return false;
+
         _fillings.Add(filling);
-        _pastel.AddFilling(filling.Ingredient);
         return true;
     }
 
