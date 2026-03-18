@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 2098360710043839310}
   - component: {fileID: 6598179706461829354}
   - component: {fileID: 5520281729689365349}
+  - component: {fileID: -5278069885936599522}
   m_Layer: 0
   m_Name: Queijo SInk
   m_TagString: Untagged
@@ -146,7 +147,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 147deb51597be3d40b746fea8718390b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -252,3 +253,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _draggablePrefab: {fileID: 3095736115967226448, guid: ae36668e02583924781bbfa7b42a19a6, type: 3}
+--- !u!114 &-5278069885936599522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142219619040711605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba87754a7814cc195cb9a6921802f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _marker: {fileID: 0}
+  _outlineThickness: 4
+  _highlightScaleMultiplier: 1.1
+  _highlightColor: {r: 1, g: 0.95, b: 0.6, a: 1}
+  _spriteRenderer: {fileID: 7367941062341088989}
+  _graphic: {fileID: 0}

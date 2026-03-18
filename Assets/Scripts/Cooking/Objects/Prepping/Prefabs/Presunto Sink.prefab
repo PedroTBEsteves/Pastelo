@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7508916362135995111}
   - component: {fileID: 1611464609268342615}
   - component: {fileID: 5574255335869514232}
+  - component: {fileID: 4185860733791368025}
   m_Layer: 0
   m_Name: Presunto Sink
   m_TagString: Untagged
@@ -59,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 147deb51597be3d40b746fea8718390b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -165,6 +166,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _draggablePrefab: {fileID: 3095736115967226448, guid: 6b5ef29ce45241d4580b51d888fb6b29, type: 3}
+--- !u!114 &4185860733791368025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556916794420987154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba87754a7814cc195cb9a6921802f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _marker: {fileID: 0}
+  _outlineThickness: 4
+  _highlightScaleMultiplier: 1.1
+  _highlightColor: {r: 1, g: 0.95, b: 0.6, a: 1}
+  _spriteRenderer: {fileID: 2010317973467851504}
+  _graphic: {fileID: 0}
 --- !u!1 &8342283531500888329
 GameObject:
   m_ObjectHideFlags: 0

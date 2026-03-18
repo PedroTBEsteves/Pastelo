@@ -4,8 +4,13 @@ using UnityEngine.UI;
 
 public class TutorialTarget : MonoBehaviour
 {
+    private static readonly int OutlineThicknessMaterialId = Shader.PropertyToID("_OutlineThickness");
+
     [SerializeField]
     private GameObject _marker;
+
+    [SerializeField]
+    private float _outlineThickness = 4;
 
     [SerializeField]
     private float _highlightScaleMultiplier = 1.1f;
@@ -13,16 +18,17 @@ public class TutorialTarget : MonoBehaviour
     [SerializeField]
     private Color _highlightColor = new(1f, 0.95f, 0.6f, 1f);
 
-    [SerializeField, Self]
+    [SerializeField, Self(Flag.Optional)]
     private SpriteRenderer _spriteRenderer;
 
-    [SerializeField, Self]
+    [SerializeField, Self(Flag.Optional)]
     private Graphic _graphic;
 
     private Vector3 _baseScale;
     private Color _baseColor;
     private bool _baseColorCaptured;
     private object _runtimeContext;
+    private Material _material;
 
     public TutorialTargetId Id { get; private set; }
     public object Context => _runtimeContext;
@@ -38,6 +44,7 @@ public class TutorialTarget : MonoBehaviour
         {
             _baseColor = _spriteRenderer.color;
             _baseColorCaptured = true;
+            _material =  _spriteRenderer.material;
         }
         else if (_graphic != null)
         {
@@ -73,7 +80,6 @@ public class TutorialTarget : MonoBehaviour
         if (_marker != null)
         {
             _marker.SetActive(true);
-            return;
         }
 
         transform.localScale = _baseScale * _highlightScaleMultiplier;
@@ -93,8 +99,11 @@ public class TutorialTarget : MonoBehaviour
 
     private void SetColor(Color color)
     {
-        if (_spriteRenderer != null)
-            _spriteRenderer.color = color;
+        if (_material != null)
+        {
+            var outlineThickness = color == _baseColor ? 0.0f : _outlineThickness;
+            _material.SetFloat(OutlineThicknessMaterialId, outlineThickness);
+        }
 
         if (_graphic != null)
             _graphic.color = color;

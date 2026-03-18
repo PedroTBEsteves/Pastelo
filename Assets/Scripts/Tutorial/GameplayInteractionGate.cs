@@ -15,10 +15,11 @@ public class GameplayInteractionGate
         return interactionType switch
         {
             TutorialInteractionType.TakeOrder => _state.CurrentStep == TutorialStep.TakeOrder,
-            TutorialInteractionType.MoveCamera => (_state.CurrentStep is TutorialStep.MoveCameraToPrepping
+            TutorialInteractionType.MoveCamera => _state.CurrentStep is TutorialStep.MoveCameraToPrepping
                 or TutorialStep.MoveCameraToFrying
-                or TutorialStep.MoveCameraToPacking)
-                && Equals(_state.ExpectedCameraSection, context),
+                or TutorialStep.MoveCameraToPacking
+                or TutorialStep.PlaceInFrying
+                or TutorialStep.PlaceOnDelivery,
             TutorialInteractionType.UseDough => _state.CurrentStep == TutorialStep.AddDough
                 && Equals(_state.ExpectedDough, context),
             TutorialInteractionType.AddFilling => _state.CurrentStep == TutorialStep.AddFilling
