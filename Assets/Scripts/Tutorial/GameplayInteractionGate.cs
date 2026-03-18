@@ -31,6 +31,8 @@ public class GameplayInteractionGate
             TutorialInteractionType.PlaceOnDelivery => _state.CurrentStep == TutorialStep.PlaceOnDelivery,
             TutorialInteractionType.DeliverOrder => _state.CurrentStep == TutorialStep.DeliverOrder
                 && (_state.TutorialOrder == null || Equals(_state.TutorialOrder, context)),
+            TutorialInteractionType.DiscardItem => false,
+            TutorialInteractionType.BuyIngredient => false,
             _ => true,
         };
     }

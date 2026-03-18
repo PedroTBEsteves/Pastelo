@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,16 +15,28 @@ public class TrashBin : MonoBehaviour
 
     [SerializeField]
     private Image _image;
+
+    [Inject]
+    private readonly GameplayInteractionGate _interactionGate;
     
     private List<RaycastResult> _raycastResults = new();
     
     public void Show()
     {
+        if (!_interactionGate.CanInteract(TutorialInteractionType.DiscardItem))
+            return;
+
         _image.enabled = true;
     }
     
     public void TryDiscard(Draggable draggable, PointerEventData eventData)
     {
+        if (!_interactionGate.CanInteract(TutorialInteractionType.DiscardItem))
+        {
+            Hide();
+            return;
+        }
+
         if (IsInside(eventData))
         {
             Destroy(draggable.gameObject);

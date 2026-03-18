@@ -9,4 +9,6 @@ public enum TutorialInteractionType
     RemoveCookedPastel,
     PlaceOnDelivery,
     DeliverOrder,
+    DiscardItem,
+    BuyIngredient,
 }

@@ -68,6 +68,9 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
 
         if (isUnlocked)
             return;
+
+        if (!_interactionGate.CanInteract(TutorialInteractionType.BuyIngredient, _ingredient))
+            return;
         
         if (_ingredientsStorage.TryBuyIngredient(_ingredient))
         {
