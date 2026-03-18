@@ -9,10 +9,13 @@ public class RecipeGenerator
     private readonly float _maxMainPercentage;
 
     private readonly IngredientsStorage _ingredientsStorage;
+
+    private readonly GameplayTutorialState _tutorialState;
     
-    public RecipeGenerator(RecipeGeneratorSettings settings, IngredientsStorage ingredientsStorage)
+    public RecipeGenerator(RecipeGeneratorSettings settings, IngredientsStorage ingredientsStorage, GameplayTutorialState tutorialState)
     {
         _ingredientsStorage = ingredientsStorage;
+        _tutorialState = tutorialState;
 
         var minFillings = Mathf.Max(0, settings.MinFillings);
         var maxFillingsInclusive = Mathf.Max(0, settings.MaxFillingsInclusive);
@@ -25,6 +28,9 @@ public class RecipeGenerator
 
     public Recipe Generate()
     {
+        if (_tutorialState.IsActive)
+            return _tutorialState.TutorialRecipe;
+        
         var dough = _ingredientsStorage.Doughs.GetRandomElement();
 
         var fillings = new Dictionary<Filling, int>();

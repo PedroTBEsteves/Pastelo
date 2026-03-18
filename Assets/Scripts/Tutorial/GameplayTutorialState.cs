@@ -6,6 +6,11 @@ public class GameplayTutorialState
 {
     private readonly Queue<Filling> _remainingFillings = new();
 
+    public GameplayTutorialState(Recipe tutorialRecipe)
+    {
+        TutorialRecipe = tutorialRecipe;
+    }
+
     public bool IsActive { get; private set; }
     public bool IsFinished { get; private set; }
     public TutorialStep CurrentStep { get; private set; } = TutorialStep.Inactive;
@@ -15,6 +20,7 @@ public class GameplayTutorialState
     public Order TutorialOrder { get; private set; }
     public Dough ExpectedDough => TutorialOrder?.Recipe.Dough;
     public Filling CurrentFilling => _remainingFillings.Count > 0 ? _remainingFillings.Peek() : null;
+    public Recipe TutorialRecipe { get; }
 
     public event Action StateChanged = delegate { };
 

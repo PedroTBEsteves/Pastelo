@@ -8353,6 +8353,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e17b3ee35449e4cb7f5c81072a3265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tutorialRecipe:
+    _fillings:
+      _serializedList:
+      - Key: {fileID: 11400000, guid: 28414d76e6b91e140b382b3f199e0986, type: 2}
+        Value: 1
+      - Key: {fileID: 11400000, guid: 7356f64bd7c066147b19e9e08518dffa, type: 2}
+        Value: 2
+    <Dough>k__BackingField: {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
 --- !u!114 &1464197130
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,18 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AYellowpaper.SerializedCollections;
+using UnityEngine;
 
+[Serializable]
 public class Recipe : IEquatable<Recipe>
 {
-    private readonly Dictionary<Filling, int> _fillings;
+    [SerializeField]
+    private SerializedDictionary<Filling, int> _fillings;
     public Recipe(Dough dough, IReadOnlyDictionary<Filling, int> fillings)
     {
         Dough = dough;
-        _fillings = new Dictionary<Filling, int>(fillings);
+        _fillings = new SerializedDictionary<Filling, int>(fillings);
         Value = dough.Value + fillings.Sum(f => f.Key.Value * f.Value);
     }
     
-    public Dough Dough { get; }
+    [field: SerializeField]
+    public Dough Dough { get; private set; }
     public IReadOnlyDictionary<Filling, int> Fillings => _fillings;
     
     public float Value { get; }
