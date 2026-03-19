@@ -1,4 +1,3 @@
-using System;
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
@@ -15,15 +14,12 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
     
     [SerializeField, Self]
     private DraggableSink _draggableSink;
-    
-    [Inject]
-    private readonly Money _money;
+
+    [SerializeField, Scene]
+    private IngredientUnlockPurchasePrompt _purchasePrompt;
     
     [Inject]
     private readonly IngredientsStorage _ingredientsStorage;
-    
-    [Inject]
-    private readonly IPopupTextService _popupTextService;
 
     [Inject]
     private readonly GameplayInteractionGate _interactionGate;
@@ -63,7 +59,7 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
     }
 
     public void OnPointerDown(PointerEventData eventData)
-    { ;
+    {
         var isUnlocked = _ingredientsStorage.Contains(_ingredient);
 
         if (isUnlocked)
@@ -71,14 +67,12 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
 
         if (!_interactionGate.CanInteract(TutorialInteractionType.BuyIngredient, _ingredient))
             return;
-        
-        if (_ingredientsStorage.TryBuyIngredient(_ingredient))
-        {
-            _lockedIndicator.gameObject.SetActive(false);
-        }
-        else
-        {
-            _popupTextService.ShowError("Sem dinheiro suficiente!", transform.position);
-        }
+
+        _purchasePrompt.Show(_ingredient, OnIngredientPurchased);
+    }
+
+    private void OnIngredientPurchased()
+    {
+        _lockedIndicator.gameObject.SetActive(false);
     }
 }

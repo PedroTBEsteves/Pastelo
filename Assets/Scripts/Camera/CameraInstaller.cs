@@ -1,3 +1,4 @@
+using System;
 using AYellowpaper.SerializedCollections;
 using KBCore.Refs;
 using PrimeTween;
@@ -18,12 +19,14 @@ public class CameraInstaller : ValidatedMonoBehaviour, IInstaller
     [SerializeField, Scene]
     private SectionController _sectionController;
     
+    private CameraController _cameraController;
+    
     public void InstallBindings(ContainerBuilder containerBuilder)
     {
-        var cameraController = new CameraController(_sectionPositions, _transitionDuration, _transitionEase, _sectionController);
+        _cameraController = new CameraController(_sectionPositions, _transitionDuration, _transitionEase, _sectionController);
         
         containerBuilder
-            .AddScoped(_ => cameraController, typeof(CameraController))
+            .AddScoped(_ => _cameraController, typeof(CameraController))
             .AddScoped(_ => _sectionController);
     }
 }
