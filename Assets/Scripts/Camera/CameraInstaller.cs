@@ -29,4 +29,9 @@ public class CameraInstaller : ValidatedMonoBehaviour, IInstaller
             .AddScoped(_ => _cameraController, typeof(CameraController))
             .AddScoped(_ => _sectionController);
     }
+
+    private void Awake()
+    {
+        _cameraController.GoImmediatelyToSection(CameraSection.Balcony);
+    }
 }

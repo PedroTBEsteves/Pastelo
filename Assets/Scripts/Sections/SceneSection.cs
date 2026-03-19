@@ -14,11 +14,11 @@ public class SceneSection : ValidatedMonoBehaviour
     public SceneSection Previous { get; private set; }
     
     private float _size;
+    private bool _isInitialized;
 
     private void Awake()
     {
-        _size = _sizeCollider.size.x - 0.005f;
-        Destroy(_sizeCollider);
+        EnsureInitialized();
     }
 
     public void MoveNext()
@@ -43,7 +43,23 @@ public class SceneSection : ValidatedMonoBehaviour
 
     public bool IsInside(float position) => position >= GetXMin() && position <= GetXMax();
     
-    private float GetHalfWidth() => _size / 2;
+    private float GetHalfWidth()
+    {
+        EnsureInitialized();
+        return _size / 2;
+    }
+
+    private void EnsureInitialized()
+    {
+        if (_isInitialized)
+            return;
+
+        _size = _sizeCollider.size.x - 0.005f;
+        if (_sizeCollider != null)
+            Destroy(_sizeCollider);
+
+        _isInitialized = true;
+    }
     
     protected override void OnValidate()
     {

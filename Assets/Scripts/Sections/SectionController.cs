@@ -10,9 +10,11 @@ public class SectionController : MonoBehaviour
 
     private float _xMax;
     private float _xMin;
+    private bool _isInitialized;
 
     public void AttachToSection(Transform objectToAttach)
     {
+        EnsureInitialized();
         var position = objectToAttach.position.x;
         var head = GetSectionAt(position);
 
@@ -21,6 +23,7 @@ public class SectionController : MonoBehaviour
 
     public Vector3 GetNextSectionPosition(float currentCameraX)
     {
+        EnsureInitialized();
         var current = GetSectionAt(currentCameraX);
         if (current == _tail)
             MoveRight();
@@ -30,6 +33,7 @@ public class SectionController : MonoBehaviour
 
     public Vector3 GetPreviousSectionPosition(float currentCameraX)
     {
+        EnsureInitialized();
         var current = GetSectionAt(currentCameraX);
         if (current == _head)
             MoveLeft();
@@ -39,17 +43,28 @@ public class SectionController : MonoBehaviour
     
     private void Awake()
     {
-        _xMax = _tail.GetXMax();
-        _xMin = _head.GetXMin();
+        EnsureInitialized();
     }
 
     public void SyncToViewRect(Rect cameraViewRect)
     {
+        EnsureInitialized();
+        
         while (cameraViewRect.xMax > _xMax)
             MoveRight();
 
         while (cameraViewRect.xMin < _xMin)
             MoveLeft();
+    }
+
+    private void EnsureInitialized()
+    {
+        if (_isInitialized)
+            return;
+
+        _xMax = _tail.GetXMax();
+        _xMin = _head.GetXMin();
+        _isInitialized = true;
     }
 
     private SceneSection GetSectionAt(float position)
