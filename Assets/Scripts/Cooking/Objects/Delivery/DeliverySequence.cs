@@ -33,6 +33,8 @@ public class DeliverySequence
                 _strikesController.Strike();
                 _isFailedOrder = false;
             }
+
+            _orderController.FinishOrderFlow(order);
         });
     }
 

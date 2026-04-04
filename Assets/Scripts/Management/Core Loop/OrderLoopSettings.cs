@@ -12,6 +12,9 @@ public class OrderLoopSettings : ScriptableObject
     
     [field: SerializeField]
     public float MaxCustomerArrivalTime { get; private set; }
+
+    [field: SerializeField]
+    public int MaxCustomers { get; private set; }
     
     [field: Header("Customers Queue")]
     [field: SerializeField]

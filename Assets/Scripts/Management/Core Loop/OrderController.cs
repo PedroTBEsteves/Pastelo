@@ -28,6 +28,7 @@ public class OrderController : ITickable
     public event Action<Order> OrderExpired = delegate { };
     public event Action<Order> OrderFailed = delegate { };
     public event Action<Order> OrderSucceeded = delegate { };
+    public event Action<Order> OrderFlowFinished = delegate { };
 
     public Order AcceptOrder(Customer customer)
     {
@@ -78,9 +79,18 @@ public class OrderController : ITickable
             OrderExpired(order);
             Debug.Log($"{order} expirou!");
             _customerPopUpDialogues.CustomerOrderExpiredDialogue(order.Customer)
-                .ChainCallback(_strikesController.Strike);
+                .ChainCallback(() =>
+                {
+                    _strikesController.Strike();
+                    OrderFlowFinished(order);
+                });
         }
         
         _expiredOrders.Clear();
+    }
+
+    public void FinishOrderFlow(Order order)
+    {
+        OrderFlowFinished(order);
     }
 }

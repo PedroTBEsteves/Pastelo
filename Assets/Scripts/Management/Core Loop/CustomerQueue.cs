@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,18 +15,30 @@ public class CustomerQueue : ITickable
     private readonly Queue<CustomerWaitStatus> _queue = new();
 
     private readonly CustomersDatabase _customers;
+    private readonly OrderController _orderController;
     private readonly StrikesController _strikesController;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogue;
+    private readonly int _maxCustomers;
 
-    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, StrikesController strikesController, ICustomerPopUpDialogue customerPopUpDialogue)
+    private int _generatedCustomers;
+    private int _resolvedCustomers;
+
+    private bool HasCustomersLimit => _maxCustomers > 0;
+    private bool HasGeneratedAllCustomers => HasCustomersLimit && _generatedCustomers >= _maxCustomers;
+
+    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, StrikesController strikesController, ICustomerPopUpDialogue customerPopUpDialogue)
     {
         _customers = customers;
+        _orderController = orderController;
         _strikesController = strikesController;
         _customerPopUpDialogue = customerPopUpDialogue;
         _customerWaitTime = orderLoopSettings.QueueWaitTimeLimit;
         _minCustomerArrivalTime = orderLoopSettings.MinCustomerArrivalTime;
         _maxCustomerArrivalTime = orderLoopSettings.MaxCustomerArrivalTime;
+        _maxCustomers = orderLoopSettings.MaxCustomers;
         _nextArrivalTime = 1f;
+
+        _orderController.OrderFlowFinished += OnOrderFinished;
     }
     
     public event Action<Customer> CustomerArrived = delegate { };
@@ -63,6 +74,9 @@ public class CustomerQueue : ITickable
 
     private void CheckForCustomerArrival(float deltaTime)
     {
+        if (HasGeneratedAllCustomers)
+            return;
+
         _elapsedArrivalTime += deltaTime;
 
         if (!(_elapsedArrivalTime >= _nextArrivalTime)) 
@@ -71,10 +85,13 @@ public class CustomerQueue : ITickable
         var customer = _customers.GetRandom();
         var waitStatus = new CustomerWaitStatus(customer, _customerWaitTime);
         _queue.Enqueue(waitStatus);
+        _generatedCustomers++;
         CustomersCountChanged(_queue.Count);
         _elapsedArrivalTime -= _nextArrivalTime;
         CustomerArrived(customer);
-        _nextArrivalTime = GetNextArrivalTime();
+
+        if (!HasGeneratedAllCustomers)
+            _nextArrivalTime = GetNextArrivalTime();
     }
 
     private void AdvanceWaitStatuses(float deltaTime)
@@ -91,8 +108,27 @@ public class CustomerQueue : ITickable
             _queue.Dequeue();
             CustomersCountChanged(_queue.Count);
             _customerPopUpDialogue.CustomerGaveUpDialogue(first.Customer)
-                .ChainCallback(_strikesController.Strike);
+                .ChainCallback(() =>
+                {
+                    _strikesController.Strike();
+                    ResolveCustomerFlow();
+                });
         }
+    }
+
+    private void OnOrderFinished(Order _)
+    {
+        ResolveCustomerFlow();
+    }
+
+    private void ResolveCustomerFlow()
+    {
+        _resolvedCustomers++;
+
+        if (!HasGeneratedAllCustomers || _resolvedCustomers < _generatedCustomers)
+            return;
+
+        _strikesController.EndGame();
     }
     
     private float GetNextArrivalTime() => Random.Range(_minCustomerArrivalTime, _maxCustomerArrivalTime);

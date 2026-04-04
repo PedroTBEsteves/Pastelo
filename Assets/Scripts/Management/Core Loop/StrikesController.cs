@@ -4,6 +4,7 @@ using UnityEngine;
 public class StrikesController
 {
     private int _strikes;
+    private bool _isGameOver;
 
     public int RemainingStrikes => Mathf.Max(0, StrikesToFail - _strikes);
     public int StrikesToFail { get; }
@@ -25,6 +26,15 @@ public class StrikesController
         RemainingStrikesChanged(RemainingStrikes);
         
         if (_strikes >= StrikesToFail)
-            GameOver();
+            EndGame();
+    }
+
+    public void EndGame()
+    {
+        if (_isGameOver)
+            return;
+
+        _isGameOver = true;
+        GameOver();
     }
 }
