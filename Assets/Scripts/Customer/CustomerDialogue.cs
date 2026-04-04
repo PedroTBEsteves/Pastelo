@@ -52,7 +52,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     {
         _customerQueue.CustomerArrived += customer =>
         {
-            if (_customerSprite != null)
+            if (_customerSprite.sprite == null)
                 _customerSprite.sprite = customer.Sprite;
         };
 
