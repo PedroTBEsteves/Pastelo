@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2477316e0c8cf3d4488569b1f749be4c
+guid: de6c7a659c1dd29469509f84e725b14e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1925503613280761263
-    second: cenario_BG_Liberdade3_0
+      213: -1874954316134232122
+    second: cenario_lona4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cenario_BG_Liberdade3_0
+      name: cenario_lona4_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
+        y: 933
         width: 2120
-        height: 1270
+        height: 347
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 15a4bac5aac3745e0800000000000000
-      internalID: -1925503613280761263
+      spriteID: 6cfcbb0cbf2daf5e0800000000000000
+      internalID: -1874954316134232122
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cenario_BG_Liberdade3_0: -1925503613280761263
+      cenario_lona4_0: -1874954316134232122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
