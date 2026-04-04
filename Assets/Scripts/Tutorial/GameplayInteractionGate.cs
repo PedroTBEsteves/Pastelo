@@ -15,11 +15,7 @@ public class GameplayInteractionGate
         return interactionType switch
         {
             TutorialInteractionType.TakeOrder => _state.CurrentStep == TutorialStep.TakeOrder,
-            TutorialInteractionType.MoveCamera => _state.CurrentStep is TutorialStep.MoveCameraToPrepping
-                or TutorialStep.MoveCameraToFrying
-                or TutorialStep.MoveCameraToPacking
-                or TutorialStep.PlaceInFrying
-                or TutorialStep.PlaceOnDelivery,
+            TutorialInteractionType.MoveCamera => CanMoveCameraTo(context),
             TutorialInteractionType.UseDough => _state.CurrentStep == TutorialStep.AddDough
                 && Equals(_state.ExpectedDough, context),
             TutorialInteractionType.AddFilling => _state.CurrentStep == TutorialStep.AddFilling
@@ -36,5 +32,15 @@ public class GameplayInteractionGate
             TutorialInteractionType.BuyIngredient => false,
             _ => true,
         };
+    }
+
+    private bool CanMoveCameraTo(object context)
+    {
+        if (context is not CameraSection targetSection || _state.ExpectedCameraSection != targetSection)
+            return false;
+
+        return _state.CurrentStep is TutorialStep.MoveCameraToPrepping
+            or TutorialStep.MoveCameraToFrying
+            or TutorialStep.MoveCameraToPacking;
     }
 }

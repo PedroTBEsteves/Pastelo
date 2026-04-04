@@ -25,6 +25,7 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(_direction == Direction.Left ? TutorialTargetId.CameraMoveLeft : TutorialTargetId.CameraMoveRight);
         _tutorialTargetRegistry.Register(_tutorialTarget);
+        _cameraController.CameraEndedMoving += () => SetCameraMovePercentage(null);
     }
 
     private void OnDestroy()
@@ -32,13 +33,16 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
         _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
 
-    private void SetCameraMovePercentage(PointerEventData eventData)
+    private void SetCameraMovePercentage(PointerEventData _)
     {
         var directionValue = _direction == Direction.Left ? -1 : 1;
         var targetSection = _cameraController.GetSectionInDirection(directionValue);
 
         if (!_interactionGate.CanInteract(TutorialInteractionType.MoveCamera, targetSection))
+        {
+            _cameraController.StopMoving();
             return;
+        }
 
         switch (_direction)
         {
