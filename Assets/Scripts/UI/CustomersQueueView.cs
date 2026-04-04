@@ -84,7 +84,7 @@ public class CustomersQueueView : MonoBehaviour
         if (!_itemsById.Remove(entry.Id, out var item) || item == null)
             return;
 
-        Destroy(item.gameObject);
+        item.Remove();
     }
 
     private void OnCurrentSectionChanged(CameraSection _)

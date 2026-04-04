@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class CustomerQueue : ITickable
 {
     private readonly float _customerWaitTime;
+    private readonly GameplayTutorialState _tutorialState;
     
     private readonly float _minCustomerArrivalTime;
     private readonly float _maxCustomerArrivalTime;
@@ -25,13 +26,15 @@ public class CustomerQueue : ITickable
 
     private bool HasCustomersLimit => _maxCustomers > 0;
     private bool HasGeneratedAllCustomers => HasCustomersLimit && _generatedCustomers >= _maxCustomers;
+    private bool IsPausedByTutorial => _tutorialState.IsActive && _tutorialState.CurrentStep != TutorialStep.WaitForCustomer;
 
-    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, StrikesController strikesController, ICustomerPopUpDialogue customerPopUpDialogue)
+    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, StrikesController strikesController, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState)
     {
         _customers = customers;
         _orderController = orderController;
         _strikesController = strikesController;
         _customerPopUpDialogue = customerPopUpDialogue;
+        _tutorialState = tutorialState;
         _customerWaitTime = orderLoopSettings.QueueWaitTimeLimit;
         _minCustomerArrivalTime = orderLoopSettings.MinCustomerArrivalTime;
         _maxCustomerArrivalTime = orderLoopSettings.MaxCustomerArrivalTime;
@@ -73,6 +76,9 @@ public class CustomerQueue : ITickable
     
     public void Tick(float deltaTime)
     {
+        if (IsPausedByTutorial)
+            return;
+
         CheckForCustomerArrival(deltaTime);
         AdvanceWaitStatuses(deltaTime);
     }

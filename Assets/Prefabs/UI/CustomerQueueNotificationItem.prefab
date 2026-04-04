@@ -92,6 +92,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _customerImage: {fileID: 100013}
   _remainingTimeSlider: {fileID: 100022}
+  _introTweenSettings:
+    duration: 0.25
+    ease: 31
+    customEase:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    cycles: 1
+    cycleMode: 0
+    startDelay: 0
+    endDelay: 0
+    useUnscaledTime: 0
+    _useFixedUpdate: 0
+    _updateType: 0
+  _exitTweenSettings:
+    duration: 0.25
+    ease: 31
+    customEase:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    cycles: 1
+    cycleMode: 0
+    startDelay: 0
+    endDelay: 0
+    useUnscaledTime: 0
+    _useFixedUpdate: 0
+    _updateType: 0
 --- !u!1 &100010
 GameObject:
   m_ObjectHideFlags: 0

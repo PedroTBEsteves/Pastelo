@@ -1,3 +1,4 @@
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +13,12 @@ public class CustomerQueueNotificationItem : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private Slider _remainingTimeSlider;
 
+    [SerializeField]
+    private TweenSettings _introTweenSettings;
+    
+    [SerializeField]
+    private TweenSettings _exitTweenSettings;
+
     private CustomerWaitStatus _entry;
     private CameraController _cameraController;
 
@@ -22,7 +29,14 @@ public class CustomerQueueNotificationItem : MonoBehaviour, IPointerClickHandler
 
         _customerImage.sprite = _entry.Customer.Sprite;
         _customerImage.preserveAspect = true;
+        Tween.Scale(transform, Vector3.zero, Vector3.one, _introTweenSettings);
         Refresh();
+    }
+
+    public void Remove()
+    {
+        Tween.Scale(transform, Vector3.zero, Vector3.one, _introTweenSettings)
+            .OnComplete(this, target => Destroy(target.gameObject));
     }
 
     private void Update()
