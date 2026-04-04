@@ -18,7 +18,7 @@ public class SectionController : MonoBehaviour
         var position = objectToAttach.position.x;
         var head = GetSectionAt(position);
 
-        objectToAttach.transform.parent = head.transform;
+        objectToAttach.SetParent(head.AttachmentRoot, true);
     }
 
     public Vector3 GetNextSectionPosition(float currentCameraX)

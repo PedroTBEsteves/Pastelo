@@ -7,11 +7,16 @@ public class SceneSection : ValidatedMonoBehaviour
     [SerializeField, Self]
     private BoxCollider2D _sizeCollider;
 
+    [SerializeField]
+    private Transform _attachmentRoot;
+
     [field: SerializeField]
     public SceneSection Next { get; private set; }
     
     [field: SerializeField]
     public SceneSection Previous { get; private set; }
+
+    public Transform AttachmentRoot => _attachmentRoot != null ? _attachmentRoot : transform;
     
     private float _size;
     private bool _isInitialized;
