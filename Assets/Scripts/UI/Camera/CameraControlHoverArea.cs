@@ -19,17 +19,19 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
 
     private TutorialTarget _tutorialTarget;
+    private bool _isPointerHovering;
 
     private void Awake()
     {
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(_direction == Direction.Left ? TutorialTargetId.CameraMoveLeft : TutorialTargetId.CameraMoveRight);
         _tutorialTargetRegistry.Register(_tutorialTarget);
-        _cameraController.CameraEndedMoving += () => SetCameraMovePercentage(null);
+        _cameraController.CameraEndedMoving += OnCameraEndedMoving;
     }
 
     private void OnDestroy()
     {
+        _cameraController.CameraEndedMoving -= OnCameraEndedMoving;
         _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
 
@@ -56,12 +58,34 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
                 throw new ArgumentOutOfRangeException();
         }
     }
+
+    private void OnCameraEndedMoving()
+    {
+        if (!_isPointerHovering)
+            return;
+
+        SetCameraMovePercentage(null);
+    }
     
-    public void OnPointerEnter(PointerEventData eventData) => SetCameraMovePercentage(eventData);
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _isPointerHovering = true;
+        SetCameraMovePercentage(eventData);
+    }
 
-    public void OnPointerMove(PointerEventData eventData) => SetCameraMovePercentage(eventData);
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        if (!_isPointerHovering)
+            return;
 
-    public void OnPointerExit(PointerEventData eventData) => _cameraController.StopMoving();
+        SetCameraMovePercentage(eventData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _isPointerHovering = false;
+        _cameraController.StopMoving();
+    }
 
     [Serializable]
     private enum Direction

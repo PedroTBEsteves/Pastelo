@@ -1,6 +1,6 @@
 public static class GameplayTutorialOptions
 {
-    private static bool _shouldRunTutorial = false;
+    private static bool _shouldRunTutorial = true;
 
     public static void SetShouldRunTutorial(bool shouldRunTutorial)
     {
