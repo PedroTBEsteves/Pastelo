@@ -122,7 +122,7 @@ public class FryingArea : ValidatedMonoBehaviour
     {
         var size = _collider.size.x * 0.7f;
 
-        var offset = new Vector3(size/4 * (index - 2) + size/8, 0, -1);
+        var offset = new Vector3(size/4 * (index - 2) + size/8, _heightTransform.position.y, -1);
         return transform.position + offset;
     }
 
