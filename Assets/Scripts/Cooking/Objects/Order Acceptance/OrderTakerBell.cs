@@ -24,10 +24,16 @@ public class OrderTakerBell : ValidatedMonoBehaviour, IPointerDownHandler
     [SerializeField]
     private AudioSource _bellSound;
 
+    [SerializeField]
+    private bool _registerAsTutorialTarget = true;
+
     private TutorialTarget _tutorialTarget;
 
     private void Awake()
     {
+        if (!_registerAsTutorialTarget)
+            return;
+
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(TutorialTargetId.OrderBell);
         _tutorialTargetRegistry.Register(_tutorialTarget);
@@ -35,7 +41,8 @@ public class OrderTakerBell : ValidatedMonoBehaviour, IPointerDownHandler
 
     private void OnDestroy()
     {
-        _tutorialTargetRegistry.Unregister(_tutorialTarget);
+        if (_tutorialTarget != null)
+            _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
 
     public void OnPointerDown(PointerEventData eventData)

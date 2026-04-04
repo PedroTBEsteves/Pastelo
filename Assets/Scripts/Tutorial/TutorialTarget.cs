@@ -18,7 +18,7 @@ public class TutorialTarget : MonoBehaviour
     [SerializeField]
     private Color _highlightColor = new(1f, 0.95f, 0.6f, 1f);
 
-    [SerializeField, Self(Flag.Optional)]
+    [SerializeField, Child(Flag.Optional | Flag.Editable)]
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField, Self(Flag.Optional)]

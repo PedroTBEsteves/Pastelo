@@ -43,10 +43,27 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     
     [Inject]
     private readonly CustomerQueue _customerQueue;
+
+    [Inject]
+    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
     
     private Sequence _dialogueSequence;
+    private TutorialTarget _tutorialTarget;
 
     public bool IsPlaying => _dialogueSequence.isAlive;
+
+    private void Awake()
+    {
+        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
+        _tutorialTarget.Configure(TutorialTargetId.OrderBell);
+        _tutorialTargetRegistry.Register(_tutorialTarget);
+    }
+
+    private void OnDestroy()
+    {
+        if (_tutorialTarget != null)
+            _tutorialTargetRegistry.Unregister(_tutorialTarget);
+    }
 
     private void Start()
     {
