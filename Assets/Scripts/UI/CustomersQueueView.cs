@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(VerticalLayoutGroup))]
+[RequireComponent(typeof(HorizontalLayoutGroup))]
 [RequireComponent(typeof(ContentSizeFitter))]
 public class CustomersQueueView : MonoBehaviour
 {
@@ -34,7 +34,7 @@ public class CustomersQueueView : MonoBehaviour
     private RectTransform _rectTransform;
     private Image _image;
     private AudioSource _audioSource;
-    private VerticalLayoutGroup _layoutGroup;
+    private HorizontalLayoutGroup _layoutGroup;
     private readonly Dictionary<int, CustomerQueueNotificationItem> _itemsById = new();
     private NotificationSide _currentSide;
 
@@ -43,7 +43,7 @@ public class CustomersQueueView : MonoBehaviour
         _rectTransform = (RectTransform)transform;
         _image = GetComponent<Image>();
         _audioSource = GetComponent<AudioSource>();
-        _layoutGroup = GetComponent<VerticalLayoutGroup>();
+        _layoutGroup = GetComponent<HorizontalLayoutGroup>();
         _customerQueue.CustomerArrived += OnCustomerArrived;
         _customerQueue.QueueEntryAdded += OnQueueEntryAdded;
         _customerQueue.QueueEntryRemoved += OnQueueEntryRemoved;
