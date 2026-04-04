@@ -44,6 +44,10 @@ public class CustomerQueue : ITickable
     public event Action<Customer> CustomerArrived = delegate { };
     public event Action<Customer> CustomerExpired = delegate { };
     public event Action<int> CustomersCountChanged = delegate { };
+    public event Action<CustomerWaitStatus> QueueEntryAdded = delegate { };
+    public event Action<CustomerWaitStatus, CustomerQueueEntryRemovedReason> QueueEntryRemoved = delegate { };
+
+    public IEnumerable<CustomerWaitStatus> Entries => _queue;
 
     public bool TryGetNext(out Customer customer)
     {
@@ -53,6 +57,7 @@ public class CustomerQueue : ITickable
         if (hasCustomer)
         {
             customer = waitStatus.Customer;
+            QueueEntryRemoved(waitStatus, CustomerQueueEntryRemovedReason.TakenForService);
             CustomersCountChanged(_queue.Count);
         }
 
@@ -86,6 +91,7 @@ public class CustomerQueue : ITickable
         var waitStatus = new CustomerWaitStatus(customer, _customerWaitTime);
         _queue.Enqueue(waitStatus);
         _generatedCustomers++;
+        QueueEntryAdded(waitStatus);
         CustomersCountChanged(_queue.Count);
         _elapsedArrivalTime -= _nextArrivalTime;
         CustomerArrived(customer);
@@ -106,6 +112,7 @@ public class CustomerQueue : ITickable
         {
             CustomerExpired(first.Customer);
             _queue.Dequeue();
+            QueueEntryRemoved(first, CustomerQueueEntryRemovedReason.Expired);
             CustomersCountChanged(_queue.Count);
             _customerPopUpDialogue.CustomerGaveUpDialogue(first.Customer)
                 .ChainCallback(() =>

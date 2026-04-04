@@ -62,6 +62,15 @@ public class CameraController
         return _orderedSections[targetIndex];
     }
 
+    public int GetDirectionToSection(CameraSection section)
+    {
+        if (_orderedSections.Length == 0)
+            return 0;
+
+        var targetIndex = GetSectionIndex(section);
+        return targetIndex.CompareTo(_currentSectionIndex);
+    }
+
     public void GoImmediatelyToSection(CameraSection section)
     {
         var wasMoving = _isMoving;
