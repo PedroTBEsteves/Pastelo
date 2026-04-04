@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1611464609268342615}
   - component: {fileID: 5574255335869514232}
   - component: {fileID: 3575402004917079136}
+  - component: {fileID: 3441546510067728005}
   m_Layer: 0
   m_Name: Queijo Sink
   m_TagString: Untagged
@@ -185,6 +186,20 @@ MonoBehaviour:
   _highlightColor: {r: 1, g: 0.95, b: 0.6, a: 1}
   _spriteRenderer: {fileID: 2010317973467851504}
   _graphic: {fileID: 0}
+--- !u!114 &3441546510067728005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556916794420987154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3af8f1b54d4b2fa38cdb229f5ec651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: Queijo
+  _viewPrefabOverride: {fileID: 0}
 --- !u!1 &8342283531500888329
 GameObject:
   m_ObjectHideFlags: 0
