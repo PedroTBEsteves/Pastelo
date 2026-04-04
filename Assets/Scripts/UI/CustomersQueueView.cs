@@ -50,7 +50,7 @@ public class CustomersQueueView : MonoBehaviour
         _cameraController.CurrentSectionChanged += OnCurrentSectionChanged;
 
         _currentSide = GetSideForBalcony();
-        ApplySide(_currentSide);
+        //ApplySide(_currentSide);
 
         foreach (var entry in _customerQueue.Entries)
             AddEntry(entry, false);
@@ -90,7 +90,7 @@ public class CustomersQueueView : MonoBehaviour
     private void OnCurrentSectionChanged(CameraSection _)
     {
         _currentSide = GetSideForBalcony();
-        ApplySide(_currentSide);
+        //ApplySide(_currentSide);
     }
 
     private NotificationSide GetSideForBalcony() => _cameraController.GetDirectionToSection(CameraSection.Balcony) > 0

@@ -114,6 +114,8 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     
     private void OnHeld(PointerEventData eventData)
     {
+        _tutorialEvents.PublishPastelPickedUp(this);
+
         if (_frying && _interactionGate.CanInteract(TutorialInteractionType.RemoveCookedPastel, this))
             _tutorialEvents.PublishPastelRemovedFromFryer(this);
 
@@ -124,6 +126,8 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
     private void OnDropped(PointerEventData eventData)
     {
+        _tutorialEvents.PublishPastelDropped(this);
+
         var mousePosition = _cameraController.ScreenToWorldPointy(eventData.position);
         var raycastHit = Physics2D.Raycast(
             mousePosition,

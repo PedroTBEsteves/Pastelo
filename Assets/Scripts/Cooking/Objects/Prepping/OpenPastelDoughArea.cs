@@ -108,7 +108,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         foreach (var fillings in _fillings)
             Destroy(fillings.gameObject);
         _fillings.Clear();
-        _tutorialEvents.PublishPastelClosed();
+        _tutorialEvents.PublishPastelClosed(draggableClosedPastel);
         //_cameraController.GoToNextSection();
     }
 

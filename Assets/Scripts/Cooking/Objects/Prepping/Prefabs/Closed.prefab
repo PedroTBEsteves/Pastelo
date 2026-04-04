@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 188576179777124358}
   - component: {fileID: 3628853816251220452}
   - component: {fileID: -7452085516801636856}
+  - component: {fileID: 3946908216902818608}
   m_Layer: 0
   m_Name: Closed
   m_TagString: Untagged
@@ -211,7 +212,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -8679182956094478198, guid: c493380d779441345af50705ed445b41, type: 3}
+  m_Sprite: {fileID: 5435832490908719703, guid: 0cb8525d98757f447b5c8b3ca95d48ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -260,7 +261,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.42, y: 2.15}
+    oldSize: {x: 2.56, y: 3.68}
     newSize: {x: 1.42, y: 2.15}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -319,6 +320,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _draggable: {fileID: 188576179777124358}
+--- !u!114 &3946908216902818608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146083446873447655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba87754a7814cc195cb9a6921802f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _marker: {fileID: 0}
+  _outlineThickness: 4
+  _highlightScaleMultiplier: 1.1
+  _highlightColor: {r: 1, g: 0.95, b: 0.6, a: 1}
+  _spriteRenderer: {fileID: 7710389937225776067}
+  _graphic: {fileID: 0}
 --- !u!1 &3160242439812138036
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.38}
+  m_AnchoredPosition: {x: 0, y: 1.621}
   m_SizeDelta: {x: 1.09, y: 0.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5211553218259955050

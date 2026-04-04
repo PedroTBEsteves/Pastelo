@@ -34,6 +34,8 @@ public class GameplayTutorialController
         _tutorialEvents.DoughOpened += OnDoughOpened;
         _tutorialEvents.FillingAdded += OnFillingAdded;
         _tutorialEvents.PastelClosed += OnPastelClosed;
+        _tutorialEvents.PastelPickedUp += OnPastelPickedUp;
+        _tutorialEvents.PastelDropped += OnPastelDropped;
         _tutorialEvents.PastelPlacedInFryer += OnPastelPlacedInFryer;
         _tutorialEvents.PastelReachedCooked += OnPastelReachedCooked;
         _tutorialEvents.PastelRemovedFromFryer += OnPastelRemovedFromFryer;
@@ -109,12 +111,52 @@ public class GameplayTutorialController
         _state.SetStep(TutorialStep.ClosePastel, TutorialTargetId.ClosePastelArea);
     }
 
-    private void OnPastelClosed()
+    private void OnPastelClosed(DraggableClosedPastel pastel)
     {
         if (!_state.IsActive || _state.CurrentStep != TutorialStep.ClosePastel)
             return;
 
-        _state.SetStep(TutorialStep.MoveCameraToFrying, TutorialTargetId.CameraMoveRight, expectedCameraSection: CameraSection.Frying);
+        _state.SetTutorialPastel(pastel);
+        _state.SetStep(TutorialStep.ClosePastel, TutorialTargetId.CookedPastel, pastel);
+    }
+
+    private void OnPastelPickedUp(DraggableClosedPastel pastel)
+    {
+        if (!_state.IsActive)
+            return;
+
+        if (_state.CurrentStep == TutorialStep.ClosePastel && _state.TutorialPastel == pastel)
+        {
+            _state.TryBeginDraggingTutorialPastel(pastel);
+            _state.SetStep(TutorialStep.MoveCameraToFrying, TutorialTargetId.CameraMoveRight, expectedCameraSection: CameraSection.Frying);
+            return;
+        }
+
+        if (_state.CurrentStep == TutorialStep.RemoveCookedPastel && _state.TutorialPastel == pastel)
+        {
+            _state.TryBeginDraggingTutorialPastel(pastel);
+            _state.SetStep(TutorialStep.MoveCameraToPacking, TutorialTargetId.CameraMoveRight, expectedCameraSection: CameraSection.Packing);
+            return;
+        }
+
+        if (_state.CurrentStep is not (TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToPacking))
+            return;
+
+        _state.TryBeginDraggingTutorialPastel(pastel);
+    }
+
+    private void OnPastelDropped(DraggableClosedPastel pastel)
+    {
+        if (!_state.IsActive || _state.CurrentStep is not (TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToPacking))
+            return;
+
+        if (!_state.TryEndDraggingTutorialPastel(pastel))
+            return;
+
+        var returnStep = _state.CurrentStep == TutorialStep.MoveCameraToFrying
+            ? TutorialStep.ClosePastel
+            : TutorialStep.RemoveCookedPastel;
+        _state.SetStep(returnStep, TutorialTargetId.CookedPastel, pastel);
     }
 
     private void OnPastelPlacedInFryer(DraggableClosedPastel _)
@@ -122,6 +164,7 @@ public class GameplayTutorialController
         if (!_state.IsActive || _state.CurrentStep != TutorialStep.PlaceInFrying)
             return;
 
+        _state.ClearTutorialPastelDrag();
         _state.SetStep(TutorialStep.WaitUntilCooked);
     }
 
@@ -130,15 +173,13 @@ public class GameplayTutorialController
         if (!_state.IsActive || _state.CurrentStep != TutorialStep.WaitUntilCooked)
             return;
 
+        _state.SetTutorialPastel(pastel);
         _state.SetStep(TutorialStep.RemoveCookedPastel, TutorialTargetId.CookedPastel, pastel);
     }
 
     private void OnPastelRemovedFromFryer(DraggableClosedPastel _)
     {
-        if (!_state.IsActive || _state.CurrentStep != TutorialStep.RemoveCookedPastel)
-            return;
-
-        _state.SetStep(TutorialStep.MoveCameraToPacking, TutorialTargetId.CameraMoveRight, expectedCameraSection: CameraSection.Packing);
+        // Advancing to packing is now driven by the drag state, not just by removing from the fryer.
     }
 
     private void OnPastelPlacedOnDelivery(DraggableClosedPastel _)
@@ -154,6 +195,7 @@ public class GameplayTutorialController
         if (!_state.IsActive || order != _state.TutorialOrder || _state.CurrentStep != TutorialStep.DeliverOrder)
             return;
 
+        _state.ClearTutorialPastelDrag();
         _state.Finish();
     }
 
