@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -3435788241511376217, guid: 9cb43e5d61134fd4790e71270b0657cc, type: 3}
+  m_Sprite: {fileID: 8470005997068428547, guid: 5c844979d1242004aa0ad608a8c9ca1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,9 +100,10 @@ GameObject:
   - component: {fileID: 2098360710043839310}
   - component: {fileID: 6598179706461829354}
   - component: {fileID: 5520281729689365349}
-  - component: {fileID: 6085206746004663777}
+  - component: {fileID: 2523472932811461584}
+  - component: {fileID: 3553307263284109868}
   m_Layer: 0
-  m_Name: Churrasco Sink
+  m_Name: Massa Sink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2446269278895985266, guid: 063db1ef54da057428697bd79cb09890, type: 3}
+  m_Sprite: {fileID: 7009773628709338706, guid: 700d960d89e5e314abfbe5811ce1e954, type: 3}
   m_Color: {r: 0.8867924, g: 0.81557304, b: 0.80731577, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d54f12b6a04f7409d3071794905ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ingredient: {fileID: 11400000, guid: 9930b5dd76ecc2e4bb6c3b28fbdba5d4, type: 2}
+  _ingredient: {fileID: 11400000, guid: 88fa7ba433f184f40b8a087152b8cdaa, type: 2}
   _lockedIndicator: {fileID: 2150025455480998394}
   _draggableSink: {fileID: 5520281729689365349}
   _purchasePrompt: {fileID: 0}
@@ -233,7 +234,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 1.11}
+    oldSize: {x: 1.81, y: 1.83}
     newSize: {x: 0.8, y: 1.11}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -253,8 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a0589d3b5d2224dafaa6256a872a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _draggablePrefab: {fileID: 3095736115967226448, guid: 631865f17dba97541bc195303d4092b3, type: 3}
---- !u!114 &6085206746004663777
+  _draggablePrefab: {fileID: 3095736115967226448, guid: 466e3b69f90f6a247804a009cc5239f0, type: 3}
+--- !u!114 &2523472932811461584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,3 +273,17 @@ MonoBehaviour:
   _highlightColor: {r: 1, g: 0.95, b: 0.6, a: 1}
   _spriteRenderer: {fileID: 7367941062341088989}
   _graphic: {fileID: 0}
+--- !u!114 &3553307263284109868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142219619040711605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3af8f1b54d4b2fa38cdb229f5ec651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: Tradicional
+  _viewPrefabOverride: {fileID: 0}

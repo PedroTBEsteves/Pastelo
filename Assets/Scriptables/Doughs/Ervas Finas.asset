@@ -15,13 +15,13 @@ MonoBehaviour:
   <Name>k__BackingField: Ervas Finas
   <Cost>k__BackingField: 0.8
   <Value>k__BackingField: 3
-  <Icon>k__BackingField: {fileID: 7976486375383208650, guid: aabfbbd8f269b4441bff35e7bed7f774, type: 3}
-  <OpenDoughSprite>k__BackingField: {fileID: 4054941489315323230, guid: 9f6409fd11135d244b0e54082dea369e, type: 3}
+  <Icon>k__BackingField: {fileID: 2013869065985307180, guid: 7a2aa678b2636f642bee03535b4f3429, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: 4090259601666450071, guid: 1b76a44926c3c1c4d9ec5deddb63a8f7, type: 3}
   _closedPastelDoughSprites:
     _serializedList:
     - Key: 0
-      Value: {fileID: -5536340196685505864, guid: e77bb1d3ba2d9b34e87bb7e4ea07274f, type: 3}
+      Value: {fileID: 1394955401386578300, guid: f265c8884852447488653865a5ae9dd3, type: 3}
     - Key: 1
-      Value: {fileID: 6375504994563717052, guid: 48d5749a3148401488a1244f33e142a2, type: 3}
+      Value: {fileID: -5855267455142226875, guid: b26fb86c7060e88489be72b0d596de31, type: 3}
     - Key: 2
-      Value: {fileID: 1301891721129929922, guid: bda4261a1ffdebd468856552e69d1f40, type: 3}
+      Value: {fileID: -8119769557658058874, guid: 8c00314db492c71468b4c628946b157d, type: 3}

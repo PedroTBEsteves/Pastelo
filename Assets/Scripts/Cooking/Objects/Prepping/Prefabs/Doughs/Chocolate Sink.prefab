@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4676948166295540457
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2098360710043839310, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: _ingredient
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d09fa27b83aac644ad79e605f95d924, type: 2}
+    - target: {fileID: 2587436458443413696, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2630404456673343825, guid: 2d59cb7f7145bf74a936dc5b1181996f, type: 3}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650786505430391835, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553307263284109868, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: _text
+      value: Chocolate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142219619040711605, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_Name
+      value: Chocolate Sink
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520281729689365349, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: _draggablePrefab
+      value: 
+      objectReference: {fileID: 2001016326790191810, guid: bbd4e3b640c8da64db102e75d83387c0, type: 3}
+    - target: {fileID: 6598179706461829354, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_Size.x
+      value: 2.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598179706461829354, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_Size.y
+      value: 2.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598179706461829354, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598179706461829354, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367941062341088989, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5281907171707744427, guid: 591588fc8f23cb34eba6f53f9c309c06, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}

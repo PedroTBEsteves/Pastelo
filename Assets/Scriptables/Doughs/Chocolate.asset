@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17b678c364b97948b4c333091ccb2ff, type: 3}
+  m_Name: Chocolate
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Chocolate
+  <Cost>k__BackingField: 0.6
+  <Value>k__BackingField: 2
+  <Icon>k__BackingField: {fileID: 5281907171707744427, guid: 591588fc8f23cb34eba6f53f9c309c06, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: 4475540513237748772, guid: f5c855d02b93095468288814077df8bf, type: 3}
+  _closedPastelDoughSprites:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: -2575876139857980733, guid: c7090dba99789e74e8a08103e9b455ab, type: 3}
+    - Key: 1
+      Value: {fileID: 5317896245838512498, guid: dbbe6019b519dd04b827c9c58b2d9abc, type: 3}
+    - Key: 2
+      Value: {fileID: -3177036078896601808, guid: 2570b533db66c27428cdd6e508bd1953, type: 3}

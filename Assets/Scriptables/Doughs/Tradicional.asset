@@ -15,13 +15,13 @@ MonoBehaviour:
   <Name>k__BackingField: Tradicional
   <Cost>k__BackingField: 0.5
   <Value>k__BackingField: 1.5
-  <Icon>k__BackingField: {fileID: -5120585517933392877, guid: fb2a6a20623587a449f13ffc6387aeef, type: 3}
-  <OpenDoughSprite>k__BackingField: {fileID: 1184430581610484425, guid: 3623ca88acd39184faa9982556296beb, type: 3}
+  <Icon>k__BackingField: {fileID: 7009773628709338706, guid: 700d960d89e5e314abfbe5811ce1e954, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: 3682588487474673058, guid: 62926b54ded7ce245a1149fb2ad82ed8, type: 3}
   _closedPastelDoughSprites:
     _serializedList:
     - Key: 0
-      Value: {fileID: -8317522304409841102, guid: 1f496f483968b364baff76f393c29fe7, type: 3}
+      Value: {fileID: -5647656978846785272, guid: 8897a27548e89a643b46173bc8bd21b0, type: 3}
     - Key: 1
-      Value: {fileID: 8974115523538674798, guid: ad54ba350bd4708408a725f127f16352, type: 3}
+      Value: {fileID: -5769385248837973851, guid: 285568a422df6aa478615ec32f14d172, type: 3}
     - Key: 2
-      Value: {fileID: -9164093154171501782, guid: 422c9f7a3543da24595024520884c1c3, type: 3}
+      Value: {fileID: 7840476546924409492, guid: c06ba5410a3f8d349af5fce134713a37, type: 3}

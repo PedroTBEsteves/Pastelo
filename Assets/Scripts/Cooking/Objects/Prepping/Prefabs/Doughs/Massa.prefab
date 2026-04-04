@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3095736115967226448}
   - component: {fileID: -896003603493872279}
   m_Layer: 0
-  m_Name: Alho
+  m_Name: Massa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

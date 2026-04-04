@@ -15,13 +15,13 @@ MonoBehaviour:
   <Name>k__BackingField: Pimenta
   <Cost>k__BackingField: 0.7
   <Value>k__BackingField: 2.5
-  <Icon>k__BackingField: {fileID: -7039977068611174146, guid: 9e59b29e13b029f43af1c72b69e0900f, type: 3}
-  <OpenDoughSprite>k__BackingField: {fileID: -5857682462441077272, guid: ac01fb94298aa254a97fabcdd8d7aacb, type: 3}
+  <Icon>k__BackingField: {fileID: -4157140275246709874, guid: a3f038e2519a05546a124f1733be5680, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: -3614801910557280548, guid: 9b799336c857c7349ab47564fb6fb425, type: 3}
   _closedPastelDoughSprites:
     _serializedList:
     - Key: 0
-      Value: {fileID: -7565695630210632437, guid: 0ddff10cdac38cb4a9c27b2aee93a055, type: 3}
+      Value: {fileID: 5435832490908719703, guid: 0cb8525d98757f447b5c8b3ca95d48ff, type: 3}
     - Key: 1
-      Value: {fileID: 1040315187803150831, guid: ce5a4ea56b1546b43b72ee9328bc413e, type: 3}
+      Value: {fileID: 5879240364180964412, guid: 5e6f6d1a17f525d4582bff98ffb1596b, type: 3}
     - Key: 2
-      Value: {fileID: 6054819722310184621, guid: ca458a18c2f57c5409c7336cf321c721, type: 3}
+      Value: {fileID: 5966886953657223257, guid: ecf4a9fd8705d3d4185522a11e93a838, type: 3}
