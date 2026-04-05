@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: 005
   m_EditorClassIdentifier: 
   <Sprite>k__BackingField: {fileID: 7350100175165167710, guid: fb4c0faf026e0614fb9d89b9252c3add, type: 3}
+  <Icone>k__BackingField: {fileID: 5664984844282992131, guid: 4ade01a3355b0dc4ab2a02d5eb6d4375, type: 3}

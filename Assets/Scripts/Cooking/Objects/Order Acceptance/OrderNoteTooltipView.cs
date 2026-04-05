@@ -8,9 +8,6 @@ public class OrderNoteTooltipView : TooltipView
     private Image _doughIcon;
 
     [SerializeField]
-    private GameObject _emptyIngredients;
-
-    [SerializeField]
     private Transform _ingredientsRoot;
 
     [SerializeField]
@@ -34,18 +31,12 @@ public class OrderNoteTooltipView : TooltipView
         ClearIngredients();
         _doughIcon.sprite = recipe.Dough.Icon;
         _doughIcon.preserveAspect = true;
-
-        var hasIngredients = false;
-
+        
         foreach (var (filling, amount) in recipe.Fillings)
         {
             var ingredientRow = Instantiate(_ingredientRowPrefab, _ingredientsRoot);
             ingredientRow.Bind(filling, amount);
-            hasIngredients = true;
         }
-
-        if (_emptyIngredients != null)
-            _emptyIngredients.SetActive(!hasIngredients);
 
         return true;
     }

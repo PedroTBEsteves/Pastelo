@@ -1,4 +1,5 @@
 using KBCore.Refs;
+using PrimeTween;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
@@ -28,14 +29,39 @@ public class OrderNote : ValidatedMonoBehaviour
     
     [SerializeField]
     private Slider _remainingTimeSlider;
+
+    [SerializeField]
+    private Graphic _remainingTimeFillGraphic;
+
+    [SerializeField]
+    private Color _highRemainingTimeColor = Color.green;
+
+    [SerializeField]
+    private Color _mediumRemainingTimeColor = Color.yellow;
+
+    [SerializeField]
+    private Color _lowRemainingTimeColor = Color.red;
+
+    [SerializeField]
+    private TweenSettings _remainingTimeColorTweenSettings;
     
     [SerializeField, Self]
     private Draggable _draggable;
 
     private Vector3 _positionOnHold;
     private TutorialTarget _tutorialTarget;
+    private Tween _remainingTimeColorTween;
+    private RemainingTimeBand _currentRemainingTimeBand;
+    private bool _remainingTimeBandInitialized;
     
     public Order Order { get; private set; }
+
+    private enum RemainingTimeBand
+    {
+        High,
+        Medium,
+        Low
+    }
 
     private void Awake()
     {
@@ -47,6 +73,9 @@ public class OrderNote : ValidatedMonoBehaviour
 
     private void OnDestroy()
     {
+        if (_remainingTimeColorTween.isAlive)
+            _remainingTimeColorTween.Stop();
+
         _orderController.OrderExpired -= OnOrderExpired;
         _draggable.Held -= OnHeld;
         _draggable.Dropped -= OnDropped;
@@ -62,6 +91,7 @@ public class OrderNote : ValidatedMonoBehaviour
         _tutorialTargetRegistry.Register(_tutorialTarget);
 
         _orderNumber.SetText($"#{order.Number}");
+        ApplyRemainingTimeBand(order.NormalizedRemainingTime, false);
         _remainingTimeSlider.transform.SetAsLastSibling();
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
     }
@@ -82,7 +112,9 @@ public class OrderNote : ValidatedMonoBehaviour
 
     private void Update()
     {
-        _remainingTimeSlider.normalizedValue = Order.NormalizedRemainingTime;
+        var normalizedRemainingTime = Order.NormalizedRemainingTime;
+        _remainingTimeSlider.normalizedValue = normalizedRemainingTime;
+        ApplyRemainingTimeBand(normalizedRemainingTime, true);
     }
 
     private void OnHeld(PointerEventData _)
@@ -113,4 +145,56 @@ public class OrderNote : ValidatedMonoBehaviour
     }
 
     private bool CanDragOrderNote() => _interactionGate.CanInteract(TutorialInteractionType.DeliverOrder, Order);
+
+    private void ApplyRemainingTimeBand(float normalizedRemainingTime, bool useTween)
+    {
+        var remainingTimeBand = GetRemainingTimeBand(normalizedRemainingTime);
+        if (_remainingTimeBandInitialized
+            && remainingTimeBand == _currentRemainingTimeBand
+            && _remainingTimeFillGraphic != null)
+            return;
+
+        _remainingTimeBandInitialized = true;
+        _currentRemainingTimeBand = remainingTimeBand;
+        if (_remainingTimeFillGraphic == null)
+            return;
+
+        var targetColor = GetRemainingTimeColor(remainingTimeBand);
+        if (!useTween)
+        {
+            _remainingTimeFillGraphic.color = targetColor;
+            return;
+        }
+
+        if (_remainingTimeColorTween.isAlive)
+            _remainingTimeColorTween.Stop();
+
+        _remainingTimeColorTween = Tween.Color(
+            _remainingTimeFillGraphic,
+            _remainingTimeFillGraphic.color,
+            targetColor,
+            _remainingTimeColorTweenSettings);
+    }
+
+    private RemainingTimeBand GetRemainingTimeBand(float normalizedRemainingTime)
+    {
+        if (normalizedRemainingTime > 0.66f)
+            return RemainingTimeBand.High;
+
+        if (normalizedRemainingTime > 0.33f)
+            return RemainingTimeBand.Medium;
+
+        return RemainingTimeBand.Low;
+    }
+
+    private Color GetRemainingTimeColor(RemainingTimeBand remainingTimeBand)
+    {
+        return remainingTimeBand switch
+        {
+            RemainingTimeBand.High => _highRemainingTimeColor,
+            RemainingTimeBand.Medium => _mediumRemainingTimeColor,
+            RemainingTimeBand.Low => _lowRemainingTimeColor,
+            _ => _highRemainingTimeColor
+        };
+    }
 }

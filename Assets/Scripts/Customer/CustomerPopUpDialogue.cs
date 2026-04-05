@@ -36,7 +36,7 @@ public class CustomerPopUpDialogue : MonoBehaviour, ICustomerPopUpDialogue
 
     private Sequence DialogueSequence(Customer customer, TextAsset[] dialogueOptions)
     {
-        _customerImage.sprite = customer.Sprite;
+        _customerImage.sprite = customer.Icone;
         _popUpRoot.SetActive(true);
         var dialogue = dialogueOptions.GetRandomElement();
         

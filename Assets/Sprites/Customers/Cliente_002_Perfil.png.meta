@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f439042392903624aa7ba1cfb009ef6d
+guid: 9feb4831cd1b364438b696cbdec3fba3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7799815211784081276
-    second: VJdvLa-download-happy-blackman-png-1_0
+      213: -4087964287285334167
+    second: Cliente_002_Perfil_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: VJdvLa-download-happy-blackman-png-1_0
+      name: Cliente_002_Perfil_0
       rect:
         serializedVersion: 2
-        x: 13
+        x: 7
         y: 0
-        width: 388
-        height: 532
+        width: 99
+        height: 89
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c7f04142c928e3c60800000000000000
-      internalID: 7799815211784081276
+      spriteID: 96fefd1c322a447c0800000000000000
+      internalID: -4087964287285334167
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      VJdvLa-download-happy-blackman-png-1_0: 7799815211784081276
+      Cliente_002_Perfil_0: -4087964287285334167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
