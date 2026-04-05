@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: GaveUpDialogues_pt
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt
+  m_SharedData: {fileID: 11400000, guid: d55f67f3992552c44b6792977bc8c4cc, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 5270581248
+    m_Localized: "O pastel t\xE1 vindo do Acre a p\xE9?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10018533376
+    m_Localized: "O pastel t\xE1 fritando ou t\xE1 na faculdade de gastronomia?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14279946240
+    m_Localized: "J\xE1 envelheci dois anos esperando esse pastel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18558136320
+    m_Localized: "Ser\xE1 que a demora \xE9 porque voc\xEAs est\xE3o plantando os
+      ingredientes?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27420700672
+    m_Localized: "T\xE1 vindo de delivery de tartaruga, n\xE9?"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

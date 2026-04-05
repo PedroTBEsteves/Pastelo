@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Churrasco
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Churrasco
+  <LocalizationKey>k__BackingField: dough.barbecue
   <Cost>k__BackingField: 0.8
   <Value>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 2446269278895985266, guid: 063db1ef54da057428697bd79cb09890, type: 3}

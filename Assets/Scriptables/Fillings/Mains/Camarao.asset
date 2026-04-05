@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Camarao
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Camarao
+  <LocalizationKey>k__BackingField: filling.main.shrimp
   <Cost>k__BackingField: 0.5
   <Value>k__BackingField: 0.7
   <Icon>k__BackingField: {fileID: -2744386507665659717, guid: 8294f71a656a1e744b70abae9994de5f, type: 3}

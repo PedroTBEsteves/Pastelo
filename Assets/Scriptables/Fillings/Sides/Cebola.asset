@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cebola
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Cebola
+  <LocalizationKey>k__BackingField: filling.side.onion
   <Cost>k__BackingField: 0.2
   <Value>k__BackingField: 0.5
   <Icon>k__BackingField: {fileID: 365603805366478496, guid: 3c7640de82d2f1148a149073004a1a25, type: 3}

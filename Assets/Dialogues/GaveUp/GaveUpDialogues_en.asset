@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: GaveUpDialogues_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: d55f67f3992552c44b6792977bc8c4cc, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 5270581248
+    m_Localized: Is the pastel coming all the way from the North Pole on foot?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10018533376
+    m_Localized: Is the pastel frying, or is it in culinary school?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14279946240
+    m_Localized: "I\u2019ve aged two years waiting for this pastel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18558136320
+    m_Localized: "Is it taking so long because you\u2019re growing the ingredients?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27420700672
+    m_Localized: "It\u2019s being delivered by a turtle, right?"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

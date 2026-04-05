@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: SuccessDialogues_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: d177c4ae2c36a5544b3f6a1b0f16ceab, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 84018638848
+    m_Localized: "I\u2019ve never trusted anyone the way I trust this pastel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 96295366656
+    m_Localized: This pastel is so good even the oil must be gourmet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 100380618752
+    m_Localized: "I\u2019m already thinking about marrying the cook."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 104432316416
+    m_Localized: "This pastel healed traumas that even therapy couldn\u2019t."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 107779371008
+    m_Localized: The pastel arrived hot and destroyed my diet in three seconds.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113324240896
+    m_Localized: This pastel is my new reason to believe in humanity.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120328728576
+    m_Localized: I ate it and forgot all my problems, including my bills.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 133473677312
+    m_Localized: This pastel is proof that God exists and fries really well.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144441782272
+    m_Localized: This pastel is so good it should come with a soap opera soundtrack.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

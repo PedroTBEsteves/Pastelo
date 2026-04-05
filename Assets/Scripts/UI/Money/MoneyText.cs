@@ -43,7 +43,7 @@ public class MoneyText : ValidatedMonoBehaviour
 
     private void UpdateMoneyText(float value)
     {
-        var text = TextUtils.FormatAsMoney(value);
+        var text = ((int)value).ToString();
         _text.SetText(text);
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Queijo
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Queijo
+  <LocalizationKey>k__BackingField: dough.cheese
   <Cost>k__BackingField: 0.6
   <Value>k__BackingField: 2
   <Icon>k__BackingField: {fileID: -3484198894894543839, guid: c964ecca8ac728048b38834710d99300, type: 3}

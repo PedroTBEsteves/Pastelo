@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pimenta
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Pimenta
+  <LocalizationKey>k__BackingField: dough.pepper
   <Cost>k__BackingField: 0.7
   <Value>k__BackingField: 2.5
   <Icon>k__BackingField: {fileID: -4157140275246709874, guid: a3f038e2519a05546a124f1733be5680, type: 3}

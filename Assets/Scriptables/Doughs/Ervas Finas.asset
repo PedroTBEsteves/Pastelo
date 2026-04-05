@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ervas Finas
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Ervas Finas
+  <LocalizationKey>k__BackingField: dough.fine_herbs
   <Cost>k__BackingField: 0.8
   <Value>k__BackingField: 3
   <Icon>k__BackingField: {fileID: 2013869065985307180, guid: 7a2aa678b2636f642bee03535b4f3429, type: 3}

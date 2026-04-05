@@ -7,6 +7,7 @@ public class CustomerQueue : ITickable
 {
     private readonly float _customerWaitTime;
     private readonly GameplayTutorialState _tutorialState;
+    private readonly float _firstCustomerArrivalDelayAfterTutorial;
     
     private readonly float _minCustomerArrivalTime;
     private readonly float _maxCustomerArrivalTime;
@@ -23,6 +24,8 @@ public class CustomerQueue : ITickable
 
     private int _generatedCustomers;
     private int _resolvedCustomers;
+    private bool _hasTutorialStarted;
+    private bool _hasConfiguredFirstCustomerAfterTutorial;
 
     private bool HasCustomersLimit => _maxCustomers > 0;
     private bool HasGeneratedAllCustomers => HasCustomersLimit && _generatedCustomers >= _maxCustomers;
@@ -38,6 +41,7 @@ public class CustomerQueue : ITickable
         _customerWaitTime = orderLoopSettings.QueueWaitTimeLimit;
         _minCustomerArrivalTime = orderLoopSettings.MinCustomerArrivalTime;
         _maxCustomerArrivalTime = orderLoopSettings.MaxCustomerArrivalTime;
+        _firstCustomerArrivalDelayAfterTutorial = Mathf.Max(0f, orderLoopSettings.FirstCustomerArrivalDelayAfterTutorial);
         _maxCustomers = orderLoopSettings.MaxCustomers;
         _nextArrivalTime = 1f;
 
@@ -76,6 +80,8 @@ public class CustomerQueue : ITickable
     
     public void Tick(float deltaTime)
     {
+        SyncTutorialArrivalDelay();
+
         if (IsPausedByTutorial)
             return;
 
@@ -142,6 +148,19 @@ public class CustomerQueue : ITickable
             return;
 
         _strikesController.EndGame();
+    }
+
+    private void SyncTutorialArrivalDelay()
+    {
+        if (_tutorialState.IsActive)
+            _hasTutorialStarted = true;
+
+        if (!_hasTutorialStarted || _hasConfiguredFirstCustomerAfterTutorial || !_tutorialState.IsFinished)
+            return;
+
+        _hasConfiguredFirstCustomerAfterTutorial = true;
+        _elapsedArrivalTime = 0f;
+        _nextArrivalTime = _firstCustomerArrivalDelayAfterTutorial;
     }
     
     private float GetNextArrivalTime() => Random.Range(_minCustomerArrivalTime, _maxCustomerArrivalTime);

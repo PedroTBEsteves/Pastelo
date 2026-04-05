@@ -2,13 +2,18 @@ using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class TooltipTarget : ValidatedMonoBehaviour, IPointerEnterHandler, IPointerMoveHandler, IPointerExitHandler
 {
     private const float MovementThresholdSqr = 0.01f;
 
-    [SerializeField, TextArea]
-    private string _text;
+    [SerializeField]
+    private LocalizedStringTable _localizationTable;
+
+    [SerializeField]
+    private string _localizationKey;
 
     [SerializeField]
     private TooltipView _viewPrefabOverride;
@@ -27,16 +32,21 @@ public class TooltipTarget : ValidatedMonoBehaviour, IPointerEnterHandler, IPoin
     private float _hoverStartTime;
     private Vector2 _lastPointerPosition;
     private Camera _lastEventCamera;
+    private string _runtimeTextOverride;
+    private bool _loggedMissingTable;
+    private bool _loggedMissingKey;
+    private bool _loggedMissingTableForLocale;
+    private bool _loggedMissingEntry;
 
-    public string Text => _text;
+    public string Text => GetText();
     public TooltipView ViewPrefabOverride => _viewPrefabOverride;
     public ITooltipPresenter Presenter => _presenter as ITooltipPresenter;
-    public bool HasTooltipContent => Presenter != null || !string.IsNullOrWhiteSpace(_text);
+    public bool HasTooltipContent => Presenter != null || !string.IsNullOrWhiteSpace(Text);
     public bool HasLegacyViewOverride => _viewPrefabOverride != null;
 
     public void Configure(string text = null, TooltipView viewPrefabOverride = null, MonoBehaviour presenter = null)
     {
-        _text = text;
+        _runtimeTextOverride = text;
         _viewPrefabOverride = viewPrefabOverride;
         _presenter = presenter;
     }
@@ -98,5 +108,99 @@ public class TooltipTarget : ValidatedMonoBehaviour, IPointerEnterHandler, IPoin
         _lastEventCamera = eventData.enterEventCamera
             ?? eventData.pressEventCamera
             ?? eventData.pointerCurrentRaycast.module?.eventCamera;
+    }
+
+    private void OnValidate()
+    {
+        ResetLocalizationLogState();
+    }
+
+    private string GetText()
+    {
+        if (!string.IsNullOrWhiteSpace(_runtimeTextOverride))
+            return _runtimeTextOverride;
+
+        return ResolveLocalizedText();
+    }
+
+    private string ResolveLocalizedText()
+    {
+        if (_localizationTable == null)
+        {
+            LogMissingTable();
+            return string.Empty;
+        }
+
+        if (string.IsNullOrWhiteSpace(_localizationKey))
+        {
+            LogMissingKey();
+            return string.Empty;
+        }
+
+        var table = _localizationTable.GetTable();
+
+        if (table == null)
+        {
+            LogMissingTableForLocale();
+            return string.Empty;
+        }
+
+        var entry = table.GetEntry(_localizationKey);
+
+        if (entry == null)
+        {
+            LogMissingEntry();
+            return string.Empty;
+        }
+
+        return entry.IsSmart ? entry.GetLocalizedString(new {amount = 1}) : entry.GetLocalizedString();
+    }
+
+    private void ResetLocalizationLogState()
+    {
+        _loggedMissingTable = false;
+        _loggedMissingKey = false;
+        _loggedMissingTableForLocale = false;
+        _loggedMissingEntry = false;
+    }
+
+    private void LogMissingTable()
+    {
+        if (_loggedMissingTable)
+            return;
+
+        _loggedMissingTable = true;
+        Debug.LogError($"{nameof(TooltipTarget)} on '{name}' is missing a localization table reference.", this);
+    }
+
+    private void LogMissingKey()
+    {
+        if (_loggedMissingKey)
+            return;
+
+        _loggedMissingKey = true;
+        Debug.LogError($"{nameof(TooltipTarget)} on '{name}' is missing a localization key.", this);
+    }
+
+    private void LogMissingTableForLocale()
+    {
+        if (_loggedMissingTableForLocale)
+            return;
+
+        _loggedMissingTableForLocale = true;
+        Debug.LogError(
+            $"{nameof(TooltipTarget)} on '{name}' could not resolve a String Table for locale '{LocalizationSettings.SelectedLocale?.Identifier.Code}'.",
+            this);
+    }
+
+    private void LogMissingEntry()
+    {
+        if (_loggedMissingEntry)
+            return;
+
+        _loggedMissingEntry = true;
+        Debug.LogError(
+            $"{nameof(TooltipTarget)} on '{name}' could not find localization key '{_localizationKey}' in the selected table.",
+            this);
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Chocolate
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Chocolate
+  <LocalizationKey>k__BackingField: dough.chocolate
   <Cost>k__BackingField: 0.6
   <Value>k__BackingField: 2
   <Icon>k__BackingField: {fileID: 5281907171707744427, guid: 591588fc8f23cb34eba6f53f9c309c06, type: 3}

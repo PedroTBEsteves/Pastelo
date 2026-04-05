@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: _text
       value: Azeitona
       objectReference: {fileID: 0}
+    - target: {fileID: 9117855999309085369, guid: 593c8ccca2b5d8445a7c57ab38b0bd5a, type: 3}
+      propertyPath: _localizationKey
+      value: filling.side.olive
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117855999309085369, guid: 593c8ccca2b5d8445a7c57ab38b0bd5a, type: 3}
+      propertyPath: _localizationTable.m_TableReference.m_TableCollectionName
+      value: GUID:b2d0e1f2435465768798a9bacbdced0f
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: FailDialogues_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 9ee7f6939b47c294d9ba9272bd7b311e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 4230393856
+    m_Localized: "Was the filling kidnapped? Because I can\u2019t find it here"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36560089088
+    m_Localized: If the goal was to sell me gourmet air, congratulations.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83129446400
+    m_Localized: "It\u2019s so greasy you could fry another pastel with this one."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89508982784
+    m_Localized: "I don\u2019t remember ordering a disappointment-flavored pastel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106894372864
+    m_Localized: "If this is the \u2018house flavor,\u2019 the house clearly needs
+      a renovation"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

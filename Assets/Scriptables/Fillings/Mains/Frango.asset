@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Frango
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Frango
+  <LocalizationKey>k__BackingField: filling.main.chicken
   <Cost>k__BackingField: 0.5
   <Value>k__BackingField: 0.7
   <Icon>k__BackingField: {fileID: -6010558184916818172, guid: 2b183236842c8144da6fccb91aa12802, type: 3}

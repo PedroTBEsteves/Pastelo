@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Alho
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Alho
+  <LocalizationKey>k__BackingField: dough.garlic
   <Cost>k__BackingField: 0.8
   <Value>k__BackingField: 4
   <Icon>k__BackingField: {fileID: -4067265815921442018, guid: 70fb36deaa08bd14d81c769fc6fb97cf, type: 3}

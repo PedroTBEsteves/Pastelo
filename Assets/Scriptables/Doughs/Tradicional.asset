@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tradicional
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Tradicional
+  <LocalizationKey>k__BackingField: dough.traditional
   <Cost>k__BackingField: 0.5
   <Value>k__BackingField: 1.5
   <Icon>k__BackingField: {fileID: 7009773628709338706, guid: 700d960d89e5e314abfbe5811ce1e954, type: 3}

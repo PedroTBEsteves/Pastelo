@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: _text
       value: Chocolate
       objectReference: {fileID: 0}
+    - target: {fileID: 3553307263284109868, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
+      propertyPath: _localizationKey
+      value: dough.chocolate
+      objectReference: {fileID: 0}
     - target: {fileID: 4142219619040711605, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
       propertyPath: m_Name
       value: Chocolate Sink

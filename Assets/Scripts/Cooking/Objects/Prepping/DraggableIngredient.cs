@@ -40,17 +40,7 @@ public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour 
             return;
         }
 
-        if (!CanSpend())
-        {
-            Destroy(gameObject);
-            ShowNotEnoughMoneyError();
-            return;
-        }
-
-        if (TryAddToOpenDough(openPastelDoughArea))
-        {
-            Spend();
-        }
+        TryAddToOpenDough(openPastelDoughArea);
     }
 
     protected Vector3 GetMouseWorldPosition(PointerEventData eventData)

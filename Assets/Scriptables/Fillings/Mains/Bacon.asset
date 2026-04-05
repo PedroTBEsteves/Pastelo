@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bacon
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Bacon
+  <LocalizationKey>k__BackingField: filling.main.bacon
   <Cost>k__BackingField: 0.5
   <Value>k__BackingField: 0.7
   <Icon>k__BackingField: {fileID: 2765890307910868761, guid: 0a4efc39f3f9cc44e8a28a436a6a88ad, type: 3}

@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using PrimeTween;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
 
 public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 {
+    private const string PortugueseLanguageCode = "pt";
+
     [SerializeField]
     private SpriteRenderer _customerSprite;
 
@@ -21,16 +25,19 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     private TextMeshProUGUI _text;
 
     [SerializeField]
-    private TextAsset[] _orderDialogueTemplates;
+    private LocalizedStringTable _orderDialogueTable;
 
     [SerializeField]
-    private TextAsset[] _emptyPastelOrder;
-    
+    private LocalizedStringTable _emptyPastelDialogueTable;
+
     [SerializeField]
-    private TextAsset[] _correctOrderDialogues;
-    
+    private LocalizedStringTable _correctOrderDialoguesTable;
+
     [SerializeField]
-    private TextAsset[] _incorrectOrderDialogues;
+    private LocalizedStringTable _incorrectOrderDialoguesTable;
+
+    [SerializeField]
+    private LocalizedStringTable _ingredientsTable;
 
     [SerializeField]
     private GameObject _deliveryBag;
@@ -96,18 +103,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         _iconSprite.enabled = false;
         _customerSprite.sprite = order.Customer.Sprite;
 
-        string text;
-
-        if (order.Recipe.Fillings.Count == 0)
-        {
-            text = _emptyPastelOrder.GetRandomElement().text;
-        }
-        else
-        {
-            var template = _orderDialogueTemplates.GetRandomElement();
-
-            text = string.Format(template.text, order.Recipe.Dough.Name, GetFillingsText(order.Recipe.Fillings));
-        }
+        var text = GetOrderDialogueText(order);
         
         _dialogueObject.SetActive(true);
 
@@ -129,11 +125,11 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 
     public Sequence DeliveryDialogue(Order order, Delivery delivery, OrderController orderController)
     {
+        _iconSprite.enabled = false;
         _customerSprite.sprite = order.Customer.Sprite;
         _deliveryBag.SetActive(true);
 
-        var dialogues = delivery.IsCorrectFor(order) ? _correctOrderDialogues : _incorrectOrderDialogues;
-        var dialogue = dialogues.GetRandomElement();
+        var dialogue = GetRandomDeliveryDialogue(delivery.IsCorrectFor(order));
         
         _dialogueSequence = Sequence.Create(Tween.Delay(2f, () =>
         {
@@ -141,7 +137,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             
             orderController.DeliverOrder(order, delivery);
         }))
-        .Chain(_dialogueWriter.WriteText(dialogue.text, _text, _audioSource))
+        .Chain(_dialogueWriter.WriteText(dialogue, _text, _audioSource))
         .Chain(Tween.Delay(2f, () =>
         {
             _dialogueObject.SetActive(false);
@@ -155,19 +151,114 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         return _dialogueSequence;
     }
 
-    private static string GetFillingsText(IReadOnlyDictionary<Filling, int> fillings)
+    private string GetOrderDialogueText(Order order)
     {
-        var builder = new StringBuilder();
+        if (order.Recipe.Fillings.Count == 0)
+            return GetRandomLocalizedDialogue(_emptyPastelDialogueTable, nameof(_emptyPastelDialogueTable));
+
+        var doughName = GetLocalizedIngredientName(order.Recipe.Dough);
+        var fillingsText = GetFillingsText(order.Recipe.Fillings);
+
+        var templateEntry = GetRandomLocalizedEntry(_orderDialogueTable, nameof(_orderDialogueTable));
+        templateEntry.IsSmart = true;
+        return templateEntry.GetLocalizedString(new { dough = doughName, fillings = fillingsText });
+    }
+
+    private string GetRandomDeliveryDialogue(bool isCorrectDelivery)
+    {
+        var tableReference = isCorrectDelivery ? _correctOrderDialoguesTable : _incorrectOrderDialoguesTable;
+        var fieldName = isCorrectDelivery ? nameof(_correctOrderDialoguesTable) : nameof(_incorrectOrderDialoguesTable);
+        return GetRandomLocalizedDialogue(tableReference, fieldName);
+    }
+
+    private static string GetRandomLocalizedDialogue(LocalizedStringTable tableReference, string fieldName) =>
+        GetRandomLocalizedEntry(tableReference, fieldName).GetLocalizedString();
+
+    private string GetFillingsText(IReadOnlyDictionary<Filling, int> fillings)
+    {
+        var fillingsParts = new List<string>(fillings.Count);
 
         foreach (var (filling, amount) in fillings)
-        {
-            builder.Append($" {amount} {GetFillingName(filling, amount)},");
-        }
-        
-        builder.Remove(builder.Length - 1, 1);
-        
-        return builder.ToString();
+            fillingsParts.Add($"{amount} {GetLocalizedIngredientName(filling, amount)}");
+
+        return JoinLocalizedList(fillingsParts);
     }
-    
-    private static string GetFillingName(Filling filling, int amount) => amount > 1 ? filling.PluralName : filling.Name;
+
+    private static string JoinLocalizedList(IReadOnlyList<string> items)
+    {
+        if (items.Count == 0)
+            return string.Empty;
+
+        if (items.Count == 1)
+            return items[0];
+
+        var separator = ", ";
+        var finalSeparator = IsPortugueseSelected() ? " e " : " and ";
+
+        if (items.Count == 2)
+            return $"{items[0]}{finalSeparator}{items[1]}";
+
+        var combinedText = items[0];
+
+        for (var i = 1; i < items.Count - 1; i++)
+            combinedText += separator + items[i];
+
+        return combinedText + finalSeparator + items[^1];
+    }
+
+    private string GetLocalizedIngredientName(Ingredient ingredient, int amount = 1)
+    {
+        if (string.IsNullOrWhiteSpace(ingredient.LocalizationKey))
+            throw new InvalidOperationException($"Ingredient '{ingredient.name}' is missing {nameof(Ingredient.LocalizationKey)}.");
+
+        var entry = GetLocalizedEntry(_ingredientsTable, ingredient.LocalizationKey, nameof(_ingredientsTable));
+        return entry.GetLocalizedString(new { amount });
+    }
+
+    private static bool IsPortugueseSelected()
+    {
+        var localeCode = LocalizationSettings.SelectedLocale?.Identifier.Code;
+        return !string.IsNullOrEmpty(localeCode) && localeCode.StartsWith(PortugueseLanguageCode, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static StringTableEntry GetRandomLocalizedEntry(LocalizedStringTable tableReference, string fieldName)
+    {
+        var table = GetRequiredTable(tableReference, fieldName);
+
+        if (table.SharedData?.Entries == null || table.SharedData.Entries.Count == 0)
+            throw new InvalidOperationException($"Localized table '{fieldName}' has no entries.");
+
+        var randomIndex = UnityEngine.Random.Range(0, table.SharedData.Entries.Count);
+        var sharedEntry = table.SharedData.Entries[randomIndex];
+        var entry = table.GetEntry(sharedEntry.Id);
+
+        if (entry == null)
+            throw new InvalidOperationException($"Localized table '{fieldName}' is missing entry id '{sharedEntry.Id}' for the selected locale.");
+
+        return entry;
+    }
+
+    private static StringTableEntry GetLocalizedEntry(LocalizedStringTable tableReference, string key, string fieldName)
+    {
+        var table = GetRequiredTable(tableReference, fieldName);
+        var entry = table.GetEntry(key);
+
+        if (entry == null)
+            throw new InvalidOperationException($"Localized table '{fieldName}' does not contain key '{key}' for the selected locale.");
+
+        return entry;
+    }
+
+    private static StringTable GetRequiredTable(LocalizedStringTable tableReference, string fieldName)
+    {
+        if (tableReference == null)
+            throw new InvalidOperationException($"CustomerDialogue field '{fieldName}' is not assigned in the inspector.");
+
+        var table = tableReference.GetTable();
+
+        if (table == null)
+            throw new InvalidOperationException($"CustomerDialogue field '{fieldName}' could not resolve a String Table for locale '{LocalizationSettings.SelectedLocale?.Identifier.Code}'.");
+
+        return table;
+    }
 }

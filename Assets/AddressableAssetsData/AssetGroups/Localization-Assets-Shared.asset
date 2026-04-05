@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Shared
+  m_GUID: 4b181fb29713d6e4e841fe70ddaf9528
+  m_SerializeEntries:
+  - m_GUID: 74c918ebdcf48de42a9ac1f467b14562
+    m_Address: Assets/Dialogues/Empty/EmptyPastelDialogues Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ee7f6939b47c294d9ba9272bd7b311e
+    m_Address: Assets/Dialogues/Fail/FailDialogues Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2d0e1f2435465768798a9bacbdced0f
+    m_Address: Assets/Localization/Tables/Ingredients Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d177c4ae2c36a5544b3f6a1b0f16ceab
+    m_Address: Assets/Dialogues/New Table Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d55f67f3992552c44b6792977bc8c4cc
+    m_Address: Assets/Dialogues/GaveUp/GaveUpDialogues Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff00ff5a140098f429392c6cd8956e59
+    m_Address: Assets/Dialogues/OrderTemplateDialogue Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 00cef732978168249bd2c406a8c1e2c3, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b7e17a50c3fa74841b446692eb37defc, type: 2}
+    - {fileID: 11400000, guid: a4cecc6a0f7629c4bb4b17817dc9431d, type: 2}

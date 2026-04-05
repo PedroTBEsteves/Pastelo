@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Azeitona
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Azeitona
+  <LocalizationKey>k__BackingField: filling.side.olive
   <Cost>k__BackingField: 0.2
   <Value>k__BackingField: 0.5
   <Icon>k__BackingField: {fileID: 7094018986122487484, guid: aaaa952c6c70f1043b67f08449015bc4, type: 3}

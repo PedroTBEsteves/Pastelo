@@ -285,5 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3af8f1b54d4b2fa38cdb229f5ec651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: Tradicional
+  _localizationTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:b2d0e1f2435465768798a9bacbdced0f
+  _localizationKey: 
   _viewPrefabOverride: {fileID: 0}
+  _presenter: {fileID: 0}

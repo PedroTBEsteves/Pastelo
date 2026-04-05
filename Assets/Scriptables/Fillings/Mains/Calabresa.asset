@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Calabresa
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Calabresa
+  <LocalizationKey>k__BackingField: filling.main.calabresa
   <Cost>k__BackingField: 0.5
   <Value>k__BackingField: 0.7
   <Icon>k__BackingField: {fileID: 7590320427900475201, guid: 26bbe267d3ec08446915ffd8d3cf3d5f, type: 3}

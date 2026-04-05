@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TooltipSettings
   m_EditorClassIdentifier: 
   <HoverDelay>k__BackingField: 0.5
-  <ScreenOffset>k__BackingField: {x: -350, y: 0}
+  <ScreenOffset>k__BackingField: {x: 0, y: 0}

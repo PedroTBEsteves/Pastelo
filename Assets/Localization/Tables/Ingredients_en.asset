@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Ingredients_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: b2d0e1f2435465768798a9bacbdced0f, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 7724085812380041300
+  m_TableData:
+  - m_Id: 1001
+    m_Localized: Garlic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1002
+    m_Localized: Chocolate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1003
+    m_Localized: Barbecue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1004
+    m_Localized: Fine Herbs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1005
+    m_Localized: Pepper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1006
+    m_Localized: Cheese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1007
+    m_Localized: Traditional
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1008
+    m_Localized: '{amount:plural:Bacon|Bacon}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1009
+    m_Localized: '{amount:plural:Calabresa Sausage|Calabresa Sausages}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1010
+    m_Localized: '{amount:plural:Shrimp|Shrimp}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1011
+    m_Localized: '{amount:plural:Beef|Beef}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1012
+    m_Localized: '{amount:plural:Chicken|Chicken}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1013
+    m_Localized: '{amount:plural:Ham|Ham}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1014
+    m_Localized: '{amount:plural:Olive|Olives}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1015
+    m_Localized: '{amount:plural:Onion|Onions}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1016
+    m_Localized: '{amount:plural:Corn|Corn}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1017
+    m_Localized: '{amount:plural:Pepper|Peppers}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1018
+    m_Localized: '{amount:plural:Cheese|Cheese}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  - m_Id: 1019
+    m_Localized: '{amount:plural:Tomato|Tomatoes}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724085812380041300
+  references:
+    version: 2
+    RefIds:
+    - rid: 7724085812380041300
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 1008
+        - id: 1009
+        - id: 1010
+        - id: 1011
+        - id: 1012
+        - id: 1013
+        - id: 1014
+        - id: 1015
+        - id: 1016
+        - id: 1017
+        - id: 1018
+        - id: 1019

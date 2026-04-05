@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: SuccessDialogues Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: SuccessDialogues
+  m_TableCollectionNameGuidString: d177c4ae2c36a5544b3f6a1b0f16ceab
+  m_Entries:
+  - m_Id: 84018638848
+    m_Key: 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 96295366656
+    m_Key: 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 100380618752
+    m_Key: 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 104432316416
+    m_Key: 4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 107779371008
+    m_Key: 5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113324240896
+    m_Key: 6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120328728576
+    m_Key: 7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 133473677312
+    m_Key: 8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144441782272
+    m_Key: 9
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7724085804256723223
+  references:
+    version: 2
+    RefIds:
+    - rid: 7724085804256723223
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1775422665016

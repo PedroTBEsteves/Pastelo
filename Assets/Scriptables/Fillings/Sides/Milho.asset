@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Milho
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Milho
+  <LocalizationKey>k__BackingField: filling.side.corn
   <Cost>k__BackingField: 0.2
   <Value>k__BackingField: 0.5
   <Icon>k__BackingField: {fileID: 204562589398037907, guid: ceff6ad6205ccab4fb1827b64618f953, type: 3}

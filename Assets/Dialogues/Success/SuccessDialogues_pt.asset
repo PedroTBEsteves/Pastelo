@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: SuccessDialogues_pt
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt
+  m_SharedData: {fileID: 11400000, guid: d177c4ae2c36a5544b3f6a1b0f16ceab, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 84018638848
+    m_Localized: "Nunca confiei em ningu\xE9m como confio nesse pastel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 96295366656
+    m_Localized: "Pastel t\xE3o bom que at\xE9 o \xF3leo deve ser gourmet."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 100380618752
+    m_Localized: "J\xE1 t\xF4 pensando em casar com o cozinheiro."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 104432316416
+    m_Localized: Esse pastel curou traumas que nem terapia resolve.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 107779371008
+    m_Localized: O pastel chegou quentinho e destruiu minha dieta em 3 segundos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113324240896
+    m_Localized: "Esse pastel \xE9 meu novo motivo pra acreditar na humanidade."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120328728576
+    m_Localized: Comi e esqueci todos os meus problemas, inclusive os boletos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 133473677312
+    m_Localized: "Esse pastel \xE9 a prova de que Deus existe e frita bem."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144441782272
+    m_Localized: "Pastel t\xE3o bom que devia vir com trilha sonora de novela."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

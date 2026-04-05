@@ -761,7 +761,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Esse pastel \xE9 meu novo motivo pra acreditar na humanidade."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 43a24fccab3e99a41b0e23d33ff76510, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5f7b7ad964dd1894e9401e94a51a9007, type: 2}
   m_sharedMaterial: {fileID: 6748816379713736230, guid: 43a24fccab3e99a41b0e23d33ff76510, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -828,7 +828,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &97871609
@@ -12725,17 +12725,11 @@ MonoBehaviour:
   _popUpText: {fileID: 804937892}
   _customerImage: {fileID: 1828162679}
   _customerGaveUpDialogues:
-  - {fileID: 4900000, guid: f77225bdc929e3b42a2a1f2446729aac, type: 3}
-  - {fileID: 4900000, guid: 1a5ce92700c548344aa88b5425b95259, type: 3}
-  - {fileID: 4900000, guid: c7d828b115a9bb0488819414fe9fc874, type: 3}
-  - {fileID: 4900000, guid: 248a26cb89f8a85449ab142c31bddaf5, type: 3}
-  - {fileID: 4900000, guid: b9d30aa55d480b645806db711607daa4, type: 3}
+    m_TableReference:
+      m_TableCollectionName: GUID:d55f67f3992552c44b6792977bc8c4cc
   _customerOrderExpiredDialogues:
-  - {fileID: 4900000, guid: f77225bdc929e3b42a2a1f2446729aac, type: 3}
-  - {fileID: 4900000, guid: 1a5ce92700c548344aa88b5425b95259, type: 3}
-  - {fileID: 4900000, guid: c7d828b115a9bb0488819414fe9fc874, type: 3}
-  - {fileID: 4900000, guid: 248a26cb89f8a85449ab142c31bddaf5, type: 3}
-  - {fileID: 4900000, guid: b9d30aa55d480b645806db711607daa4, type: 3}
+    m_TableReference:
+      m_TableCollectionName: GUID:d55f67f3992552c44b6792977bc8c4cc
   _audioSource: {fileID: 1842843262}
   _delayAfterWritingIsDone: 2
 --- !u!114 &1842843260
@@ -13838,30 +13832,21 @@ MonoBehaviour:
   _iconSprite: {fileID: 665564509}
   _dialogueObject: {fileID: 2069919068}
   _text: {fileID: 97871608}
-  _orderDialogueTemplates:
-  - {fileID: 4900000, guid: 2b6984c3d84f2774f92a09d92069c3eb, type: 3}
-  _emptyPastelOrder:
-  - {fileID: 4900000, guid: 71b2d4453a038494a9646df3dc659cb4, type: 3}
-  - {fileID: 4900000, guid: b9bda2e53da8bf147abd4299ffe4c4d4, type: 3}
-  - {fileID: 4900000, guid: c8befaac66fd37b4d9182343d0e27471, type: 3}
-  - {fileID: 4900000, guid: 7fa5d4f23f18f444291cecf3ce5e5fd4, type: 3}
-  - {fileID: 4900000, guid: 37a67137a7d860c4795e76ad28f9d1b4, type: 3}
-  _correctOrderDialogues:
-  - {fileID: 4900000, guid: 83f2167261e6a2248b340c195883d338, type: 3}
-  - {fileID: 4900000, guid: a3496257d74a67247bcf95e8811e7c1a, type: 3}
-  - {fileID: 4900000, guid: f0068933957e31342b2e2f1a61176181, type: 3}
-  - {fileID: 4900000, guid: a232516408c953b489a09de20890623c, type: 3}
-  - {fileID: 4900000, guid: 4df1c9f95814daf40a4a603fe8cc6545, type: 3}
-  - {fileID: 4900000, guid: cc77b8686eb84544bb6cdc2360f5de72, type: 3}
-  - {fileID: 4900000, guid: 1f4e1945eb7f902429ce20684c28e005, type: 3}
-  - {fileID: 4900000, guid: 023f513bf2ab7c9458273068bd27796b, type: 3}
-  - {fileID: 4900000, guid: a698f01a622b60544a5766c7bdd7441a, type: 3}
-  _incorrectOrderDialogues:
-  - {fileID: 4900000, guid: 9cf0e4b1dc57daa4194feaa2eaa9875d, type: 3}
-  - {fileID: 4900000, guid: 1dc2286e04bb71742ad43f1ff1542ab3, type: 3}
-  - {fileID: 4900000, guid: db7dd2dbd1e31b740a054eb1c0b36f76, type: 3}
-  - {fileID: 4900000, guid: e673b11c3e464ce4bb78721cd6ce2bca, type: 3}
-  - {fileID: 4900000, guid: 5c2354e3200bba74faae659a3d78c2fa, type: 3}
+  _orderDialogueTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:ff00ff5a140098f429392c6cd8956e59
+  _emptyPastelDialogueTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:74c918ebdcf48de42a9ac1f467b14562
+  _correctOrderDialoguesTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:d177c4ae2c36a5544b3f6a1b0f16ceab
+  _incorrectOrderDialoguesTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:9ee7f6939b47c294d9ba9272bd7b311e
+  _ingredientsTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:b2d0e1f2435465768798a9bacbdced0f
   _deliveryBag: {fileID: 247462890}
   _audioSource: {fileID: 1958252928}
   _delayAfterTextIsDone: 2
