@@ -34,6 +34,13 @@ public class TooltipTarget : ValidatedMonoBehaviour, IPointerEnterHandler, IPoin
     public bool HasTooltipContent => Presenter != null || !string.IsNullOrWhiteSpace(_text);
     public bool HasLegacyViewOverride => _viewPrefabOverride != null;
 
+    public void Configure(string text = null, TooltipView viewPrefabOverride = null, MonoBehaviour presenter = null)
+    {
+        _text = text;
+        _viewPrefabOverride = viewPrefabOverride;
+        _presenter = presenter;
+    }
+
     private void Update()
     {
         if (!_isHovered || _isTooltipVisible || (!HasTooltipContent && !HasLegacyViewOverride) || _tooltipSettings == null || _tooltipService == null)

@@ -1,10 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrderNoteTooltipView : TooltipView
 {
     [SerializeField]
-    private TextMeshProUGUI _doughName;
+    private Image _doughIcon;
 
     [SerializeField]
     private GameObject _emptyIngredients;
@@ -17,9 +18,13 @@ public class OrderNoteTooltipView : TooltipView
 
     public bool Bind(Order order)
     {
-        if (order == null
-            || order.Recipe == null
-            || _doughName == null
+        return order != null && Bind(order.Recipe);
+    }
+
+    public bool Bind(Recipe recipe)
+    {
+        if (recipe == null
+            || _doughIcon == null
             || _ingredientsRoot == null
             || _ingredientRowPrefab == null)
         {
@@ -27,11 +32,12 @@ public class OrderNoteTooltipView : TooltipView
         }
 
         ClearIngredients();
-        _doughName.SetText(order.Recipe.Dough.Name);
+        _doughIcon.sprite = recipe.Dough.Icon;
+        _doughIcon.preserveAspect = true;
 
         var hasIngredients = false;
 
-        foreach (var (filling, amount) in order.Recipe.Fillings)
+        foreach (var (filling, amount) in recipe.Fillings)
         {
             var ingredientRow = Instantiate(_ingredientRowPrefab, _ingredientsRoot);
             ingredientRow.Bind(filling, amount);

@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 3628853816251220452}
   - component: {fileID: -7452085516801636856}
   - component: {fileID: 3946908216902818608}
+  - component: {fileID: 6912378456123784561}
   m_Layer: 0
   m_Name: Closed
   m_TagString: Untagged
@@ -338,6 +339,21 @@ MonoBehaviour:
   _highlightColor: {r: 1, g: 0.95, b: 0.6, a: 1}
   _spriteRenderer: {fileID: 7710389937225776067}
   _graphic: {fileID: 0}
+--- !u!114 &6912378456123784561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146083446873447655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3af8f1b54d4b2fa38cdb229f5ec651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: 
+  _viewPrefabOverride: {fileID: 0}
+  _presenter: {fileID: 0}
 --- !u!1 &3160242439812138036
 GameObject:
   m_ObjectHideFlags: 0

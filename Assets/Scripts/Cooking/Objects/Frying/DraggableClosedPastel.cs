@@ -46,12 +46,18 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
     private Slider _activeSlider;
     private TutorialTarget _tutorialTarget;
+    private TooltipTarget _tooltipTarget;
 
     private void Awake()
     {
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(TutorialTargetId.CookedPastel, this);
         _tutorialTargetRegistry.Register(_tutorialTarget);
+
+        _tooltipTarget = GetComponent<TooltipTarget>();
+        var tooltipPresenter = GetComponent<ClosedPastelTooltipPresenter>() ?? gameObject.AddComponent<ClosedPastelTooltipPresenter>();
+        _tooltipTarget?.Configure(presenter: tooltipPresenter);
+
         _draggable.Held += OnHeld;
         _draggable.Dropped += OnDropped;
         _draggable.AddCanDragHandler(CanDragPastel);

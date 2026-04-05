@@ -24,6 +24,7 @@ public class ClosedPastelDough
     public event Action<FriedLevel> FriedLevelChanged;
 
     public Dough Dough => _recipe.Dough;
+    public Recipe Recipe => _recipe;
     public FriedLevel FriedLevel => _friedLevel;
     public float FryingProgress => _timeFrying / _timeToIncreaseFriedLevelInSeconds;
     
