@@ -25,6 +25,10 @@ public class CustomersQueueView : MonoBehaviour
     [SerializeField]
     private CustomerQueueNotificationItem _itemPrefab;
 
+    [SerializeField]
+    [Min(0)]
+    private int _maxVisibleIndicators;
+
     [Inject]
     private readonly CustomerQueue _customerQueue;
 
@@ -53,7 +57,10 @@ public class CustomersQueueView : MonoBehaviour
         //ApplySide(_currentSide);
 
         foreach (var entry in _customerQueue.Entries)
-            AddEntry(entry, false);
+        {
+            if (!TryAddEntry(entry, false))
+                break;
+        }
     }
 
     private void OnDestroy()
@@ -76,7 +83,7 @@ public class CustomersQueueView : MonoBehaviour
 
     private void OnQueueEntryAdded(CustomerWaitStatus entry)
     {
-        AddEntry(entry, true);
+        TryAddEntry(entry, true);
     }
 
     private void OnQueueEntryRemoved(CustomerWaitStatus entry, CustomerQueueEntryRemovedReason _)
@@ -85,6 +92,7 @@ public class CustomersQueueView : MonoBehaviour
             return;
 
         item.Remove();
+        TryAddNextMissingEntry();
     }
 
     private void OnCurrentSectionChanged(CameraSection _)
@@ -119,10 +127,13 @@ public class CustomersQueueView : MonoBehaviour
         _audioSource.Play();
     }
 
-    private void AddEntry(CustomerWaitStatus entry, bool insertAtTop)
+    private bool TryAddEntry(CustomerWaitStatus entry, bool insertAtTop)
     {
         if (_itemsById.ContainsKey(entry.Id) || _itemPrefab == null)
-            return;
+            return false;
+
+        if (!CanCreateMoreIndicators())
+            return false;
 
         var item = Instantiate(_itemPrefab, transform);
         item.name = $"Queue Item {entry.Id}";
@@ -132,5 +143,20 @@ public class CustomersQueueView : MonoBehaviour
             item.transform.SetSiblingIndex(0);
 
         _itemsById.Add(entry.Id, item);
+        return true;
     }
+
+    private void TryAddNextMissingEntry()
+    {
+        if (!CanCreateMoreIndicators())
+            return;
+
+        foreach (var entry in _customerQueue.Entries)
+        {
+            if (TryAddEntry(entry, false))
+                return;
+        }
+    }
+
+    private bool CanCreateMoreIndicators() => _maxVisibleIndicators <= 0 || _itemsById.Count < _maxVisibleIndicators;
 }

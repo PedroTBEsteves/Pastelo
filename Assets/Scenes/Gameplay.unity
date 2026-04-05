@@ -478,7 +478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -481495159247619944, guid: b6295e0e30b0d4d43ab171ad3b461265, type: 3}
+  m_Sprite: {fileID: -8454085109010994015, guid: bb51861defab73d47863c850abd1f1b3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -828,7 +828,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &97871609
@@ -3539,7 +3539,7 @@ GameObject:
   - component: {fileID: 420153611}
   - component: {fileID: 420153609}
   m_Layer: 5
-  m_Name: Background
+  m_Name: BuyPrompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12810,8 +12810,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -481495159247619944, guid: b6295e0e30b0d4d43ab171ad3b461265, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: -239707925315106213, guid: 3568887847f728241acef579a15eebda, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -14437,6 +14437,7 @@ MonoBehaviour:
   _leftVisibleAnchoredPosition: {x: 48, y: 0}
   _rightVisibleAnchoredPosition: {x: -48, y: 0}
   _itemPrefab: {fileID: 100004, guid: 1367177d0b1e4ef6878d1c780a4f7c75, type: 3}
+  _maxVisibleIndicators: 4
 --- !u!222 &2102200004
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14581,7 +14582,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
-  m_ReverseArrangement: 1
+  m_ReverseArrangement: 0
 --- !u!1 &2116220889
 GameObject:
   m_ObjectHideFlags: 0
