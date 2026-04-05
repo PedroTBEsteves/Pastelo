@@ -25,6 +25,15 @@ public class OrderNote : ValidatedMonoBehaviour
     private TextMeshProUGUI _orderNumber;
 
     [SerializeField]
+    private Image _doughIcon;
+
+    [SerializeField]
+    private Transform _ingredientsRoot;
+
+    [SerializeField]
+    private OrderNoteTooltipIngredientRow _ingredientRowPrefab;
+
+    [SerializeField]
     private AudioClip _failAudio;
     
     [SerializeField]
@@ -53,6 +62,9 @@ public class OrderNote : ValidatedMonoBehaviour
     private Tween _remainingTimeColorTween;
     private RemainingTimeBand _currentRemainingTimeBand;
     private bool _remainingTimeBandInitialized;
+    private LayoutElement _layoutElement;
+    private RectTransform _rectTransform;
+    private float _baseWidth;
     
     public Order Order { get; private set; }
 
@@ -65,6 +77,9 @@ public class OrderNote : ValidatedMonoBehaviour
 
     private void Awake()
     {
+        _rectTransform = (RectTransform)transform;
+        _layoutElement = GetComponent<LayoutElement>();
+        _baseWidth = Mathf.Max(_rectTransform.sizeDelta.x, _layoutElement != null ? _layoutElement.preferredWidth : 0f);
         _orderController.OrderExpired += OnOrderExpired;
         _draggable.Held += OnHeld;
         _draggable.Dropped += OnDropped;
@@ -91,9 +106,11 @@ public class OrderNote : ValidatedMonoBehaviour
         _tutorialTargetRegistry.Register(_tutorialTarget);
 
         _orderNumber.SetText($"#{order.Number}");
+        BindRecipe(order.Recipe);
         ApplyRemainingTimeBand(order.NormalizedRemainingTime, false);
         _remainingTimeSlider.transform.SetAsLastSibling();
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
+        UpdateWidthFromContent();
     }
 
     public void PostInitialize()
@@ -145,6 +162,54 @@ public class OrderNote : ValidatedMonoBehaviour
     }
 
     private bool CanDragOrderNote() => _interactionGate.CanInteract(TutorialInteractionType.DeliverOrder, Order);
+
+    private void BindRecipe(Recipe recipe)
+    {
+        if (recipe == null)
+            return;
+
+        if (_doughIcon != null)
+        {
+            _doughIcon.sprite = recipe.Dough.Icon;
+            _doughIcon.preserveAspect = true;
+        }
+
+        if (_ingredientsRoot == null || _ingredientRowPrefab == null)
+            return;
+        
+        foreach (var (filling, amount) in recipe.Fillings)
+        {
+            var ingredientRow = Instantiate(_ingredientRowPrefab, _ingredientsRoot);
+            ingredientRow.Bind(filling, amount);
+        }
+    }
+
+    private void UpdateWidthFromContent()
+    {
+        if (_rectTransform == null)
+            return;
+
+        var width = _baseWidth;
+        RectTransform contentRect = null;
+        if (_ingredientsRoot != null)
+            contentRect = _ingredientsRoot.parent as RectTransform;
+        else if (_doughIcon != null)
+            contentRect = _doughIcon.transform.parent?.parent as RectTransform;
+
+        if (contentRect != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(contentRect);
+            var contentWidth = LayoutUtility.GetPreferredWidth(contentRect);
+            width = Mathf.Max(width, contentRect.anchoredPosition.x + contentWidth + 16f);
+        }
+
+        var sizeDelta = _rectTransform.sizeDelta;
+        sizeDelta.x = width;
+        _rectTransform.sizeDelta = sizeDelta;
+
+        if (_layoutElement != null)
+            _layoutElement.preferredWidth = width;
+    }
 
     private void ApplyRemainingTimeBand(float normalizedRemainingTime, bool useTween)
     {

@@ -12,6 +12,9 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     private SpriteRenderer _customerSprite;
 
     [SerializeField]
+    private SpriteRenderer _iconSprite;
+
+    [SerializeField]
     private GameObject _dialogueObject;
     
     [SerializeField]
@@ -70,7 +73,10 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         _customerQueue.CustomerArrived += customer =>
         {
             if (_customerSprite.sprite == null)
+            {
                 _customerSprite.sprite = customer.Sprite;
+                _iconSprite.enabled = true;
+            }
         };
 
         _customerQueue.CustomerExpired += customer =>
@@ -78,12 +84,16 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             if (_customerQueue.TryPeek(out var nextCustomer))
                 _customerSprite.sprite = nextCustomer.Sprite;
             else
+            {
                 _customerSprite.sprite = null;
+                _iconSprite.enabled = false;
+            }
         };
     }
 
     public Sequence OrderDialogue(Order order)
     {
+        _iconSprite.enabled = false;
         _customerSprite.sprite = order.Customer.Sprite;
 
         string text;
@@ -106,7 +116,10 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             {
                 _dialogueObject.SetActive(false);
                 if (_customerQueue.TryPeek(out var nextCustomer))
+                {
                     _customerSprite.sprite = nextCustomer.Sprite;
+                    _iconSprite.enabled = true;
+                }
                 else
                     _customerSprite.sprite = null;
             }));
