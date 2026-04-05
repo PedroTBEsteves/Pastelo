@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 480e7066b8baa274dbe48559349d5136
+guid: b9f37a858b037304e8f12626c8a11d66
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5617789704290926967
-    second: "UI_Bot\xE3o_Sair_0"
+      213: 3410271938796084145
+    second: UI_Menu_QRCode_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "UI_Bot\xE3o_Sair_0"
+      name: UI_Menu_QRCode_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 0
-        width: 518
-        height: 162
+        x: 28
+        y: 37
+        width: 874
+        height: 431
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 98e74ec370a9902b0800000000000000
-      internalID: -5617789704290926967
+      spriteID: 1bb5c6b8248b35f20800000000000000
+      internalID: 3410271938796084145
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "UI_Bot\xE3o_Sair_0": -5617789704290926967
+      UI_Menu_QRCode_0: 3410271938796084145
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c4efca903ed903b4ea63f6727c546cde
+guid: b895a482ddec6af4195206ebf5624d1d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5743083529496731191
-    second: UI_Menu_Fundo_0
+      213: 2025795497953354209
+    second: UI_Menu_Ondas_Direita_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Menu_Fundo_0
+      name: UI_Menu_Ondas_Direita_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 499
+        height: 1081
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c163f445f77c40b0800000000000000
-      internalID: -5743083529496731191
+      spriteID: 1e16813b5421d1c10800000000000000
+      internalID: 2025795497953354209
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_Menu_Fundo_0: -5743083529496731191
+      UI_Menu_Ondas_Direita_0: 2025795497953354209
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

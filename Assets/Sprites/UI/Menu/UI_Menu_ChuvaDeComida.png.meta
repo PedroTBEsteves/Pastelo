@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: 80e82c8f5335fbb41b253af30843a62d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2792136224613082763
+    second: UI_Menu_ChuvaDeComida_0
+  - first:
+      213: 3664995912567528242
+    second: UI_Menu_ChuvaDeComida_1
+  - first:
+      213: -8030328411411853587
+    second: UI_Menu_ChuvaDeComida_2
+  - first:
+      213: -8414968186892514848
+    second: UI_Menu_ChuvaDeComida_3
+  - first:
+      213: -4506408150796855913
+    second: UI_Menu_ChuvaDeComida_4
+  - first:
+      213: 3831742602051898877
+    second: UI_Menu_ChuvaDeComida_5
+  - first:
+      213: 7177942052607655479
+    second: UI_Menu_ChuvaDeComida_6
+  - first:
+      213: -5865916886412654444
+    second: UI_Menu_ChuvaDeComida_7
+  - first:
+      213: 5855846016912541693
+    second: UI_Menu_ChuvaDeComida_8
+  - first:
+      213: -5770022409916455180
+    second: UI_Menu_ChuvaDeComida_9
+  - first:
+      213: -6782739190652971212
+    second: UI_Menu_ChuvaDeComida_10
+  - first:
+      213: 6276569434699595807
+    second: UI_Menu_ChuvaDeComida_11
+  - first:
+      213: -8570330537441163092
+    second: UI_Menu_ChuvaDeComida_12
+  - first:
+      213: -4618071658238710357
+    second: UI_Menu_ChuvaDeComida_13
+  - first:
+      213: 1266893672392833991
+    second: UI_Menu_ChuvaDeComida_14
+  - first:
+      213: 249252444492733670
+    second: UI_Menu_ChuvaDeComida_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 915
+        width: 121
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8620985a19afb620800000000000000
+      internalID: 2792136224613082763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_1
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 991
+        width: 106
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b98df4d5eacd230800000000000000
+      internalID: 3664995912567528242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_2
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 938
+        width: 144
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: deec1183bda8e8090800000000000000
+      internalID: -8030328411411853587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_3
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 1031
+        width: 85
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e90f08b407083b80800000000000000
+      internalID: -8414968186892514848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_4
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 709
+        width: 230
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79514dea9a50671c0800000000000000
+      internalID: -4506408150796855913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_5
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 819
+        width: 106
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfdc80a58951d2530800000000000000
+      internalID: 3831742602051898877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_6
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 604
+        width: 138
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73e7408344c2d9360800000000000000
+      internalID: 7177942052607655479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_7
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 558
+        width: 208
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4988867bba3189ea0800000000000000
+      internalID: -5865916886412654444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 188
+        width: 196
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df745714de4244150800000000000000
+      internalID: 5855846016912541693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_9
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 413
+        width: 116
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f6e2e66033ccefa0800000000000000
+      internalID: -5770022409916455180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_10
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 189
+        width: 231
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 437520184aeded1a0800000000000000
+      internalID: -6782739190652971212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_11
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 374
+        width: 141
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f10085b65aada1750800000000000000
+      internalID: 6276569434699595807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_12
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 168
+        width: 91
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca80324a8c1101980800000000000000
+      internalID: -8570330537441163092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_13
+      rect:
+        serializedVersion: 2
+        x: 1753
+        y: 95
+        width: 142
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bade16f5b4059efb0800000000000000
+      internalID: -4618071658238710357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_14
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 143
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb3a2f2519e49110800000000000000
+      internalID: 1266893672392833991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Menu_ChuvaDeComida_15
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 0
+        width: 159
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ec136517c5857300800000000000000
+      internalID: 249252444492733670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      UI_Menu_ChuvaDeComida_0: 2792136224613082763
+      UI_Menu_ChuvaDeComida_1: 3664995912567528242
+      UI_Menu_ChuvaDeComida_10: -6782739190652971212
+      UI_Menu_ChuvaDeComida_11: 6276569434699595807
+      UI_Menu_ChuvaDeComida_12: -8570330537441163092
+      UI_Menu_ChuvaDeComida_13: -4618071658238710357
+      UI_Menu_ChuvaDeComida_14: 1266893672392833991
+      UI_Menu_ChuvaDeComida_15: 249252444492733670
+      UI_Menu_ChuvaDeComida_2: -8030328411411853587
+      UI_Menu_ChuvaDeComida_3: -8414968186892514848
+      UI_Menu_ChuvaDeComida_4: -4506408150796855913
+      UI_Menu_ChuvaDeComida_5: 3831742602051898877
+      UI_Menu_ChuvaDeComida_6: 7177942052607655479
+      UI_Menu_ChuvaDeComida_7: -5865916886412654444
+      UI_Menu_ChuvaDeComida_8: 5855846016912541693
+      UI_Menu_ChuvaDeComida_9: -5770022409916455180
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

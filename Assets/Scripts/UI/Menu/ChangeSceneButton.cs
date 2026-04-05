@@ -13,6 +13,12 @@ public class ChangeSceneButton : ValidatedMonoBehaviour
 
     private void Awake()
     {
-        _button.onClick.AddListener(() => SceneManager.LoadScene(_sceneIndex));
+        _button.onClick.AddListener(() =>
+        {
+            if (_sceneIndex == 1)
+                GameplayTutorialOptions.SetShouldRunTutorial(true);
+            
+            SceneManager.LoadScene(_sceneIndex);
+        });
     }
 }
