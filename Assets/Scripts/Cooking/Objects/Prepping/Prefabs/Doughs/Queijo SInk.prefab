@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4142219619040711605, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
       propertyPath: m_Name
-      value: Queijo Sink
+      value: Queijo SInk
       objectReference: {fileID: 0}
     - target: {fileID: 5520281729689365349, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
       propertyPath: _draggablePrefab

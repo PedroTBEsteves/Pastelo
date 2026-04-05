@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 4a7aabad10ab01d4c9be92d4be592a09
+guid: 4a52260d9212d844d910bf3bca1967d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5269495528873709658
-    second: 10149821-1_0
-  - first:
-      213: -3445308201108427794
-    second: 10149821-1_1
+      213: 5860788428083523846
+    second: UI_HUD_Pedido_0_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -116,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 10149821-1_0
+      name: UI_HUD_Pedido_0_0
       rect:
         serializedVersion: 2
-        x: 111
-        y: 100
-        width: 120
-        height: 312
+        x: 0
+        y: 0
+        width: 171
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a50d608b342012940800000000000000
-      internalID: 5269495528873709658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 10149821-1_1
-      rect:
-        serializedVersion: 2
-        x: 281
-        y: 100
-        width: 120
-        height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: eeb2133f17ecf20d0800000000000000
-      internalID: -3445308201108427794
+      spriteID: 60173a70604b55150800000000000000
+      internalID: 5860788428083523846
       vertices: []
       indices: 
       edges: []
@@ -163,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      10149821-1_0: 5269495528873709658
-      10149821-1_1: -3445308201108427794
+      UI_HUD_Pedido_0_0: 5860788428083523846
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

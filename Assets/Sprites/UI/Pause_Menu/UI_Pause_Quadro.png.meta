@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8636cce201622e948b6b7eebdc977f41
+guid: 71551dc5480db1b4eb24ad8b8f7ab875
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8773208022192235513
-    second: UI_Fila_0
+      213: 787080890174040434
+    second: UI_Pause_Quadro_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,20 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -126,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Fila_0
+      name: UI_Pause_Quadro_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 7
-        width: 132
-        height: 95
+        x: 0
+        y: 0
+        width: 1038
+        height: 816
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 70cdf9849cd4f3680800000000000000
-      internalID: -8773208022192235513
+      spriteID: 279625446e54cea00800000000000000
+      internalID: 787080890174040434
       vertices: []
       indices: 
       edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_Fila_0: -8773208022192235513
+      UI_Pause_Quadro_0: 787080890174040434
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

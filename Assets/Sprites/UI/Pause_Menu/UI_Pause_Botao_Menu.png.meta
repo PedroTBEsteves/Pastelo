@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9cb43e5d61134fd4790e71270b0657cc
+guid: 2c5e813f62ce95647a4701c99e2e60d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3435788241511376217
-    second: UI_Cadeado_0
+      213: -7192533181217858144
+    second: UI_Pause_Botao_Menu_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 175
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Cadeado_0
+      name: UI_Pause_Botao_Menu_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 1
-        width: 116
-        height: 136
+        x: 0
+        y: 0
+        width: 159
+        height: 158
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7aa10454cc0a150d0800000000000000
-      internalID: -3435788241511376217
+      spriteID: 0ad9c4aed2dfe2c90800000000000000
+      internalID: -7192533181217858144
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_Cadeado_0: -3435788241511376217
+      UI_Pause_Botao_Menu_0: -7192533181217858144
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

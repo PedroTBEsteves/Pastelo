@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b6295e0e30b0d4d43ab171ad3b461265
+guid: 7f5ff15b192edfa4cb0446f41d6f4794
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -481495159247619944
-    second: UI_BalaoDeFala_0
+      213: 2338948493217438097
+    second: UI_HUD_NotasPedidos_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,20 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -126,45 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_BalaoDeFala_0
+      name: UI_HUD_NotasPedidos_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 9
-        width: 623
-        height: 268
+        x: 0
+        y: 0
+        width: 239
+        height: 164
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 898b9f724b26159f0800000000000000
-      internalID: -481495159247619944
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_BalaoDeFala_1
-      rect:
-        serializedVersion: 2
-        x: 11
-        y: 12
-        width: 568
-        height: 259
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 14, y: 13, z: 0, w: 15}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac3c6ee7cb53acd4098416f283a3ba3f
-      internalID: -1036297530
+      spriteID: 1991926234d957020800000000000000
+      internalID: 2338948493217438097
       vertices: []
       indices: 
       edges: []
@@ -173,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5566d96ef879cd14280cb42ffd043ac9
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -183,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_BalaoDeFala_0: -481495159247619944
-      UI_BalaoDeFala_1: -1036297530
+      UI_HUD_NotasPedidos_0: 2338948493217438097
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

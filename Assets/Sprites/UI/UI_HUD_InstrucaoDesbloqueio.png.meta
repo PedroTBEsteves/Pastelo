@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a5d88cfac06fbe04abd086e8d4f2d399
+guid: e89c0ac5e7937ca46b6209f4529204cc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5552118531381489681
-    second: "Bot\xE3o_0"
+      213: 1889150229376006033
+    second: UI_HUD_InstrucaoDesbloqueio_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Bot\xE3o_0"
+      name: UI_HUD_InstrucaoDesbloqueio_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 9
-        width: 551
-        height: 159
+        x: 0
+        y: 0
+        width: 280
+        height: 147
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 33, y: 31, z: 34, w: 36}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fef8422bc99e2f2b0800000000000000
-      internalID: -5552118531381489681
+      spriteID: 197fd4ddf1c973a10800000000000000
+      internalID: 1889150229376006033
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 40ee950396ccb574ba094fef47cdb482
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "Bot\xE3o_0": -5552118531381489681
+      UI_HUD_InstrucaoDesbloqueio_0: 1889150229376006033
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
