@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Portuguese (pt)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Portuguese (pt)
+  m_GUID: baa60c386145d624dad1feea7228b16e
+  m_SerializeEntries:
+  - m_GUID: 1d08ecd597db55c4fa796af3ce8f91b9
+    m_Address: UI_Agradecimentos_QRCode
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 00cef732978168249bd2c406a8c1e2c3, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7c89be55393a54747849cf97a31d1f49, type: 2}
+    - {fileID: 11400000, guid: f581e5b38d6993a4d8e0551655e40db8, type: 2}

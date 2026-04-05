@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
+using UnityEngine.VFX;
 
 public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 {
@@ -47,6 +48,9 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 
     [SerializeField]
     private float _delayAfterTextIsDone = 1f;
+
+    [SerializeField]
+    private VisualEffect _happyVisualEffect;
 
     [Inject]
     private DialogueWriter _dialogueWriter;
@@ -129,13 +133,17 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         _customerSprite.sprite = order.Customer.Sprite;
         _deliveryBag.SetActive(true);
 
-        var dialogue = GetRandomDeliveryDialogue(delivery.IsCorrectFor(order));
+        var isCorrect = delivery.IsCorrectFor(order);
+
+        var dialogue = GetRandomDeliveryDialogue(isCorrect);
         
         _dialogueSequence = Sequence.Create(Tween.Delay(2f, () =>
         {
             _dialogueObject.SetActive(true);
             
             orderController.DeliverOrder(order, delivery);
+            if (isCorrect)
+                _happyVisualEffect.Play();
         }))
         .Chain(_dialogueWriter.WriteText(dialogue, _text, _audioSource))
         .Chain(Tween.Delay(2f, () =>
@@ -146,6 +154,8 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             else
                 _customerSprite.sprite = null;
             _deliveryBag.SetActive(false);
+            
+            _happyVisualEffect.Stop();
         }));
 
         return _dialogueSequence;

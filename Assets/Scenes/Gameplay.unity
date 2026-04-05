@@ -6213,7 +6213,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.6866666, y: 2.3633332}
+  m_Size: {x: 0.96, y: 1.7633333}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -6273,8 +6273,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.6866666, y: 2.3633332}
-    newSize: {x: 1.6866666, y: 2.3633332}
+    oldSize: {x: 0.96, y: 1.7633333}
+    newSize: {x: 0.96, y: 1.7633333}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -13486,6 +13486,7 @@ GameObject:
   - component: {fileID: 1927781877}
   - component: {fileID: 1927781876}
   - component: {fileID: 1927781878}
+  - component: {fileID: 1927781879}
   m_Layer: 5
   m_Name: QRCode
   m_TagString: Untagged
@@ -13503,7 +13504,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0008577233, y: 0.0008577233, z: 0.0008577233}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1994325119}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13572,6 +13573,47 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1927781879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927781874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 7724085812380041304
+  references:
+    version: 2
+    RefIds:
+    - rid: 7724085812380041304
+      type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 1927781876}
+        m_TrackedProperties:
+          items:
+          - rid: 7724085812380041305
+        m_UpdateType: 0
+    - rid: 7724085812380041305
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 7724085812380041306
+        m_PropertyPath: m_Sprite
+    - rid: 7724085812380041306
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:266d133b17876384aafe1ff1aa1cca55
+        m_TableEntryReference:
+          m_KeyId: 5195083776
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
 --- !u!1 &1939608415
 GameObject:
   m_ObjectHideFlags: 0
@@ -13850,6 +13892,7 @@ MonoBehaviour:
   _deliveryBag: {fileID: 247462890}
   _audioSource: {fileID: 1958252928}
   _delayAfterTextIsDone: 2
+  _happyVisualEffect: {fileID: 2103461294}
 --- !u!4 &1958252927
 Transform:
   m_ObjectHideFlags: 0
@@ -13865,6 +13908,7 @@ Transform:
   m_Children:
   - {fileID: 840429724}
   - {fileID: 2069919069}
+  - {fileID: 2103461295}
   m_Father: {fileID: 1939608417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1958252928
@@ -14258,7 +14302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1994325119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14329,7 +14373,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994325118}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -15392,8 +15436,8 @@ VisualEffect:
   m_GameObject: {fileID: 2103461292}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 99634b144f7b4724da30c0ec4b9e5fc7, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
@@ -15429,12 +15473,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103461292}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20464009, y: 0.26089722, z: -0.056694027, w: 0.94172233}
-  m_LocalPosition: {x: 0, y: 1.04, z: -0.9109888}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.20501703, y: 0.25455314, z: -0.05531543, w: 0.94345695}
+  m_LocalPosition: {x: 0.518, y: -0.245, z: -0.31}
+  m_LocalScale: {x: 0.34965038, y: 0.34965038, z: 0.34965035}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1958252927}
   m_LocalEulerAnglesHint: {x: 24.52, y: 30.97, z: 0}
 --- !u!1 &2116220889
 GameObject:
@@ -15873,4 +15917,3 @@ SceneRoots:
   - {fileID: 128583085}
   - {fileID: 635548947}
   - {fileID: 334308385}
-  - {fileID: 2103461295}

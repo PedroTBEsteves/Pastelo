@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: 4b181fb29713d6e4e841fe70ddaf9528
   m_SerializeEntries:
+  - m_GUID: 266d133b17876384aafe1ff1aa1cca55
+    m_Address: Assets/Localization/Tables/UI/UI Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 74c918ebdcf48de42a9ac1f467b14562
     m_Address: Assets/Dialogues/Empty/EmptyPastelDialogues Shared Data.asset
     m_ReadOnly: 1
