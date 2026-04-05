@@ -7,6 +7,7 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
     private SpriteRenderer _spriteRenderer;
     
     private bool _addedToPastel;
+    private Vector3 _slotPosition;
     private OpenPastelDoughArea _openPastelDoughArea;
 
     protected override void Awake()
@@ -54,6 +55,13 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
     public void SetSortingOrder(int sortingOrder)
     {
         _spriteRenderer.sortingOrder = sortingOrder;
+    }
+
+    public Vector3 GetSlotPosition() => _slotPosition;
+
+    public void SetSlotPosition(Vector3 slotPosition)
+    {
+        _slotPosition = slotPosition;
     }
 
     private bool CanDrag() => true;

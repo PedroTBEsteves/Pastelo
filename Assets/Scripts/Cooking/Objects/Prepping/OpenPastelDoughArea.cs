@@ -98,7 +98,29 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         if (_pastel == null || !_fillings.Contains(filling))
             return false;
 
-        SnapFillingToClosestAvailableSlot(filling, dropPosition);
+        var slotPositions = GetSlotPositions(filling.GetSlotPosition().z).ToList();
+        var occupiedFillingsBySlot = GetOccupiedFillingsBySlot(slotPositions);
+        var currentSlotIndex = GetClosestSlotIndex(slotPositions, filling.GetSlotPosition());
+        var targetSlotIndex = GetClosestSlotIndex(slotPositions, dropPosition);
+
+        if (currentSlotIndex < 0 || targetSlotIndex < 0)
+            return false;
+
+        var hasAvailableSlot = occupiedFillingsBySlot.Count < slotPositions.Count;
+
+        if (!hasAvailableSlot
+            && occupiedFillingsBySlot.TryGetValue(targetSlotIndex, out var targetFilling)
+            && targetFilling != null
+            && targetFilling != filling)
+        {
+            SetFillingToSlot(targetFilling, slotPositions[currentSlotIndex]);
+            SetFillingToSlot(filling, slotPositions[targetSlotIndex]);
+        }
+        else
+        {
+            SnapFillingToClosestAvailableSlot(filling, dropPosition, slotPositions);
+        }
+
         _fillings.Remove(filling);
         _fillings.Add(filling);
         UpdateFillingsSortingOrder();
@@ -132,15 +154,18 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     private void SnapFillingToClosestAvailableSlot(DraggableFilling filling, Vector3 targetPosition)
     {
-        var slotPositions = GetSlotPositions(filling.transform.position.z).ToList();
+        SnapFillingToClosestAvailableSlot(filling, targetPosition, GetSlotPositions(filling.transform.position.z).ToList());
+    }
+
+    private void SnapFillingToClosestAvailableSlot(DraggableFilling filling, Vector3 targetPosition, IReadOnlyList<Vector3> slotPositions)
+    {
         var occupiedSlotIndices = GetOccupiedSlotIndices(slotPositions, filling);
         var closestAvailableSlotIndex = GetClosestAvailableSlotIndex(slotPositions, occupiedSlotIndices, targetPosition);
 
         if (closestAvailableSlotIndex < 0)
             return;
 
-        filling.transform.SetParent(transform, true);
-        filling.transform.position = slotPositions[closestAvailableSlotIndex];
+        SetFillingToSlot(filling, slotPositions[closestAvailableSlotIndex]);
     }
 
     private void UpdateFillingsSortingOrder()
@@ -154,6 +179,32 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         }
     }
 
+    private Dictionary<int, DraggableFilling> GetOccupiedFillingsBySlot(IReadOnlyList<Vector3> slotPositions)
+    {
+        var occupiedFillingsBySlot = new Dictionary<int, DraggableFilling>();
+
+        foreach (var existingFilling in _fillings)
+        {
+            if (existingFilling == null)
+                continue;
+
+            var closestSlotIndex = GetClosestSlotIndex(slotPositions, existingFilling.GetSlotPosition());
+            if (closestSlotIndex < 0 || occupiedFillingsBySlot.ContainsKey(closestSlotIndex))
+                continue;
+
+            occupiedFillingsBySlot.Add(closestSlotIndex, existingFilling);
+        }
+
+        return occupiedFillingsBySlot;
+    }
+
+    private void SetFillingToSlot(DraggableFilling filling, Vector3 slotPosition)
+    {
+        filling.transform.SetParent(transform, true);
+        filling.transform.position = slotPosition;
+        filling.SetSlotPosition(slotPosition);
+    }
+
     private HashSet<int> GetOccupiedSlotIndices(IReadOnlyList<Vector3> slotPositions, DraggableFilling fillingToIgnore)
     {
         var occupiedSlotIndices = new HashSet<int>();
@@ -163,7 +214,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
             if (existingFilling == null || existingFilling == fillingToIgnore)
                 continue;
 
-            var closestSlotIndex = GetClosestSlotIndex(slotPositions, existingFilling.transform.position);
+            var closestSlotIndex = GetClosestSlotIndex(slotPositions, existingFilling.GetSlotPosition());
             if (closestSlotIndex >= 0)
                 occupiedSlotIndices.Add(closestSlotIndex);
         }
