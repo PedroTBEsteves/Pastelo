@@ -10,14 +10,21 @@ public class ClosedPastelDough
     private float _timeFrying;
     
     public ClosedPastelDough(Dough dough, IReadOnlyDictionary<Filling, int> fillings, float timeToIncreaseFriedLevelInSeconds)
+        : this(new Recipe(dough, fillings), FriedLevel.Raw, timeToIncreaseFriedLevelInSeconds)
     {
-        _recipe = new Recipe(dough, fillings);
+    }
+
+    public ClosedPastelDough(Recipe recipe, FriedLevel friedLevel, float timeToIncreaseFriedLevelInSeconds)
+    {
+        _recipe = recipe;
+        _friedLevel = friedLevel;
         _timeToIncreaseFriedLevelInSeconds = timeToIncreaseFriedLevelInSeconds;
     }
 
     public event Action<FriedLevel> FriedLevelChanged;
 
     public Dough Dough => _recipe.Dough;
+    public FriedLevel FriedLevel => _friedLevel;
     public float FryingProgress => _timeFrying / _timeToIncreaseFriedLevelInSeconds;
     
     public void Fry(float deltaTime)

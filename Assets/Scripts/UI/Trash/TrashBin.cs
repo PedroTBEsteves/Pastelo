@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Reflex.Attributes;
@@ -20,7 +21,12 @@ public class TrashBin : MonoBehaviour
     private readonly GameplayInteractionGate _interactionGate;
     
     private List<RaycastResult> _raycastResults = new();
-    
+
+    private void Awake()
+    {
+        _image.enabled = false;
+    }
+
     public void Show()
     {
         if (!_interactionGate.CanInteract(TutorialInteractionType.DiscardItem))
@@ -63,6 +69,4 @@ public class TrashBin : MonoBehaviour
     {
         _image.enabled = false;
     }
-
-    
 }
