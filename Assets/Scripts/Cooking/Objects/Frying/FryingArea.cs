@@ -12,7 +12,7 @@ public class FryingArea : ValidatedMonoBehaviour
     private BoxCollider2D _collider;
     
     [SerializeField, Child(Flag.ExcludeSelf)]
-    private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
     
     [SerializeField]
     private Transform _discardPositionTransform;
@@ -22,12 +22,6 @@ public class FryingArea : ValidatedMonoBehaviour
 
     [SerializeField, Child(Flag.ExcludeSelf)]
     private AudioSource _stoveSound;
-    
-    [SerializeField]
-    private Sprite _offSprite;
-    
-    [SerializeField]
-    private Sprite _onSprite;
     
     [SerializeField]
     private Transform _heightTransform;
@@ -101,7 +95,7 @@ public class FryingArea : ValidatedMonoBehaviour
         foreach (var visualEffect in _visualEffects)
             visualEffect.Play();
         
-        _spriteRenderer.sprite = _onSprite;
+        _animator.SetBool("Frying", true);
     }
 
     private void StopFrying()
@@ -110,7 +104,7 @@ public class FryingArea : ValidatedMonoBehaviour
         foreach (var visualEffect in _visualEffects)
             visualEffect.Stop();
         
-        _spriteRenderer.sprite = _offSprite;
+        _animator.SetBool("Frying", false);
     }
 
     private int GetNearestSlotIndex(Vector3 position)

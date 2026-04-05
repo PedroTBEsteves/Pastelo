@@ -100,9 +100,11 @@ public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
     {
         if (!_isOpen)
             return;
+        
+        var ingridientName = _currentIngredient is Dough ? $"Massa {_currentIngredient.Name}" : _currentIngredient.Name;
 
         var currentPrice = _ingredientsStorage.CurrentPrice;
-        _priceText.SetText($"Desbloquear o ingrediente por {TextUtils.FormatAsMoney(currentPrice)}?");
+        _priceText.SetText($"Desbloquear {ingridientName} por {TextUtils.FormatAsMoney(currentPrice)}?");
         _confirmButton.interactable = _currentIngredient != null
                                       && !_ingredientsStorage.Contains(_currentIngredient)
                                       && _money.CanSpend(currentPrice);
