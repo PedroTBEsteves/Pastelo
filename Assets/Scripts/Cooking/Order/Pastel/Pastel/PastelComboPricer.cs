@@ -7,12 +7,32 @@ public static class PastelComboPricer
 
     public static float GetValue(Pastel pastel, PastelCookingSettings settings)
     {
-        if (pastel == null || settings == null || pastel.FillingSlots == null)
+        if (pastel == null)
             return 0f;
 
-        var ingredientStats = BuildIngredientStats(pastel.FillingSlots);
+        return TryGetMatchingComboPattern(pastel.FillingSlots, settings, out var comboPattern)
+            ? comboPattern.Value
+            : 0f;
+    }
+
+    public static bool HasMatchingCombo(IReadOnlyList<Filling> fillingSlots, PastelCookingSettings settings)
+    {
+        return TryGetMatchingComboPattern(fillingSlots, settings, out _);
+    }
+
+    private static bool TryGetMatchingComboPattern(
+        IReadOnlyList<Filling> fillingSlots,
+        PastelCookingSettings settings,
+        out PastelComboPattern matchingComboPattern)
+    {
+        matchingComboPattern = null;
+
+        if (settings == null || fillingSlots == null)
+            return false;
+
+        var ingredientStats = BuildIngredientStats(fillingSlots);
         if (ingredientStats.Count > MaxDistinctIngredientTypes)
-            return 0f;
+            return false;
 
         var genericTypesByIngredient = AssignGenericTypes(ingredientStats);
         foreach (var comboPattern in settings.ComboPatterns)
@@ -21,14 +41,17 @@ public static class PastelComboPricer
                 continue;
 
             var slotTypes = comboPattern.SlotTypes;
-            if (slotTypes == null || slotTypes.Count != pastel.FillingSlots.Count)
+            if (slotTypes == null || slotTypes.Count != fillingSlots.Count)
                 continue;
 
-            if (MatchesPattern(pastel.FillingSlots, slotTypes, genericTypesByIngredient))
-                return comboPattern.Value;
+            if (!MatchesPattern(fillingSlots, slotTypes, genericTypesByIngredient))
+                continue;
+
+            matchingComboPattern = comboPattern;
+            return true;
         }
 
-        return 0f;
+        return false;
     }
 
     private static Dictionary<Filling, IngredientStats> BuildIngredientStats(IReadOnlyList<Filling> fillingSlots)

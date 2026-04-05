@@ -20,6 +20,9 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
     [SerializeField]
     private DraggableClosedPastel _closedPastelPrefab;
     
+    [SerializeField]
+    private SpriteRenderer _comboIndicatorRenderer;
+    
     [Inject]
     private readonly PastelCookingSettings _pastelCookingSettings;
     
@@ -53,6 +56,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(TutorialTargetId.ClosePastelArea);
         _tutorialTargetRegistry.Register(_tutorialTarget);
+        RefreshComboIndicator();
     }
 
     private void OnDestroy()
@@ -71,6 +75,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _spriteRenderer.sprite = dough.OpenDoughSprite;
         _pastel = new OpenPastelDough(dough, _recipeGeneratorSettings.MaxFillingsInclusive);
         _tutorialEvents.PublishDoughOpened(dough);
+        RefreshComboIndicator();
 
         return true;
     }
@@ -89,6 +94,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         SnapFillingToClosestAvailableSlot(filling);
         _fillings.Add(filling);
         UpdateFillingsSortingOrder();
+        RefreshComboIndicator();
         _tutorialEvents.PublishFillingAdded(filling.Ingredient);
         return true;
     }
@@ -124,6 +130,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _fillings.Remove(filling);
         _fillings.Add(filling);
         UpdateFillingsSortingOrder();
+        RefreshComboIndicator();
         return true;
     }
 
@@ -138,6 +145,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         var closedPastel = _pastel.Close(_pastelCookingSettings, BuildFillingSlots());
         _pastel = null;
         _spriteRenderer.sprite = null;
+        RefreshComboIndicator();
         var draggableClosedPastel = Instantiate(_closedPastelPrefab, transform.position + Vector3.forward, Quaternion.identity, transform.parent);
         draggableClosedPastel.Initialize(closedPastel);
         foreach (var fillings in _fillings)
@@ -166,6 +174,15 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
             return;
 
         SetFillingToSlot(filling, slotPositions[closestAvailableSlotIndex]);
+    }
+
+    private void RefreshComboIndicator()
+    {
+        if (_comboIndicatorRenderer == null)
+            return;
+
+        _comboIndicatorRenderer.enabled = _pastel != null
+                                         && PastelComboPricer.HasMatchingCombo(BuildFillingSlots(), _pastelCookingSettings);
     }
 
     private void UpdateFillingsSortingOrder()
