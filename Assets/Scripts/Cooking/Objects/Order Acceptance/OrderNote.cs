@@ -22,15 +22,6 @@ public class OrderNote : ValidatedMonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI _orderNumber;
-    
-    [SerializeField]
-    private OrderNoteFillingGroup _fillingGroupPrefab;
-    
-    [SerializeField]
-    private Image _doughIcon;
-
-    [SerializeField]
-    private Transform _fillingsRoot;
 
     [SerializeField]
     private AudioClip _failAudio;
@@ -71,20 +62,6 @@ public class OrderNote : ValidatedMonoBehaviour
         _tutorialTargetRegistry.Register(_tutorialTarget);
 
         _orderNumber.SetText($"#{order.Number}");
-        
-        _doughIcon.sprite = order.Recipe.Dough.Icon;
-
-        var fillingGroup = Instantiate(_fillingGroupPrefab, _fillingsRoot); 
-        
-        foreach (var (filling, amount) in order.Recipe.Fillings)
-        {
-            if (fillingGroup.TryAdd(filling, amount))
-                continue;
-            
-            fillingGroup = Instantiate(_fillingGroupPrefab, _fillingsRoot);
-            fillingGroup.TryAdd(filling, amount);
-        }
-        
         _remainingTimeSlider.transform.SetAsLastSibling();
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
     }
