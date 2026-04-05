@@ -13,11 +13,20 @@ public class TooltipView : MonoBehaviour
         _text = text;
     }
 
-    public virtual void SetText(string text)
+    public virtual bool Bind(TooltipTarget target)
     {
-        if (_text == null)
-            return;
+        if (target == null)
+            return false;
+
+        return BindDefaultText(target.Text);
+    }
+
+    public virtual bool BindDefaultText(string text)
+    {
+        if (_text == null || string.IsNullOrWhiteSpace(text))
+            return false;
 
         _text.SetText(text);
+        return true;
     }
 }

@@ -25,25 +25,36 @@ public class TooltipService : MonoBehaviour, ITooltipService
         EnsurePointerRaycasters();
     }
 
-    public void Show(TooltipTarget target, Vector2 screenPosition, Camera eventCamera)
+    public bool Show(TooltipTarget target, Vector2 screenPosition, Camera eventCamera)
     {
-        if (target == null || string.IsNullOrWhiteSpace(target.Text))
-            return;
+        if (target == null || (!target.HasTooltipContent && !target.HasLegacyViewOverride))
+            return false;
 
         if (!ResolveCanvas())
-            return;
+            return false;
+
+        var targetViewPrefab = ResolveViewPrefab(target);
+
+        if (targetViewPrefab == null)
+            return false;
 
         if (_currentTarget != target)
         {
             DestroyCurrentView();
             _currentTarget = target;
-            _currentView = Instantiate(ResolveViewPrefab(target), _canvasRectTransform);
+            _currentView = Instantiate(targetViewPrefab, _canvasRectTransform);
         }
 
-        _currentView.SetText(target.Text);
+        if (!TryConfigureCurrentView(target))
+        {
+            DestroyCurrentView();
+            return false;
+        }
+
         _currentView.gameObject.SetActive(true);
         LayoutRebuilder.ForceRebuildLayoutImmediate(_currentView.RectTransform);
         UpdatePosition(target, screenPosition, eventCamera);
+        return true;
     }
 
     public void UpdatePosition(TooltipTarget target, Vector2 screenPosition, Camera eventCamera)
@@ -92,6 +103,11 @@ public class TooltipService : MonoBehaviour, ITooltipService
 
     private TooltipView ResolveViewPrefab(TooltipTarget target)
     {
+        var presenterViewPrefab = target.Presenter?.GetViewPrefab(target);
+
+        if (presenterViewPrefab != null)
+            return presenterViewPrefab;
+
         if (target.ViewPrefabOverride != null)
             return target.ViewPrefabOverride;
 
@@ -99,6 +115,19 @@ public class TooltipService : MonoBehaviour, ITooltipService
             _defaultViewPrefab = Resources.Load<TooltipView>(DefaultTooltipViewResourcePath);
 
         return _defaultViewPrefab != null ? _defaultViewPrefab : CreateFallbackViewPrefab();
+    }
+
+    private bool TryConfigureCurrentView(TooltipTarget target)
+    {
+        if (_currentView == null)
+            return false;
+
+        var presenter = target.Presenter;
+
+        if (presenter != null && presenter.Configure(_currentView, target))
+            return true;
+
+        return _currentView.Bind(target);
     }
 
     private TooltipView CreateFallbackViewPrefab()
@@ -134,7 +163,7 @@ public class TooltipService : MonoBehaviour, ITooltipService
         text.font = TMP_Settings.defaultFontAsset;
         text.fontSize = 24f;
         text.color = Color.white;
-        text.enableWordWrapping = false;
+        text.textWrappingMode = TextWrappingModes.NoWrap;
         text.raycastTarget = false;
         text.overflowMode = TextOverflowModes.Overflow;
 

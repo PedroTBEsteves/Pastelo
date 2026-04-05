@@ -13,6 +13,9 @@ public class TooltipTarget : ValidatedMonoBehaviour, IPointerEnterHandler, IPoin
     [SerializeField]
     private TooltipView _viewPrefabOverride;
 
+    [SerializeField]
+    private MonoBehaviour _presenter;
+
     [Inject]
     private readonly TooltipSettings _tooltipSettings;
 
@@ -27,17 +30,19 @@ public class TooltipTarget : ValidatedMonoBehaviour, IPointerEnterHandler, IPoin
 
     public string Text => _text;
     public TooltipView ViewPrefabOverride => _viewPrefabOverride;
+    public ITooltipPresenter Presenter => _presenter as ITooltipPresenter;
+    public bool HasTooltipContent => Presenter != null || !string.IsNullOrWhiteSpace(_text);
+    public bool HasLegacyViewOverride => _viewPrefabOverride != null;
 
     private void Update()
     {
-        if (!_isHovered || _isTooltipVisible || string.IsNullOrWhiteSpace(_text) || _tooltipSettings == null || _tooltipService == null)
+        if (!_isHovered || _isTooltipVisible || (!HasTooltipContent && !HasLegacyViewOverride) || _tooltipSettings == null || _tooltipService == null)
             return;
 
         if (Time.unscaledTime - _hoverStartTime < _tooltipSettings.HoverDelay)
             return;
 
-        _tooltipService.Show(this, _lastPointerPosition, _lastEventCamera);
-        _isTooltipVisible = true;
+        _isTooltipVisible = _tooltipService.Show(this, _lastPointerPosition, _lastEventCamera);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
