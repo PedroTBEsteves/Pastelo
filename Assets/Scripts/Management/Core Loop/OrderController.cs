@@ -8,17 +8,25 @@ public class OrderController : ITickable
     private readonly RecipeGenerator _recipeGenerator;
     private readonly StrikesController _strikesController;
     private readonly Money _money;
+    private readonly PastelCookingSettings _pastelCookingSettings;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogues;
     private readonly List<Order> _activeOrders = new();
     private readonly List<Order> _expiredOrders = new();
 
     private int _currentOrderNumber;
 
-    public OrderController(OrderLoopSettings orderLoopSettings, RecipeGenerator recipeGenerator, StrikesController strikesController, Money money, ICustomerPopUpDialogue customerPopUpDialogues)
+    public OrderController(
+        OrderLoopSettings orderLoopSettings,
+        RecipeGenerator recipeGenerator,
+        StrikesController strikesController,
+        Money money,
+        PastelCookingSettings pastelCookingSettings,
+        ICustomerPopUpDialogue customerPopUpDialogues)
     {
         _recipeGenerator = recipeGenerator;
         _strikesController = strikesController;
         _money = money;
+        _pastelCookingSettings = pastelCookingSettings;
         _customerPopUpDialogues = customerPopUpDialogues;
         _orderCompletionTimeLimit = orderLoopSettings.OrderCompletionTimeLimit;
     }
@@ -61,7 +69,7 @@ public class OrderController : ITickable
             OrderFailed(order);
         }
         
-        _money.Gain(order.Recipe.Value);
+        _money.Gain(PastelComboPricer.GetValue(delivery.Pastel, _pastelCookingSettings));
     }
     
     public void Tick(float deltaTime)

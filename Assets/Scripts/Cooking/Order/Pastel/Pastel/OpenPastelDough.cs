@@ -23,8 +23,8 @@ public class OpenPastelDough
         return true;
     }
 
-    public ClosedPastelDough Close(PastelCookingSettings settings)
+    public ClosedPastelDough Close(PastelCookingSettings settings, IReadOnlyList<Filling> fillingSlots)
     {
-        return new ClosedPastelDough(_dough, _fillings, settings.TimeToIncreaseFriedLevelInSeconds);
+        return new ClosedPastelDough(_dough, _fillings, fillingSlots, settings.TimeToIncreaseFriedLevelInSeconds);
     }
 }

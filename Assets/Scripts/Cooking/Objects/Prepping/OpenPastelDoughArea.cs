@@ -134,8 +134,8 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
         if (_pastel == null)
             return;
-        
-        var closedPastel = _pastel.Close(_pastelCookingSettings);
+
+        var closedPastel = _pastel.Close(_pastelCookingSettings, BuildFillingSlots());
         _pastel = null;
         _spriteRenderer.sprite = null;
         var draggableClosedPastel = Instantiate(_closedPastelPrefab, transform.position + Vector3.forward, Quaternion.identity, transform.parent);
@@ -250,7 +250,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
         for (var slotIndex = 0; slotIndex < slotPositions.Count; slotIndex++)
         {
-            var distance = (fillingPosition - slotPositions[slotIndex]).sqrMagnitude;
+            var distance = ((Vector2)fillingPosition - (Vector2)slotPositions[slotIndex]).sqrMagnitude;
             if (distance >= closestDistance)
                 continue;
 
@@ -259,6 +259,26 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         }
 
         return closestSlotIndex;
+    }
+
+    private IReadOnlyList<Filling> BuildFillingSlots()
+    {
+        var slotPositions = GetSlotPositions(0f).ToList();
+        var fillingSlots = new Filling[slotPositions.Count];
+
+        foreach (var filling in _fillings)
+        {
+            if (filling == null)
+                continue;
+
+            var slotIndex = GetClosestSlotIndex(slotPositions, filling.GetSlotPosition());
+            if (slotIndex < 0 || slotIndex >= fillingSlots.Length)
+                continue;
+
+            fillingSlots[slotIndex] = filling.Ingredient;
+        }
+
+        return fillingSlots;
     }
 
     private IEnumerable<Vector3> GetSlotPositions(float zPosition)

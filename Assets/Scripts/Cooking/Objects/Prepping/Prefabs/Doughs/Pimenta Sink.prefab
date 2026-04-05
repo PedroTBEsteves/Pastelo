@@ -12,10 +12,6 @@ PrefabInstance:
       propertyPath: _ingredient
       value: 
       objectReference: {fileID: 11400000, guid: 3bfc5e16d6e859a4cac6904982c2b7da, type: 2}
-    - target: {fileID: 2098360710043839310, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
-      propertyPath: _purchasePrompt
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2587436458443413696, guid: a054d1e6c0aa65f49b909c977a9b8b9b, type: 3}
       propertyPath: m_Sprite
       value: 

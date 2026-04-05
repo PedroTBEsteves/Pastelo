@@ -13,3 +13,12 @@ MonoBehaviour:
   m_Name: PastelCookingSettings
   m_EditorClassIdentifier: 
   <TimeToIncreaseFriedLevelInSeconds>k__BackingField: 15
+  _comboPatterns:
+  - <Value>k__BackingField: 1
+    _slotTypes: 010000000100000001000000020000000200000002000000
+  - <Value>k__BackingField: 1
+    _slotTypes: 010000000200000001000000010000000200000001000000
+  - <Value>k__BackingField: 3
+    _slotTypes: 010000000200000003000000010000000200000003000000
+  - <Value>k__BackingField: 1
+    _slotTypes: 010000000200000001000000020000000100000002000000
