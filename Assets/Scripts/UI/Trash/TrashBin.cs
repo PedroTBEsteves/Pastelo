@@ -65,7 +65,7 @@ public class TrashBin : MonoBehaviour
 
     private void PlayDiscardSound() => _audioSource.Play();
 
-    private void Hide()
+    public void Hide()
     {
         _image.enabled = false;
     }

@@ -88,7 +88,20 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
         SnapFillingToClosestAvailableSlot(filling);
         _fillings.Add(filling);
+        UpdateFillingsSortingOrder();
         _tutorialEvents.PublishFillingAdded(filling.Ingredient);
+        return true;
+    }
+
+    public bool TryRepositionFilling(DraggableFilling filling, Vector3 dropPosition)
+    {
+        if (_pastel == null || !_fillings.Contains(filling))
+            return false;
+
+        SnapFillingToClosestAvailableSlot(filling, dropPosition);
+        _fillings.Remove(filling);
+        _fillings.Add(filling);
+        UpdateFillingsSortingOrder();
         return true;
     }
 
@@ -114,15 +127,31 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     private void SnapFillingToClosestAvailableSlot(DraggableFilling filling)
     {
+        SnapFillingToClosestAvailableSlot(filling, filling.transform.position);
+    }
+
+    private void SnapFillingToClosestAvailableSlot(DraggableFilling filling, Vector3 targetPosition)
+    {
         var slotPositions = GetSlotPositions(filling.transform.position.z).ToList();
         var occupiedSlotIndices = GetOccupiedSlotIndices(slotPositions, filling);
-        var closestAvailableSlotIndex = GetClosestAvailableSlotIndex(slotPositions, occupiedSlotIndices, filling.transform.position);
+        var closestAvailableSlotIndex = GetClosestAvailableSlotIndex(slotPositions, occupiedSlotIndices, targetPosition);
 
         if (closestAvailableSlotIndex < 0)
             return;
 
         filling.transform.SetParent(transform, true);
         filling.transform.position = slotPositions[closestAvailableSlotIndex];
+    }
+
+    private void UpdateFillingsSortingOrder()
+    {
+        for (var index = 0; index < _fillings.Count; index++)
+        {
+            if (_fillings[index] == null)
+                continue;
+
+            _fillings[index].SetSortingOrder(index + 1);
+        }
     }
 
     private HashSet<int> GetOccupiedSlotIndices(IReadOnlyList<Vector3> slotPositions, DraggableFilling fillingToIgnore)

@@ -1,8 +1,12 @@
-using System;
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
+public interface IDiscardPolicy
+{
+    bool CanBeDiscarded();
+}
 
 [RequireComponent(typeof(Draggable))]
 public class DisposableDraggable : ValidatedMonoBehaviour
@@ -25,10 +29,28 @@ public class DisposableDraggable : ValidatedMonoBehaviour
         _draggable.Dropped -= OnDropped;
     }
 
-    private void OnHeld(PointerEventData _) => _trashBin.Show();
-
     private void OnDropped(PointerEventData eventData)
     {
+        if (!CanBeDiscarded())
+        {
+            _trashBin.Hide();
+            return;
+        }
+
         _trashBin.TryDiscard(_draggable, eventData);
+    }
+
+    private void OnHeld(PointerEventData _)
+    {
+        if (!CanBeDiscarded())
+            return;
+
+        _trashBin.Show();
+    }
+
+    private bool CanBeDiscarded()
+    {
+        var discardPolicy = GetComponent(typeof(IDiscardPolicy)) as IDiscardPolicy;
+        return discardPolicy?.CanBeDiscarded() ?? true;
     }
 }

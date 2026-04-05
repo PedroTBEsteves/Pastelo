@@ -32,34 +32,59 @@ public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour 
         Draggable.Dropped -= OnDropped;
     }
 
-    private void OnDropped(PointerEventData eventData)
+    protected virtual void OnDropped(PointerEventData eventData)
     {
-        var mousePosition = _cameraController.ScreenToWorldPointy(eventData.position);
-        var raycastHit = Physics2D.Raycast(
-            mousePosition,
-            Vector2.zero,
-            float.MaxValue,
-            ~LayerMask.GetMask("Draggable", "Ignore Raycast"));
-        
-        if (!raycastHit 
-            || !raycastHit.collider.TryGetComponent<OpenPastelDoughArea>(out var openPastelDoughArea))
+        if (!TryGetOpenPastelDoughArea(eventData, out var openPastelDoughArea))
         {
             Destroy(gameObject);
             return;
         }
 
-        if (!_money.CanSpend(Ingredient.Cost))
+        if (!CanSpend())
         {
             Destroy(gameObject);
-            _popupTextService.ShowError("Sem dinheiro suficiente!", transform.position);
+            ShowNotEnoughMoneyError();
             return;
         }
 
         if (TryAddToOpenDough(openPastelDoughArea))
         {
-            _money.TrySpend(Ingredient.Cost);
+            Spend();
         }
     }
-    
+
+    protected Vector3 GetMouseWorldPosition(PointerEventData eventData)
+    {
+        return _cameraController.ScreenToWorldPointy(eventData.position);
+    }
+
+    protected bool TryGetOpenPastelDoughArea(PointerEventData eventData, out OpenPastelDoughArea openPastelDoughArea)
+    {
+        var mousePosition = GetMouseWorldPosition(eventData);
+        var raycastHit = Physics2D.Raycast(
+            mousePosition,
+            Vector2.zero,
+            float.MaxValue,
+            ~LayerMask.GetMask("Draggable", "Ignore Raycast"));
+
+        if (raycastHit && raycastHit.collider.TryGetComponent(out openPastelDoughArea))
+            return true;
+
+        openPastelDoughArea = null;
+        return false;
+    }
+
+    protected bool CanSpend() => _money.CanSpend(Ingredient.Cost);
+
+    protected void Spend()
+    {
+        _money.TrySpend(Ingredient.Cost);
+    }
+
+    protected void ShowNotEnoughMoneyError()
+    {
+        _popupTextService.ShowError("Sem dinheiro suficiente!", transform.position);
+    }
+
     protected abstract bool TryAddToOpenDough(OpenPastelDoughArea openPastelDoughArea);
 }
