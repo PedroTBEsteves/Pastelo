@@ -19,7 +19,7 @@ public class StrikesDisplay : ValidatedMonoBehaviour
     [Inject]
     private readonly StrikesController _strikesController;
 
-    private readonly List<GameObject> _icons = new();
+    private readonly List<StrikeIcon> _icons = new();
 
 
     private void Awake()
@@ -62,14 +62,30 @@ public class StrikesDisplay : ValidatedMonoBehaviour
             _icons.Add(CreateIcon());
     }
 
-    private GameObject CreateIcon()
+    private StrikeIcon CreateIcon()
     {
-        return Instantiate(_iconPrefab, _layoutGroup.transform);
+        var iconObject = Instantiate(_iconPrefab, _layoutGroup.transform);
+        var icon = iconObject.GetComponent<StrikeIcon>();
+
+        if (icon == null)
+        {
+            Debug.LogError($"Strike icon prefab '{_iconPrefab.name}' is missing a {nameof(StrikeIcon)} component.", _iconPrefab);
+            return null;
+        }
+
+        return icon;
     }
 
     private void UpdateIcons(int remainingStrikes)
     {
+        var takenStrikes = _strikesController.StrikesToFail - remainingStrikes;
+
         for (var index = 0; index < _icons.Count; index++)
-            _icons[index].SetActive(index < remainingStrikes);
+        {
+            if (_icons[index] == null)
+                continue;
+
+            _icons[index].SetTaken(index < takenStrikes);
+        }
     }
 }

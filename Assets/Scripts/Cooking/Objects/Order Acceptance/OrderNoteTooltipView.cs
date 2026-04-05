@@ -28,7 +28,6 @@ public class OrderNoteTooltipView : TooltipView
             return false;
         }
 
-        ClearIngredients();
         _doughIcon.sprite = recipe.Dough.Icon;
         _doughIcon.preserveAspect = true;
         
@@ -47,11 +46,5 @@ public class OrderNoteTooltipView : TooltipView
             return false;
 
         return Bind(orderNote.Order);
-    }
-
-    private void ClearIngredients()
-    {
-        for (var i = _ingredientsRoot.childCount - 1; i >= 0; i--)
-            Destroy(_ingredientsRoot.GetChild(i).gameObject);
     }
 }
