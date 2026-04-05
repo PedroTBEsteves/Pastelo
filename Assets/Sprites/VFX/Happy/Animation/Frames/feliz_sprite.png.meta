@@ -1,0 +1,1222 @@
+fileFormatVersion: 2
+guid: 491e79c75deee40469fb47d38317ec94
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 196693869074430333
+    second: feliz_sprite_0
+  - first:
+      213: -3833689971533253770
+    second: feliz_sprite_1
+  - first:
+      213: 5180930149882555556
+    second: feliz_sprite_2
+  - first:
+      213: 2144234328404901373
+    second: feliz_sprite_3
+  - first:
+      213: -5036941766458363608
+    second: feliz_sprite_4
+  - first:
+      213: -6606364735814176165
+    second: feliz_sprite_5
+  - first:
+      213: -4222260695307257553
+    second: feliz_sprite_6
+  - first:
+      213: 5856037064650208351
+    second: feliz_sprite_7
+  - first:
+      213: 1085881789230750009
+    second: feliz_sprite_8
+  - first:
+      213: -3472958354807292134
+    second: feliz_sprite_9
+  - first:
+      213: -1496883415470218945
+    second: feliz_sprite_10
+  - first:
+      213: 4492964849078517082
+    second: feliz_sprite_11
+  - first:
+      213: 1572824544760368690
+    second: feliz_sprite_12
+  - first:
+      213: 4253072081046599867
+    second: feliz_sprite_13
+  - first:
+      213: -5218357211553873996
+    second: feliz_sprite_14
+  - first:
+      213: 2653566211232780230
+    second: feliz_sprite_15
+  - first:
+      213: 4854271463515342497
+    second: feliz_sprite_16
+  - first:
+      213: 480864498975025147
+    second: feliz_sprite_17
+  - first:
+      213: -3838189623210139622
+    second: feliz_sprite_18
+  - first:
+      213: 6128827442670776641
+    second: feliz_sprite_19
+  - first:
+      213: 7668710449780325591
+    second: feliz_sprite_20
+  - first:
+      213: 3934699566064837383
+    second: feliz_sprite_21
+  - first:
+      213: 6495278617569543006
+    second: feliz_sprite_22
+  - first:
+      213: -4510907969909957838
+    second: feliz_sprite_23
+  - first:
+      213: 4905738608495977594
+    second: feliz_sprite_24
+  - first:
+      213: 5015264014670375861
+    second: feliz_sprite_25
+  - first:
+      213: 3589184587218467095
+    second: feliz_sprite_26
+  - first:
+      213: 8552080308576161467
+    second: feliz_sprite_27
+  - first:
+      213: -3614899235804438736
+    second: feliz_sprite_28
+  - first:
+      213: -5519043488907346781
+    second: feliz_sprite_29
+  - first:
+      213: 4389696142895580158
+    second: feliz_sprite_30
+  - first:
+      213: 497541434456209222
+    second: feliz_sprite_31
+  - first:
+      213: -8263282064340040867
+    second: feliz_sprite_32
+  - first:
+      213: 5296033787433431360
+    second: feliz_sprite_33
+  - first:
+      213: -7109416931392914415
+    second: feliz_sprite_34
+  - first:
+      213: 5850583218197369138
+    second: feliz_sprite_35
+  - first:
+      213: -7612076885762713729
+    second: feliz_sprite_36
+  - first:
+      213: 2533783680020239092
+    second: feliz_sprite_37
+  - first:
+      213: -2955678586335683007
+    second: feliz_sprite_38
+  - first:
+      213: 5635146282372851089
+    second: feliz_sprite_39
+  - first:
+      213: -3557937875239586939
+    second: feliz_sprite_40
+  - first:
+      213: 1383644794191569809
+    second: feliz_sprite_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: feliz_sprite_0
+      rect:
+        serializedVersion: 2
+        x: 1837
+        y: 809
+        width: 368
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d79bda3280ccab200800000000000000
+      internalID: 196693869074430333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_1
+      rect:
+        serializedVersion: 2
+        x: 3227
+        y: 833
+        width: 368
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67378cb584ffbcac0800000000000000
+      internalID: -3833689971533253770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_2
+      rect:
+        serializedVersion: 2
+        x: 4615
+        y: 827
+        width: 368
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ac6cd5858c56e740800000000000000
+      internalID: 5180930149882555556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_3
+      rect:
+        serializedVersion: 2
+        x: 5992
+        y: 806
+        width: 368
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfdb5c3d2c9d1cd10800000000000000
+      internalID: 2144234328404901373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_4
+      rect:
+        serializedVersion: 2
+        x: 7362
+        y: 790
+        width: 368
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 821bbe77620391ab0800000000000000
+      internalID: -5036941766458363608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_5
+      rect:
+        serializedVersion: 2
+        x: 10055
+        y: 47
+        width: 850
+        height: 1054
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b52f029564a7154a0800000000000000
+      internalID: -6606364735814176165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_6
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 483
+        width: 190
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f29fd13a4448765c0800000000000000
+      internalID: -4222260695307257553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_7
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 480
+        width: 196
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f543ff50fa2d44150800000000000000
+      internalID: 5856037064650208351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_8
+      rect:
+        serializedVersion: 2
+        x: 2203
+        y: 539
+        width: 239
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9391a2bebb3d11f00800000000000000
+      internalID: 1085881789230750009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_9
+      rect:
+        serializedVersion: 2
+        x: 2913
+        y: 368
+        width: 170
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1f7cfdd6c29dcfc0800000000000000
+      internalID: -3472958354807292134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_10
+      rect:
+        serializedVersion: 2
+        x: 3001
+        y: 594
+        width: 196
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3169b6e6700a3be0800000000000000
+      internalID: -1496883415470218945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_11
+      rect:
+        serializedVersion: 2
+        x: 3115
+        y: 486
+        width: 85
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5d34a9b9b73a5e30800000000000000
+      internalID: 4492964849078517082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_12
+      rect:
+        serializedVersion: 2
+        x: 3589
+        y: 545
+        width: 261
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23e057c179bc3d510800000000000000
+      internalID: 1572824544760368690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_13
+      rect:
+        serializedVersion: 2
+        x: 4331
+        y: 588
+        width: 196
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb8f9e22682f50b30800000000000000
+      internalID: 4253072081046599867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_14
+      rect:
+        serializedVersion: 2
+        x: 4970
+        y: 532
+        width: 255
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bfbb3e93cba497b0800000000000000
+      internalID: -5218357211553873996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_15
+      rect:
+        serializedVersion: 2
+        x: 5681
+        y: 573
+        width: 196
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cf4280f86c53d420800000000000000
+      internalID: 2653566211232780230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_16
+      rect:
+        serializedVersion: 2
+        x: 6348
+        y: 509
+        width: 250
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a6c5225d26dd5340800000000000000
+      internalID: 4854271463515342497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_17
+      rect:
+        serializedVersion: 2
+        x: 7030
+        y: 561
+        width: 195
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf7a08ec6bf5ca600800000000000000
+      internalID: 480864498975025147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_18
+      rect:
+        serializedVersion: 2
+        x: 7715
+        y: 493
+        width: 247
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1028ff8fd20cbac0800000000000000
+      internalID: -3838189623210139622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_19
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 356
+        width: 170
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 141be025618fd0550800000000000000
+      internalID: 6128827442670776641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_20
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 214
+        width: 245
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dc7b74068bbc6a60800000000000000
+      internalID: 7668710449780325591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_21
+      rect:
+        serializedVersion: 2
+        x: 2239
+        y: 280
+        width: 222
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 703ad2d886cda9630800000000000000
+      internalID: 3934699566064837383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_22
+      rect:
+        serializedVersion: 2
+        x: 3635
+        y: 268
+        width: 222
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e534c6d3d7dd32a50800000000000000
+      internalID: 6495278617569543006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_23
+      rect:
+        serializedVersion: 2
+        x: 4260
+        y: 347
+        width: 170
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23bd907e9190661c0800000000000000
+      internalID: -4510907969909957838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_24
+      rect:
+        serializedVersion: 2
+        x: 4463
+        y: 467
+        width: 85
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a746250d54fa41440800000000000000
+      internalID: 4905738608495977594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_25
+      rect:
+        serializedVersion: 2
+        x: 5013
+        y: 253
+        width: 222
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bb2a31ac0cc99540800000000000000
+      internalID: 5015264014670375861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_26
+      rect:
+        serializedVersion: 2
+        x: 5612
+        y: 328
+        width: 170
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 719b672ad585fc130800000000000000
+      internalID: 3589184587218467095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_27
+      rect:
+        serializedVersion: 2
+        x: 5822
+        y: 448
+        width: 85
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbe8b43dab71fa670800000000000000
+      internalID: 8552080308576161467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_28
+      rect:
+        serializedVersion: 2
+        x: 6972
+        y: 310
+        width: 170
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03f9b0f2c4c45ddc0800000000000000
+      internalID: -3614899235804438736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_29
+      rect:
+        serializedVersion: 2
+        x: 7188
+        y: 434
+        width: 85
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3acbebf103b6863b0800000000000000
+      internalID: -5519043488907346781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_30
+      rect:
+        serializedVersion: 2
+        x: 2137
+        y: 353
+        width: 90
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef3813562655bec30800000000000000
+      internalID: 4389696142895580158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_31
+      rect:
+        serializedVersion: 2
+        x: 3241
+        y: 184
+        width: 269
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 647fccd6c4f97e600800000000000000
+      internalID: 497541434456209222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_32
+      rect:
+        serializedVersion: 2
+        x: 3516
+        y: 347
+        width: 90
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53c7244ebce25d80800000000000000
+      internalID: -8263282064340040867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_33
+      rect:
+        serializedVersion: 2
+        x: 4597
+        y: 155
+        width: 283
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 041bf6a8baa4f7940800000000000000
+      internalID: 5296033787433431360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_34
+      rect:
+        serializedVersion: 2
+        x: 4890
+        y: 337
+        width: 90
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11c7d2cd7f6465d90800000000000000
+      internalID: -7109416931392914415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_35
+      rect:
+        serializedVersion: 2
+        x: 5963
+        y: 155
+        width: 277
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23114817072713150800000000000000
+      internalID: 5850583218197369138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_36
+      rect:
+        serializedVersion: 2
+        x: 6258
+        y: 327
+        width: 90
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f77d62527687c5690800000000000000
+      internalID: -7612076885762713729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_37
+      rect:
+        serializedVersion: 2
+        x: 6390
+        y: 232
+        width: 222
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f2d94915dec92320800000000000000
+      internalID: 2533783680020239092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_38
+      rect:
+        serializedVersion: 2
+        x: 7329
+        y: 155
+        width: 271
+        height: 280
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14e9b3f4cf15bf6d0800000000000000
+      internalID: -2955678586335683007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_39
+      rect:
+        serializedVersion: 2
+        x: 7620
+        y: 321
+        width: 90
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 195623200bf043e40800000000000000
+      internalID: 5635146282372851089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_40
+      rect:
+        serializedVersion: 2
+        x: 7755
+        y: 216
+        width: 222
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 583bf6d6a5aaf9ec0800000000000000
+      internalID: -3557937875239586939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feliz_sprite_41
+      rect:
+        serializedVersion: 2
+        x: 8692
+        y: 156
+        width: 271
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1936b150c91b33310800000000000000
+      internalID: 1383644794191569809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      feliz_sprite_0: 196693869074430333
+      feliz_sprite_1: -3833689971533253770
+      feliz_sprite_10: -1496883415470218945
+      feliz_sprite_11: 4492964849078517082
+      feliz_sprite_12: 1572824544760368690
+      feliz_sprite_13: 4253072081046599867
+      feliz_sprite_14: -5218357211553873996
+      feliz_sprite_15: 2653566211232780230
+      feliz_sprite_16: 4854271463515342497
+      feliz_sprite_17: 480864498975025147
+      feliz_sprite_18: -3838189623210139622
+      feliz_sprite_19: 6128827442670776641
+      feliz_sprite_2: 5180930149882555556
+      feliz_sprite_20: 7668710449780325591
+      feliz_sprite_21: 3934699566064837383
+      feliz_sprite_22: 6495278617569543006
+      feliz_sprite_23: -4510907969909957838
+      feliz_sprite_24: 4905738608495977594
+      feliz_sprite_25: 5015264014670375861
+      feliz_sprite_26: 3589184587218467095
+      feliz_sprite_27: 8552080308576161467
+      feliz_sprite_28: -3614899235804438736
+      feliz_sprite_29: -5519043488907346781
+      feliz_sprite_3: 2144234328404901373
+      feliz_sprite_30: 4389696142895580158
+      feliz_sprite_31: 497541434456209222
+      feliz_sprite_32: -8263282064340040867
+      feliz_sprite_33: 5296033787433431360
+      feliz_sprite_34: -7109416931392914415
+      feliz_sprite_35: 5850583218197369138
+      feliz_sprite_36: -7612076885762713729
+      feliz_sprite_37: 2533783680020239092
+      feliz_sprite_38: -2955678586335683007
+      feliz_sprite_39: 5635146282372851089
+      feliz_sprite_4: -5036941766458363608
+      feliz_sprite_40: -3557937875239586939
+      feliz_sprite_41: 1383644794191569809
+      feliz_sprite_5: -6606364735814176165
+      feliz_sprite_6: -4222260695307257553
+      feliz_sprite_7: 5856037064650208351
+      feliz_sprite_8: 1085881789230750009
+      feliz_sprite_9: -3472958354807292134
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
