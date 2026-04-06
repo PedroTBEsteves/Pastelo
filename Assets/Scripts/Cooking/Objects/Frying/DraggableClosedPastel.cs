@@ -139,7 +139,7 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         _frying = frying;
         _rawSlider.gameObject.SetActive(_frying);
         _cookedSlider.gameObject.SetActive(_frying);
-        _spriteRenderer.sortingOrder = 2;
+        _spriteRenderer.sortingOrder = frying ? 2 : 4;
     }
     
     private void OnHeld(PointerEventData eventData)

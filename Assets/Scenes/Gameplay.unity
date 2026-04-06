@@ -8837,7 +8837,6 @@ GameObject:
   - component: {fileID: 1056291911}
   - component: {fileID: 1056291915}
   - component: {fileID: 1056291916}
-  - component: {fileID: 1056291917}
   m_Layer: 0
   m_Name: FryArea
   m_TagString: Untagged
@@ -9106,41 +9105,6 @@ MonoBehaviour:
   _highlightColor: {r: 1, g: 0.95, b: 0.6, a: 1}
   _spriteRenderer: {fileID: 1056291913}
   _graphic: {fileID: 0}
---- !u!114 &1056291917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056291910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023f2cecd89dd1147a0c262eccdcd2e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transformTweenSettings:
-    duration: 0.8
-    ease: 18
-    customEase:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    cycles: 1
-    cycleMode: 0
-    startDelay: 0
-    endDelay: 0
-    useUnscaledTime: 0
-    _useFixedUpdate: 0
-    _updateType: 0
-  _useScale: 1
-  _hoverScale: {x: 1.02, y: 1.02, z: 1.02}
-  _usePosition: 0
-  _hoverLocalPosition: {x: 0, y: 0, z: 0}
-  _useRotation: 0
-  _hoverLocalEulerAngles: {x: 0, y: 0, z: 0}
-  _isTweenEnabled: 1
 --- !u!1 &1062681481
 GameObject:
   m_ObjectHideFlags: 0
