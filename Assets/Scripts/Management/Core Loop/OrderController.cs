@@ -63,13 +63,12 @@ public class OrderController : ITickable
         if (delivery.IsCorrectFor(order))
         {
             OrderSucceeded(order);
+            _money.Gain(1);
         }
         else
         {
             OrderFailed(order);
         }
-        
-        _money.Gain(PastelComboPricer.GetValue(delivery.Pastel, _pastelCookingSettings));
     }
     
     public void Tick(float deltaTime)
