@@ -1,5 +1,6 @@
 using System;
 using KBCore.Refs;
+using PrimeTween;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +9,10 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
 {
     [SerializeField]
     private Direction _direction;
+
+    [SerializeField]
+    [Min(0f)]
+    private float _repeatMoveDelay = 0.25f;
     
     [Inject]
     private readonly CameraController _cameraController;
@@ -20,6 +25,9 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
 
     private TutorialTarget _tutorialTarget;
     private bool _isPointerHovering;
+    private bool _hasTriggeredMoveThisHover;
+    private bool _isRepeatMoveDelayActive;
+    private Tween _repeatMoveDelayTween;
 
     private void Awake()
     {
@@ -31,6 +39,7 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
 
     private void OnDestroy()
     {
+        CancelRepeatMoveDelay();
         _cameraController.CameraEndedMoving -= OnCameraEndedMoving;
         _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
@@ -61,15 +70,23 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
 
     private void OnCameraEndedMoving()
     {
-        if (!_isPointerHovering)
+        _cameraController.StopMoving();
+
+        if (!_isPointerHovering || !_hasTriggeredMoveThisHover)
             return;
 
-        SetCameraMovePercentage(null);
+        ScheduleRepeatMove();
     }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
         _isPointerHovering = true;
+
+        if (_hasTriggeredMoveThisHover)
+            return;
+
+        CancelRepeatMoveDelay();
+        _hasTriggeredMoveThisHover = true;
         SetCameraMovePercentage(eventData);
     }
 
@@ -77,14 +94,48 @@ public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandl
     {
         if (!_isPointerHovering)
             return;
-
-        SetCameraMovePercentage(eventData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _isPointerHovering = false;
+        _hasTriggeredMoveThisHover = false;
+        CancelRepeatMoveDelay();
         _cameraController.StopMoving();
+    }
+
+    private void ScheduleRepeatMove()
+    {
+        if (_isRepeatMoveDelayActive)
+            return;
+
+        var delay = Mathf.Max(0f, _repeatMoveDelay);
+        if (delay <= 0f)
+        {
+            TryRepeatMove();
+            return;
+        }
+
+        _isRepeatMoveDelayActive = true;
+        _repeatMoveDelayTween = Tween.Delay(delay, TryRepeatMove);
+    }
+
+    private void TryRepeatMove()
+    {
+        _isRepeatMoveDelayActive = false;
+
+        if (!_isPointerHovering)
+            return;
+
+        SetCameraMovePercentage(null);
+    }
+
+    private void CancelRepeatMoveDelay()
+    {
+        _isRepeatMoveDelayActive = false;
+
+        if (_repeatMoveDelayTween.isAlive)
+            _repeatMoveDelayTween.Stop();
     }
 
     [Serializable]

@@ -6316,6 +6316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _direction: 1
+  _repeatMoveDelay: 0.5
 --- !u!114 &830857753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16730,6 +16731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _direction: 0
+  _repeatMoveDelay: 0.5
 --- !u!114 &2129319302
 MonoBehaviour:
   m_ObjectHideFlags: 0
