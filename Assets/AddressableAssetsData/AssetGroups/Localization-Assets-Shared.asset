@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: 4b181fb29713d6e4e841fe70ddaf9528
   m_SerializeEntries:
+  - m_GUID: 190d5a78372d24045ba36df6a0634436
+    m_Address: Assets/Dialogues/GaveUpOrder/GaveUpOrder Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 266d133b17876384aafe1ff1aa1cca55
     m_Address: Assets/Localization/Tables/UI/UI Shared Data.asset
     m_ReadOnly: 1
@@ -22,6 +27,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 74c918ebdcf48de42a9ac1f467b14562
     m_Address: Assets/Dialogues/Empty/EmptyPastelDialogues Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bdb7eacfbf7e7d4cb7f473be95b1703
+    m_Address: Assets/Dialogues/GaveUpLine/GaveUpLine Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

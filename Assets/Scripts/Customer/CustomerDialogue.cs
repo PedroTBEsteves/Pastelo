@@ -17,7 +17,25 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     private SpriteRenderer _customerSprite;
 
     [SerializeField]
+    private SpriteRenderer _customerTransitionSprite;
+
+    [SerializeField]
     private SpriteRenderer _iconSprite;
+
+    [SerializeField]
+    private SpriteRenderer _queuedCustomersIndicatorSprite;
+
+    [SerializeField]
+    private Vector3 _customerStartLocalOffset;
+
+    [SerializeField]
+    private TweenSettings _customerMoveTweenSettings;
+
+    [SerializeField]
+    private float _customerBobbingRange = 0.1f;
+
+    [SerializeField]
+    private TweenSettings _customerBobbingTweenSettings = new(1f, Ease.InOutSine, cycles: -1, cycleMode: CycleMode.Yoyo);
 
     [SerializeField]
     private GameObject _dialogueObject;
@@ -63,11 +81,24 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     
     private Sequence _dialogueSequence;
     private TutorialTarget _tutorialTarget;
+    private Tween _customerMoveTween;
+    private Tween _customerTransitionMoveTween;
+    private Tween _customerBobbingTween;
+    private Vector3 _customerIdleLocalPosition;
+    private HoverTransformTween _customerHoverTween;
 
     public bool IsPlaying => _dialogueSequence.isAlive;
 
     private void Awake()
     {
+        _customerIdleLocalPosition = _customerSprite.transform.localPosition;
+        _customerSprite.TryGetComponent(out _customerHoverTween);
+        ResetTransitionSprite();
+        SetRendererState(_customerSprite, _customerSprite.sprite, _customerIdleLocalPosition);
+        SetCustomerHoverEnabled(false);
+        StartCustomerBobbing();
+        SetQueuedCustomersIndicator(GetQueuedCustomersCount());
+
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(TutorialTargetId.OrderBell);
         _tutorialTargetRegistry.Register(_tutorialTarget);
@@ -75,37 +106,32 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 
     private void OnDestroy()
     {
+        StopCustomerTweens();
+
+        if (_customerQueue != null)
+        {
+            _customerQueue.CustomerArrived -= OnCustomerArrived;
+            _customerQueue.CustomerExpired -= OnCustomerExpired;
+            _customerQueue.CustomersCountChanged -= OnCustomersCountChanged;
+        }
+
         if (_tutorialTarget != null)
             _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
 
     private void Start()
     {
-        _customerQueue.CustomerArrived += customer =>
-        {
-            if (_customerSprite.sprite == null)
-            {
-                _customerSprite.sprite = customer.Sprite;
-                _iconSprite.enabled = true;
-            }
-        };
-
-        _customerQueue.CustomerExpired += customer =>
-        {
-            if (_customerQueue.TryPeek(out var nextCustomer))
-                _customerSprite.sprite = nextCustomer.Sprite;
-            else
-            {
-                _customerSprite.sprite = null;
-                _iconSprite.enabled = false;
-            }
-        };
+        _customerQueue.CustomerArrived += OnCustomerArrived;
+        _customerQueue.CustomerExpired += OnCustomerExpired;
+        _customerQueue.CustomersCountChanged += OnCustomersCountChanged;
+        SetQueuedCustomersIndicator(GetQueuedCustomersCount());
     }
 
     public Sequence OrderDialogue(Order order)
     {
+        ShowCurrentCustomer(order.Customer.Sprite);
+        SetCustomerHoverEnabled(false);
         _iconSprite.enabled = false;
-        _customerSprite.sprite = order.Customer.Sprite;
 
         var text = GetOrderDialogueText(order);
         
@@ -115,13 +141,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             .Chain(Tween.Delay(_delayAfterTextIsDone, () =>
             {
                 _dialogueObject.SetActive(false);
-                if (_customerQueue.TryPeek(out var nextCustomer))
-                {
-                    _customerSprite.sprite = nextCustomer.Sprite;
-                    _iconSprite.enabled = true;
-                }
-                else
-                    _customerSprite.sprite = null;
+                AnimateNextCustomerFromQueue();
             }));
         
         return _dialogueSequence;
@@ -129,8 +149,9 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 
     public Sequence DeliveryDialogue(Order order, Delivery delivery, OrderController orderController)
     {
+        ShowCurrentCustomer(order.Customer.Sprite);
+        SetCustomerHoverEnabled(false);
         _iconSprite.enabled = false;
-        _customerSprite.sprite = order.Customer.Sprite;
         _deliveryBag.SetActive(true);
 
         var isCorrect = delivery.IsCorrectFor(order);
@@ -149,16 +170,232 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         .Chain(Tween.Delay(2f, () =>
         {
             _dialogueObject.SetActive(false);
-            if (_customerQueue.TryPeek(out var nextCustomer))
-                _customerSprite.sprite = nextCustomer.Sprite;
-            else
-                _customerSprite.sprite = null;
+            AnimateNextCustomerFromQueue();
             _deliveryBag.SetActive(false);
             
             _happyVisualEffect.Stop();
         }));
 
         return _dialogueSequence;
+    }
+
+    private void OnCustomerArrived(Customer customer)
+    {
+        if (_customerSprite.sprite != null)
+            return;
+
+        AnimateCustomerArrival(customer.Sprite);
+        _iconSprite.enabled = true;
+    }
+
+    private void OnCustomerExpired(Customer customer)
+    {
+        if (!TryGetCurrentAndNextQueuedCustomers(out var currentCustomer, out var nextCustomer))
+            return;
+
+        if (currentCustomer != customer)
+            return;
+
+        if (nextCustomer != null)
+        {
+            AnimateCustomerSwap(currentCustomer.Sprite, nextCustomer.Sprite);
+            _iconSprite.enabled = true;
+            return;
+        }
+
+        AnimateCustomerExit();
+        _iconSprite.enabled = false;
+    }
+
+    private void OnCustomersCountChanged(int count) => SetQueuedCustomersIndicator(count);
+
+    private void AnimateNextCustomerFromQueue()
+    {
+        if (_customerQueue.TryPeek(out var nextCustomer))
+        {
+            AnimateCustomerSwap(_customerSprite.sprite, nextCustomer.Sprite);
+            _iconSprite.enabled = true;
+            return;
+        }
+
+        AnimateCustomerExit();
+        _iconSprite.enabled = false;
+    }
+
+    private void ShowCurrentCustomer(Sprite sprite)
+    {
+        StopCustomerTweens();
+        ResetTransitionSprite();
+        SetRendererState(_customerSprite, sprite, _customerIdleLocalPosition);
+        StartCustomerBobbing();
+    }
+
+    private void AnimateCustomerArrival(Sprite sprite)
+    {
+        StopCustomerTweens();
+        ResetTransitionSprite();
+        var customerStartLocalPosition = GetCustomerStartLocalPosition();
+        SetRendererState(_customerSprite, sprite, customerStartLocalPosition);
+        _customerMoveTween = Tween.Position(
+            _customerSprite.transform,
+            GetWorldPosition(customerStartLocalPosition),
+            GetWorldPosition(_customerIdleLocalPosition),
+            _customerMoveTweenSettings)
+            .OnComplete(this, static dialogue => dialogue.StartCustomerBobbing());
+    }
+
+    private void AnimateCustomerExit()
+    {
+        if (_customerSprite.sprite == null)
+        {
+            SetCustomerHoverEnabled(false);
+            ResetTransitionSprite();
+            return;
+        }
+
+        StopCustomerTweens();
+        ResetTransitionSprite();
+        SetRendererState(_customerSprite, _customerSprite.sprite, _customerIdleLocalPosition);
+        var customerStartLocalPosition = GetCustomerStartLocalPosition();
+        _customerMoveTween = Tween.Position(
+            _customerSprite.transform,
+            GetWorldPosition(_customerIdleLocalPosition),
+            GetWorldPosition(customerStartLocalPosition),
+            _customerMoveTweenSettings)
+            .OnComplete(this, static dialogue =>
+            {
+                dialogue.SetRendererState(dialogue._customerSprite, null, dialogue._customerIdleLocalPosition);
+            });
+    }
+
+    private void AnimateCustomerSwap(Sprite outgoingSprite, Sprite incomingSprite)
+    {
+        if (incomingSprite == null)
+        {
+            AnimateCustomerExit();
+            return;
+        }
+
+        if (outgoingSprite == null)
+        {
+            AnimateCustomerArrival(incomingSprite);
+            return;
+        }
+
+        StopCustomerTweens();
+        var customerStartLocalPosition = GetCustomerStartLocalPosition();
+        SetRendererState(_customerTransitionSprite, outgoingSprite, _customerIdleLocalPosition);
+        SetRendererState(_customerSprite, incomingSprite, customerStartLocalPosition);
+
+        _customerTransitionMoveTween = Tween.Position(
+            _customerTransitionSprite.transform,
+            GetWorldPosition(_customerIdleLocalPosition),
+            GetWorldPosition(customerStartLocalPosition),
+            _customerMoveTweenSettings)
+            .OnComplete(this, static dialogue => dialogue.ResetTransitionSprite());
+
+        _customerMoveTween = Tween.Position(
+            _customerSprite.transform,
+            GetWorldPosition(customerStartLocalPosition),
+            GetWorldPosition(_customerIdleLocalPosition),
+            _customerMoveTweenSettings)
+            .OnComplete(this, static dialogue => dialogue.StartCustomerBobbing());
+    }
+
+    private void StopCustomerTweens()
+    {
+        SetCustomerHoverEnabled(false);
+
+        if (_customerMoveTween.isAlive)
+            _customerMoveTween.Stop();
+
+        if (_customerTransitionMoveTween.isAlive)
+            _customerTransitionMoveTween.Stop();
+
+        StopCustomerBobbing(true);
+    }
+
+    private void StartCustomerBobbing()
+    {
+        if (_customerSprite.sprite == null || !_customerSprite.enabled || _customerBobbingRange <= 0f)
+            return;
+
+        StopCustomerBobbing(true);
+
+        _customerBobbingTween = Tween.LocalPositionY(
+            _customerSprite.transform,
+            _customerIdleLocalPosition.y,
+            _customerIdleLocalPosition.y + _customerBobbingRange,
+            _customerBobbingTweenSettings);
+
+        SetCustomerHoverEnabled(true);
+    }
+
+    private void StopCustomerBobbing(bool resetToIdlePosition)
+    {
+        if (_customerBobbingTween.isAlive)
+            _customerBobbingTween.Stop();
+
+        if (!resetToIdlePosition)
+            return;
+
+        var localPosition = _customerSprite.transform.localPosition;
+        localPosition.y = _customerIdleLocalPosition.y;
+        _customerSprite.transform.localPosition = localPosition;
+    }
+
+    private void ResetTransitionSprite() => SetRendererState(_customerTransitionSprite, null, GetCustomerStartLocalPosition());
+
+    private void SetCustomerHoverEnabled(bool enabled)
+    {
+        if (_customerHoverTween == null)
+            return;
+
+        _customerHoverTween.SetTweenEnabled(enabled);
+    }
+
+    private void SetRendererState(SpriteRenderer renderer, Sprite sprite, Vector3 localPosition)
+    {
+        renderer.sprite = sprite;
+        renderer.enabled = sprite != null;
+        renderer.transform.localPosition = localPosition;
+    }
+
+    private Vector3 GetWorldPosition(Vector3 localPosition)
+    {
+        var parent = _customerSprite.transform.parent;
+        return parent == null ? localPosition : parent.TransformPoint(localPosition);
+    }
+
+    private Vector3 GetCustomerStartLocalPosition() => _customerIdleLocalPosition + _customerStartLocalOffset;
+
+    private void SetQueuedCustomersIndicator(int count) => _queuedCustomersIndicatorSprite.enabled = count > 1;
+
+    private int GetQueuedCustomersCount()
+    {
+        var count = 0;
+
+        foreach (var _ in _customerQueue.Entries)
+            count++;
+
+        return count;
+    }
+
+    private bool TryGetCurrentAndNextQueuedCustomers(out Customer currentCustomer, out Customer nextCustomer)
+    {
+        currentCustomer = null;
+        nextCustomer = null;
+
+        using var entries = _customerQueue.Entries.GetEnumerator();
+        if (!entries.MoveNext())
+            return false;
+
+        currentCustomer = entries.Current.Customer;
+
+        if (entries.MoveNext())
+            nextCustomer = entries.Current.Customer;
+
+        return true;
     }
 
     private string GetOrderDialogueText(Order order)

@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: _ingredient
       value: 
       objectReference: {fileID: 11400000, guid: a25afefa6b90eeb429e3a03205e02c4d, type: 2}
+    - target: {fileID: 8342283531500888329, guid: 593c8ccca2b5d8445a7c57ab38b0bd5a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9117855999309085369, guid: 593c8ccca2b5d8445a7c57ab38b0bd5a, type: 3}
       propertyPath: _text
       value: Frango

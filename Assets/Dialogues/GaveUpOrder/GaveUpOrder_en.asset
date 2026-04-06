@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: GaveUpOrder_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 190d5a78372d24045ba36df6a0634436, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 4565938176
+    m_Localized: "I waited, I believed\u2026 and got disappointed again, classic."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24446939136
+    m_Localized: My order became an urban legend, everyone talks about it but no
+      one sees it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41291264000
+    m_Localized: "Wow, that was fast\u2026 I almost thought I\u2019d leave with a
+      pastel today."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74992496640
+    m_Localized: "It\u2019s fine, I didn\u2019t really want to eat anyway."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81451724800
+    m_Localized: No rush, I clearly have all day for this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111722016768
+    m_Localized: "It\u2019s fine, hunger is just psychological."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122606235648
+    m_Localized: I ordered a pastel and got a reminder that waiting is never worth
+      it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147558150144
+    m_Localized: "The order didn\u2019t arrive, but disappointment is always right
+      on time."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

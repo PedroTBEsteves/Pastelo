@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 4eceded42a8a2264c97a6ba7fd8e60dc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 980336629130665340
+    second: Team Loom - Logo 2_0
+  - first:
+      213: 1394031514165089344
+    second: Team Loom - Logo 2_1
+  - first:
+      213: 1177991278521752171
+    second: Team Loom - Logo 2_2
+  - first:
+      213: -7625208142205487412
+    second: Team Loom - Logo 2_3
+  - first:
+      213: -8899612740308018070
+    second: Team Loom - Logo 2_4
+  - first:
+      213: -6474107344943668028
+    second: Team Loom - Logo 2_5
+  - first:
+      213: -716136438709486521
+    second: Team Loom - Logo 2_6
+  - first:
+      213: -2800812736026337049
+    second: Team Loom - Logo 2_7
+  - first:
+      213: 4265648105514013154
+    second: Team Loom - Logo 2_8
+  - first:
+      213: -1394959100640221754
+    second: Team Loom - Logo 2_9
+  - first:
+      213: -8980583018997740891
+    second: Team Loom - Logo 2_10
+  - first:
+      213: -6396053662458015171
+    second: Team Loom - Logo 2_11
+  - first:
+      213: 818379699511762532
+    second: Team Loom - Logo 2_12
+  - first:
+      213: 244191395795980523
+    second: Team Loom - Logo 2_13
+  - first:
+      213: -7436207589293402745
+    second: Team Loom - Logo 2_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_0
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 675
+        width: 144
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7d13ab58fada9d00800000000000000
+      internalID: 980336629130665340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_1
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 461
+        width: 248
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0449287b648985310800000000000000
+      internalID: 1394031514165089344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_2
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 467
+        width: 205
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6a1cc893d0195010800000000000000
+      internalID: 1177991278521752171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_3
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 419
+        width: 236
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc6fc614891dd2690800000000000000
+      internalID: -7625208142205487412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_4
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 446
+        width: 312
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6c56676d593e7480800000000000000
+      internalID: -8899612740308018070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 529
+        width: 192
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c4a2eacba95726a0800000000000000
+      internalID: -6474107344943668028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_6
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 231
+        width: 357
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74cf10804b5cf06f0800000000000000
+      internalID: -716136438709486521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_7
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 144
+        width: 1270
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e0a2cae7a38129d0800000000000000
+      internalID: -2800812736026337049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_8
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 0
+        width: 50
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e11bf10a50a23b30800000000000000
+      internalID: 4265648105514013154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_9
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 2
+        width: 63
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c5242ab61c14ace0800000000000000
+      internalID: -1394959100640221754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_10
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 2
+        width: 71
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5aa0cbc435f8e5380800000000000000
+      internalID: -8980583018997740891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_11
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 1
+        width: 61
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d329adce417ac37a0800000000000000
+      internalID: -6396053662458015171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_12
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 2
+        width: 27
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46e1ac030087b5b00800000000000000
+      internalID: 818379699511762532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_13
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 5
+        width: 77
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be050abd7ca836300800000000000000
+      internalID: 244191395795980523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Team Loom - Logo 2_14
+      rect:
+        serializedVersion: 2
+        x: 1339
+        y: 0
+        width: 50
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7855a14a8984dc890800000000000000
+      internalID: -7436207589293402745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Team Loom - Logo 2_0: 980336629130665340
+      Team Loom - Logo 2_1: 1394031514165089344
+      Team Loom - Logo 2_10: -8980583018997740891
+      Team Loom - Logo 2_11: -6396053662458015171
+      Team Loom - Logo 2_12: 818379699511762532
+      Team Loom - Logo 2_13: 244191395795980523
+      Team Loom - Logo 2_14: -7436207589293402745
+      Team Loom - Logo 2_2: 1177991278521752171
+      Team Loom - Logo 2_3: -7625208142205487412
+      Team Loom - Logo 2_4: -8899612740308018070
+      Team Loom - Logo 2_5: -6474107344943668028
+      Team Loom - Logo 2_6: -716136438709486521
+      Team Loom - Logo 2_7: -2800812736026337049
+      Team Loom - Logo 2_8: 4265648105514013154
+      Team Loom - Logo 2_9: -1394959100640221754
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -83,7 +83,7 @@ public class CustomerQueueNotificationItem : MonoBehaviour, IPointerClickHandler
         if (_cameraController == null)
             return;
 
-        _cameraController.GoImmediatelyToSection(CameraSection.Balcony);
+        _cameraController.GoToSectionAnimated(CameraSection.Balcony);
     }
 
     private void Refresh()

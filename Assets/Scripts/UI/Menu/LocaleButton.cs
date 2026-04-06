@@ -11,8 +11,14 @@ public class LocaleButton : ValidatedMonoBehaviour
     [SerializeField, Self]
     private Button _button;
 
+    [SerializeField, Self]
+    private Image _image;
+    
     [SerializeField]
-    private Image _activeImage;
+    private Color _activeColor;
+    
+    [SerializeField]
+    private Color _inactiveColor;
 
     [SerializeField]
     private string _localeCode;
@@ -110,7 +116,7 @@ public class LocaleButton : ValidatedMonoBehaviour
                        !string.IsNullOrWhiteSpace(_localeCode) &&
                        string.Equals(selectedLocale.Identifier.Code, _localeCode, StringComparison.OrdinalIgnoreCase);
 
-        _activeImage.enabled = isActive;
+        _image.color = isActive ? _activeColor : _inactiveColor;
     }
 
     private void StopTrackedCoroutine(ref Coroutine routine)

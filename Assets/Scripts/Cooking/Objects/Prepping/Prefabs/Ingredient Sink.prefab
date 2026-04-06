@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5574255335869514232}
   - component: {fileID: -4323337825458426719}
   - component: {fileID: 9117855999309085369}
+  - component: {fileID: 3590547358906861628}
   m_Layer: 0
   m_Name: Ingredient Sink
   m_TagString: Untagged
@@ -107,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ingredient: {fileID: 11400000, guid: 08ccb2b0efd9aa542b04096cb51be8c5, type: 2}
   _lockedIndicator: {fileID: 5765820812895196427}
+  _spriteRenderer: {fileID: 2010317973467851504}
   _draggableSink: {fileID: 5574255335869514232}
   _purchasePrompt: {fileID: 0}
 --- !u!61 &1611464609268342615
@@ -204,6 +206,41 @@ MonoBehaviour:
   _localizationKey: 
   _viewPrefabOverride: {fileID: 0}
   _presenter: {fileID: 0}
+--- !u!114 &3590547358906861628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556916794420987154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023f2cecd89dd1147a0c262eccdcd2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transformTweenSettings:
+    duration: 0.8
+    ease: 24
+    customEase:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    cycles: 1
+    cycleMode: 0
+    startDelay: 0
+    endDelay: 0
+    useUnscaledTime: 0
+    _useFixedUpdate: 0
+    _updateType: 0
+  _useScale: 1
+  _hoverScale: {x: 1.1, y: 1.1, z: 1.1}
+  _usePosition: 0
+  _hoverLocalPosition: {x: 0, y: 0, z: 0}
+  _useRotation: 0
+  _hoverLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _isTweenEnabled: 1
 --- !u!1 &8342283531500888329
 GameObject:
   m_ObjectHideFlags: 0

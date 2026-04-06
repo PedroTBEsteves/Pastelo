@@ -17,7 +17,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 0.6
   <Value>k__BackingField: 2
   <Icon>k__BackingField: {fileID: -3484198894894543839, guid: c964ecca8ac728048b38834710d99300, type: 3}
-  <OpenDoughSprite>k__BackingField: {fileID: -4204132070261998381, guid: 4c0d89f7304adf94aa8dbf4328553981, type: 3}
+  <OpenDoughSprite>k__BackingField: {fileID: 8989570357778761060, guid: f943e9543e9cdde468c053b4e17fefe0, type: 3}
   _closedPastelDoughSprites:
     _serializedList:
     - Key: 0

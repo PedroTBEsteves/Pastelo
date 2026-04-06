@@ -8,6 +8,9 @@ public class GameOverScreen : MonoBehaviour
 {
     [Inject]
     private readonly StrikesController _strikesController;
+
+    [Inject]
+    private readonly ISceneTransitionService _sceneTransitionService;
     
     [SerializeField]
     private GameObject _gameOverScreen;
@@ -63,9 +66,9 @@ public class GameOverScreen : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
-    private void LoadMenu()
+    private async void LoadMenu()
     {
-        SceneManager.LoadScene(_menuSceneIndex);
+        await _sceneTransitionService.TryLoadSceneAsync(_menuSceneIndex);
     }
 
     private CanvasGroup GetOrCreateCanvasGroup()

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: GaveUpLine_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 7bdb7eacfbf7e7d4cb7f473be95b1703, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 4641435648
+    m_Localized: I stood in line just to practice my ability to do nothing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106449776640
+    m_Localized: "I won\u2019t even order anything, just to keep my streak of never
+      finishing what I start."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126779568128
+    m_Localized: I was going to order something, but the courage ran out. So did
+      the patience.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155728654336
+    m_Localized: "I just wanted a pastel\u2026 but apparently that was asking too
+      much from life."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 200410574848
+    m_Localized: "I got in line hungry, but left with existential questions I didn\u2019t
+      ask for."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 216168574976
+    m_Localized: I loved the experience of not ordering anything, very efficient.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 241267290112
+    m_Localized: The nonexistent service was impeccable, congratulations.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 267003539456
+    m_Localized: Wow, I really loved standing here doing nothing, it was exactly
+      my plan.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

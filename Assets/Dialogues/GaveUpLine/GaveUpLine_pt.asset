@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: GaveUpLine_pt
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt
+  m_SharedData: {fileID: 11400000, guid: 7bdb7eacfbf7e7d4cb7f473be95b1703, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 4641435648
+    m_Localized: "Fiquei na fila s\xF3 para treinar minha habilidade de n\xE3o fazer
+      nada."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106449776640
+    m_Localized: "Nem vou pedir nada, pra manter o padr\xE3o de nunca terminar o
+      que come\xE7o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126779568128
+    m_Localized: "Ia pedir alguma coisa, mas a coragem acabou. A paci\xEAncia tamb\xE9m."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155728654336
+    m_Localized: "Eu s\xF3 queria um pastel\u2026 mas aparentemente isso tamb\xE9m
+      era pedir demais da vida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 200410574848
+    m_Localized: "Entrei na fila com fome, mas sa\xED com quest\xF5es existenciais
+      que n\xE3o pedi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 216168574976
+    m_Localized: "Adorei a experi\xEAncia de n\xE3o pedir nada, super eficiente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 241267290112
+    m_Localized: "O atendimento inexistente foi impec\xE1vel, est\xE3o de parab\xE9ns."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 267003539456
+    m_Localized: Nossa, adorei ficar aqui sem fazer nada, era exatamente o meu plano.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

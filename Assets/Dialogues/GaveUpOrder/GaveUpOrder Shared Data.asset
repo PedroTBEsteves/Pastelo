@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: GaveUpOrder Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: GaveUpOrder
+  m_TableCollectionNameGuidString: 190d5a78372d24045ba36df6a0634436
+  m_Entries:
+  - m_Id: 4565938176
+    m_Key: 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24446939136
+    m_Key: 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41291264000
+    m_Key: 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74992496640
+    m_Key: 4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81451724800
+    m_Key: 5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111722016768
+    m_Key: 6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122606235648
+    m_Key: 7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147558150144
+    m_Key: 8
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7724085812380041402
+  references:
+    version: 2
+    RefIds:
+    - rid: 7724085812380041402
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1775443338663

@@ -11,6 +11,9 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
     
     [SerializeField, Child(Flag.ExcludeSelf)]
     private Transform _lockedIndicator;
+
+    [SerializeField, Self]
+    private SpriteRenderer _spriteRenderer;
     
     [SerializeField, Self]
     private DraggableSink _draggableSink;
@@ -34,6 +37,7 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
         var isUnlocked = _ingredientsStorage.Contains(_ingredient);
         
         _lockedIndicator.gameObject.SetActive(!isUnlocked);
+        _spriteRenderer.enabled = isUnlocked;
 
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(typeof(TIngredient) == typeof(Dough) ? TutorialTargetId.DoughSource : TutorialTargetId.FillingSource, _ingredient);
@@ -74,5 +78,6 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
     private void OnIngredientPurchased()
     {
         _lockedIndicator.gameObject.SetActive(false);
+        _spriteRenderer.enabled = true;
     }
 }

@@ -89,6 +89,65 @@ public class CameraController
     public void GoToNextSection() => QueueDirection(1);
 
     public void GoToPreviousSection() => QueueDirection(-1);
+
+    public void GoToSessionAnimated(CameraSection section)
+    {
+        if (_orderedSections.Length == 0)
+            return;
+
+        var wasMoving = _isMoving;
+        var targetIndex = GetSectionIndex(section);
+        var startPosition = _currentCamera.transform.position;
+        var targetPosition = _sectionPositions[section];
+        targetPosition.z = startPosition.z;
+        var duration = Mathf.Max(0f, _transitionDuration);
+
+        _transitionTween.Stop();
+        _isMoving = false;
+        _queuedDirection = 0;
+        _currentSectionIndex = GetNearestSectionIndex(_currentCamera.transform.position);
+
+        if (wasMoving)
+            CameraEndedMoving();
+
+        if (_currentSectionIndex == targetIndex)
+        {
+            SyncSectionsToCamera();
+            CameraMoved();
+            CurrentSectionChanged(CurrentSection);
+            return;
+        }
+
+        if (duration <= 0f)
+        {
+            _currentSectionIndex = targetIndex;
+            _currentCamera.transform.position = targetPosition;
+            SyncSectionsToCamera();
+            CameraMoved();
+            CurrentSectionChanged(CurrentSection);
+            return;
+        }
+
+        _isMoving = true;
+        CameraBeganMoving();
+        _transitionTween = Tween.Position(_currentCamera.transform, startPosition, targetPosition, duration, _transitionEase)
+            .OnUpdate(this, static (controller, _) =>
+            {
+                controller.SyncSectionsToCamera();
+                controller.CameraMoved();
+            })
+            .OnComplete(this, controller =>
+            {
+                controller._isMoving = false;
+                controller._currentSectionIndex = targetIndex;
+                controller.SyncSectionsToCamera();
+                controller.CameraMoved();
+                controller.CurrentSectionChanged(controller.CurrentSection);
+                controller.CameraEndedMoving();
+            });
+    }
+
+    public void GoToSectionAnimated(CameraSection section) => GoToSessionAnimated(section);
     
     public Vector2 ScreenToWorldPointy(Vector2 screenPosition) => _currentCamera.ScreenToWorldPoint(screenPosition);
 
