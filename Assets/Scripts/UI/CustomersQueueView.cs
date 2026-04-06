@@ -58,7 +58,7 @@ public class CustomersQueueView : MonoBehaviour
 
         foreach (var entry in _customerQueue.Entries)
         {
-            if (!TryAddEntry(entry, false))
+            if (!TryAddEntry(entry))
                 break;
         }
     }
@@ -83,7 +83,7 @@ public class CustomersQueueView : MonoBehaviour
 
     private void OnQueueEntryAdded(CustomerWaitStatus entry)
     {
-        TryAddEntry(entry, true);
+        TryAddEntry(entry);
     }
 
     private void OnQueueEntryRemoved(CustomerWaitStatus entry, CustomerQueueEntryRemovedReason _)
@@ -127,7 +127,7 @@ public class CustomersQueueView : MonoBehaviour
         _audioSource.Play();
     }
 
-    private bool TryAddEntry(CustomerWaitStatus entry, bool insertAtTop)
+    private bool TryAddEntry(CustomerWaitStatus entry)
     {
         if (_itemsById.ContainsKey(entry.Id) || _itemPrefab == null)
             return false;
@@ -138,9 +138,6 @@ public class CustomersQueueView : MonoBehaviour
         var item = Instantiate(_itemPrefab, transform);
         item.name = $"Queue Item {entry.Id}";
         item.Initialize(entry, _cameraController);
-
-        if (insertAtTop)
-            item.transform.SetSiblingIndex(0);
 
         _itemsById.Add(entry.Id, item);
         return true;
@@ -153,7 +150,7 @@ public class CustomersQueueView : MonoBehaviour
 
         foreach (var entry in _customerQueue.Entries)
         {
-            if (TryAddEntry(entry, false))
+            if (TryAddEntry(entry))
                 return;
         }
     }

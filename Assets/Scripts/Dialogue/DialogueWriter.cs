@@ -6,17 +6,11 @@ using UnityEngine;
 public class DialogueWriter
 {
     private readonly float _delayBetweenCharacters;
-    private readonly IReadOnlyList<AudioClip> _audioClips;
-    private readonly float _minPitch;
-    private readonly float _maxPitch;
     private readonly float _audioFrequency;
 
-    public DialogueWriter(float delayBetweenCharacters, IReadOnlyList<AudioClip> audioClips, float minPitch, float maxPitch, float audioFrequency)
+    public DialogueWriter(float delayBetweenCharacters, float audioFrequency)
     {
         _delayBetweenCharacters = delayBetweenCharacters;
-        _audioClips = audioClips;
-        _minPitch = minPitch;
-        _maxPitch = maxPitch;
         _audioFrequency = audioFrequency;
     }
 
@@ -32,20 +26,13 @@ public class DialogueWriter
                 .ChainCallback(() =>
                     {
                         textMesh.maxVisibleCharacters++;
-                        // if (textMesh.maxVisibleCharacters % _audioFrequency == 0)
-                        //     PlayAudio(audioSource);
+                        if (textMesh.maxVisibleCharacters % _audioFrequency == 0)
+                             audioSource.Play();
                             
                     })
                 .ChainDelay(_delayBetweenCharacters);
         }
 
         return sequence;
-    }
-
-    private void PlayAudio(AudioSource audioSource)
-    {
-        var audioClip = _audioClips.GetRandomElement();
-        audioSource.pitch = Random.Range(_minPitch, _maxPitch);
-        audioSource.PlayOneShot(audioClip);
     }
 }

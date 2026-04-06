@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class OrderNoteTaker : MonoBehaviour
 {
-    private const int MaxVisibleOrders = 4;
+    [SerializeField]
+    private int _maxVisibleOrders = 4;
 
     private sealed class VisibleOrderState
     {
@@ -47,7 +48,7 @@ public class OrderNoteTaker : MonoBehaviour
 
     private void OnOrderStarted(Order order)
     {
-        if (_visibleOrders.Count >= MaxVisibleOrders)
+        if (_visibleOrders.Count >= _maxVisibleOrders)
         {
             _queuedOrders.Enqueue(order);
             return;
@@ -83,7 +84,7 @@ public class OrderNoteTaker : MonoBehaviour
 
     private void ShowQueuedOrdersIfPossible()
     {
-        while (_visibleOrders.Count < MaxVisibleOrders && _queuedOrders.Count > 0)
+        while (_visibleOrders.Count < _maxVisibleOrders && _queuedOrders.Count > 0)
             ShowOrder(_queuedOrders.Dequeue());
     }
 

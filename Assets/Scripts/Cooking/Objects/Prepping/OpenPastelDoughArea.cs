@@ -323,10 +323,21 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _pressTween = Tween.Delay(_pressDuration, Close);
+        BeginCloseHold();
     }
 
     public void OnPointerUp(PointerEventData eventData)
+    {
+        CancelCloseHold();
+    }
+
+    public void BeginCloseHold()
+    {
+        CancelCloseHold();
+        _pressTween = Tween.Delay(_pressDuration, Close);
+    }
+
+    public void CancelCloseHold()
     {
         if (_pressTween.isAlive)
             _pressTween.Stop();
