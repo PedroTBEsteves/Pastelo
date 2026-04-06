@@ -19,9 +19,17 @@ MonoBehaviour:
     m_Key: ui.agradecimentos
     m_Metadata:
       m_Items: []
+  - m_Id: 2439275524096
+    m_Key: ui.wishlitst
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7643756670976
+    m_Key: ui.pause
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
-    - rid: 7724085812380041303
+    - rid: 7724085812380041334
   m_KeyGenerator:
     rid: 7724085812380041302
   references:
@@ -31,13 +39,21 @@ MonoBehaviour:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
         m_CustomEpoch: 1775430110230
-    - rid: 7724085812380041303
+    - rid: 7724085812380041334
       type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_Entries:
+        - m_KeyId: 7643756670976
+          m_TableCodes:
+          - en
+          - pt
+        - m_KeyId: 2439275524096
+          m_TableCodes:
+          - en
+          - pt
         - m_KeyId: 5195083776
           m_TableCodes:
-          - pt
           - en
-        m_TypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+          - pt
+        m_TypeString: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null

@@ -3,6 +3,9 @@ using KBCore.Refs;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
 
 public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
@@ -18,6 +21,15 @@ public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
 
     [SerializeField]
     private Button _closeButton;
+
+    [SerializeField]
+    private LocalizedStringTable _ingredientsTable;
+
+    [SerializeField]
+    private LocalizedStringTable _promptTable;
+
+    [SerializeField]
+    private string _purchasePromptKey;
 
     [Inject]
     private readonly Money _money;
@@ -100,13 +112,84 @@ public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
     {
         if (!_isOpen)
             return;
-        
-        var ingredientName = _currentIngredient is Dough ? $"Massa {_currentIngredient.Name}" : _currentIngredient.Name;
 
         var currentPrice = _ingredientsStorage.CurrentPrice;
-        _priceText.SetText($"Desbloquear {ingredientName} por {TextUtils.FormatAsMoney(currentPrice)}?");
+        var ingredientName = GetLocalizedIngredientName(_currentIngredient);
+        var promptEntry = GetPurchasePromptEntry();
+
+        _priceText.SetText(promptEntry.GetLocalizedString(new
+        {
+            ingredient = ingredientName,
+            value = ((int)currentPrice).ToString()
+        }));
+
         _confirmButton.interactable = _currentIngredient != null
                                       && !_ingredientsStorage.Contains(_currentIngredient)
                                       && _money.CanSpend(currentPrice);
+    }
+
+    private string GetLocalizedIngredientName(Ingredient ingredient)
+    {
+        if (ingredient == null)
+            throw new InvalidOperationException($"{nameof(IngredientUnlockPurchasePrompt)} cannot localize a null ingredient.");
+
+        if (string.IsNullOrWhiteSpace(ingredient.LocalizationKey))
+            throw new InvalidOperationException($"Ingredient '{ingredient.name}' is missing {nameof(Ingredient.LocalizationKey)}.");
+
+        var entry = GetIngredientsTable().GetEntry(ingredient.LocalizationKey);
+
+        if (entry == null)
+        {
+            throw new InvalidOperationException(
+                $"Localized ingredients table does not contain key '{ingredient.LocalizationKey}' for locale '{LocalizationSettings.SelectedLocale?.Identifier.Code}'.");
+        }
+
+        return entry.GetLocalizedString(new { amount = 1 });
+    }
+
+    private StringTableEntry GetPurchasePromptEntry()
+    {
+        if (_promptTable == null)
+            throw new InvalidOperationException($"{nameof(IngredientUnlockPurchasePrompt)} field '{nameof(_promptTable)}' is not assigned in the inspector.");
+
+        if (string.IsNullOrWhiteSpace(_purchasePromptKey))
+        {
+            throw new InvalidOperationException(
+                $"{nameof(IngredientUnlockPurchasePrompt)} field '{nameof(_purchasePromptKey)}' is not assigned in the inspector.");
+        }
+
+        var table = _promptTable.GetTable();
+
+        if (table == null)
+        {
+            throw new InvalidOperationException(
+                $"{nameof(IngredientUnlockPurchasePrompt)} field '{nameof(_promptTable)}' could not resolve a String Table for locale '{LocalizationSettings.SelectedLocale?.Identifier.Code}'.");
+        }
+
+        var entry = table.GetEntry(_purchasePromptKey);
+
+        if (entry == null)
+        {
+            throw new InvalidOperationException(
+                $"{nameof(IngredientUnlockPurchasePrompt)} could not find prompt key '{_purchasePromptKey}' for locale '{LocalizationSettings.SelectedLocale?.Identifier.Code}'.");
+        }
+
+        return entry;
+    }
+
+    private StringTable GetIngredientsTable()
+    {
+        if (_ingredientsTable == null)
+            throw new InvalidOperationException($"{nameof(IngredientUnlockPurchasePrompt)} field '{nameof(_ingredientsTable)}' is not assigned in the inspector.");
+
+        var table = _ingredientsTable.GetTable();
+
+        if (table == null)
+        {
+            throw new InvalidOperationException(
+                $"{nameof(IngredientUnlockPurchasePrompt)} field '{nameof(_ingredientsTable)}' could not resolve a String Table for locale '{LocalizationSettings.SelectedLocale?.Identifier.Code}'.");
+        }
+
+        return table;
     }
 }

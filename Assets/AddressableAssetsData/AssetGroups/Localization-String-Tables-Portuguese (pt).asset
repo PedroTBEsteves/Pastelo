@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83d574c18a6e97d498451a84a00100c0
+    m_Address: Prompts_pt
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 873b143fd01f88d4dac3c63605944bad
     m_Address: GaveUpDialogues_pt
     m_ReadOnly: 1
