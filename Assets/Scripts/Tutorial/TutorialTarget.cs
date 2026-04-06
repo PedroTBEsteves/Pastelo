@@ -1,8 +1,9 @@
 using KBCore.Refs;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TutorialTarget : MonoBehaviour
+public class TutorialTarget : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private static readonly int OutlineThicknessMaterialId = Shader.PropertyToID("_OutlineThickness");
 
@@ -24,11 +25,15 @@ public class TutorialTarget : MonoBehaviour
     [SerializeField, Self(Flag.Optional)]
     private Graphic _graphic;
 
+    [SerializeField]
+    private bool _hideMarkerOnClick;
+
     private Vector3 _baseScale;
     private Color _baseColor;
     private bool _baseColorCaptured;
     private object _runtimeContext;
     private Material _material;
+    private bool _showing;
 
     public TutorialTargetId Id { get; private set; }
     public object Context => _runtimeContext;
@@ -84,6 +89,7 @@ public class TutorialTarget : MonoBehaviour
 
         transform.localScale = _baseScale * _highlightScaleMultiplier;
         SetColor(_highlightColor);
+        _showing = true;
     }
 
     public void Hide()
@@ -95,6 +101,8 @@ public class TutorialTarget : MonoBehaviour
 
         if (_baseColorCaptured)
             SetColor(_baseColor);
+        
+        _showing = false;
     }
 
     private void SetColor(Color color)
@@ -107,5 +115,21 @@ public class TutorialTarget : MonoBehaviour
 
         if (_graphic != null)
             _graphic.color = color;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (!_hideMarkerOnClick || !_showing)
+            return;
+        
+        _marker.SetActive(false);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (!_hideMarkerOnClick || !_showing)
+            return;
+        
+        _marker.SetActive(true);
     }
 }

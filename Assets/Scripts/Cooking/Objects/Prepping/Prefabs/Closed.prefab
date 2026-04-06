@@ -336,10 +336,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _marker: {fileID: 0}
   _outlineThickness: 4
-  _highlightScaleMultiplier: 1.1
+  _highlightScaleMultiplier: 1
   _highlightColor: {r: 1, g: 0.95, b: 0.6, a: 1}
   _spriteRenderer: {fileID: 7710389937225776067}
   _graphic: {fileID: 0}
+  _hideMarkerOnClick: 0
 --- !u!114 &6912378456123784561
 MonoBehaviour:
   m_ObjectHideFlags: 0

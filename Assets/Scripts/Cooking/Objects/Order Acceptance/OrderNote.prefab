@@ -617,10 +617,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _marker: {fileID: 7158551157573610306}
   _outlineThickness: 4
-  _highlightScaleMultiplier: 1.1
+  _highlightScaleMultiplier: 1
   _highlightColor: {r: 1, g: 0, b: 0, a: 1}
   _spriteRenderer: {fileID: 0}
   _graphic: {fileID: 2446448888341257568}
+  _hideMarkerOnClick: 1
 --- !u!114 &5893224271381853237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +656,7 @@ MonoBehaviour:
   _hoverLocalPosition: {x: 0, y: 0, z: 0}
   _useRotation: 0
   _hoverLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _isTweenEnabled: 1
 --- !u!1 &4354202778325234737
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &739696764274678632
 RectTransform:
   m_ObjectHideFlags: 0
@@ -976,13 +978,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5224837830077223733, guid: af17178a633730e44a2b6ff1e1aab057, type: 3}
+  m_Sprite: {fileID: 5003036125298638855, guid: 98e41c780fb686e4691bcd5bc25164c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
