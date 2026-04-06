@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class OrderController : ITickable
 {
+    private const float TutorialFreezeThresholdNormalized = 0.10f;
+
     private readonly float _orderCompletionTimeLimit;
     private readonly RecipeGenerator _recipeGenerator;
     private readonly StrikesController _strikesController;
     private readonly Money _money;
     private readonly PastelCookingSettings _pastelCookingSettings;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogues;
+    private readonly GameplayTutorialState _tutorialState;
     private readonly List<Order> _activeOrders = new();
     private readonly List<Order> _expiredOrders = new();
 
@@ -21,13 +24,15 @@ public class OrderController : ITickable
         StrikesController strikesController,
         Money money,
         PastelCookingSettings pastelCookingSettings,
-        ICustomerPopUpDialogue customerPopUpDialogues)
+        ICustomerPopUpDialogue customerPopUpDialogues,
+        GameplayTutorialState tutorialState)
     {
         _recipeGenerator = recipeGenerator;
         _strikesController = strikesController;
         _money = money;
         _pastelCookingSettings = pastelCookingSettings;
         _customerPopUpDialogues = customerPopUpDialogues;
+        _tutorialState = tutorialState;
         _orderCompletionTimeLimit = orderLoopSettings.OrderCompletionTimeLimit;
     }
     
@@ -75,6 +80,9 @@ public class OrderController : ITickable
     {
         foreach (var order in _activeOrders)
         {
+            if (ShouldFreezeTutorialOrder(order))
+                continue;
+
             order.Tick(deltaTime);
             if (order.IsExpired())
                 _expiredOrders.Add(order);
@@ -99,5 +107,12 @@ public class OrderController : ITickable
     public void FinishOrderFlow(Order order)
     {
         OrderFlowFinished(order);
+    }
+
+    private bool ShouldFreezeTutorialOrder(Order order)
+    {
+        return _tutorialState.IsActive
+            && order == _tutorialState.TutorialOrder
+            && order.NormalizedRemainingTime <= TutorialFreezeThresholdNormalized;
     }
 }

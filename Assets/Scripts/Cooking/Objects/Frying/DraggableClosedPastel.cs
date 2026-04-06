@@ -8,6 +8,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Draggable))]
 public class DraggableClosedPastel : ValidatedMonoBehaviour
 {
+    private const float TutorialBurnProtectionProgress = 0.90f;
+
     [SerializeField, Self]
     private SpriteRenderer _spriteRenderer;
 
@@ -37,6 +39,9 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
     [Inject]
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
+
+    [Inject]
+    private readonly GameplayTutorialState _tutorialState;
     
     private ClosedPastelDough _closedPastelDough;
 
@@ -111,6 +116,19 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
     public void Fry(float deltaTime)
     {
+        if (ShouldLimitTutorialFrying())
+        {
+            deltaTime = Mathf.Min(
+                deltaTime,
+                _closedPastelDough.GetRemainingTimeUntilProgress(TutorialBurnProtectionProgress));
+
+            if (deltaTime <= 0f)
+            {
+                _activeSlider.normalizedValue = _closedPastelDough.FryingProgress;
+                return;
+            }
+        }
+
         _closedPastelDough.Fry(deltaTime);
 
         _activeSlider.normalizedValue = _closedPastelDough.FryingProgress;
@@ -191,5 +209,12 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
             return true;
 
         return _interactionGate.CanInteract(TutorialInteractionType.RemoveCookedPastel, this);
+    }
+
+    private bool ShouldLimitTutorialFrying()
+    {
+        return _tutorialState.IsActive
+            && _tutorialState.TutorialPastel == this
+            && _closedPastelDough.FriedLevel == FriedLevel.Done;
     }
 }

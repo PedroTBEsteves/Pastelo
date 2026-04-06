@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class ClosedPastelDough
 {
@@ -39,6 +40,13 @@ public class ClosedPastelDough
     public IReadOnlyList<Filling> FillingSlots => _fillingSlots;
     public FriedLevel FriedLevel => _friedLevel;
     public float FryingProgress => _timeFrying / _timeToIncreaseFriedLevelInSeconds;
+
+    public float GetRemainingTimeUntilProgress(float targetProgress)
+    {
+        var clampedProgress = Mathf.Clamp01(targetProgress);
+        var targetTime = _timeToIncreaseFriedLevelInSeconds * clampedProgress;
+        return Mathf.Max(0f, targetTime - _timeFrying);
+    }
     
     public void Fry(float deltaTime)
     {

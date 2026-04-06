@@ -212,7 +212,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 5435832490908719703, guid: 0cb8525d98757f447b5c8b3ca95d48ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -351,7 +351,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3af8f1b54d4b2fa38cdb229f5ec651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: 
+  _localizationTable:
+    m_TableReference:
+      m_TableCollectionName: 
+  _localizationKey: 
   _viewPrefabOverride: {fileID: 0}
   _presenter: {fileID: 0}
 --- !u!1 &3160242439812138036
