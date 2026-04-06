@@ -51,6 +51,7 @@ public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
         {
             SetOverlayBlocking(true);
             await PlayFadeAsync(_fadeOutTweenSettings, startingVolumeDb, _fadedVolumeDb);
+            RestoreScaledTime();
 
             var loadOperation = SceneManager.LoadSceneAsync(sceneIndex);
             await AwaitAsyncOperation(loadOperation);
@@ -58,11 +59,12 @@ public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
 
             _overlayCanvasGroup.alpha = 1f;
             await PlayFadeAsync(_fadeInTweenSettings, _fadedVolumeDb, startingVolumeDb);
-            SetOverlayBlocking(false);
+            ResetOverlayState();
             return true;
         }
         finally
         {
+            ResetOverlayState();
             _isTransitioning = false;
         }
     }
@@ -172,6 +174,23 @@ public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
             return;
 
         _overlayCanvasGroup.interactable = false;
+        _overlayCanvasGroup.blocksRaycasts = isBlocking;
+    }
+
+    private void ResetOverlayState()
+    {
+        if (_overlayCanvasGroup == null)
+            return;
+
+        _overlayCanvasGroup.alpha = 0f;
+        _overlayCanvasGroup.interactable = false;
+        _overlayCanvasGroup.blocksRaycasts = false;
+    }
+
+    private static void RestoreScaledTime()
+    {
+        if (!Mathf.Approximately(Time.timeScale, 1f))
+            Time.timeScale = 1f;
     }
 
     private static Task AwaitAsyncOperation(AsyncOperation asyncOperation)
