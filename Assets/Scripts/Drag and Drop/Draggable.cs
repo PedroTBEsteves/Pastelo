@@ -10,6 +10,9 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
 {
     [Inject]
     private readonly CameraController _cameraController;
+
+    [Inject]
+    private readonly DraggableInputConfiguration _inputConfiguration;
     
     private Vector2 _holdOffset;
     
@@ -19,8 +22,6 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
     private bool _dragging;
     private bool _followPointerContinuously;
     private bool _transitioning;
-    
-    private IDraggableHandler _handler;
     
     private readonly List<Func<bool>> _canDragHandlers = new();
     
@@ -34,7 +35,6 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
         gameObject.layer = LayerMask.NameToLayer("Draggable");
         _sprite = GetComponent<SpriteRenderer>();
         _order = _sprite != null ? _sprite.sortingOrder : 0;
-        _handler = new ClickDraggableHandler(this);
 
         _cameraController.CameraBeganMoving += OnCameraTransitionStarted;
         _cameraController.CameraEndedMoving += OnCameraTransitionFinished;
@@ -57,13 +57,13 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
         _cameraController.CameraEndedMoving -= OnCameraTransitionFinished;
     }
 
-    public void OnDrag(PointerEventData eventData) => _handler.OnDrag(eventData);
+    public void OnDrag(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnDrag(this, eventData);
 
-    public void OnBeginDrag(PointerEventData eventData) => _handler.OnBeginDrag(eventData);
+    public void OnBeginDrag(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnBeginDrag(this, eventData);
 
-    public void OnEndDrag(PointerEventData eventData) => _handler.OnEndDrag(eventData);
+    public void OnEndDrag(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnEndDrag(this, eventData);
     
-    public void OnPointerClick(PointerEventData eventData) => _handler.OnPointerClick(eventData);
+    public void OnPointerClick(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnPointerClick(this, eventData);
     
     public void AddCanDragHandler(Func<bool> handler) => _canDragHandlers.Add(handler);
     

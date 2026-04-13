@@ -11,7 +11,7 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
     private Draggable _draggablePrefab;
 
     [Inject]
-    private readonly CameraController _cameraController;
+    private readonly DraggableInputConfiguration _inputConfiguration;
 
     private Draggable _draggable;
 
@@ -23,18 +23,22 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
     
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (_inputConfiguration.Mode != DraggableInputMode.Drag)
+            return;
+
         if (!CanCreateDraggable())
             return;
         
-        var position = eventData.pointerCurrentRaycast.worldPosition;
-        
-        _draggable = Instantiate(_draggablePrefab, position, Quaternion.identity);
+        _draggable = CreateDraggable(eventData);
         
         ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.beginDragHandler);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (_inputConfiguration.Mode != DraggableInputMode.Drag)
+            return;
+
         if (_draggable == null)
             return;
         
@@ -43,6 +47,9 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (_inputConfiguration.Mode != DraggableInputMode.Drag)
+            return;
+
         if (_draggable == null)
             return;
         
@@ -52,13 +59,15 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (_inputConfiguration.Mode != DraggableInputMode.Click)
+            return;
+
         if (_draggable == null)
         {
             if (!CanCreateDraggable())
                 return;
 
-            var position = eventData.pointerCurrentRaycast.worldPosition;
-            _draggable = Instantiate(_draggablePrefab, position, Quaternion.identity);
+            _draggable = CreateDraggable(eventData);
         }
 
         ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.pointerClickHandler);
@@ -68,4 +77,10 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
     }
     
     private bool CanCreateDraggable() => _canCreateDraggableHandlers.Aggregate(true, (agg, handler) => agg && handler());
+
+    private Draggable CreateDraggable(PointerEventData eventData)
+    {
+        var position = eventData.pointerCurrentRaycast.worldPosition;
+        return Instantiate(_draggablePrefab, position, Quaternion.identity);
+    }
 }

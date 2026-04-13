@@ -2,41 +2,38 @@ using UnityEngine.EventSystems;
 
 public sealed class ClickDraggableHandler : IDraggableHandler
 {
-    private readonly Draggable _draggable;
-
-    public ClickDraggableHandler(Draggable draggable)
-    {
-        _draggable = draggable;
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnBeginDrag(Draggable draggable, PointerEventData eventData)
     {
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnDrag(Draggable draggable, PointerEventData eventData)
     {
-        if (!_draggable.IsDragging)
+        if (!draggable.IsDragging)
             return;
 
-        _draggable.UpdateDragPosition(eventData.position);
+        draggable.UpdateDragPosition(eventData.position);
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag(Draggable draggable, PointerEventData eventData)
     {
+        if (!draggable.IsDragging)
+            return;
+
+        draggable.EndDrag(eventData);
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(Draggable draggable, PointerEventData eventData)
     {
-        if (_draggable.IsDragging)
+        if (draggable.IsDragging)
         {
-            _draggable.EndDrag(eventData);
+            draggable.EndDrag(eventData);
             return;
         }
 
-        if (!_draggable.CanDrag())
+        if (!draggable.CanDrag())
             return;
 
-        _draggable.BeginDrag(eventData, followPointerContinuously: true);
-        _draggable.UpdateDragPosition(eventData.position);
+        draggable.BeginDrag(eventData, followPointerContinuously: true);
+        draggable.UpdateDragPosition(eventData.position);
     }
 }
