@@ -149,7 +149,7 @@ public class CameraController
 
     public void GoToSectionAnimated(CameraSection section) => GoToSessionAnimated(section);
     
-    public Vector2 ScreenToWorldPointy(Vector2 screenPosition) => _currentCamera.ScreenToWorldPoint(screenPosition);
+    public Vector2 ScreenToWorldPoint(Vector2 screenPosition) => _currentCamera.ScreenToWorldPoint(screenPosition);
 
     private void QueueDirection(int direction)
     {

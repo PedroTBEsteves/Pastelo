@@ -5,7 +5,7 @@ using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField]
     private Draggable _draggablePrefab;
@@ -48,6 +48,23 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
         
         ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.endDragHandler);
         _draggable = null;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (_draggable == null)
+        {
+            if (!CanCreateDraggable())
+                return;
+
+            var position = eventData.pointerCurrentRaycast.worldPosition;
+            _draggable = Instantiate(_draggablePrefab, position, Quaternion.identity);
+        }
+
+        ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+
+        if (!_draggable.IsDragging)
+            _draggable = null;
     }
     
     private bool CanCreateDraggable() => _canCreateDraggableHandlers.Aggregate(true, (agg, handler) => agg && handler());

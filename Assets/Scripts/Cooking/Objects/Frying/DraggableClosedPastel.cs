@@ -151,14 +151,14 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
         SetFrying(false);
         _fryingArea?.Remove(this);
-        _dragStartPosition = _cameraController.ScreenToWorldPointy(eventData.position);
+        _dragStartPosition = _cameraController.ScreenToWorldPoint(eventData.position);
     }
 
     private void OnDropped(PointerEventData eventData)
     {
         _tutorialEvents.PublishPastelDropped(this);
 
-        var mousePosition = _cameraController.ScreenToWorldPointy(eventData.position);
+        var mousePosition = _cameraController.ScreenToWorldPoint(eventData.position);
         var raycastHit = Physics2D.Raycast(
             mousePosition,
             Vector2.zero,

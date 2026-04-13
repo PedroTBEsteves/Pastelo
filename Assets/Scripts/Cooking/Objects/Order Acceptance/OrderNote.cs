@@ -141,7 +141,7 @@ public class OrderNote : ValidatedMonoBehaviour
 
     private void OnDropped(PointerEventData eventData)
     {
-        var mousePosition = _cameraController.ScreenToWorldPointy(eventData.position);
+        var mousePosition = _cameraController.ScreenToWorldPoint(eventData.position);
         var raycastHit = Physics2D.Raycast(
             mousePosition,
             Vector2.zero,

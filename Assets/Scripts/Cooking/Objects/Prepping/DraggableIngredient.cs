@@ -45,7 +45,7 @@ public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour 
 
     protected Vector3 GetMouseWorldPosition(PointerEventData eventData)
     {
-        return _cameraController.ScreenToWorldPointy(eventData.position);
+        return _cameraController.ScreenToWorldPoint(eventData.position);
     }
 
     protected bool TryGetOpenPastelDoughArea(PointerEventData eventData, out OpenPastelDoughArea openPastelDoughArea)
