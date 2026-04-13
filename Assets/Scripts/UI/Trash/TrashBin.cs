@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,9 +5,6 @@ using UnityEngine.UI;
 
 public class TrashBin : MonoBehaviour
 {
-    [SerializeField]
-    private GraphicRaycaster _raycaster;
-
     [SerializeField]
     private AudioSource _audioSource;
 
@@ -20,11 +14,10 @@ public class TrashBin : MonoBehaviour
     [Inject]
     private readonly GameplayInteractionGate _interactionGate;
     
-    private List<RaycastResult> _raycastResults = new();
-
     private void Awake()
     {
         _image.enabled = false;
+        _image.raycastTarget = false;
     }
 
     public void Show()
@@ -54,13 +47,11 @@ public class TrashBin : MonoBehaviour
     
     private bool IsInside(PointerEventData eventData)
     {
-        _raycaster.Raycast(eventData, _raycastResults);
+        var eventCamera = eventData.pressEventCamera != null
+            ? eventData.pressEventCamera
+            : eventData.enterEventCamera;
 
-        var containsTrashBin = _raycastResults.Any(result => result.gameObject == gameObject);
-        
-        _raycastResults.Clear();
-        
-        return containsTrashBin;
+        return RectTransformUtility.RectangleContainsScreenPoint(_image.rectTransform, eventData.position, eventCamera);
     }
 
     private void PlayDiscardSound() => _audioSource.Play();
