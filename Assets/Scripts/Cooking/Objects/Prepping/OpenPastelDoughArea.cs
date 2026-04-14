@@ -36,6 +36,9 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     [SerializeField]
     private SpriteMask _ingredientsVisibilityMask;
+
+    [SerializeField]
+    private Transform _closedPastelSpawnPoint;
     
     [Inject]
     private readonly PastelCookingSettings _pastelCookingSettings;
@@ -183,7 +186,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _spriteRenderer.sprite = null;
         ResetCloseDragVisual();
         RefreshComboIndicator();
-        var draggableClosedPastel = Instantiate(_closedPastelPrefab, transform.position + Vector3.forward, Quaternion.identity, transform.parent);
+        var draggableClosedPastel = Instantiate(_closedPastelPrefab, _closedPastelSpawnPoint.position, Quaternion.identity, transform.parent);
         draggableClosedPastel.Initialize(closedPastel);
         foreach (var fillings in _fillings)
             Destroy(fillings.gameObject);
