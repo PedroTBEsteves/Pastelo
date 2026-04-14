@@ -33,6 +33,9 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     [SerializeField]
     private Transform _ingredientsRoot;
+
+    [SerializeField]
+    private SpriteMask _ingredientsVisibilityMask;
     
     [Inject]
     private readonly PastelCookingSettings _pastelCookingSettings;
@@ -265,12 +268,16 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         if (_currentDough != null)
             _spriteRenderer.sprite = _currentDough.OpenDoughSprite;
 
-        if (_closeDragFillRenderer == null)
-            return;
+        UpdateIngredientsVisibilityMask(_currentDough != null
+            ? _currentDough.OpenIngredientsVisibilityMaskSprite
+            : null);
 
-        _closeDragFillRenderer.enabled = false;
-        _closeDragFillRenderer.sprite = null;
-        _closeDragFillRenderer.drawMode = SpriteDrawMode.Simple;
+        if (_closeDragFillRenderer != null)
+        {
+            _closeDragFillRenderer.enabled = false;
+            _closeDragFillRenderer.sprite = null;
+            _closeDragFillRenderer.drawMode = SpriteDrawMode.Simple;
+        }
     }
 
     private void UpdateCloseDragVisual()
@@ -290,6 +297,16 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _closeDragFillRenderer.sprite = _currentDough.GetCloseDragCoverLayerFrame(frameIndex);
         _closeDragFillRenderer.enabled = _closeDragFillRenderer.sprite != null;
         _closeDragFillRenderer.drawMode = SpriteDrawMode.Simple;
+        UpdateIngredientsVisibilityMask(_currentDough.GetCloseDragIngredientsVisibilityMaskFrame(frameIndex));
+    }
+
+    private void UpdateIngredientsVisibilityMask(Sprite maskSprite)
+    {
+        if (_ingredientsVisibilityMask == null)
+            return;
+
+        _ingredientsVisibilityMask.sprite = maskSprite;
+        _ingredientsVisibilityMask.enabled = maskSprite != null;
     }
 
     private void SnapFillingToClosestAvailableSlot(DraggableFilling filling)

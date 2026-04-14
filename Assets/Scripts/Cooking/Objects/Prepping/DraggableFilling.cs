@@ -14,7 +14,9 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
     protected override void Awake()
     {
         base.Awake();
+        RefreshMaskInteraction();
         
+        Draggable.Held += OnHeld;
         Draggable.AddCanDragHandler(CanDrag);
     }
 
@@ -25,12 +27,14 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
 
         base.OnDestroy();
         
+        Draggable.Held -= OnHeld;
         Draggable.RemoveCanDragHandler(CanDrag);
     }
 
     protected override bool TryAddToOpenDough(OpenPastelDoughArea openPastelDoughArea)
     {
         _addedToPastel = openPastelDoughArea.TryAddFilling(this);
+        RefreshMaskInteraction();
         
         if (!_addedToPastel)
             Destroy(gameObject);
@@ -40,18 +44,23 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
         return _addedToPastel;
     }
 
-    protected override void OnDropped(UnityEngine.EventSystems.PointerEventData eventData)
+    protected override void OnDropped(PointerEventData eventData)
     {
         if (!_addedToPastel)
         {
             base.OnDropped(eventData);
+            RefreshMaskInteraction();
             return;
         }
 
         if (_openPastelDoughArea == null)
+        {
+            RefreshMaskInteraction();
             return;
+        }
 
         _openPastelDoughArea.TryRepositionFilling(this, GetMouseWorldPosition(eventData));
+        RefreshMaskInteraction();
     }
 
     public bool CanBeDiscarded() => true;
@@ -66,6 +75,18 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
     public void SetSlotPosition(Vector3 slotPosition)
     {
         _slotPosition = slotPosition;
+    }
+
+    private void OnHeld(PointerEventData eventData)
+    {
+        RefreshMaskInteraction();
+    }
+
+    private void RefreshMaskInteraction()
+    {
+        _spriteRenderer.maskInteraction = _addedToPastel && !Draggable.IsDragging
+            ? SpriteMaskInteraction.VisibleOutsideMask
+            : SpriteMaskInteraction.None;
     }
 
     private bool CanDrag() => true;

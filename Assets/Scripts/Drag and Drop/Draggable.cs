@@ -84,8 +84,8 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
         _followPointerContinuously = followPointerContinuously;
         _pendingEndDrag = false;
         _pendingEndDragEventData = null;
-        Held(eventData);
         _dragging = true;
+        Held(eventData);
     }
 
     public void UpdateDragPosition(Vector2 screenPosition)
@@ -122,8 +122,8 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
         _pendingEndDrag = false;
         _pendingEndDragEventData = null;
         _transitioning = false;
-        Dropped(eventData);
         _dragging = false;
+        Dropped(eventData);
     }
 
     private void OnCameraTransitionStarted()
