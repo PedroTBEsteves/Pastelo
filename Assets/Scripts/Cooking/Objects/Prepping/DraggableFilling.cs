@@ -20,6 +20,9 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
 
     protected override void OnDestroy()
     {
+        if (_addedToPastel && _openPastelDoughArea != null)
+            _openPastelDoughArea.RemoveFilling(this);
+
         base.OnDestroy();
         
         Draggable.RemoveCanDragHandler(CanDrag);
@@ -51,7 +54,7 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
         _openPastelDoughArea.TryRepositionFilling(this, GetMouseWorldPosition(eventData));
     }
 
-    public bool CanBeDiscarded() => !_addedToPastel;
+    public bool CanBeDiscarded() => true;
 
     public void SetSortingOrder(int sortingOrder)
     {
@@ -64,5 +67,6 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
     {
         _slotPosition = slotPosition;
     }
+
     private bool CanDrag() => true;
 }

@@ -151,6 +151,21 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         return true;
     }
 
+    public bool RemoveFilling(DraggableFilling filling)
+    {
+        if (filling == null)
+            return false;
+
+        var removedFromList = _fillings.Remove(filling);
+        if (!removedFromList)
+            return false;
+
+        _pastel?.TryRemoveFilling(filling.Ingredient);
+        UpdateFillingsSortingOrder();
+        RefreshComboIndicator();
+        return true;
+    }
+
     private void Close()
     {
         if (!_interactionGate.CanInteract(TutorialInteractionType.ClosePastel))

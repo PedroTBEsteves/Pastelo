@@ -23,6 +23,20 @@ public class OpenPastelDough
         return true;
     }
 
+    public bool TryRemoveFilling(Filling filling)
+    {
+        if (!_fillings.TryGetValue(filling, out var fillingsCount) || fillingsCount <= 0)
+            return false;
+
+        if (fillingsCount == 1)
+            _fillings.Remove(filling);
+        else
+            _fillings[filling] = fillingsCount - 1;
+
+        _fillingsCount--;
+        return true;
+    }
+
     public ClosedPastelDough Close(PastelCookingSettings settings, IReadOnlyList<Filling> fillingSlots)
     {
         return new ClosedPastelDough(_dough, _fillings, fillingSlots, settings.TimeToIncreaseFriedLevelInSeconds);
