@@ -53,6 +53,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
 
     private OpenPastelDough _pastel;
+    private Dough _currentDough;
     
     private List<DraggableFilling> _fillings = new List<DraggableFilling>();
 
@@ -60,7 +61,6 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
     private bool _isCloseDragActive;
     private int _activeCloseDragPointerId = int.MinValue;
     private float _closeDragProgressNormalized;
-    private float _closeDragFillBaseHeight;
     
     public int FillingsCount => _fillings.Count;
 
@@ -69,7 +69,6 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(TutorialTargetId.ClosePastelArea);
         _tutorialTargetRegistry.Register(_tutorialTarget);
-        CacheCloseDragFillDefaults();
         ResetCloseDragVisual();
         RefreshComboIndicator();
     }
@@ -89,6 +88,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
             return false;
         
         _spriteRenderer.sprite = dough.OpenDoughSprite;
+        _currentDough = dough;
         _pastel = new OpenPastelDough(dough, _recipeGeneratorSettings.MaxFillingsInclusive);
         _tutorialEvents.PublishDoughOpened(dough);
         ResetCloseDragVisual();
@@ -176,6 +176,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
         var closedPastel = _pastel.Close(_pastelCookingSettings, BuildFillingSlots());
         _pastel = null;
+        _currentDough = null;
         _spriteRenderer.sprite = null;
         ResetCloseDragVisual();
         RefreshComboIndicator();
@@ -186,14 +187,6 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _fillings.Clear();
         _tutorialEvents.PublishPastelClosed(draggableClosedPastel);
         //_cameraController.GoToNextSection();
-    }
-
-    private void CacheCloseDragFillDefaults()
-    {
-        if (_closeDragFillRenderer == null)
-            return;
-
-        _closeDragFillBaseHeight = _closeDragFillRenderer.size.y;
     }
 
     private bool CanStartCloseDrag(PointerEventData eventData)
@@ -269,27 +262,34 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     private void ResetCloseDragVisual()
     {
+        if (_currentDough != null)
+            _spriteRenderer.sprite = _currentDough.OpenDoughSprite;
+
         if (_closeDragFillRenderer == null)
             return;
 
         _closeDragFillRenderer.enabled = false;
-        _closeDragFillRenderer.size = new Vector2(0f, _closeDragFillBaseHeight);
+        _closeDragFillRenderer.sprite = null;
+        _closeDragFillRenderer.drawMode = SpriteDrawMode.Simple;
     }
 
     private void UpdateCloseDragVisual()
     {
-        if (_closeDragFillRenderer == null || _closeDragReferenceArea == null)
+        if (_currentDough == null || _spriteRenderer == null || _closeDragFillRenderer == null)
             return;
 
-        var bounds = _closeDragReferenceArea.bounds;
-        var width = bounds.size.x * _closeDragProgressNormalized;
-        var fillTransform = _closeDragFillRenderer.transform;
-        var position = fillTransform.position;
+        var frameCount = _currentDough.GetCloseDragFrameCount();
+        if (_closeDragProgressNormalized <= 0f || frameCount <= 0)
+        {
+            ResetCloseDragVisual();
+            return;
+        }
 
-        _closeDragFillRenderer.enabled = width > 0f;
-        _closeDragFillRenderer.drawMode = SpriteDrawMode.Tiled;
-        _closeDragFillRenderer.size = new Vector2(width, _closeDragFillBaseHeight);
-        fillTransform.position = new Vector3(bounds.min.x + width * 0.5f, position.y, position.z);
+        var frameIndex = Mathf.Clamp(Mathf.FloorToInt(_closeDragProgressNormalized * frameCount), 0, frameCount - 1);
+        _spriteRenderer.sprite = _currentDough.GetCloseDragBaseLayerFrame(frameIndex);
+        _closeDragFillRenderer.sprite = _currentDough.GetCloseDragCoverLayerFrame(frameIndex);
+        _closeDragFillRenderer.enabled = _closeDragFillRenderer.sprite != null;
+        _closeDragFillRenderer.drawMode = SpriteDrawMode.Simple;
     }
 
     private void SnapFillingToClosestAvailableSlot(DraggableFilling filling)

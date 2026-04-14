@@ -11978,7 +11978,7 @@ GameObject:
   - component: {fileID: 1586708349}
   - component: {fileID: 1586708351}
   - component: {fileID: 1586708350}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: Pastel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12631,15 +12631,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 7
-  m_Sprite: {fileID: 3682588487474673058, guid: 62926b54ded7ce245a1149fb2ad82ed8, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 2
+  m_DrawMode: 0
   m_Size: {x: 0, y: 3.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &1651714012
