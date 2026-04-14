@@ -15,12 +15,15 @@ public class CustomerQueue : ITickable
     private float _elapsedArrivalTime;
     
     private readonly Queue<CustomerWaitStatus> _queue = new();
+    private readonly Queue<Customer> _recentCustomers = new();
+    private readonly HashSet<Customer> _recentCustomersLookup = new();
 
     private readonly CustomersDatabase _customers;
     private readonly OrderController _orderController;
     private readonly StrikesController _strikesController;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogue;
     private readonly int _maxCustomers;
+    private readonly int _recentCustomersRepeatWindow;
 
     private int _generatedCustomers;
     private int _resolvedCustomers;
@@ -41,6 +44,7 @@ public class CustomerQueue : ITickable
         _customerWaitTime = orderLoopSettings.QueueWaitTimeLimit;
         _minCustomerArrivalTime = orderLoopSettings.MinCustomerArrivalTime;
         _maxCustomerArrivalTime = orderLoopSettings.MaxCustomerArrivalTime;
+        _recentCustomersRepeatWindow = Mathf.Max(0, orderLoopSettings.RecentCustomersRepeatWindow);
         _firstCustomerArrivalDelayAfterTutorial = Mathf.Max(0f, orderLoopSettings.FirstCustomerArrivalDelayAfterTutorial);
         _maxCustomers = orderLoopSettings.MaxCustomers;
         _nextArrivalTime = 1f;
@@ -99,9 +103,10 @@ public class CustomerQueue : ITickable
         if (!(_elapsedArrivalTime >= _nextArrivalTime)) 
             return;
 
-        var customer = _customers.GetRandom();
+        var customer = GetNextCustomer();
         var waitStatus = new CustomerWaitStatus(customer, _customerWaitTime);
         _queue.Enqueue(waitStatus);
+        RememberRecentCustomer(customer);
         _generatedCustomers++;
         QueueEntryAdded(waitStatus);
         CustomersCountChanged(_queue.Count);
@@ -161,6 +166,33 @@ public class CustomerQueue : ITickable
         _hasConfiguredFirstCustomerAfterTutorial = true;
         _elapsedArrivalTime = 0f;
         _nextArrivalTime = _firstCustomerArrivalDelayAfterTutorial;
+    }
+
+    private Customer GetNextCustomer()
+    {
+        if (_recentCustomersRepeatWindow <= 0)
+            return _customers.GetRandom();
+
+        return _customers.GetRandomExcluding(_recentCustomersLookup);
+    }
+
+    private void RememberRecentCustomer(Customer customer)
+    {
+        if (_recentCustomersRepeatWindow <= 0)
+            return;
+
+        _recentCustomers.Enqueue(customer);
+        _recentCustomersLookup.Add(customer);
+
+        while (_recentCustomers.Count > _recentCustomersRepeatWindow)
+        {
+            var removedCustomer = _recentCustomers.Dequeue();
+
+            if (_recentCustomers.Contains(removedCustomer))
+                continue;
+
+            _recentCustomersLookup.Remove(removedCustomer);
+        }
     }
     
     private float GetNextArrivalTime() => Random.Range(_minCustomerArrivalTime, _maxCustomerArrivalTime);
