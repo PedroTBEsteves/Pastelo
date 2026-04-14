@@ -20,6 +20,7 @@ public class GameplayTutorialState
     public Order TutorialOrder { get; private set; }
     public DraggableClosedPastel TutorialPastel { get; private set; }
     public bool IsTutorialPastelBeingDragged { get; private set; }
+    public TutorialPastelDropResult PendingTutorialPastelDropResult { get; private set; } = TutorialPastelDropResult.None;
     public Dough ExpectedDough => TutorialOrder?.Recipe.Dough;
     public Filling CurrentFilling => _remainingFillings.Count > 0 ? _remainingFillings.Peek() : null;
     public Recipe TutorialRecipe { get; }
@@ -83,6 +84,7 @@ public class GameplayTutorialState
     {
         TutorialPastel = pastel;
         IsTutorialPastelBeingDragged = false;
+        PendingTutorialPastelDropResult = TutorialPastelDropResult.None;
         StateChanged();
     }
 
@@ -95,6 +97,7 @@ public class GameplayTutorialState
             return true;
 
         IsTutorialPastelBeingDragged = true;
+        PendingTutorialPastelDropResult = TutorialPastelDropResult.None;
         StateChanged();
         return true;
     }
@@ -112,13 +115,43 @@ public class GameplayTutorialState
         return true;
     }
 
+    public bool TrySetPendingTutorialPastelDropResult(DraggableClosedPastel pastel, TutorialPastelDropResult result)
+    {
+        if (TutorialPastel != pastel)
+            return false;
+
+        if (PendingTutorialPastelDropResult == result)
+            return true;
+
+        PendingTutorialPastelDropResult = result;
+        StateChanged();
+        return true;
+    }
+
+    public TutorialPastelDropResult ConsumePendingTutorialPastelDropResult()
+    {
+        var result = PendingTutorialPastelDropResult;
+        PendingTutorialPastelDropResult = TutorialPastelDropResult.None;
+        return result;
+    }
+
     public void ClearTutorialPastelDrag()
     {
-        if (TutorialPastel == null && !IsTutorialPastelBeingDragged)
+        if (TutorialPastel == null
+            && !IsTutorialPastelBeingDragged
+            && PendingTutorialPastelDropResult == TutorialPastelDropResult.None)
             return;
 
         TutorialPastel = null;
         IsTutorialPastelBeingDragged = false;
+        PendingTutorialPastelDropResult = TutorialPastelDropResult.None;
         StateChanged();
     }
+}
+
+public enum TutorialPastelDropResult
+{
+    None,
+    PlacedInFryer,
+    PlacedOnDelivery,
 }

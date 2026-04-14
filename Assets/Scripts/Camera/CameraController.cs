@@ -38,6 +38,7 @@ public class CameraController
     public event Action<CameraSection> CurrentSectionChanged = delegate { };
 
     public CameraSection CurrentSection => _orderedSections.Length == 0 ? default : _orderedSections[_currentSectionIndex];
+    public bool IsMoving => _isMoving;
 
     private Rect GetViewRect()
     {
