@@ -62,6 +62,9 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
         if (_inputConfiguration.Mode != DraggableInputMode.Click)
             return;
 
+        if (_draggable != null && !_draggable.IsDragging)
+            _draggable = null;
+
         if (_draggable == null)
         {
             if (!CanCreateDraggable())
