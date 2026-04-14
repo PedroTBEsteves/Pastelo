@@ -22,7 +22,7 @@ public class TutorialTarget : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField, Child(Flag.Optional | Flag.Editable)]
     private SpriteRenderer _spriteRenderer;
 
-    [SerializeField, Self(Flag.Optional)]
+    [SerializeField, Self(Flag.Optional | Flag.Editable)]
     private Graphic _graphic;
 
     [SerializeField]
