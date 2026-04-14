@@ -22,6 +22,8 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
     private bool _dragging;
     private bool _followPointerContinuously;
     private bool _transitioning;
+    private bool _pendingEndDrag;
+    private PointerEventData _pendingEndDragEventData;
     
     private readonly List<Func<bool>> _canDragHandlers = new();
     
@@ -42,13 +44,12 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
 
     private void Update()
     {
-        if (!_dragging || (!_followPointerContinuously && !_transitioning))
-            return;
-        
-        if (Pointer.current == null)
+        if (!_dragging || (!_followPointerContinuously && !_transitioning && !_pendingEndDrag))
             return;
 
-        UpdateDragPosition(Pointer.current.position.ReadValue());
+        var pointerPosition = Pointer.current.position.ReadValue();
+
+        UpdateDragPosition(pointerPosition);
     }
 
     private void OnDestroy()
@@ -81,6 +82,8 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
         
         _holdOffset = transform.position - eventData.pointerCurrentRaycast.worldPosition;
         _followPointerContinuously = followPointerContinuously;
+        _pendingEndDrag = false;
+        _pendingEndDragEventData = null;
         Held(eventData);
         _dragging = true;
     }
@@ -97,12 +100,28 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
     {
         if (!_dragging)
             return;
-        
+
+        if (_transitioning || _cameraController.IsMoving)
+        {
+            _pendingEndDrag = true;
+            _pendingEndDragEventData = eventData;
+            _followPointerContinuously = false;
+            return;
+        }
+
+        CompleteDrag(eventData);
+    }
+
+    private void CompleteDrag(PointerEventData eventData)
+    {
         if (_sprite != null)
             _sprite.sortingOrder = _order;
-        
+
         _holdOffset = Vector2.zero;
         _followPointerContinuously = false;
+        _pendingEndDrag = false;
+        _pendingEndDragEventData = null;
+        _transitioning = false;
         Dropped(eventData);
         _dragging = false;
     }
@@ -118,5 +137,8 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
     private void OnCameraTransitionFinished()
     {
         _transitioning = false;
+
+        if (_pendingEndDrag)
+            CompleteDrag(_pendingEndDragEventData);
     }
 }
