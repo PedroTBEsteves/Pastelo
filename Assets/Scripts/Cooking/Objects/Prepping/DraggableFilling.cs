@@ -2,7 +2,7 @@ using KBCore.Refs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy, IPointerDownHandler, IPointerUpHandler
+public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
 {
     [SerializeField, Self]
     private SpriteRenderer _spriteRenderer;
@@ -15,7 +15,6 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy, IP
     {
         base.Awake();
         
-        Draggable.Held += OnHeld;
         Draggable.AddCanDragHandler(CanDrag);
     }
 
@@ -23,7 +22,6 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy, IP
     {
         base.OnDestroy();
         
-        Draggable.Held -= OnHeld;
         Draggable.RemoveCanDragHandler(CanDrag);
     }
 
@@ -66,30 +64,5 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy, IP
     {
         _slotPosition = slotPosition;
     }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (!_addedToPastel || _openPastelDoughArea == null)
-            return;
-
-        _openPastelDoughArea.BeginCloseHold();
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (_openPastelDoughArea == null)
-            return;
-
-        _openPastelDoughArea.CancelCloseHold();
-    }
-
-    private void OnHeld(PointerEventData eventData)
-    {
-        if (_openPastelDoughArea == null)
-            return;
-
-        _openPastelDoughArea.CancelCloseHold();
-    }
-
     private bool CanDrag() => true;
 }

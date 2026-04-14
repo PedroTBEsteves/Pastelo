@@ -1,27 +1,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using KBCore.Refs;
-using PrimeTween;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    [SerializeField, Self]
+    [SerializeField, Child]
     private SpriteRenderer _spriteRenderer;
 
-    [SerializeField, Child(Flag.ExcludeSelf)]
+    [SerializeField]
     private BoxCollider2D _ingredientsArea;
 
     [SerializeField]
-    private float _pressDuration;
+    private BoxCollider2D _closeDragStartArea;
+
+    [SerializeField]
+    private BoxCollider2D _closeDragReferenceArea;
+
+    [SerializeField]
+    private SpriteRenderer _closeDragFillRenderer;
+
+    [SerializeField, Range(0f, 1f)]
+    private float _closeDragReleaseThresholdNormalized = 0.5f;
 
     [SerializeField]
     private DraggableClosedPastel _closedPastelPrefab;
     
     [SerializeField]
     private SpriteRenderer _comboIndicatorRenderer;
+
+    [SerializeField]
+    private Transform _ingredientsRoot;
     
     [Inject]
     private readonly PastelCookingSettings _pastelCookingSettings;
@@ -40,14 +51,16 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     [Inject]
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
-    
-    private OpenPastelDough _pastel;
 
-    private Tween _pressTween;
+    private OpenPastelDough _pastel;
     
     private List<DraggableFilling> _fillings = new List<DraggableFilling>();
 
     private TutorialTarget _tutorialTarget;
+    private bool _isCloseDragActive;
+    private int _activeCloseDragPointerId = int.MinValue;
+    private float _closeDragProgressNormalized;
+    private float _closeDragFillBaseHeight;
     
     public int FillingsCount => _fillings.Count;
 
@@ -56,11 +69,14 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(TutorialTargetId.ClosePastelArea);
         _tutorialTargetRegistry.Register(_tutorialTarget);
+        CacheCloseDragFillDefaults();
+        ResetCloseDragVisual();
         RefreshComboIndicator();
     }
 
     private void OnDestroy()
     {
+        CancelCloseDrag();
         _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
     
@@ -75,6 +91,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _spriteRenderer.sprite = dough.OpenDoughSprite;
         _pastel = new OpenPastelDough(dough, _recipeGeneratorSettings.MaxFillingsInclusive);
         _tutorialEvents.PublishDoughOpened(dough);
+        ResetCloseDragVisual();
         RefreshComboIndicator();
 
         return true;
@@ -145,6 +162,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         var closedPastel = _pastel.Close(_pastelCookingSettings, BuildFillingSlots());
         _pastel = null;
         _spriteRenderer.sprite = null;
+        ResetCloseDragVisual();
         RefreshComboIndicator();
         var draggableClosedPastel = Instantiate(_closedPastelPrefab, transform.position + Vector3.forward, Quaternion.identity, transform.parent);
         draggableClosedPastel.Initialize(closedPastel);
@@ -153,6 +171,110 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
         _fillings.Clear();
         _tutorialEvents.PublishPastelClosed(draggableClosedPastel);
         //_cameraController.GoToNextSection();
+    }
+
+    private void CacheCloseDragFillDefaults()
+    {
+        if (_closeDragFillRenderer == null)
+            return;
+
+        _closeDragFillBaseHeight = _closeDragFillRenderer.size.y;
+    }
+
+    private bool CanStartCloseDrag(PointerEventData eventData)
+    {
+        if (_pastel == null)
+            return false;
+
+        if (!_interactionGate.CanInteract(TutorialInteractionType.ClosePastel))
+            return false;
+
+        if (_closeDragStartArea == null || _closeDragReferenceArea == null)
+            return false;
+
+        var pointerWorldPosition = GetPointerWorldPosition(eventData);
+        pointerWorldPosition.z = _closeDragStartArea.bounds.center.z;
+
+        return _closeDragStartArea.bounds.Contains(pointerWorldPosition);
+    }
+
+    private Vector3 GetPointerWorldPosition(PointerEventData eventData)
+    {
+        return _cameraController.ScreenToWorldPoint(eventData.position);
+    }
+
+    private float GetCloseDragProgress(PointerEventData eventData)
+    {
+        if (_closeDragReferenceArea == null)
+            return 0f;
+
+        var bounds = _closeDragReferenceArea.bounds;
+        var width = bounds.size.x;
+        if (width <= Mathf.Epsilon)
+            return 0f;
+
+        return Mathf.Clamp01(Mathf.InverseLerp(bounds.min.x, bounds.max.x, GetPointerWorldPosition(eventData).x));
+    }
+
+    private void StartCloseDrag(PointerEventData eventData)
+    {
+        _isCloseDragActive = true;
+        _activeCloseDragPointerId = eventData.pointerId;
+        UpdateCloseDragProgress(GetCloseDragProgress(eventData));
+    }
+
+    private void UpdateCloseDragProgress(float progressNormalized)
+    {
+        _closeDragProgressNormalized = Mathf.Clamp01(progressNormalized);
+        UpdateCloseDragVisual();
+    }
+
+    private void TryCompleteCloseDrag()
+    {
+        if (!_isCloseDragActive)
+            return;
+
+        var releaseThreshold = Mathf.Clamp01(_closeDragReleaseThresholdNormalized);
+        var shouldClose = _closeDragProgressNormalized >= 1f
+                          || _closeDragProgressNormalized >= releaseThreshold;
+
+        CancelCloseDrag();
+
+        if (shouldClose)
+            Close();
+    }
+
+    private void CancelCloseDrag()
+    {
+        _isCloseDragActive = false;
+        _activeCloseDragPointerId = int.MinValue;
+        _closeDragProgressNormalized = 0f;
+        ResetCloseDragVisual();
+    }
+
+    private void ResetCloseDragVisual()
+    {
+        if (_closeDragFillRenderer == null)
+            return;
+
+        _closeDragFillRenderer.enabled = false;
+        _closeDragFillRenderer.size = new Vector2(0f, _closeDragFillBaseHeight);
+    }
+
+    private void UpdateCloseDragVisual()
+    {
+        if (_closeDragFillRenderer == null || _closeDragReferenceArea == null)
+            return;
+
+        var bounds = _closeDragReferenceArea.bounds;
+        var width = bounds.size.x * _closeDragProgressNormalized;
+        var fillTransform = _closeDragFillRenderer.transform;
+        var position = fillTransform.position;
+
+        _closeDragFillRenderer.enabled = width > 0f;
+        _closeDragFillRenderer.drawMode = SpriteDrawMode.Tiled;
+        _closeDragFillRenderer.size = new Vector2(width, _closeDragFillBaseHeight);
+        fillTransform.position = new Vector3(bounds.min.x + width * 0.5f, position.y, position.z);
     }
 
     private void SnapFillingToClosestAvailableSlot(DraggableFilling filling)
@@ -217,7 +339,7 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     private void SetFillingToSlot(DraggableFilling filling, Vector3 slotPosition)
     {
-        filling.transform.SetParent(transform, true);
+        filling.transform.SetParent(_ingredientsRoot, true);
         filling.transform.position = slotPosition;
         filling.SetSlotPosition(slotPosition);
     }
@@ -323,23 +445,29 @@ public class OpenPastelDoughArea : ValidatedMonoBehaviour, IPointerDownHandler, 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        BeginCloseHold();
+        if (!CanStartCloseDrag(eventData))
+            return;
+
+        StartCloseDrag(eventData);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (!_isCloseDragActive || eventData.pointerId != _activeCloseDragPointerId)
+            return;
+
+        UpdateCloseDragProgress(GetCloseDragProgress(eventData));
+
+        if (_closeDragProgressNormalized >= 1f)
+            TryCompleteCloseDrag();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        CancelCloseHold();
-    }
+        if (!_isCloseDragActive || eventData.pointerId != _activeCloseDragPointerId)
+            return;
 
-    public void BeginCloseHold()
-    {
-        CancelCloseHold();
-        _pressTween = Tween.Delay(_pressDuration, Close);
-    }
-
-    public void CancelCloseHold()
-    {
-        if (_pressTween.isAlive)
-            _pressTween.Stop();
+        UpdateCloseDragProgress(GetCloseDragProgress(eventData));
+        TryCompleteCloseDrag();
     }
 }
