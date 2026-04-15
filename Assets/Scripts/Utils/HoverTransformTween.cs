@@ -130,7 +130,7 @@ public class HoverTransformTween : ValidatedMonoBehaviour, IPointerEnterHandler,
 
         StopActiveSequence();
 
-        var sequence = Sequence.Create();
+        var sequence = Sequence.Create(useUnscaledTime: _transformTweenSettings.useUnscaledTime);
 
         if (_useScale)
             sequence.Group(Tween.Scale(transform, transform.localScale, _hoverScale, _transformTweenSettings));
@@ -151,7 +151,7 @@ public class HoverTransformTween : ValidatedMonoBehaviour, IPointerEnterHandler,
 
         StopActiveSequence();
 
-        var sequence = Sequence.Create();
+        var sequence = Sequence.Create(useUnscaledTime: _transformTweenSettings.useUnscaledTime);
 
         if (_useScale)
             sequence.Group(Tween.Scale(transform, transform.localScale, _initialLocalScale, _transformTweenSettings));
