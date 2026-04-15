@@ -12,16 +12,16 @@ public sealed class DraggableInputConfiguration
     {
         get
         {
-            var savedValue = PlayerPrefs.GetInt(PlayerPrefsKey, (int)DraggableInputMode.Drag);
+            var savedValue = PlayerPrefs.GetInt(PlayerPrefsKey, (int)DraggableInputMode.Click);
             return Enum.IsDefined(typeof(DraggableInputMode), savedValue)
                 ? (DraggableInputMode)savedValue
-                : DraggableInputMode.Drag;
+                : DraggableInputMode.Click;
         }
         set
         {
-            var sanitizedMode = value == DraggableInputMode.Click
-                ? DraggableInputMode.Click
-                : DraggableInputMode.Drag;
+            var sanitizedMode = value == DraggableInputMode.Drag
+                ? DraggableInputMode.Drag
+                : DraggableInputMode.Click;
 
             PlayerPrefs.SetInt(PlayerPrefsKey, (int)sanitizedMode);
             PlayerPrefs.Save();

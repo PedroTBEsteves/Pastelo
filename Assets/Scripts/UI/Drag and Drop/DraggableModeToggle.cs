@@ -13,13 +13,13 @@ public class DraggableModeToggle : ValidatedMonoBehaviour
 
     private void Awake()
     {
-        _toggle.isOn = _inputConfiguration.Mode != DraggableInputMode.Drag;
+        _toggle.isOn = _inputConfiguration.Mode == DraggableInputMode.Drag;
         _toggle.onValueChanged.AddListener(OnToggleValueChanged);
     }
 
-    private void OnToggleValueChanged(bool isClick)
+    private void OnToggleValueChanged(bool isDrag)
     {
-        var mode = isClick ? DraggableInputMode.Click :  DraggableInputMode.Drag;
+        var mode = isDrag ? DraggableInputMode.Drag :  DraggableInputMode.Click;
         _inputConfiguration.Mode = mode;
     }
 }
