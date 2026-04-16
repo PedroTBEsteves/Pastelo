@@ -19,11 +19,11 @@ public class ManagementInstaller : MonoBehaviour, IInstaller
             .AddScoped(typeof(IngredientsStorage))
             .AddSingleton(Resources.Load("Settings/Management/MoneySettings"))
             .AddScoped(typeof(Money))
+            .AddScoped(typeof(LevelFlowController))
             .AddScoped(typeof(TimeController))
             .AddSingleton(Resources.Load("Settings/Management/OrderLoopSettings"))
             .AddScoped(typeof(OrderController), typeof(OrderController), typeof(ITickable))
             .AddScoped(typeof(CustomerQueue), typeof(CustomerQueue), typeof(ITickable))
-            .AddScoped(typeof(StrikesController))
             .AddScoped(typeof(GameplayTutorialController));
     }
 }

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
@@ -24,8 +25,8 @@ public class LevelSelectionButton : ValidatedMonoBehaviour
         _button.onClick.RemoveListener(OnButtonClicked);
     }
 
-    private async void OnButtonClicked()
+    private void OnButtonClicked()
     {
-        await _levelSelector.PlayLevel(_level);
+        _levelSelector.PlayLevel(_level).Forget();
     }
 }

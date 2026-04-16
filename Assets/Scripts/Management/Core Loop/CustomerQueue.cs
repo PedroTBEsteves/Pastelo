@@ -20,7 +20,7 @@ public class CustomerQueue : ITickable
 
     private readonly CustomersDatabase _customers;
     private readonly OrderController _orderController;
-    private readonly StrikesController _strikesController;
+    private readonly LevelFlowController _levelFlowController;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogue;
     private readonly int _maxCustomers;
     private readonly int _recentCustomersRepeatWindow;
@@ -34,7 +34,7 @@ public class CustomerQueue : ITickable
     private bool HasGeneratedAllCustomers => HasCustomersLimit && _generatedCustomers >= _maxCustomers;
     private bool IsPausedByTutorial => _tutorialState.IsActive && _tutorialState.CurrentStep != TutorialStep.WaitForCustomer;
 
-    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, StrikesController strikesController, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState, LevelSelector levelSelector)
+    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, LevelFlowController levelFlowController, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState, LevelSelector levelSelector)
     {
         if (levelSelector == null)
             throw new ArgumentNullException(nameof(levelSelector));
@@ -45,7 +45,7 @@ public class CustomerQueue : ITickable
 
         _customers = customers;
         _orderController = orderController;
-        _strikesController = strikesController;
+        _levelFlowController = levelFlowController;
         _customerPopUpDialogue = customerPopUpDialogue;
         _tutorialState = tutorialState;
         _customerWaitTime = orderLoopSettings.QueueWaitTimeLimit;
@@ -141,7 +141,6 @@ public class CustomerQueue : ITickable
             _customerPopUpDialogue.CustomerGaveUpDialogue(first.Customer)
                 .ChainCallback(() =>
                 {
-                    _strikesController.Strike();
                     ResolveCustomerFlow();
                 });
         }
@@ -159,7 +158,7 @@ public class CustomerQueue : ITickable
         if (!HasGeneratedAllCustomers || _resolvedCustomers < _generatedCustomers)
             return;
 
-        _strikesController.EndGame();
+        _levelFlowController.EndLevel();
     }
 
     private void SyncTutorialArrivalDelay()

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class TimeController
 {
-    public TimeController(StrikesController strikesController)
+    public TimeController(LevelFlowController levelFlowController)
     {
-        strikesController.GameOver += Pause;
+        levelFlowController.LevelEnded += Pause;
     }
     
     public bool Running { get; private set; } = true;

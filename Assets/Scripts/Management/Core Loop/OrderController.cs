@@ -8,7 +8,6 @@ public class OrderController : ITickable
 
     private readonly float _orderCompletionTimeLimit;
     private readonly RecipeGenerator _recipeGenerator;
-    private readonly StrikesController _strikesController;
     private readonly Money _money;
     private readonly PastelCookingSettings _pastelCookingSettings;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogues;
@@ -21,14 +20,12 @@ public class OrderController : ITickable
     public OrderController(
         OrderLoopSettings orderLoopSettings,
         RecipeGenerator recipeGenerator,
-        StrikesController strikesController,
         Money money,
         PastelCookingSettings pastelCookingSettings,
         ICustomerPopUpDialogue customerPopUpDialogues,
         GameplayTutorialState tutorialState)
     {
         _recipeGenerator = recipeGenerator;
-        _strikesController = strikesController;
         _money = money;
         _pastelCookingSettings = pastelCookingSettings;
         _customerPopUpDialogues = customerPopUpDialogues;
@@ -96,7 +93,6 @@ public class OrderController : ITickable
             _customerPopUpDialogues.CustomerOrderExpiredDialogue(order.Customer)
                 .ChainCallback(() =>
                 {
-                    _strikesController.Strike();
                     OrderFlowFinished(order);
                 });
         }
