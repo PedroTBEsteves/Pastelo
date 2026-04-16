@@ -8,9 +8,6 @@ public abstract class Ingredient : ScriptableObject
     [field: SerializeField]
     public string LocalizationKey { get; private set; }
     
-    [field:  SerializeField]
-    public float Cost { get; private set; }
-    
     [field: SerializeField]
     public float Value { get; private set; }
 
