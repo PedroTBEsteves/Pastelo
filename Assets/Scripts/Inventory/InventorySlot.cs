@@ -28,7 +28,7 @@ public sealed class InventorySlot
 
     public ItemDefinition Item => _item;
     public int Quantity => _quantity;
-    public bool IsUnlimited => _item != null && _item.MaxStack == -1;
+    public bool IsUnlimited => _item != null && _item.MaxStack <= 0;
     public int RemainingCapacity => IsUnlimited ? int.MaxValue : Mathf.Max(0, _item.MaxStack - _quantity);
 
     public void Add(int amount)

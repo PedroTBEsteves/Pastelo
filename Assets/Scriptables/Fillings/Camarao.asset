@@ -12,9 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9587c94729844114ea69b978990d15a9, type: 3}
   m_Name: Camarao
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Camarao
-  <LocalizationKey>k__BackingField: filling.main.shrimp
-  <Cost>k__BackingField: 0.5
-  <Value>k__BackingField: 0.7
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <Icon>k__BackingField: {fileID: -2744386507665659717, guid: 8294f71a656a1e744b70abae9994de5f, type: 3}
-  <PluralName>k__BackingField: Camaroes
+  <BuyPrice>k__BackingField: 0
+  <SellPrice>k__BackingField: 0
+  <MaxStack>k__BackingField: 0
+  <InternalName>k__BackingField: Camarao
+  <LocalizationKey>k__BackingField: filling.main.shrimp
+  <Value>k__BackingField: 0.7
+  <OrderIcon>k__BackingField: {fileID: -2744386507665659717, guid: 8294f71a656a1e744b70abae9994de5f, type: 3}
+  references:
+    version: 2
+    RefIds: []

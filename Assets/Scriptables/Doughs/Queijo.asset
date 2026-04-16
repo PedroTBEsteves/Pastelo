@@ -12,11 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17b678c364b97948b4c333091ccb2ff, type: 3}
   m_Name: Queijo
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Queijo
-  <LocalizationKey>k__BackingField: dough.cheese
-  <Cost>k__BackingField: 0.6
-  <Value>k__BackingField: 2
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <Icon>k__BackingField: {fileID: -3484198894894543839, guid: c964ecca8ac728048b38834710d99300, type: 3}
+  <BuyPrice>k__BackingField: 0
+  <SellPrice>k__BackingField: 0
+  <MaxStack>k__BackingField: 0
+  <InternalName>k__BackingField: Queijo
+  <LocalizationKey>k__BackingField: dough.cheese
+  <Value>k__BackingField: 2
+  <OrderIcon>k__BackingField: {fileID: 0}
   <OpenDoughSprite>k__BackingField: {fileID: 8989570357778761060, guid: f943e9543e9cdde468c053b4e17fefe0, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: f9a02bbe40382af49b5dd4c71470611c, type: 3}
   _closeDragBaseLayerFrames:
@@ -45,3 +66,6 @@ MonoBehaviour:
       Value: {fileID: 8598870678440081809, guid: a0ab3dc00ed97e44ab66da4ff3f7ee2f, type: 3}
     - Key: 2
       Value: {fileID: 7681776534776075315, guid: c21fa3d5b752db34c85f077de69d8e37, type: 3}
+  references:
+    version: 2
+    RefIds: []

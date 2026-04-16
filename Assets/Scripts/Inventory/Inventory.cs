@@ -47,7 +47,7 @@ public sealed class Inventory
 
         while (remainingAmount > 0)
         {
-            var slotAmount = item.MaxStack == -1 ? remainingAmount : Math.Min(remainingAmount, item.MaxStack);
+            var slotAmount = item.MaxStack <= 0 ? remainingAmount : Math.Min(remainingAmount, item.MaxStack);
             var newSlot = new InventorySlot(item, this, slotAmount);
             _slots.Add(newSlot);
             remainingAmount -= slotAmount;

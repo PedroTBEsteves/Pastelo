@@ -170,7 +170,7 @@ public class OrderNote : ValidatedMonoBehaviour
 
         if (_doughIcon != null)
         {
-            _doughIcon.sprite = recipe.Dough.Icon;
+            _doughIcon.sprite = recipe.Dough.OrderIcon;
             _doughIcon.preserveAspect = true;
         }
 

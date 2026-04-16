@@ -12,11 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17b678c364b97948b4c333091ccb2ff, type: 3}
   m_Name: Ervas Finas
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Ervas Finas
-  <LocalizationKey>k__BackingField: dough.fine_herbs
-  <Cost>k__BackingField: 0.8
-  <Value>k__BackingField: 3
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <Icon>k__BackingField: {fileID: 2013869065985307180, guid: 7a2aa678b2636f642bee03535b4f3429, type: 3}
+  <BuyPrice>k__BackingField: 0
+  <SellPrice>k__BackingField: 0
+  <MaxStack>k__BackingField: 0
+  <InternalName>k__BackingField: Ervas Finas
+  <LocalizationKey>k__BackingField: dough.fine_herbs
+  <Value>k__BackingField: 3
+  <OrderIcon>k__BackingField: {fileID: 0}
   <OpenDoughSprite>k__BackingField: {fileID: 4090259601666450071, guid: 1b76a44926c3c1c4d9ec5deddb63a8f7, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: f9a02bbe40382af49b5dd4c71470611c, type: 3}
   _closeDragBaseLayerFrames:
@@ -45,3 +66,6 @@ MonoBehaviour:
       Value: {fileID: -5855267455142226875, guid: b26fb86c7060e88489be72b0d596de31, type: 3}
     - Key: 2
       Value: {fileID: -8119769557658058874, guid: 8c00314db492c71468b4c628946b157d, type: 3}
+  references:
+    version: 2
+    RefIds: []

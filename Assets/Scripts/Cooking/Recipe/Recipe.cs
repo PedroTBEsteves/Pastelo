@@ -48,6 +48,6 @@ public class Recipe : IEquatable<Recipe>
 
     public override string ToString()
     {
-        return $"{Dough.Name} - ({string.Join(",", _fillings.Select(i => $"({i.Key.Name},{i.Value})"))})";
+        return $"{Dough.InternalName} - ({string.Join(",", _fillings.Select(i => $"({i.Key.InternalName},{i.Value})"))})";
     }
 }

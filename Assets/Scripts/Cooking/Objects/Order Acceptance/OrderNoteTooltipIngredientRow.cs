@@ -15,7 +15,7 @@ public class OrderNoteTooltipIngredientRow : MonoBehaviour
         if (filling == null || _icon == null || _amount == null)
             return false;
 
-        _icon.sprite = filling.Icon;
+        _icon.sprite = filling.OrderIcon;
         _amount.SetText($"x{amount}");
         return true;
     }

@@ -28,7 +28,7 @@ public class OrderNoteTooltipView : TooltipView
             return false;
         }
 
-        _doughIcon.sprite = recipe.Dough.Icon;
+        _doughIcon.sprite = recipe.Dough.OrderIcon;
         _doughIcon.preserveAspect = true;
         
         foreach (var (filling, amount) in recipe.Fillings)

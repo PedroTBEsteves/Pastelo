@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public abstract class Ingredient : ScriptableObject
+public abstract class Ingredient : ItemDefinition
 {
     [field: SerializeField]
-    public string Name { get; private set; }
+    public string InternalName { get; private set; }
 
     [field: SerializeField]
     public string LocalizationKey { get; private set; }
@@ -12,5 +12,5 @@ public abstract class Ingredient : ScriptableObject
     public float Value { get; private set; }
 
     [field: SerializeField]
-    public Sprite Icon { get; private set; }
+    public Sprite OrderIcon { get; private set; }
 }

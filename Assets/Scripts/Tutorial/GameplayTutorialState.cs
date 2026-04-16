@@ -40,7 +40,7 @@ public class GameplayTutorialState
         _remainingFillings.Clear();
 
         foreach (var filling in order.Recipe.Fillings
-                     .OrderBy(pair => pair.Key.Name)
+                     .OrderBy(pair => pair.Key.InternalName)
                      .SelectMany(pair => Enumerable.Repeat(pair.Key, pair.Value)))
         {
             _remainingFillings.Enqueue(filling);

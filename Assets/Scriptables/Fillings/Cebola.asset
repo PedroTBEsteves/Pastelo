@@ -12,9 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9587c94729844114ea69b978990d15a9, type: 3}
   m_Name: Cebola
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Cebola
-  <LocalizationKey>k__BackingField: filling.side.onion
-  <Cost>k__BackingField: 0.2
-  <Value>k__BackingField: 0.5
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <Icon>k__BackingField: {fileID: 365603805366478496, guid: 3c7640de82d2f1148a149073004a1a25, type: 3}
-  <PluralName>k__BackingField: Cebolas
+  <BuyPrice>k__BackingField: 0
+  <SellPrice>k__BackingField: 0
+  <MaxStack>k__BackingField: 0
+  <InternalName>k__BackingField: Cebola
+  <LocalizationKey>k__BackingField: filling.side.onion
+  <Value>k__BackingField: 0.5
+  <OrderIcon>k__BackingField: {fileID: 365603805366478496, guid: 3c7640de82d2f1148a149073004a1a25, type: 3}
+  references:
+    version: 2
+    RefIds: []

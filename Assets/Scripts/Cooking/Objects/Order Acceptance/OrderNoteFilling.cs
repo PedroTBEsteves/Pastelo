@@ -12,7 +12,7 @@ public class OrderNoteFilling : MonoBehaviour
 
     public void Initialize(Filling filling, int amount)
     {
-        _icon.sprite = filling.Icon;
+        _icon.sprite = filling.OrderIcon;
         _text.SetText($"x{amount}");
     }
 }

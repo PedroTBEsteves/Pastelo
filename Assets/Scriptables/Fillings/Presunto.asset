@@ -12,9 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9587c94729844114ea69b978990d15a9, type: 3}
   m_Name: Presunto
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Presunto
-  <LocalizationKey>k__BackingField: filling.main.ham
-  <Cost>k__BackingField: 0.5
-  <Value>k__BackingField: 0.7
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <Icon>k__BackingField: {fileID: -6389559659260161797, guid: 6824ee85009ee6b4c95575c794e70e31, type: 3}
-  <PluralName>k__BackingField: Presuntos
+  <BuyPrice>k__BackingField: 0
+  <SellPrice>k__BackingField: 0
+  <MaxStack>k__BackingField: 0
+  <InternalName>k__BackingField: Presunto
+  <LocalizationKey>k__BackingField: filling.main.ham
+  <Value>k__BackingField: 0.7
+  <OrderIcon>k__BackingField: {fileID: -6389559659260161797, guid: 6824ee85009ee6b4c95575c794e70e31, type: 3}
+  references:
+    version: 2
+    RefIds: []

@@ -12,11 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17b678c364b97948b4c333091ccb2ff, type: 3}
   m_Name: Chocolate
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Chocolate
-  <LocalizationKey>k__BackingField: dough.chocolate
-  <Cost>k__BackingField: 0.6
-  <Value>k__BackingField: 2
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <Icon>k__BackingField: {fileID: 5281907171707744427, guid: 591588fc8f23cb34eba6f53f9c309c06, type: 3}
+  <BuyPrice>k__BackingField: 0
+  <SellPrice>k__BackingField: 0
+  <MaxStack>k__BackingField: 0
+  <InternalName>k__BackingField: Chocolate
+  <LocalizationKey>k__BackingField: dough.chocolate
+  <Value>k__BackingField: 2
+  <OrderIcon>k__BackingField: {fileID: 0}
   <OpenDoughSprite>k__BackingField: {fileID: 4475540513237748772, guid: f5c855d02b93095468288814077df8bf, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: f9a02bbe40382af49b5dd4c71470611c, type: 3}
   _closeDragBaseLayerFrames:
@@ -45,3 +66,6 @@ MonoBehaviour:
       Value: {fileID: 5317896245838512498, guid: dbbe6019b519dd04b827c9c58b2d9abc, type: 3}
     - Key: 2
       Value: {fileID: -3177036078896601808, guid: 2570b533db66c27428cdd6e508bd1953, type: 3}
+  references:
+    version: 2
+    RefIds: []

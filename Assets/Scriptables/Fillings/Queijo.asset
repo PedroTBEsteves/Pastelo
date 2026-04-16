@@ -12,9 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9587c94729844114ea69b978990d15a9, type: 3}
   m_Name: Queijo
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Queijo
-  <LocalizationKey>k__BackingField: filling.side.cheese
-  <Cost>k__BackingField: 0.2
-  <Value>k__BackingField: 0.3
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <Icon>k__BackingField: {fileID: -1899758367821576830, guid: b07b3e45785f605478fa577c487b7b94, type: 3}
-  <PluralName>k__BackingField: Queijos
+  <BuyPrice>k__BackingField: 0
+  <SellPrice>k__BackingField: 0
+  <MaxStack>k__BackingField: 0
+  <InternalName>k__BackingField: Queijo
+  <LocalizationKey>k__BackingField: filling.side.cheese
+  <Value>k__BackingField: 0.3
+  <OrderIcon>k__BackingField: {fileID: -1899758367821576830, guid: b07b3e45785f605478fa577c487b7b94, type: 3}
+  references:
+    version: 2
+    RefIds: []
