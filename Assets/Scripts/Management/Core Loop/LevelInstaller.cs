@@ -18,6 +18,7 @@ public class LevelInstaller : MonoBehaviour, IInstaller
             .AddScoped(typeof(LevelMoneyManager))
             .AddScoped(typeof(LevelFlowController))
             .AddScoped(typeof(TimeController))
+            .AddScoped(typeof(LevelPerformanceTracker))
             .AddSingleton(Resources.Load("Settings/Management/OrderLoopSettings"))
             .AddScoped(typeof(OrderController), typeof(OrderController), typeof(ITickable))
             .AddScoped(typeof(CustomerQueue), typeof(CustomerQueue), typeof(ITickable))

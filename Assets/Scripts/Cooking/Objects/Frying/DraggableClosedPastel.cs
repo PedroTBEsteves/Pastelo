@@ -46,12 +46,13 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     private ClosedPastelDough _closedPastelDough;
 
     private FryingArea _fryingArea;
-    private Vector3 _dragStartPosition;
     private bool _frying;
 
     private Slider _activeSlider;
     private TutorialTarget _tutorialTarget;
     private TooltipTarget _tooltipTarget;
+    private bool _hasInitializedFriedLevelState;
+    private bool _hasPublishedBurntEvent;
 
     private void Awake()
     {
@@ -89,6 +90,7 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         _closedPastelDough = closedPastelDough;
         _closedPastelDough.FriedLevelChanged += OnFriedLevelChanged;
         OnFriedLevelChanged(_closedPastelDough.FriedLevel);
+        _hasInitializedFriedLevelState = true;
         if (closedPastelDough.FriedLevel != FriedLevel.Raw)
             _rawSlider.normalizedValue = 1f;
     }
@@ -111,6 +113,12 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
         if (level == FriedLevel.Done)
             _tutorialEvents.PublishPastelReachedCooked(this);
+
+        if (!_hasInitializedFriedLevelState || level != FriedLevel.Burnt || _hasPublishedBurntEvent)
+            return;
+
+        _hasPublishedBurntEvent = true;
+        EventBus<PastelBurntEvent>.Raise(new PastelBurntEvent(this));
     }
         
 
@@ -151,7 +159,6 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
         SetFrying(false);
         _fryingArea?.Remove(this);
-        _dragStartPosition = _cameraController.ScreenToWorldPoint(eventData.position);
     }
 
     private void OnDropped(PointerEventData eventData)
