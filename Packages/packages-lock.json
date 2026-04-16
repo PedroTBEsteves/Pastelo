@@ -10,6 +10,23 @@
       },
       "hash": "940831fe8a474e92b96a5c183298b45843cf067e"
     },
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a9e27c03d411d2fca01cc7410c24c97cd77cb539"
+    },
+    "com.eflatun.scenereference": {
+      "version": "https://github.com/starikcetin/Eflatun.SceneReference.git#5.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.settings-manager": "2.0.1",
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "hash": "6821c571090fc0828accced5dbd7635152c23887"
+    },
     "com.gustavopsantos.reflex": {
       "version": "https://github.com/gustavopsantos/reflex.git?path=/Assets/Reflex/#13.0.3",
       "depth": 0,
@@ -338,6 +355,13 @@
     "com.unity.searcher": {
       "version": "4.9.3",
       "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.settings-manager": {
+      "version": "2.1.0",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
