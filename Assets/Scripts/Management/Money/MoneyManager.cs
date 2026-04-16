@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class Money
+public class MoneyManager
 {
     private float _amount;
 
-    public Money(MoneySettings settings)
+    public MoneyManager(MoneySettings settings)
     {
         _amount = settings.InitialAmount;
     }
@@ -35,6 +35,4 @@ public class Money
     }
     
     public void Gain(float amount) => Amount += amount;
-
-    public record MoneyChangedEvent(float Previous, float Current);
 }

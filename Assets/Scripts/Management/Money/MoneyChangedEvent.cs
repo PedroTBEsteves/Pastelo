@@ -1,0 +1,1 @@
+﻿public record MoneyChangedEvent(float Previous, float Current);

@@ -25,15 +25,15 @@ public class MoneyText : ValidatedMonoBehaviour
     private AudioSource _moneyLostAudio;
     
     [Inject]
-    private readonly Money _money;
+    private readonly MoneyManager _moneyManager;
 
     private void Awake()
     {
-        UpdateMoneyText(_money.Amount);
-        _money.MoneyChanged += OnMoneyChanged;
+        UpdateMoneyText(_moneyManager.Amount);
+        _moneyManager.MoneyChanged += OnMoneyChanged;
     }
 
-    private void OnMoneyChanged(Money.MoneyChangedEvent moneyChanged)
+    private void OnMoneyChanged(MoneyChangedEvent moneyChanged)
     {
         UpdateMoneyText(moneyChanged.Current);
         

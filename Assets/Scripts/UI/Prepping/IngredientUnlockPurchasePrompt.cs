@@ -32,7 +32,7 @@ public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
     private string _purchasePromptKey;
 
     [Inject]
-    private readonly Money _money;
+    private readonly MoneyManager _moneyManager;
 
     [Inject]
     private readonly IngredientsStorage _ingredientsStorage;
@@ -46,7 +46,7 @@ public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
         _panel.SetActive(false);
         _confirmButton.onClick.AddListener(ConfirmPurchase);
         _closeButton.onClick.AddListener(Hide);
-        _money.MoneyChanged += OnMoneyChanged;
+        _moneyManager.MoneyChanged += OnMoneyChanged;
         _ingredientsStorage.PriceChanged += OnPriceChanged;
     }
 
@@ -54,7 +54,7 @@ public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
     {
         _confirmButton.onClick.RemoveListener(ConfirmPurchase);
         _closeButton.onClick.RemoveListener(Hide);
-        _money.MoneyChanged -= OnMoneyChanged;
+        _moneyManager.MoneyChanged -= OnMoneyChanged;
         _ingredientsStorage.PriceChanged -= OnPriceChanged;
     }
 
@@ -98,7 +98,7 @@ public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
         RefreshView();
     }
 
-    private void OnMoneyChanged(Money.MoneyChangedEvent _)
+    private void OnMoneyChanged(MoneyChangedEvent _)
     {
         RefreshView();
     }
@@ -125,7 +125,7 @@ public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
 
         _confirmButton.interactable = _currentIngredient != null
                                       && !_ingredientsStorage.Contains(_currentIngredient)
-                                      && _money.CanSpend(currentPrice);
+                                      && _moneyManager.CanSpend(currentPrice);
     }
 
     private string GetLocalizedIngredientName(Ingredient ingredient)

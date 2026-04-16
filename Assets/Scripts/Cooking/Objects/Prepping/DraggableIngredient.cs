@@ -16,12 +16,6 @@ public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour 
     [Inject]
     private readonly CameraController _cameraController;
 
-    [Inject]
-    private readonly Money _money;
-    
-    [Inject]
-    private readonly IPopupTextService _popupTextService;
-
     protected virtual void Awake()
     {
         Draggable.Dropped += OnDropped;
@@ -62,18 +56,6 @@ public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour 
 
         openPastelDoughArea = null;
         return false;
-    }
-
-    protected bool CanSpend() => _money.CanSpend(Ingredient.Cost);
-
-    protected void Spend()
-    {
-        _money.TrySpend(Ingredient.Cost);
-    }
-
-    protected void ShowNotEnoughMoneyError()
-    {
-        _popupTextService.ShowError("Sem dinheiro suficiente!", transform.position);
     }
 
     protected abstract bool TryAddToOpenDough(OpenPastelDoughArea openPastelDoughArea);

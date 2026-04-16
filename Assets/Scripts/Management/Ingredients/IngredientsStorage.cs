@@ -12,15 +12,15 @@ public class IngredientsStorage
     private int _currentPriceIndex;
     private readonly IReadOnlyList<float> _prices;
 
-    private readonly Money _money;
+    private readonly MoneyManager _moneyManager;
     
-    public IngredientsStorage(IngredientsStorageSettings settings, Money money)
+    public IngredientsStorage(IngredientsStorageSettings settings, MoneyManager moneyManager)
     {
         _doughs = new List<Dough>(settings.StartingDoughs);
         _mains = new List<Main>(settings.StartingFillings.OfType<Main>());
         _sides = new List<Side>(settings.StartingFillings.OfType<Side>());
         _prices = settings.Prices;
-        _money = money;
+        _moneyManager = moneyManager;
     }
 
     public event Action<float> PriceChanged = delegate { };
@@ -33,7 +33,7 @@ public class IngredientsStorage
 
     public bool TryBuyIngredient(Ingredient ingredient)
     {
-        var spent = _money.TrySpend(CurrentPrice);
+        var spent = _moneyManager.TrySpend(CurrentPrice);
         
         if (spent)
         {

@@ -23,6 +23,8 @@ public class Order
     }
 
     public bool IsExpired() => _elapsedTime >= _timeLimit;
+
+    public float GetValue() => Recipe.Value;
     
     public override string ToString() => $"{Recipe} para {Customer.name}";
 }
