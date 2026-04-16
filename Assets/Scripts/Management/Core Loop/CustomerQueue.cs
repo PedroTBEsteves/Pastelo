@@ -34,8 +34,15 @@ public class CustomerQueue : ITickable
     private bool HasGeneratedAllCustomers => HasCustomersLimit && _generatedCustomers >= _maxCustomers;
     private bool IsPausedByTutorial => _tutorialState.IsActive && _tutorialState.CurrentStep != TutorialStep.WaitForCustomer;
 
-    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, StrikesController strikesController, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState)
+    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, StrikesController strikesController, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState, LevelSelector levelSelector)
     {
+        if (levelSelector == null)
+            throw new ArgumentNullException(nameof(levelSelector));
+
+        var selectedLevel = levelSelector.SelectedLevel;
+        if (selectedLevel == null)
+            throw new InvalidOperationException($"{nameof(CustomerQueue)} requires a selected {nameof(Level)}.");
+
         _customers = customers;
         _orderController = orderController;
         _strikesController = strikesController;
@@ -46,7 +53,7 @@ public class CustomerQueue : ITickable
         _maxCustomerArrivalTime = orderLoopSettings.MaxCustomerArrivalTime;
         _recentCustomersRepeatWindow = Mathf.Max(0, orderLoopSettings.RecentCustomersRepeatWindow);
         _firstCustomerArrivalDelayAfterTutorial = Mathf.Max(0f, orderLoopSettings.FirstCustomerArrivalDelayAfterTutorial);
-        _maxCustomers = orderLoopSettings.MaxCustomers;
+        _maxCustomers = selectedLevel.CustomersToServe;
         _nextArrivalTime = 1f;
 
         _orderController.OrderFlowFinished += OnOrderFinished;

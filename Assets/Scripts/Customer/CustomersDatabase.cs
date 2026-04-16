@@ -1,18 +1,27 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using Random = UnityEngine.Random;
 
 public class CustomersDatabase
 {
-    private readonly Customer[] _customers;
+    private readonly IReadOnlyList<Customer> _customers;
 
-    public CustomersDatabase()
+    public CustomersDatabase(LevelSelector levelSelector)
     {
-        _customers = Resources.LoadAll<Customer>("Customers");
+        if (levelSelector == null)
+            throw new ArgumentNullException(nameof(levelSelector));
+
+        var selectedLevel = levelSelector.SelectedLevel;
+        if (selectedLevel == null)
+            throw new InvalidOperationException($"{nameof(CustomersDatabase)} requires a selected {nameof(Level)}.");
+
+        _customers = selectedLevel.Customers.ToList();
     }
 
     public Customer GetRandom()
     {
-        var size = _customers.Length;
+        var size = _customers.Count;
         var index = Random.Range(0, size);
         return _customers[index];
     }

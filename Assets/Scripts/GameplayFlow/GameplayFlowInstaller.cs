@@ -9,6 +9,8 @@ public class GameplayFlowInstaller : ValidatedMonoBehaviour, IInstaller
     
     public void InstallBindings(ContainerBuilder containerBuilder)
     {
-        containerBuilder.AddScoped(_ => _gameplayLoopFlowController, typeof(GameplayLoopFlowController));
+        containerBuilder
+            .AddSingleton(_ => _gameplayLoopFlowController, typeof(GameplayLoopFlowController))
+            .AddSingleton(typeof(LevelSelector));
     }
 }
