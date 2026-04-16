@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class IngredientsStorage
 {
     private readonly List<Dough> _doughs;
-    private readonly List<Main> _mains;
-    private readonly List<Side> _sides;
+    private readonly List<Filling> _fillings;
 
     private int _currentPriceIndex;
     private readonly IReadOnlyList<float> _prices;
@@ -17,8 +15,7 @@ public class IngredientsStorage
     public IngredientsStorage(IngredientsStorageSettings settings, MoneyManager moneyManager)
     {
         _doughs = new List<Dough>(settings.StartingDoughs);
-        _mains = new List<Main>(settings.StartingFillings.OfType<Main>());
-        _sides = new List<Side>(settings.StartingFillings.OfType<Side>());
+        _fillings = new List<Filling>(settings.StartingFillings);
         _prices = settings.Prices;
         _moneyManager = moneyManager;
     }
@@ -26,8 +23,7 @@ public class IngredientsStorage
     public event Action<float> PriceChanged = delegate { };
     
     public IReadOnlyList<Dough> Doughs => _doughs;
-    public IReadOnlyList<Main> Mains => _mains;
-    public IReadOnlyList<Side> Sides => _sides;
+    public IReadOnlyList<Filling> Fillings => _fillings;
 
     public float CurrentPrice => _prices[_currentPriceIndex];
 
@@ -49,8 +45,7 @@ public class IngredientsStorage
     {
         return ingredient switch
         {
-            Main main => _mains.Contains(main),
-            Side side => _sides.Contains(side),
+            Filling filling => _fillings.Contains(filling),
             Dough dough => _doughs.Contains(dough),
             _ => throw new InvalidOperationException("Ingredient doesn't exist")
         };
@@ -60,11 +55,8 @@ public class IngredientsStorage
     {
         switch (ingredient)
         {
-            case Main main:
-                _mains.Add(main);
-                break;
-            case Side side:
-                _sides.Add(side);
+            case Filling filling:
+                _fillings.Add(filling);
                 break;
             case Dough dough:
                 _doughs.Add(dough);

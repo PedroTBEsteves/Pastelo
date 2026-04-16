@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02898411018c4d4e8b1ab0f20166a93, type: 3}
-  m_Name: Tomate
+  m_Script: {fileID: 11500000, guid: 9587c94729844114ea69b978990d15a9, type: 3}
+  m_Name: Pimenta
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Tomate
-  <LocalizationKey>k__BackingField: filling.side.tomato
+  <Name>k__BackingField: Pimenta
+  <LocalizationKey>k__BackingField: filling.side.pepper
   <Cost>k__BackingField: 0.2
   <Value>k__BackingField: 0.5
-  <Icon>k__BackingField: {fileID: -8601570835046681118, guid: b43aa24c64b16444ea2b3b1dec7aa3d2, type: 3}
-  <PluralName>k__BackingField: Tomates
+  <Icon>k__BackingField: {fileID: -6977464587672051905, guid: 7eefeee40cfbea048a6ef476578ffb1a, type: 3}
+  <PluralName>k__BackingField: Pimentas

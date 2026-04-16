@@ -14,5 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MinFillings>k__BackingField: 0
   <MaxFillingsInclusive>k__BackingField: 6
-  <NoMainProbability>k__BackingField: 0.1
-  <MaxMainPercentage>k__BackingField: 0.5
