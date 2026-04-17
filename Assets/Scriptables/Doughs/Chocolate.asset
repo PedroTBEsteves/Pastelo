@@ -37,7 +37,7 @@ MonoBehaviour:
   <InternalName>k__BackingField: Chocolate
   <LocalizationKey>k__BackingField: dough.chocolate
   <Value>k__BackingField: 2
-  <OrderIcon>k__BackingField: {fileID: 0}
+  <OrderIcon>k__BackingField: {fileID: 5281907171707744427, guid: 591588fc8f23cb34eba6f53f9c309c06, type: 3}
   <OpenDoughSprite>k__BackingField: {fileID: 4475540513237748772, guid: f5c855d02b93095468288814077df8bf, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: f9a02bbe40382af49b5dd4c71470611c, type: 3}
   _closeDragBaseLayerFrames:

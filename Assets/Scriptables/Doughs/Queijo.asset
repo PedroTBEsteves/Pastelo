@@ -37,7 +37,7 @@ MonoBehaviour:
   <InternalName>k__BackingField: Queijo
   <LocalizationKey>k__BackingField: dough.cheese
   <Value>k__BackingField: 2
-  <OrderIcon>k__BackingField: {fileID: 0}
+  <OrderIcon>k__BackingField: {fileID: -3484198894894543839, guid: c964ecca8ac728048b38834710d99300, type: 3}
   <OpenDoughSprite>k__BackingField: {fileID: 8989570357778761060, guid: f943e9543e9cdde468c053b4e17fefe0, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: f9a02bbe40382af49b5dd4c71470611c, type: 3}
   _closeDragBaseLayerFrames:

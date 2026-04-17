@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
@@ -7,7 +6,7 @@ using UnityEngine.UI;
 public sealed class FinishLevelButton : ValidatedMonoBehaviour
 {
     [Inject]
-    private readonly GameplayLoopFlowController _gameplayLoopFlowController;
+    private readonly DayManager _dayManager;
 
     [SerializeField, Self]
     private Button _button;
@@ -24,6 +23,6 @@ public sealed class FinishLevelButton : ValidatedMonoBehaviour
 
     private void OnButtonClicked()
     {
-        _gameplayLoopFlowController.LoadDowntime().Forget();
+        _dayManager.FinishDay();
     }
 }

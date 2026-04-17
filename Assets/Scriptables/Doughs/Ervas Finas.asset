@@ -37,7 +37,7 @@ MonoBehaviour:
   <InternalName>k__BackingField: Ervas Finas
   <LocalizationKey>k__BackingField: dough.fine_herbs
   <Value>k__BackingField: 3
-  <OrderIcon>k__BackingField: {fileID: 0}
+  <OrderIcon>k__BackingField: {fileID: 2013869065985307180, guid: 7a2aa678b2636f642bee03535b4f3429, type: 3}
   <OpenDoughSprite>k__BackingField: {fileID: 4090259601666450071, guid: 1b76a44926c3c1c4d9ec5deddb63a8f7, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: f9a02bbe40382af49b5dd4c71470611c, type: 3}
   _closeDragBaseLayerFrames:
