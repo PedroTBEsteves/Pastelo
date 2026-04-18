@@ -15,4 +15,6 @@ public abstract class Ingredient : ItemDefinition
     public Sprite OrderIcon { get; private set; }
     
     public abstract string GetName();
+
+    public override string GetDisplayName() => GetName();
 }

@@ -20,4 +20,6 @@ public abstract class ItemDefinition : ScriptableObject
     
     [field: SerializeField, Header("Inventory")]
     public int MaxStack { get; private set; }
+
+    public virtual string GetDisplayName() => Name.GetLocalizedString();
 }

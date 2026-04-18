@@ -32,7 +32,6 @@ public class IngredientStorePurchaseButton : ValidatedMonoBehaviour
             _button.onClick.AddListener(OnButtonClicked);
 
         _moneyManager.MoneyChanged += OnMoneyChanged;
-        Refresh();
     }
 
     private void OnDestroy()
@@ -56,7 +55,7 @@ public class IngredientStorePurchaseButton : ValidatedMonoBehaviour
             return;
 
         if (_store.TryBuyIngredient(_ingredient))
-            Refresh();
+            RefreshInteractable();
     }
 
     private void OnMoneyChanged(MoneyChangedEvent _)
