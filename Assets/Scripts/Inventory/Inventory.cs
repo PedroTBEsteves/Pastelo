@@ -1,11 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public sealed class Inventory
 {
     private readonly List<InventorySlot> _slots = new();
 
+    public Inventory()
+    {
+        var settings = Resources.Load<InventorySettings>("Settings/Management/InventorySettings");
+        foreach (var initialItem in settings.InitialItems)
+            Add(initialItem.Item, initialItem.Amount);
+    }
+    
     public event Action<InventorySlot> SlotAdded;
     public event Action<InventorySlot> SlotRemoved;
     public event Action Changed = delegate { };
