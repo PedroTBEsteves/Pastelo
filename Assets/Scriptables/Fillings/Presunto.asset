@@ -39,6 +39,8 @@ MonoBehaviour:
   <Value>k__BackingField: 0.7
   <OrderIcon>k__BackingField: {fileID: -6389559659260161797, guid: 6824ee85009ee6b4c95575c794e70e31, type: 3}
   <SourceSprite>k__BackingField: {fileID: 7501749082229401266, guid: ef2743a5dae05b3479edc43fa9257a43, type: 3}
+  _tags:
+  - {fileID: 11400000, guid: 28fcae3989873424a9db467c13e1ec55, type: 2}
   references:
     version: 2
     RefIds: []
