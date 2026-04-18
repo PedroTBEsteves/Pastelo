@@ -9,9 +9,9 @@ public class Filling : Ingredient
     public override string GetName() => Name.GetLocalizedString(new { amount = 1 });
     
     [SerializeField]
-    private IngredientTag[] _tags;
+    private FillingTag[] _tags;
     
-    public IReadOnlyList<IngredientTag> Tags => _tags;
+    public IReadOnlyList<FillingTag> Tags => _tags;
     
-    public bool HasTag(IngredientTag tag) => _tags.Contains(tag);
+    public bool HasTag(FillingTag tag) => _tags.Contains(tag);
 }
