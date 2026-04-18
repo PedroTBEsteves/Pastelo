@@ -33,6 +33,7 @@ MonoBehaviour:
   _customers:
   - {fileID: 11400000, guid: b973576a91922514a811c30fd9a10ab9, type: 2}
   <CustomersToServe>k__BackingField: 1
+  <PriceToPlay>k__BackingField: 5
   references:
     version: 2
     RefIds: []

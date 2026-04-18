@@ -16,6 +16,9 @@ public class Level : ScriptableObject
     
     [field: SerializeField]
     public int CustomersToServe { get; private set; }
+    
+    [field: SerializeField]
+    public float PriceToPlay { get; private set; }
 
     public IEnumerable<Customer> Customers => _customers;
 }
