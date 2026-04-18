@@ -1,7 +1,4 @@
-using System;
-using System.Globalization;
 using KBCore.Refs;
-using PrimeTween;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
@@ -17,12 +14,6 @@ public class MoneyText : ValidatedMonoBehaviour
     
     [SerializeField]
     private Color _gainedMoneyColor;
-
-    [SerializeField]
-    private AudioSource _moneyGainedAudio;
-    
-    [SerializeField]
-    private AudioSource _moneyLostAudio;
     
     [Inject]
     private readonly MoneyManager _moneyManager;
@@ -36,14 +27,11 @@ public class MoneyText : ValidatedMonoBehaviour
     private void OnMoneyChanged(MoneyChangedEvent moneyChanged)
     {
         UpdateMoneyText(moneyChanged.Current);
-        
-        if (moneyChanged.Current > moneyChanged.Previous)
-            _moneyGainedAudio.Play();
     }
 
     private void UpdateMoneyText(float value)
     {
-        var text = ((int)value).ToString();
+        var text = TextUtils.FormatAsMoney(value);
         _text.SetText(text);
     }
 }

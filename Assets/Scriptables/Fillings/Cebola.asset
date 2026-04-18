@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:b2d0e1f2435465768798a9bacbdced0f
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 1015
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   <Icon>k__BackingField: {fileID: 365603805366478496, guid: 3c7640de82d2f1148a149073004a1a25, type: 3}
-  <BuyPrice>k__BackingField: 0
+  <BuyPrice>k__BackingField: 2
   <SellPrice>k__BackingField: 0
   <MaxStack>k__BackingField: 0
   <InternalName>k__BackingField: Cebola

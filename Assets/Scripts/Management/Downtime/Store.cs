@@ -2,6 +2,18 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public readonly struct StoreFixedIngredientOffer
+{
+    public StoreFixedIngredientOffer(Ingredient ingredient, int remainingDays)
+    {
+        Ingredient = ingredient;
+        RemainingDays = Mathf.Max(0, remainingDays);
+    }
+
+    public Ingredient Ingredient { get; }
+    public int RemainingDays { get; }
+}
+
 public sealed class Store
 {
     private readonly StoreSettings _settings;
@@ -10,7 +22,7 @@ public sealed class Store
     private readonly Inventory _inventory;
 
     private readonly List<Ingredient> _randomIngredients = new();
-    private readonly List<Ingredient> _fixedIngredients = new();
+    private readonly List<StoreFixedIngredientOffer> _fixedIngredients = new();
 
     private int _resolvedDay = -1;
 
@@ -20,9 +32,6 @@ public sealed class Store
         _dayManager = dayManager ?? throw new ArgumentNullException(nameof(dayManager));
         _moneyManager = moneyManager ?? throw new ArgumentNullException(nameof(moneyManager));
         _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
-
-        var a = RandomIngredients;
-        var b = FixedIngredients;
     }
 
     public IReadOnlyList<Ingredient> RandomIngredients
@@ -34,7 +43,7 @@ public sealed class Store
         }
     }
 
-    public IReadOnlyList<Ingredient> FixedIngredients
+    public IReadOnlyList<StoreFixedIngredientOffer> FixedIngredients
     {
         get
         {
@@ -91,7 +100,10 @@ public sealed class Store
         }
 
         for (var i = 0; i < activeEntries.Count; i++)
-            _fixedIngredients.Add(activeEntries[i].Ingredient);
+        {
+            var entry = activeEntries[i];
+            _fixedIngredients.Add(new StoreFixedIngredientOffer(entry.Ingredient, entry.ExpireOnDay - day));
+        }
     }
 
     private void ResolveRandomIngredients(int day)
@@ -105,7 +117,10 @@ public sealed class Store
             return;
 
         var candidates = new List<Ingredient>(randomPool.Count);
-        var selectedLookup = new HashSet<Ingredient>(_fixedIngredients);
+        var selectedLookup = new HashSet<Ingredient>();
+
+        for (var i = 0; i < _fixedIngredients.Count; i++)
+            selectedLookup.Add(_fixedIngredients[i].Ingredient);
 
         for (var i = 0; i < randomPool.Count; i++)
         {
@@ -133,7 +148,16 @@ public sealed class Store
 
     private bool IsIngredientAvailable(Ingredient ingredient)
     {
-        return _fixedIngredients.Contains(ingredient) || _randomIngredients.Contains(ingredient);
+        if (_randomIngredients.Contains(ingredient))
+            return true;
+
+        for (var i = 0; i < _fixedIngredients.Count; i++)
+        {
+            if (_fixedIngredients[i].Ingredient == ingredient)
+                return true;
+        }
+
+        return false;
     }
 
     private void RemoveExpiredFixedIngredients(List<ActiveFixedIngredient> activeEntries, int currentDay)

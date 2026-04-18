@@ -49,4 +49,6 @@ public class Dough : Ingredient
 
         return frames[index];
     }
+
+    public override string GetName() => Name.GetLocalizedString();
 }

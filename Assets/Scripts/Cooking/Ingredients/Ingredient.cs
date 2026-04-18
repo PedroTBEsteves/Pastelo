@@ -13,4 +13,6 @@ public abstract class Ingredient : ItemDefinition
 
     [field: SerializeField]
     public Sprite OrderIcon { get; private set; }
+    
+    public abstract string GetName();
 }
