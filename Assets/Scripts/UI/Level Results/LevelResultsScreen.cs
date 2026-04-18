@@ -28,6 +28,9 @@ public class LevelResultsScreen : MonoBehaviour
     private TextMeshProUGUI _postServiceAbandonmentsText;
 
     [SerializeField]
+    private TextMeshProUGUI _ordersMissingIngredientsText;
+
+    [SerializeField]
     private TweenSettings _countTweenSettings = new(1f, Ease.OutQuad, useUnscaledTime: true);
 
     [Inject]
@@ -71,6 +74,7 @@ public class LevelResultsScreen : MonoBehaviour
             .Group(Tween.Custom(0f, snapshot.BurntPastelsCount, _countTweenSettings, value => SetCount(_burntPastelsText, value)))
             .Group(Tween.Custom(0f, snapshot.QueueAbandonmentsCount, _countTweenSettings, value => SetCount(_queueAbandonmentsText, value)))
             .Group(Tween.Custom(0f, snapshot.PostServiceAbandonmentsCount, _countTweenSettings, value => SetCount(_postServiceAbandonmentsText, value)))
+            .Group(Tween.Custom(0f, snapshot.OrdersMissingIngredientsCount, _countTweenSettings, value => SetCount(_ordersMissingIngredientsText, value)))
             .OnComplete(this, screen => screen.ApplySnapshot(snapshot));
     }
 
@@ -82,6 +86,7 @@ public class LevelResultsScreen : MonoBehaviour
         SetCount(_burntPastelsText, snapshot.BurntPastelsCount);
         SetCount(_queueAbandonmentsText, snapshot.QueueAbandonmentsCount);
         SetCount(_postServiceAbandonmentsText, snapshot.PostServiceAbandonmentsCount);
+        SetCount(_ordersMissingIngredientsText, snapshot.OrdersMissingIngredientsCount);
     }
 
     private void SetAllTextsToZero()
@@ -92,6 +97,7 @@ public class LevelResultsScreen : MonoBehaviour
         SetCount(_burntPastelsText, 0f);
         SetCount(_queueAbandonmentsText, 0f);
         SetCount(_postServiceAbandonmentsText, 0f);
+        SetCount(_ordersMissingIngredientsText, 0f);
     }
 
     private void SetMoney(float value)
@@ -130,7 +136,8 @@ public class LevelResultsScreen : MonoBehaviour
             int failedOrdersCount,
             int burntPastelsCount,
             int queueAbandonmentsCount,
-            int postServiceAbandonmentsCount)
+            int postServiceAbandonmentsCount,
+            int ordersMissingIngredientsCount)
         {
             MoneyGained = moneyGained;
             SuccessfulOrdersCount = successfulOrdersCount;
@@ -138,6 +145,7 @@ public class LevelResultsScreen : MonoBehaviour
             BurntPastelsCount = burntPastelsCount;
             QueueAbandonmentsCount = queueAbandonmentsCount;
             PostServiceAbandonmentsCount = postServiceAbandonmentsCount;
+            OrdersMissingIngredientsCount = ordersMissingIngredientsCount;
         }
 
         public float MoneyGained { get; }
@@ -146,6 +154,7 @@ public class LevelResultsScreen : MonoBehaviour
         public int BurntPastelsCount { get; }
         public int QueueAbandonmentsCount { get; }
         public int PostServiceAbandonmentsCount { get; }
+        public int OrdersMissingIngredientsCount { get; }
 
         public static LevelResultsSnapshot Capture(
             LevelMoneyManager levelMoneyManager,
@@ -157,7 +166,8 @@ public class LevelResultsScreen : MonoBehaviour
                 levelPerformanceTracker.FailedOrdersCount,
                 levelPerformanceTracker.BurntPastelsCount,
                 levelPerformanceTracker.QueueAbandonmentsCount,
-                levelPerformanceTracker.PostServiceAbandonmentsCount);
+                levelPerformanceTracker.PostServiceAbandonmentsCount,
+                levelPerformanceTracker.OrdersMissingIngredientsCount);
         }
     }
 }
