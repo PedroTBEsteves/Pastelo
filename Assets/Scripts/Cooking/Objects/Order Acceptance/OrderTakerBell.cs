@@ -55,7 +55,16 @@ public class OrderTakerBell : ValidatedMonoBehaviour, IPointerDownHandler
 
         var order = _orderController.AcceptOrder(customer);
 
-        _customerDialogue.OrderDialogue(order).ChainCallback(() => _orderController.StartOrder(order));
+        _customerDialogue.OrderDialogue(order).ChainCallback(() =>
+        {
+            if (order.HadMissingIngredients)
+            {
+                _orderController.FailOrderFromMissingIngredients(order);
+                return;
+            }
+
+            _orderController.StartOrder(order);
+        });
         _bellSound.Play();
     }
 }

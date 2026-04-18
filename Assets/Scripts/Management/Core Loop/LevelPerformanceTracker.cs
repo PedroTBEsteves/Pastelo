@@ -17,12 +17,14 @@ public sealed class LevelPerformanceTracker : IDisposable
         _orderController.OrderSucceeded += OnOrderSucceeded;
         _orderController.OrderFailed += OnOrderFailed;
         _orderController.OrderExpired += OnOrderExpired;
+        _orderController.OrderHadMissingIngredients += OnOrderHadMissingIngredients;
         _customerQueue.QueueEntryRemoved += OnQueueEntryRemoved;
         EventBus<PastelBurntEvent>.Register(_pastelBurntBinding);
     }
 
     public int SuccessfulOrdersCount { get; private set; }
     public int FailedOrdersCount { get; private set; }
+    public int OrdersMissingIngredientsCount { get; private set; }
     public int BurntPastelsCount { get; private set; }
     public int QueueAbandonmentsCount { get; private set; }
     public int PostServiceAbandonmentsCount { get; private set; }
@@ -32,6 +34,7 @@ public sealed class LevelPerformanceTracker : IDisposable
         _orderController.OrderSucceeded -= OnOrderSucceeded;
         _orderController.OrderFailed -= OnOrderFailed;
         _orderController.OrderExpired -= OnOrderExpired;
+        _orderController.OrderHadMissingIngredients -= OnOrderHadMissingIngredients;
         _customerQueue.QueueEntryRemoved -= OnQueueEntryRemoved;
         EventBus<PastelBurntEvent>.Deregister(_pastelBurntBinding);
     }
@@ -49,6 +52,11 @@ public sealed class LevelPerformanceTracker : IDisposable
     private void OnOrderExpired(Order _)
     {
         PostServiceAbandonmentsCount++;
+    }
+
+    private void OnOrderHadMissingIngredients(Order _)
+    {
+        OrdersMissingIngredientsCount++;
     }
 
     private void OnQueueEntryRemoved(CustomerWaitStatus _, CustomerQueueEntryRemovedReason reason)

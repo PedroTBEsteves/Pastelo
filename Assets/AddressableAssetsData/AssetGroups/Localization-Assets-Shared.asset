@@ -30,6 +30,12 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71b3c9eb770db7d41834cd2f679ab657
+    m_Address: Assets/Dialogues/MissingIngredients/MissingIngredientsDialogues Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 74c918ebdcf48de42a9ac1f467b14562
     m_Address: Assets/Dialogues/Empty/EmptyPastelDialogues Shared Data.asset
     m_ReadOnly: 1

@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1001
-    m_Localized: "Oi, eu gostaria de um pastel de massa {dough} com {fillings}."
+    m_Localized: Oi, eu gostaria de um pastel de {dough} com {fillings}.
     m_Metadata:
       m_Items: []
   references:

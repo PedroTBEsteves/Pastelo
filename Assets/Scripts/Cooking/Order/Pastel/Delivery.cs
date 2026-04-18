@@ -11,6 +11,9 @@ public class Delivery
 
     public bool IsCorrectFor(Order order)
     {
+        if (order?.Recipe == null)
+            return false;
+
         var pastelIsCorrect = Pastel.IsCorrectFor(order.Recipe);
 
         return pastelIsCorrect;

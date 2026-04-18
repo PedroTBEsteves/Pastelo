@@ -15,14 +15,9 @@ public sealed class LevelLoadoutLoader : MonoBehaviour
     [Inject]
     private readonly LevelSelector _levelSelector;
 
-    [Inject]
-    private readonly LevelLoadoutController _levelLoadoutController;
-
     private void Awake()
     {
-        var level = _levelSelector.SelectedLevel;
-
-        var loadout = _levelLoadoutController.GetLoadout(level);
+        var loadout = _levelSelector.GetSelectedLevelLoadout();
         ConfigureSources(GetOrderedIngredients(loadout.Doughs), _doughSources);
         ConfigureSources(GetOrderedIngredients(loadout.Fillings), _fillingSources);
     }

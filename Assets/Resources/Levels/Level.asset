@@ -35,6 +35,12 @@ MonoBehaviour:
   <CustomersToServe>k__BackingField: 1
   <PriceToPlay>k__BackingField: 5
   <SplashImage>k__BackingField: {fileID: 0}
+  _preferredDoughs:
+  - {fileID: 11400000, guid: 17765e907fe5dc1489a3063745c7d9f8, type: 2}
+  _preferredFillings:
+  - {fileID: 11400000, guid: 28414d76e6b91e140b382b3f199e0986, type: 2}
+  - {fileID: 11400000, guid: 7356f64bd7c066147b19e9e08518dffa, type: 2}
+  _preferredFillingTags: []
   references:
     version: 2
     RefIds: []

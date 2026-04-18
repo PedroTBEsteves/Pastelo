@@ -16340,6 +16340,9 @@ MonoBehaviour:
   _emptyPastelDialogueTable:
     m_TableReference:
       m_TableCollectionName: GUID:74c918ebdcf48de42a9ac1f467b14562
+  _failedOrderDialoguesTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:71b3c9eb770db7d41834cd2f679ab657
   _correctOrderDialoguesTable:
     m_TableReference:
       m_TableCollectionName: GUID:d177c4ae2c36a5544b3f6a1b0f16ceab

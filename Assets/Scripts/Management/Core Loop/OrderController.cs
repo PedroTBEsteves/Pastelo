@@ -32,19 +32,26 @@ public class OrderController : ITickable
         _tutorialState = tutorialState;
         _orderCompletionTimeLimit = orderLoopSettings.OrderCompletionTimeLimit;
     }
-    
+
     public event Action<Order> OrderAccepted = delegate { };
     public event Action<Order> OrderStarted = delegate { };
     public event Action<Order> OrderExpired = delegate { };
     public event Action<Order> OrderFailed = delegate { };
+    public event Action<Order> OrderHadMissingIngredients = delegate { };
     public event Action<Order> OrderSucceeded = delegate { };
     public event Action<Order> OrderFlowFinished = delegate { };
 
     public Order AcceptOrder(Customer customer)
     {
-        var recipe = _recipeGenerator.Generate();
+        var generationResult = _recipeGenerator.Generate();
         _currentOrderNumber++;
-        var order = new Order(_currentOrderNumber, customer, recipe, _orderCompletionTimeLimit);
+        var order = new Order(
+            _currentOrderNumber,
+            customer,
+            generationResult.Recipe,
+            _orderCompletionTimeLimit,
+            generationResult.FailedBecauseOfMissingLoadoutIngredients,
+            generationResult.MissingIngredients);
         OrderAccepted(order);
         Debug.Log($"{order} aceita!");
 
@@ -53,6 +60,12 @@ public class OrderController : ITickable
 
     public void StartOrder(Order order)
     {
+        if (order == null)
+            throw new ArgumentNullException(nameof(order));
+
+        if (order.HadMissingIngredients)
+            throw new InvalidOperationException("Cannot start an order that failed recipe generation.");
+
         _activeOrders.Add(order);
         OrderStarted(order);
         Debug.Log($"{order} começou!");
@@ -61,7 +74,7 @@ public class OrderController : ITickable
     public void DeliverOrder(Order order, Delivery delivery)
     {
         _activeOrders.Remove(order);
-        
+
         if (delivery.IsCorrectFor(order))
         {
             OrderSucceeded(order);
@@ -72,7 +85,7 @@ public class OrderController : ITickable
             OrderFailed(order);
         }
     }
-    
+
     public void Tick(float deltaTime)
     {
         foreach (var order in _activeOrders)
@@ -96,8 +109,20 @@ public class OrderController : ITickable
                     OrderFlowFinished(order);
                 });
         }
-        
+
         _expiredOrders.Clear();
+    }
+
+    public void FailOrderFromMissingIngredients(Order order)
+    {
+        if (order == null)
+            throw new ArgumentNullException(nameof(order));
+
+        if (!order.HadMissingIngredients)
+            throw new InvalidOperationException("Only orders missing loadout ingredients can use this flow.");
+
+        OrderHadMissingIngredients(order);
+        OrderFlowFinished(order);
     }
 
     public void FinishOrderFlow(Order order)

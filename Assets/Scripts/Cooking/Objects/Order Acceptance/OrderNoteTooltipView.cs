@@ -15,7 +15,7 @@ public class OrderNoteTooltipView : TooltipView
 
     public bool Bind(Order order)
     {
-        return order != null && Bind(order.Recipe);
+        return order?.Recipe != null && Bind(order.Recipe);
     }
 
     public bool Bind(Recipe recipe)

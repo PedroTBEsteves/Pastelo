@@ -48,4 +48,6 @@ public sealed class LevelSelector
     {
         SelectedLevel = null;
     }
+    
+    public Loadout GetSelectedLevelLoadout() => _levelLoadoutController.GetLoadout(SelectedLevel);
 }

@@ -50,6 +50,9 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     private LocalizedStringTable _emptyPastelDialogueTable;
 
     [SerializeField]
+    private LocalizedStringTable _failedOrderDialoguesTable;
+
+    [SerializeField]
     private LocalizedStringTable _correctOrderDialoguesTable;
 
     [SerializeField]
@@ -400,6 +403,12 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 
     private string GetOrderDialogueText(Order order)
     {
+        if (order.HadMissingIngredients)
+            return GetRandomLocalizedDialogue(_failedOrderDialoguesTable, nameof(_failedOrderDialoguesTable));
+
+        if (order.Recipe == null)
+            throw new InvalidOperationException("Expected a recipe for a valid order dialogue.");
+
         if (order.Recipe.Fillings.Count == 0)
             return GetRandomLocalizedDialogue(_emptyPastelDialogueTable, nameof(_emptyPastelDialogueTable));
 

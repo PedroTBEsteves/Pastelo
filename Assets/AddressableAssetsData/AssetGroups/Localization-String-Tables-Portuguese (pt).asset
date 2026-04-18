@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 174ad40019ae184469a5253fc9237a9b
+    m_Address: MissingIngredientsDialogues_pt
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1c8d4d97649f180409107e57378691ab
     m_Address: EmptyPastelDialogues_pt
     m_ReadOnly: 1

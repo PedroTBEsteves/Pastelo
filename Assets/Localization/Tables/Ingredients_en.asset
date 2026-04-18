@@ -20,31 +20,31 @@ MonoBehaviour:
     - rid: 7724085812380041300
   m_TableData:
   - m_Id: 1001
-    m_Localized: Garlic
+    m_Localized: Garlic Dough
     m_Metadata:
       m_Items: []
   - m_Id: 1002
-    m_Localized: Chocolate
+    m_Localized: Chocolate Dough
     m_Metadata:
       m_Items: []
   - m_Id: 1003
-    m_Localized: Barbecue
+    m_Localized: Barbecue Dough
     m_Metadata:
       m_Items: []
   - m_Id: 1004
-    m_Localized: Fine Herbs
+    m_Localized: Fine Herbs Dough
     m_Metadata:
       m_Items: []
   - m_Id: 1005
-    m_Localized: Pepper
+    m_Localized: Pepper Dough
     m_Metadata:
       m_Items: []
   - m_Id: 1006
-    m_Localized: Cheese
+    m_Localized: Cheese Dough
     m_Metadata:
       m_Items: []
   - m_Id: 1007
-    m_Localized: Traditional
+    m_Localized: Traditional Dough
     m_Metadata:
       m_Items: []
   - m_Id: 1008
