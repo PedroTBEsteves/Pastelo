@@ -404,7 +404,12 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     private string GetOrderDialogueText(Order order)
     {
         if (order.HadMissingIngredients)
-            return GetRandomLocalizedDialogue(_failedOrderDialoguesTable, nameof(_failedOrderDialoguesTable));
+        {
+            var missingIngredientsText = GetMissingIngredientsText(order.MissingIngredients);
+            var templateMissingEntry = GetRandomLocalizedEntry(_failedOrderDialoguesTable, nameof(_failedOrderDialoguesTable));
+            templateMissingEntry.IsSmart = true;
+            return templateMissingEntry.GetLocalizedString(new { ingredients = missingIngredientsText });
+        }
 
         if (order.Recipe == null)
             throw new InvalidOperationException("Expected a recipe for a valid order dialogue.");
@@ -438,6 +443,24 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             fillingsParts.Add($"{amount} {GetLocalizedIngredientName(filling, amount)}");
 
         return JoinLocalizedList(fillingsParts);
+    }
+
+    private static string GetMissingIngredientsText(IReadOnlyList<Ingredient> ingredients)
+    {
+        if (ingredients == null || ingredients.Count == 0)
+            return string.Empty;
+
+        var ingredientParts = new List<string>(ingredients.Count);
+
+        foreach (var ingredient in ingredients)
+        {
+            if (ingredient == null)
+                continue;
+
+            ingredientParts.Add(ingredient.GetDisplayName());
+        }
+
+        return JoinLocalizedList(ingredientParts);
     }
 
     private static string JoinLocalizedList(IReadOnlyList<string> items)

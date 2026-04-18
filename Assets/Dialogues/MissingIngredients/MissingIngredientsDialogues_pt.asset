@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 7724086103131029607
   m_TableData:
   - m_Id: 15613734912
-    m_Localized: "Voc\xEAs n\xE3o tem nada aqui? Indo embora agora."
+    m_Localized: "Voc\xEAs n\xE3o tem {ingredients}? Indo embora agora."
     m_Metadata:
       m_Items:
       - rid: 7724086103131029607
