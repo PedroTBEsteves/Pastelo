@@ -38,6 +38,7 @@ MonoBehaviour:
   <LocalizationKey>k__BackingField: filling.main.bacon
   <Value>k__BackingField: 0.7
   <OrderIcon>k__BackingField: {fileID: 2765890307910868761, guid: 0a4efc39f3f9cc44e8a28a436a6a88ad, type: 3}
+  <SourceSprite>k__BackingField: {fileID: 4765725578835671173, guid: 558df7e23e397d246ad65bb6012da8e9, type: 3}
   references:
     version: 2
     RefIds: []

@@ -38,6 +38,7 @@ MonoBehaviour:
   <LocalizationKey>k__BackingField: filling.side.olive
   <Value>k__BackingField: 0.5
   <OrderIcon>k__BackingField: {fileID: 7094018986122487484, guid: aaaa952c6c70f1043b67f08449015bc4, type: 3}
+  <SourceSprite>k__BackingField: {fileID: 3105153724709106385, guid: ef200b0be6ba1bc4cb110c53e01d8eeb, type: 3}
   references:
     version: 2
     RefIds: []

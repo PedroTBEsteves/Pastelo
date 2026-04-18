@@ -38,6 +38,7 @@ MonoBehaviour:
   <LocalizationKey>k__BackingField: filling.side.tomato
   <Value>k__BackingField: 0.5
   <OrderIcon>k__BackingField: {fileID: -8601570835046681118, guid: b43aa24c64b16444ea2b3b1dec7aa3d2, type: 3}
+  <SourceSprite>k__BackingField: {fileID: -8455222788644087246, guid: 71a42630f3099104dbcc2ee39e83cd79, type: 3}
   references:
     version: 2
     RefIds: []

@@ -38,6 +38,7 @@ MonoBehaviour:
   <LocalizationKey>k__BackingField: filling.side.cheese
   <Value>k__BackingField: 0.3
   <OrderIcon>k__BackingField: {fileID: -1899758367821576830, guid: b07b3e45785f605478fa577c487b7b94, type: 3}
+  <SourceSprite>k__BackingField: {fileID: 5889038431415420437, guid: 62cce34a3360a3f498fe9d89585decfa, type: 3}
   references:
     version: 2
     RefIds: []

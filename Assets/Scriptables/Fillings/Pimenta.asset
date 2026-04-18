@@ -38,6 +38,7 @@ MonoBehaviour:
   <LocalizationKey>k__BackingField: filling.side.pepper
   <Value>k__BackingField: 0.5
   <OrderIcon>k__BackingField: {fileID: -6977464587672051905, guid: 7eefeee40cfbea048a6ef476578ffb1a, type: 3}
+  <SourceSprite>k__BackingField: {fileID: 3297083115633924320, guid: 19109df4da03a9547b095cf85ace9b66, type: 3}
   references:
     version: 2
     RefIds: []

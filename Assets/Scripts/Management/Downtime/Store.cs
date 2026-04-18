@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public readonly struct StoreFixedIngredientOffer
 {
@@ -131,12 +132,10 @@ public sealed class Store
 
             candidates.Add(ingredient);
         }
-
-        var random = new System.Random(unchecked(day * 486187739 + 1203941));
-
+        
         for (var i = candidates.Count - 1; i > 0; i--)
         {
-            var swapIndex = random.Next(i + 1);
+            var swapIndex = Random.Range(0, i + 1);
             (candidates[i], candidates[swapIndex]) = (candidates[swapIndex], candidates[i]);
         }
 

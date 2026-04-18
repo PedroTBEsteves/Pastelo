@@ -5,7 +5,7 @@ using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField]
     private Draggable _draggablePrefab;
@@ -16,10 +16,15 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
     private Draggable _draggable;
 
     private readonly List<Func<bool>> _canCreateDraggableHandlers = new();
+    private readonly List<Action<Draggable>> _draggableCreatedHandlers = new();
     
     public void AddCanCreateDraggableHandler(Func<bool> handler) => _canCreateDraggableHandlers.Add(handler);
     
     public void RemoveCanCreateDraggableHandler(Func<bool> handler) =>  _canCreateDraggableHandlers.Remove(handler);
+
+    public void AddDraggableCreatedHandler(Action<Draggable> handler) => _draggableCreatedHandlers.Add(handler);
+
+    public void RemoveDraggableCreatedHandler(Action<Draggable> handler) => _draggableCreatedHandlers.Remove(handler);
     
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -84,6 +89,11 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
     private Draggable CreateDraggable(PointerEventData eventData)
     {
         var position = eventData.pointerCurrentRaycast.worldPosition;
-        return Instantiate(_draggablePrefab, position, Quaternion.identity);
+        var draggable = Instantiate(_draggablePrefab, position, Quaternion.identity);
+
+        foreach (var handler in _draggableCreatedHandlers)
+            handler?.Invoke(draggable);
+
+        return draggable;
     }
 }

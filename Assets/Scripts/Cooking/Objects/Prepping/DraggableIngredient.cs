@@ -16,6 +16,8 @@ public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour 
     [Inject]
     private readonly CameraController _cameraController;
 
+    private SpriteRenderer _spriteRenderer;
+
     protected virtual void Awake()
     {
         Draggable.Dropped += OnDropped;
@@ -56,6 +58,19 @@ public abstract class DraggableIngredient<TIngredient> : ValidatedMonoBehaviour 
 
         openPastelDoughArea = null;
         return false;
+    }
+
+    public void Configure(TIngredient ingredient)
+    {
+        Ingredient = ingredient;
+
+        if (Ingredient == null)
+            return;
+
+        _spriteRenderer ??= GetComponent<SpriteRenderer>();
+
+        if (_spriteRenderer != null)
+            _spriteRenderer.sprite = Ingredient.Icon;
     }
 
     protected abstract bool TryAddToOpenDough(OpenPastelDoughArea openPastelDoughArea);

@@ -38,6 +38,7 @@ MonoBehaviour:
   <LocalizationKey>k__BackingField: filling.main.shrimp
   <Value>k__BackingField: 0.7
   <OrderIcon>k__BackingField: {fileID: -2744386507665659717, guid: 8294f71a656a1e744b70abae9994de5f, type: 3}
+  <SourceSprite>k__BackingField: {fileID: 6389902225154603314, guid: 1fb3c5cc7a129904c8325e41c47c2d57, type: 3}
   references:
     version: 2
     RefIds: []

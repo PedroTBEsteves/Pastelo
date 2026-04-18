@@ -38,6 +38,7 @@ MonoBehaviour:
   <LocalizationKey>k__BackingField: dough.pepper
   <Value>k__BackingField: 2.5
   <OrderIcon>k__BackingField: {fileID: -4157140275246709874, guid: a3f038e2519a05546a124f1733be5680, type: 3}
+  <SourceSprite>k__BackingField: {fileID: -4157140275246709874, guid: a3f038e2519a05546a124f1733be5680, type: 3}
   <OpenDoughSprite>k__BackingField: {fileID: -3614801910557280548, guid: 9b799336c857c7349ab47564fb6fb425, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: f9a02bbe40382af49b5dd4c71470611c, type: 3}
   _closeDragBaseLayerFrames:

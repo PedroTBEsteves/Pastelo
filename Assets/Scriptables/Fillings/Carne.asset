@@ -38,6 +38,7 @@ MonoBehaviour:
   <LocalizationKey>k__BackingField: filling.main.beef
   <Value>k__BackingField: 2
   <OrderIcon>k__BackingField: {fileID: -2380449057780921004, guid: 764a945c8d855a643aeb55f55e8bf902, type: 3}
+  <SourceSprite>k__BackingField: {fileID: 2477205211457190511, guid: f75a9c309cdb0204f9d4dc9e1eb60782, type: 3}
   references:
     version: 2
     RefIds: []
