@@ -13,6 +13,7 @@ public class IngredientsStorage
     private readonly IReadOnlyList<float> _prices;
 
     private readonly Money _money;
+    private readonly List<Ingredient> _ingredients;
     
     public IngredientsStorage(IngredientsStorageSettings settings, Money money)
     {
@@ -21,15 +22,31 @@ public class IngredientsStorage
         _sides = new List<Side>(settings.StartingFillings.OfType<Side>());
         _prices = settings.Prices;
         _money = money;
+        _ingredients = new List<Ingredient>(settings.Ingredients);
     }
 
     public event Action<float> PriceChanged = delegate { };
+    public event Action<Ingredient> IngredientUnlocked = delegate { };
     
     public IReadOnlyList<Dough> Doughs => _doughs;
     public IReadOnlyList<Main> Mains => _mains;
     public IReadOnlyList<Side> Sides => _sides;
 
     public float CurrentPrice => _prices[_currentPriceIndex];
+
+    public void UnlockRandomIngredient()
+    {
+        if (_ingredients.Count == 0)
+            return;
+
+        Ingredient ingredient;
+        do
+        {
+            ingredient = _ingredients.GetRandomElement();
+        } while (Contains(ingredient));
+        _ingredients.Remove(ingredient);
+        Unlock(ingredient);
+    }
 
     public bool TryBuyIngredient(Ingredient ingredient)
     {
@@ -70,5 +87,7 @@ public class IngredientsStorage
                 _doughs.Add(dough);
                 break;
         }
+
+        IngredientUnlocked(ingredient);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(DraggableSink))]
-public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehaviour, IPointerDownHandler where TIngredient : Ingredient
+public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehaviour where TIngredient : Ingredient
 {
     [SerializeField] 
     private TIngredient _ingredient;
@@ -44,6 +44,8 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
         _tutorialTargetRegistry.Register(_tutorialTarget);
         
         _draggableSink.AddCanCreateDraggableHandler(CanCreateDraggable);
+        
+        _ingredientsStorage.IngredientUnlocked += OnIngredientUnlocked;
     }
 
     private void OnDestroy()
@@ -62,21 +64,11 @@ public abstract class DraggableIngredientSink<TIngredient> : ValidatedMonoBehavi
                && _interactionGate.CanInteract(interactionType, _ingredient);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    private void OnIngredientUnlocked(Ingredient ingredient)
     {
-        var isUnlocked = _ingredientsStorage.Contains(_ingredient);
-
-        if (isUnlocked)
+        if (ingredient != _ingredient)
             return;
-
-        if (!_interactionGate.CanInteract(TutorialInteractionType.BuyIngredient, _ingredient))
-            return;
-
-        _purchasePrompt.Show(_ingredient, OnIngredientPurchased);
-    }
-
-    private void OnIngredientPurchased()
-    {
+        
         _lockedIndicator.gameObject.SetActive(false);
         _spriteRenderer.enabled = true;
     }

@@ -15,6 +15,7 @@ public class OrderController : ITickable
     private readonly GameplayTutorialState _tutorialState;
     private readonly List<Order> _activeOrders = new();
     private readonly List<Order> _expiredOrders = new();
+    private readonly IngredientsStorage _ingredientsStorage;
 
     private int _currentOrderNumber;
 
@@ -25,7 +26,8 @@ public class OrderController : ITickable
         Money money,
         PastelCookingSettings pastelCookingSettings,
         ICustomerPopUpDialogue customerPopUpDialogues,
-        GameplayTutorialState tutorialState)
+        GameplayTutorialState tutorialState, 
+        IngredientsStorage ingredientsStorage)
     {
         _recipeGenerator = recipeGenerator;
         _strikesController = strikesController;
@@ -33,6 +35,7 @@ public class OrderController : ITickable
         _pastelCookingSettings = pastelCookingSettings;
         _customerPopUpDialogues = customerPopUpDialogues;
         _tutorialState = tutorialState;
+        _ingredientsStorage = ingredientsStorage;
         _orderCompletionTimeLimit = orderLoopSettings.OrderCompletionTimeLimit;
     }
     
@@ -69,6 +72,7 @@ public class OrderController : ITickable
         {
             OrderSucceeded(order);
             _money.Gain(1);
+            _ingredientsStorage.UnlockRandomIngredient();
         }
         else
         {
