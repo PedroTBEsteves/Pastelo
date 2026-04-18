@@ -1,16 +1,19 @@
-using Cysharp.Threading.Tasks;
 using KBCore.Refs;
 using Reflex.Attributes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelSelectionButton : ValidatedMonoBehaviour
 {
-    [Inject]
-    private readonly LevelSelector _levelSelector;
+    [SerializeField, Scene]
+    private LevelLoadoutEditorView _levelLoadoutEditorView;
 
     [SerializeField, Self]
     private Button _button;
+    
+    [SerializeField, Child]
+    private TextMeshProUGUI _levelNameText;
 
     [SerializeField]
     private Level _level;
@@ -18,6 +21,7 @@ public class LevelSelectionButton : ValidatedMonoBehaviour
     private void Awake()
     {
         _button.onClick.AddListener(OnButtonClicked);
+        _levelNameText.SetText(_level != null ? _level.Name.GetLocalizedString() : string.Empty);
     }
 
     private void OnDestroy()
@@ -27,6 +31,6 @@ public class LevelSelectionButton : ValidatedMonoBehaviour
 
     private void OnButtonClicked()
     {
-        _levelSelector.PlayLevel(_level).Forget();
+        _levelLoadoutEditorView.Show(_level);
     }
 }

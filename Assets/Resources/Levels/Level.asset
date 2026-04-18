@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: GUID:b2d0e1f2435465768798a9bacbdced0f
+      m_TableCollectionName: GUID:871fb88497b39af4f8a709cd67c2366a
     m_TableEntryReference:
-      m_KeyId: 1009
+      m_KeyId: 4163284992
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -34,6 +34,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b973576a91922514a811c30fd9a10ab9, type: 2}
   <CustomersToServe>k__BackingField: 1
   <PriceToPlay>k__BackingField: 5
+  <SplashImage>k__BackingField: {fileID: 0}
   references:
     version: 2
     RefIds: []

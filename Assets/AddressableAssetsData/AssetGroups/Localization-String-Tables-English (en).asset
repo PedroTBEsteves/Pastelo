@@ -57,8 +57,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b8f2cc1cd4023f44981153479359fd1
+    m_Address: LevelNames_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c3e1f2a35465768798a9bacbdced0f10
     m_Address: Ingredients_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1f601ad81350c74f807cfe676a55a1b
+    m_Address: TextUI_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

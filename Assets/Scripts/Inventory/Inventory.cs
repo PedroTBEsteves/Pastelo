@@ -8,6 +8,7 @@ public sealed class Inventory
 
     public event Action<InventorySlot> SlotAdded;
     public event Action<InventorySlot> SlotRemoved;
+    public event Action Changed = delegate { };
 
     public IReadOnlyList<InventorySlot> Slots => _slots;
 
@@ -53,7 +54,9 @@ public sealed class Inventory
             var slotAmount = item.MaxStack <= 0 ? remainingAmount : Math.Min(remainingAmount, item.MaxStack);
             var newSlot = new InventorySlot(item, this, slotAmount);
             _slots.Add(newSlot);
+            newSlot.Changed += OnSlotChanged;
             SlotAdded?.Invoke(newSlot);
+            Changed();
             remainingAmount -= slotAmount;
         }
     }
@@ -90,11 +93,20 @@ public sealed class Inventory
             return;
 
         if (_slots.Remove(slot))
+        {
+            slot.Changed -= OnSlotChanged;
             SlotRemoved?.Invoke(slot);
+            Changed();
+        }
     }
 
     private InventorySlot FindFirstAvailableSlot(ItemDefinition item)
     {
         return _slots.Where(slot => slot.Item == item).FirstOrDefault(slot => slot.IsUnlimited || slot.RemainingCapacity > 0);
+    }
+
+    private void OnSlotChanged(InventorySlot _)
+    {
+        Changed();
     }
 }

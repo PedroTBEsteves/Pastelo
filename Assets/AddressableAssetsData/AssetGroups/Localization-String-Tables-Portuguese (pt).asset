@@ -51,6 +51,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8706023a6f6cfd64799a7c46c6ac0a38
+    m_Address: LevelNames_pt
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 873b143fd01f88d4dac3c63605944bad
     m_Address: GaveUpDialogues_pt
     m_ReadOnly: 1
@@ -65,6 +71,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d4f2a3b465768798a9bacbdced0f1021
     m_Address: Ingredients_pt
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da993a52efbd6f746ae952f9c156d2b6
+    m_Address: TextUI_pt
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pt

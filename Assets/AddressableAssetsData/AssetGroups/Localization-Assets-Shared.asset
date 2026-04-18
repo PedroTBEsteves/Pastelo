@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25774af7f7401844da02d4d43cc16f46
+    m_Address: Assets/Localization/Tables/UI/TextUI Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 266d133b17876384aafe1ff1aa1cca55
     m_Address: Assets/Localization/Tables/UI/UI Shared Data.asset
     m_ReadOnly: 1
@@ -37,6 +42,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 82baa10e432fb5b4fa649684baf64255
     m_Address: Assets/Localization/Tables/Prompts Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 871fb88497b39af4f8a709cd67c2366a
+    m_Address: Assets/Localization/Tables/LevelNames Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
