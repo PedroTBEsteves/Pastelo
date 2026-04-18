@@ -10,6 +10,9 @@ public sealed class LevelLoadoutController
     private readonly Dictionary<Level, Loadout> _loadoutsByLevel = new();
     
     private readonly Inventory _inventory;
+    
+    private int _maxDoughsPerLoadout = 3;
+    private int _maxFillingsPerLoadout = 6;
 
     public LevelLoadoutController(Inventory inventory)
     {
@@ -21,7 +24,7 @@ public sealed class LevelLoadoutController
             if (level == null || _loadoutsByLevel.ContainsKey(level))
                 continue;
 
-            _loadoutsByLevel.Add(level, new Loadout());
+            _loadoutsByLevel.Add(level, CreateLoadout());
         }
     }
     
@@ -32,7 +35,7 @@ public sealed class LevelLoadoutController
 
         return _loadoutsByLevel.TryGetValue(level, out var loadout)
             ? loadout
-            : new Loadout();
+            : CreateLoadout();
     }
 
     public bool CanConsumeLoadout(Level level)
@@ -51,5 +54,10 @@ public sealed class LevelLoadoutController
 
         foreach (var filling in loadout.Fillings)
             _inventory.Remove(filling);
+    }
+
+    private Loadout CreateLoadout()
+    {
+        return new Loadout(_maxDoughsPerLoadout, _maxFillingsPerLoadout);
     }
 }
