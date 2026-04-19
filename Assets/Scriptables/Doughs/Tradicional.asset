@@ -31,22 +31,22 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   <Icon>k__BackingField: {fileID: 7009773628709338706, guid: 700d960d89e5e314abfbe5811ce1e954, type: 3}
-  <BuyPrice>k__BackingField: 0
+  <BuyPrice>k__BackingField: 1
   <SellPrice>k__BackingField: 0
   <MaxStack>k__BackingField: 0
   <InternalName>k__BackingField: Tradicional
   <LocalizationKey>k__BackingField: dough.traditional
-  <Value>k__BackingField: 1.5
+  <Value>k__BackingField: 1
   <OrderIcon>k__BackingField: {fileID: 7009773628709338706, guid: 700d960d89e5e314abfbe5811ce1e954, type: 3}
   <SourceSprite>k__BackingField: {fileID: 7009773628709338706, guid: 700d960d89e5e314abfbe5811ce1e954, type: 3}
   <OpenDoughSprite>k__BackingField: {fileID: 3682588487474673058, guid: 62926b54ded7ce245a1149fb2ad82ed8, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: f9a02bbe40382af49b5dd4c71470611c, type: 3}
   _closeDragBaseLayerFrames:
-  - {fileID: 21300000, guid: 826560b947d19b647a826491796d3a0a, type: 3}
-  - {fileID: 21300000, guid: d30e384bbbb2c844d9ecf6968619c67c, type: 3}
-  - {fileID: 21300000, guid: 7a59aa9eca18a5143af80a3deadd0978, type: 3}
-  - {fileID: 21300000, guid: 945b8b48575344c4bb3baed59f170a7c, type: 3}
-  - {fileID: 21300000, guid: a9b59ea350241834b966172277579331, type: 3}
+  - {fileID: 21300000, guid: 25854fd230804bf44b273131dd0456e5, type: 3}
+  - {fileID: 21300000, guid: 10d9bc77ace035d4386e5835e95aa254, type: 3}
+  - {fileID: 21300000, guid: d0fd452c49edefb4a852f3dd583a43bc, type: 3}
+  - {fileID: 21300000, guid: 764ee2efdf6073f42aaf2685343c44cc, type: 3}
+  - {fileID: 21300000, guid: 5ea655fb9e31c2d43a7debd542a956eb, type: 3}
   _closeDragCoverLayerFrames:
   - {fileID: 21300000, guid: f6fb6b2dd1039c040bc6b103f08afe6a, type: 3}
   - {fileID: 21300000, guid: 30a6f4fda757b274d8b9b4a51c69ae30, type: 3}
@@ -54,11 +54,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: adf970953a86ab2408d271bcbc6e2982, type: 3}
   - {fileID: 21300000, guid: 167b4d5efe12cd8458a908cb7d5d713b, type: 3}
   _closeDragIngredientsVisibilityMaskFrames:
-  - {fileID: 21300000, guid: 25854fd230804bf44b273131dd0456e5, type: 3}
-  - {fileID: 21300000, guid: 10d9bc77ace035d4386e5835e95aa254, type: 3}
-  - {fileID: 21300000, guid: d0fd452c49edefb4a852f3dd583a43bc, type: 3}
-  - {fileID: 21300000, guid: 764ee2efdf6073f42aaf2685343c44cc, type: 3}
-  - {fileID: 21300000, guid: 5ea655fb9e31c2d43a7debd542a956eb, type: 3}
+  - {fileID: 21300000, guid: 13be315a83d97764d9023029e9f4832d, type: 3}
+  - {fileID: 21300000, guid: 963f5eaaa730fcf4bb3accd86f101ae9, type: 3}
+  - {fileID: 21300000, guid: f5475cec59923f548a181c09fc8e2c6e, type: 3}
+  - {fileID: 21300000, guid: 3044fd3b553bd5841ae626e24f57b9b6, type: 3}
+  - {fileID: 21300000, guid: 8db877786122c1a4b8e11d0dd1849687, type: 3}
   _closedPastelDoughSprites:
     _serializedList:
     - Key: 0

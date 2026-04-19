@@ -31,12 +31,12 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   <Icon>k__BackingField: {fileID: -4157140275246709874, guid: a3f038e2519a05546a124f1733be5680, type: 3}
-  <BuyPrice>k__BackingField: 0
+  <BuyPrice>k__BackingField: 3
   <SellPrice>k__BackingField: 0
   <MaxStack>k__BackingField: 0
   <InternalName>k__BackingField: Pimenta
   <LocalizationKey>k__BackingField: dough.pepper
-  <Value>k__BackingField: 2.5
+  <Value>k__BackingField: 3
   <OrderIcon>k__BackingField: {fileID: -4157140275246709874, guid: a3f038e2519a05546a124f1733be5680, type: 3}
   <SourceSprite>k__BackingField: {fileID: -4157140275246709874, guid: a3f038e2519a05546a124f1733be5680, type: 3}
   <OpenDoughSprite>k__BackingField: {fileID: -3614801910557280548, guid: 9b799336c857c7349ab47564fb6fb425, type: 3}

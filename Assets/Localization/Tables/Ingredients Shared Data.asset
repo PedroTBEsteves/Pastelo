@@ -91,6 +91,18 @@ MonoBehaviour:
     m_Key: filling.side.tomato
     m_Metadata:
       m_Items: []
+  - m_Id: 4761572402966528
+    m_Key: tag.cheese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4761628589862912
+    m_Key: tag.meat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4761675113082880
+    m_Key: tag.vegetable
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

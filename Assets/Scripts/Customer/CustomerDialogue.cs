@@ -451,10 +451,11 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             return string.Empty;
 
         var ingredientParts = new List<string>(ingredients.Count);
+        var seenIngredients = new HashSet<Ingredient>();
 
         foreach (var ingredient in ingredients)
         {
-            if (ingredient == null)
+            if (ingredient == null || !seenIngredients.Add(ingredient))
                 continue;
 
             ingredientParts.Add(ingredient.GetDisplayName());
