@@ -15,10 +15,26 @@ public class StoreSettings : ScriptableObject
     public int RandomIngredientsCount { get; private set; } = 2;
 
     [field: SerializeField, Min(0)]
+    public int RandomItemMinStock { get; private set; } = 1;
+
+    [field: SerializeField, Min(0)]
+    public int RandomItemMaxStock { get; private set; } = 3;
+
+    [field: SerializeField, Min(0)]
     public int FixedIngredientsCount { get; private set; } = 4;
 
     public IReadOnlyList<Ingredient> RandomPool => _randomPool;
     public IReadOnlyList<FixedStoreIngredientEntry> FixedSequence => _fixedSequence;
+
+    public int GetNormalizedRandomItemMinStock()
+    {
+        return Mathf.Max(0, RandomItemMinStock);
+    }
+
+    public int GetNormalizedRandomItemMaxStock()
+    {
+        return Mathf.Max(GetNormalizedRandomItemMinStock(), RandomItemMaxStock);
+    }
 }
 
 [Serializable]

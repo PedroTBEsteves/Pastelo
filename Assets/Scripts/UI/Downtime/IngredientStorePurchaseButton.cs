@@ -16,6 +16,9 @@ public class IngredientStorePurchaseButton : ValidatedMonoBehaviour
     private TMP_Text _priceText;
 
     [SerializeField]
+    private TMP_Text _remainingStockText;
+
+    [SerializeField]
     private Image _iconImage;
 
     [Inject]
@@ -55,7 +58,7 @@ public class IngredientStorePurchaseButton : ValidatedMonoBehaviour
             return;
 
         if (_store.TryBuyIngredient(_ingredient))
-            RefreshInteractable();
+            Refresh();
     }
 
     private void OnMoneyChanged(MoneyChangedEvent _)
@@ -71,6 +74,13 @@ public class IngredientStorePurchaseButton : ValidatedMonoBehaviour
         if (_priceText != null)
             _priceText.SetText(_ingredient != null ? TextUtils.FormatAsMoney(_ingredient.BuyPrice) : string.Empty);
 
+        if (_remainingStockText != null)
+        {
+            var remainingStock = _ingredient != null ? _store.GetRemainingStock(_ingredient) : 0;
+            //TODO: localizar
+            _remainingStockText.SetText($"Estoque: {remainingStock}");
+        }
+
         if (_iconImage != null)
             _iconImage.sprite = _ingredient != null ? _ingredient.Icon : null;
 
@@ -82,6 +92,8 @@ public class IngredientStorePurchaseButton : ValidatedMonoBehaviour
         if (_button == null)
             return;
 
-        _button.interactable = _ingredient != null && _moneyManager.CanSpend(_ingredient.BuyPrice);
+        _button.interactable = _ingredient != null
+            && _store.HasStock(_ingredient)
+            && _moneyManager.CanSpend(_ingredient.BuyPrice);
     }
 }

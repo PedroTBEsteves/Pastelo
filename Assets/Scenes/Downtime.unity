@@ -1943,7 +1943,7 @@ MonoBehaviour:
   _randomIngredientsRoot: {fileID: 1581469410}
   _randomIngredientPrefab: {fileID: 2048287399238361740, guid: 0b4f4c7ce52fbb84d8e7c36514fb97b0, type: 3}
   _fixedIngredientsRoot: {fileID: 1581469410}
-  _fixedIngredientPrefab: {fileID: 2395966989855798008, guid: 89bb1eb9efbfdca4eb1ff11b7664944e, type: 3}
+  _fixedIngredientPrefab: {fileID: 23900462636246602, guid: 89bb1eb9efbfdca4eb1ff11b7664944e, type: 3}
 --- !u!114 &1581469413
 MonoBehaviour:
   m_ObjectHideFlags: 0
