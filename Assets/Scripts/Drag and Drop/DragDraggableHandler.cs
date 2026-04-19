@@ -2,6 +2,14 @@ using UnityEngine.EventSystems;
 
 public sealed class DragDraggableHandler : IDraggableHandler
 {
+    public void OnPointerDown(Draggable draggable, PointerEventData eventData)
+    {
+    }
+
+    public void OnPointerUp(Draggable draggable, PointerEventData eventData)
+    {
+    }
+
     public void OnBeginDrag(Draggable draggable, PointerEventData eventData)
     {
         if (!draggable.CanDrag())

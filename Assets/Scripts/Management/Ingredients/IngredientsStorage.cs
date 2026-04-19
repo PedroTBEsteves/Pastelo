@@ -22,7 +22,7 @@ public class IngredientsStorage
         _sides = new List<Side>(settings.StartingFillings.OfType<Side>());
         _prices = settings.Prices;
         _money = money;
-        _ingredients = new List<Ingredient>(settings.Ingredients);
+        _ingredients = new List<Ingredient>(settings.Ingredients.Except(settings.StartingFillings).Except(settings.StartingDoughs));
     }
 
     public event Action<float> PriceChanged = delegate { };

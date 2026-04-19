@@ -5,7 +5,7 @@ using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     [SerializeField]
     private Draggable _draggablePrefab;
@@ -14,6 +14,7 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
     private readonly DraggableInputConfiguration _inputConfiguration;
 
     private Draggable _draggable;
+    private bool _createdDraggableOnCurrentPress;
 
     private readonly List<Func<bool>> _canCreateDraggableHandlers = new();
     
@@ -21,6 +22,35 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
     
     public void RemoveCanCreateDraggableHandler(Func<bool> handler) =>  _canCreateDraggableHandlers.Remove(handler);
     
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (_inputConfiguration.Mode != DraggableInputMode.Click)
+            return;
+
+        if (_draggable != null)
+            return;
+
+        if (!CanCreateDraggable())
+            return;
+
+        _draggable = CreateDraggable(eventData);
+        _draggable.Dropped += OnDraggableDropped;
+        _createdDraggableOnCurrentPress = true;
+        ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.pointerDownHandler);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (_inputConfiguration.Mode != DraggableInputMode.Click)
+            return;
+
+        if (!_createdDraggableOnCurrentPress || _draggable == null)
+            return;
+
+        _createdDraggableOnCurrentPress = false;
+        _draggable.FinalizePendingPointerClickIgnore(eventData.eligibleForClick);
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (_inputConfiguration.Mode != DraggableInputMode.Drag)
@@ -62,21 +92,15 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
         if (_inputConfiguration.Mode != DraggableInputMode.Click)
             return;
 
-        if (_draggable != null && !_draggable.IsDragging)
-            _draggable = null;
-
         if (_draggable == null)
-        {
-            if (!CanCreateDraggable())
-                return;
+            return;
 
-            _draggable = CreateDraggable(eventData);
-        }
+        var currentDraggable = _draggable;
 
-        ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+        ExecuteEvents.Execute(currentDraggable.gameObject, eventData, ExecuteEvents.pointerClickHandler);
 
-        if (!_draggable.IsDragging)
-            _draggable = null;
+        if (_draggable == currentDraggable && !currentDraggable.IsDragging)
+            ClearCurrentDraggable(currentDraggable);
     }
     
     private bool CanCreateDraggable() => _canCreateDraggableHandlers.Aggregate(true, (agg, handler) => agg && handler());
@@ -85,5 +109,26 @@ public sealed class DraggableSink : MonoBehaviour, IBeginDragHandler, IDragHandl
     {
         var position = eventData.pointerCurrentRaycast.worldPosition;
         return Instantiate(_draggablePrefab, position, Quaternion.identity);
+    }
+
+    private void OnDraggableDropped(PointerEventData eventData)
+    {
+        _createdDraggableOnCurrentPress = false;
+
+        if (_draggable == null)
+            return;
+
+        ClearCurrentDraggable(_draggable);
+    }
+
+    private void ClearCurrentDraggable(Draggable draggable)
+    {
+        if (draggable == null)
+            return;
+
+        draggable.Dropped -= OnDraggableDropped;
+
+        if (_draggable == draggable)
+            _draggable = null;
     }
 }

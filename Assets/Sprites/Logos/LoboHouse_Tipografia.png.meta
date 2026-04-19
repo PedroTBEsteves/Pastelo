@@ -1,0 +1,608 @@
+fileFormatVersion: 2
+guid: d498eb3e435e56845a083341d12b7615
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8645104871330143416
+    second: LoboHouse_Tipografia_0
+  - first:
+      213: 380859860120527879
+    second: LoboHouse_Tipografia_1
+  - first:
+      213: -2205938710881252245
+    second: LoboHouse_Tipografia_2
+  - first:
+      213: 4973417195117419709
+    second: LoboHouse_Tipografia_3
+  - first:
+      213: 971961193968702005
+    second: LoboHouse_Tipografia_4
+  - first:
+      213: -391916271648096401
+    second: LoboHouse_Tipografia_5
+  - first:
+      213: -468802993189969237
+    second: LoboHouse_Tipografia_6
+  - first:
+      213: 1267844961216391288
+    second: LoboHouse_Tipografia_7
+  - first:
+      213: -5406259555492609418
+    second: LoboHouse_Tipografia_8
+  - first:
+      213: 8716619248973761713
+    second: LoboHouse_Tipografia_9
+  - first:
+      213: -1119571548718491357
+    second: LoboHouse_Tipografia_10
+  - first:
+      213: 1548701238926482067
+    second: LoboHouse_Tipografia_11
+  - first:
+      213: 1968217567736025998
+    second: LoboHouse_Tipografia_12
+  - first:
+      213: 8266117380801081033
+    second: LoboHouse_Tipografia_13
+  - first:
+      213: -2321499368934919987
+    second: LoboHouse_Tipografia_14
+  - first:
+      213: -5491374024639556325
+    second: LoboHouse_Tipografia_15
+  - first:
+      213: -8513736523407298892
+    second: LoboHouse_Tipografia_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_0
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 211
+        width: 74
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8432e5a5cea660880800000000000000
+      internalID: -8645104871330143416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_1
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 210
+        width: 109
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70460bf5606194500800000000000000
+      internalID: 380859860120527879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_2
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 212
+        width: 92
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6cc3a51e6ee261e0800000000000000
+      internalID: -2205938710881252245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_3
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 210
+        width: 109
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbc1bc2b690250540800000000000000
+      internalID: 4973417195117419709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_4
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 203
+        width: 141
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53218f56e891d7d00800000000000000
+      internalID: 971961193968702005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_5
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 204
+        width: 248
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6f38b63a32af8af0800000000000000
+      internalID: -391916271648096401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_6
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 158
+        width: 7
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2a549592a7e79f0800000000000000
+      internalID: -468802993189969237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_7
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 158
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 878629f564a489110800000000000000
+      internalID: 1267844961216391288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_8
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 158
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6724d4fe39b19f4b0800000000000000
+      internalID: -5406259555492609418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_9
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 158
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bcc9693607a7f870800000000000000
+      internalID: 8716619248973761713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_10
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 158
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3291002bb9b7670f0800000000000000
+      internalID: -1119571548718491357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_11
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 158
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39a9b6942971e7510800000000000000
+      internalID: 1548701238926482067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_12
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 158
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e83d6952373805b10800000000000000
+      internalID: 1968217567736025998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_13
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 158
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cea45a46f527b270800000000000000
+      internalID: 8266117380801081033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_14
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 158
+        width: 7
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc03750bf9068cfd0800000000000000
+      internalID: -2321499368934919987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_15
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 158
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b155d8c4b68bac3b0800000000000000
+      internalID: -5491374024639556325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_16
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 158
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bee90b5db129d980800000000000000
+      internalID: -8513736523407298892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Tipografia_17
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 148
+        width: 827
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9ad15eb8430075468d220b00e2f6c3a
+      internalID: 336354085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LoboHouse_Tipografia_0: -8645104871330143416
+      LoboHouse_Tipografia_1: 380859860120527879
+      LoboHouse_Tipografia_10: -1119571548718491357
+      LoboHouse_Tipografia_11: 1548701238926482067
+      LoboHouse_Tipografia_12: 1968217567736025998
+      LoboHouse_Tipografia_13: 8266117380801081033
+      LoboHouse_Tipografia_14: -2321499368934919987
+      LoboHouse_Tipografia_15: -5491374024639556325
+      LoboHouse_Tipografia_16: -8513736523407298892
+      LoboHouse_Tipografia_17: 336354085
+      LoboHouse_Tipografia_2: -2205938710881252245
+      LoboHouse_Tipografia_3: 4973417195117419709
+      LoboHouse_Tipografia_4: 971961193968702005
+      LoboHouse_Tipografia_5: -391916271648096401
+      LoboHouse_Tipografia_6: -468802993189969237
+      LoboHouse_Tipografia_7: 1267844961216391288
+      LoboHouse_Tipografia_8: -5406259555492609418
+      LoboHouse_Tipografia_9: 8716619248973761713
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

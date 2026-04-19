@@ -2,6 +2,24 @@ using UnityEngine.EventSystems;
 
 public sealed class ClickDraggableHandler : IDraggableHandler
 {
+    public void OnPointerDown(Draggable draggable, PointerEventData eventData)
+    {
+        if (draggable.IsDragging)
+            return;
+
+        if (!draggable.CanDrag())
+            return;
+
+        draggable.BeginDrag(eventData, followPointerContinuously: true);
+        draggable.UpdateDragPosition(eventData.position);
+        draggable.BeginPendingPointerClickIgnore();
+    }
+
+    public void OnPointerUp(Draggable draggable, PointerEventData eventData)
+    {
+        draggable.FinalizePendingPointerClickIgnore(eventData.eligibleForClick);
+    }
+
     public void OnBeginDrag(Draggable draggable, PointerEventData eventData)
     {
     }
@@ -24,16 +42,12 @@ public sealed class ClickDraggableHandler : IDraggableHandler
 
     public void OnPointerClick(Draggable draggable, PointerEventData eventData)
     {
+        if (draggable.TryConsumeIgnoredPointerClick())
+            return;
+
         if (draggable.IsDragging)
         {
             draggable.EndDrag(eventData);
-            return;
         }
-
-        if (!draggable.CanDrag())
-            return;
-
-        draggable.BeginDrag(eventData, followPointerContinuously: true);
-        draggable.UpdateDragPosition(eventData.position);
     }
 }

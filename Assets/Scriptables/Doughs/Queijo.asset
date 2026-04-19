@@ -20,17 +20,17 @@ MonoBehaviour:
   <OpenDoughSprite>k__BackingField: {fileID: 8989570357778761060, guid: f943e9543e9cdde468c053b4e17fefe0, type: 3}
   <OpenIngredientsVisibilityMaskSprite>k__BackingField: {fileID: 21300000, guid: ddfb76274db0ad04db64747d5d1b2167, type: 3}
   _closeDragBaseLayerFrames:
-  - {fileID: 21300000, guid: 49486d370a0e0f6499bd33d7d754bd13, type: 3}
-  - {fileID: 21300000, guid: fbed9282e226b5241a7555ff697588ba, type: 3}
-  - {fileID: 21300000, guid: b72af13798575ee4b8aaf63b2d940c96, type: 3}
-  - {fileID: 21300000, guid: bad92e896aaf81d44abb814c99e2167a, type: 3}
-  - {fileID: 21300000, guid: aec0593ff7d735d429fc01606995b349, type: 3}
+  - {fileID: 21300000, guid: d9c742e6f446b494bbf5d0e07b7ce033, type: 3}
+  - {fileID: 21300000, guid: f223ef6b3befecc45bdc442f231f48ac, type: 3}
+  - {fileID: 21300000, guid: 58a620a75c66a8d4d96ef7e170f00a65, type: 3}
+  - {fileID: 21300000, guid: e6175a02aeb043040b49e92dd8f815f8, type: 3}
+  - {fileID: 21300000, guid: 2c3e3f8da9e72264ebc2c467c1d2dc9a, type: 3}
   _closeDragCoverLayerFrames:
-  - {fileID: 21300000, guid: afa3cef7717c5e3418c0a15c72f77858, type: 3}
-  - {fileID: 21300000, guid: 6b37774f2df7d174ebd81e10cc283b91, type: 3}
-  - {fileID: 21300000, guid: c6fbcab031a3d944e99725695f531b4e, type: 3}
-  - {fileID: 21300000, guid: 1d0241732d3bfd340b9907a4c93ae2eb, type: 3}
-  - {fileID: 21300000, guid: 71d6ef49ef4797e488d513aa6137877a, type: 3}
+  - {fileID: 21300000, guid: e46fb0049ccba944d9619a62db20ed23, type: 3}
+  - {fileID: 21300000, guid: 0d2ea8ff3d5be5847867a711e1cc43ac, type: 3}
+  - {fileID: 21300000, guid: 59bbd0bf109c3444bb2923393e56911e, type: 3}
+  - {fileID: 21300000, guid: 157030efc941f054688806cbf0d03f1b, type: 3}
+  - {fileID: 21300000, guid: ec5d83ecd2859db4284f32539f9d69a8, type: 3}
   _closeDragIngredientsVisibilityMaskFrames:
   - {fileID: 21300000, guid: 05ed2cfbb0edf1e4ebd3fe5ea6150ce3, type: 3}
   - {fileID: 21300000, guid: 493770350f5e7744ab161e13ab329b96, type: 3}
