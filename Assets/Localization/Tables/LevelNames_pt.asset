@@ -22,6 +22,22 @@ MonoBehaviour:
     m_Localized: Liberdade
     m_Metadata:
       m_Items: []
+  - m_Id: 44017356550144
+    m_Localized: Av. Paulista
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44063464534016
+    m_Localized: Feira do Bixiga
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44392272801792
+    m_Localized: Parque Ibirapuera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44518135476224
+    m_Localized: Mercado Municipal
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38f0896c54567e4383caf25b125b44c, type: 3}
+  m_Name: Liberdade
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: GUID:871fb88497b39af4f8a709cd67c2366a
+    m_TableEntryReference:
+      m_KeyId: 4163284992
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: GUID:b2d0e1f2435465768798a9bacbdced0f
+    m_TableEntryReference:
+      m_KeyId: 1005
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _customers:
+  - {fileID: 11400000, guid: b973576a91922514a811c30fd9a10ab9, type: 2}
+  - {fileID: 11400000, guid: 9b0206a27d8811743890da2dff77c3d1, type: 2}
+  - {fileID: 11400000, guid: 167acfb3ccf39f644b0b60a57cc0b6a1, type: 2}
+  <CustomersToServe>k__BackingField: 10
+  <PriceToPlay>k__BackingField: 0
+  <SplashImage>k__BackingField: {fileID: 21300000, guid: 660916c39196ce144981704e5f71de97, type: 3}
+  _preferredDoughs:
+  - {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
+  _preferredFillings:
+  - {fileID: 11400000, guid: 28414d76e6b91e140b382b3f199e0986, type: 2}
+  _preferredFillingTags:
+  - {fileID: 11400000, guid: a964e17cab45a8644aa51ddac82eab3b, type: 2}
+  references:
+    version: 2
+    RefIds: []

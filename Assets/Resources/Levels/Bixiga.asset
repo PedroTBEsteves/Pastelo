@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38f0896c54567e4383caf25b125b44c, type: 3}
+  m_Name: Bixiga
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: GUID:871fb88497b39af4f8a709cd67c2366a
+    m_TableEntryReference:
+      m_KeyId: 44063464534016
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: GUID:b2d0e1f2435465768798a9bacbdced0f
+    m_TableEntryReference:
+      m_KeyId: 1005
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _customers:
+  - {fileID: 11400000, guid: b973576a91922514a811c30fd9a10ab9, type: 2}
+  - {fileID: 11400000, guid: 9b0206a27d8811743890da2dff77c3d1, type: 2}
+  - {fileID: 11400000, guid: 167acfb3ccf39f644b0b60a57cc0b6a1, type: 2}
+  - {fileID: 11400000, guid: 646b54cc94825624cb585d8a0ed22313, type: 2}
+  - {fileID: 11400000, guid: b0eb62303ee42ff4789ef881f8a69001, type: 2}
+  <CustomersToServe>k__BackingField: 10
+  <PriceToPlay>k__BackingField: 8
+  <SplashImage>k__BackingField: {fileID: 21300000, guid: 0e751f6bc58b5974a9f0c287f73990ca, type: 3}
+  _preferredDoughs:
+  - {fileID: 11400000, guid: 17765e907fe5dc1489a3063745c7d9f8, type: 2}
+  - {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
+  - {fileID: 11400000, guid: 2d09fa27b83aac644ad79e605f95d924, type: 2}
+  - {fileID: 11400000, guid: f76c4bb0d9cca8c488e34f244c8b1ab3, type: 2}
+  - {fileID: 11400000, guid: 3bfc5e16d6e859a4cac6904982c2b7da, type: 2}
+  _preferredFillings: []
+  _preferredFillingTags:
+  - {fileID: 11400000, guid: 28fcae3989873424a9db467c13e1ec55, type: 2}
+  - {fileID: 11400000, guid: a964e17cab45a8644aa51ddac82eab3b, type: 2}
+  - {fileID: 11400000, guid: 9eb8e9512014a954da662afd81826857, type: 2}
+  references:
+    version: 2
+    RefIds: []
