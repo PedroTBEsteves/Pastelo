@@ -44,6 +44,12 @@ public class LevelLoadoutEditorView : MonoBehaviour
     private LevelLoadoutIngredientView _loadoutIngredientPrefab;
 
     [SerializeField]
+    private Transform _preferencesRoot;
+
+    [SerializeField]
+    private LevelPreferenceView _levelPreferencePrefab;
+
+    [SerializeField]
     private LevelLoadoutInventorySlotView _inventorySlotPrefab;
 
     [SerializeField]
@@ -70,6 +76,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
     private readonly List<LevelLoadoutIngredientView> _doughSlots = new();
     private readonly List<LevelLoadoutIngredientView> _fillingSlots = new();
     private readonly List<LevelLoadoutInventorySlotView> _inventoryItems = new();
+    private readonly List<LevelPreferenceView> _preferenceItems = new();
 
     private Level _selectedLevel;
     private ActiveDrag _activeDrag;
@@ -217,6 +224,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
     {
         RefreshHeader();
         RebuildSlots();
+        RebuildPreferences();
         RebuildProjectedInventory();
         RefreshStartButton();
     }
@@ -292,6 +300,44 @@ public class LevelLoadoutEditorView : MonoBehaviour
             itemView.name = $"Projected Inventory Item {index}";
             itemView.Bind(this, projectedInventory[index]);
             _inventoryItems.Add(itemView);
+        }
+    }
+
+    private void RebuildPreferences()
+    {
+        ClearViews(_preferenceItems);
+
+        if (_selectedLevel == null || _preferencesRoot == null || _levelPreferencePrefab == null)
+            return;
+
+        foreach (var dough in _selectedLevel.PreferredDoughs
+                     .Where(dough => dough != null)
+                     .OrderBy(dough => dough.GetDisplayName()))
+        {
+            var itemView = Instantiate(_levelPreferencePrefab, _preferencesRoot);
+            itemView.name = $"Preferred Dough {dough.GetDisplayName()}";
+            itemView.Bind(dough);
+            _preferenceItems.Add(itemView);
+        }
+
+        foreach (var filling in _selectedLevel.PreferredFillings
+                     .Where(filling => filling != null)
+                     .OrderBy(filling => filling.GetDisplayName()))
+        {
+            var itemView = Instantiate(_levelPreferencePrefab, _preferencesRoot);
+            itemView.name = $"Preferred Filling {filling.GetDisplayName()}";
+            itemView.Bind(filling);
+            _preferenceItems.Add(itemView);
+        }
+
+        foreach (var fillingTag in _selectedLevel.PreferredFillingTags
+                     .Where(fillingTag => fillingTag != null)
+                     .OrderBy(fillingTag => fillingTag.Name.GetLocalizedString()))
+        {
+            var itemView = Instantiate(_levelPreferencePrefab, _preferencesRoot);
+            itemView.name = $"Preferred Tag {fillingTag.Name.GetLocalizedString()}";
+            itemView.Bind(fillingTag);
+            _preferenceItems.Add(itemView);
         }
     }
 

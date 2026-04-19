@@ -21,7 +21,7 @@ public class LevelSelectionButton : ValidatedMonoBehaviour
     private void Awake()
     {
         _button.onClick.AddListener(OnButtonClicked);
-        _levelNameText.SetText(_level != null ? _level.Name.GetLocalizedString() : string.Empty);
+        _levelNameText.SetText($"{_level.Name.GetLocalizedString()} ({TextUtils.FormatAsMoney(_level.PriceToPlay)})");
     }
 
     private void OnDestroy()
