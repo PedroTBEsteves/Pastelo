@@ -86,6 +86,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     private Tween _customerBobbingTween;
     private Vector3 _customerIdleLocalPosition;
     private HoverTransformTween _customerHoverTween;
+    private bool _isQueueCustomerVisible;
 
     public bool IsPlaying => _dialogueSequence.isAlive;
 
@@ -95,6 +96,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         _customerSprite.TryGetComponent(out _customerHoverTween);
         ResetTransitionSprite();
         SetRendererState(_customerSprite, _customerSprite.sprite, _customerIdleLocalPosition);
+        _isQueueCustomerVisible = _customerSprite.sprite != null;
         SetCustomerHoverEnabled(false);
         StartCustomerBobbing();
         SetQueuedCustomersIndicator(GetQueuedCustomersCount());
@@ -141,7 +143,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             .Chain(Tween.Delay(_delayAfterTextIsDone, () =>
             {
                 _dialogueObject.SetActive(false);
-                AnimateNextCustomerFromQueue();
+                AnimateNextCustomerAfterDialogue();
             }));
         
         return _dialogueSequence;
@@ -170,7 +172,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         .Chain(Tween.Delay(2f, () =>
         {
             _dialogueObject.SetActive(false);
-            AnimateNextCustomerFromQueue();
+            AnimateNextCustomerAfterDialogue();
             _deliveryBag.SetActive(false);
             
             _happyVisualEffect.Stop();
@@ -181,7 +183,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 
     private void OnCustomerArrived(Customer customer)
     {
-        if (_customerSprite.sprite != null)
+        if (_isQueueCustomerVisible || IsPlaying)
             return;
 
         AnimateCustomerArrival(customer.Sprite);
@@ -190,6 +192,9 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
 
     private void OnCustomerExpired(Customer customer)
     {
+        if (IsPlaying && !_isQueueCustomerVisible)
+            return;
+
         if (!TryGetCurrentAndNextQueuedCustomers(out var currentCustomer, out var nextCustomer))
             return;
 
@@ -213,6 +218,23 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
     {
         if (_customerQueue.TryPeek(out var nextCustomer))
         {
+            if (_isQueueCustomerVisible)
+                AnimateCustomerSwap(_customerSprite.sprite, nextCustomer.Sprite);
+            else
+                AnimateCustomerArrival(nextCustomer.Sprite);
+
+            _iconSprite.enabled = true;
+            return;
+        }
+
+        AnimateCustomerExit();
+        _iconSprite.enabled = false;
+    }
+
+    private void AnimateNextCustomerAfterDialogue()
+    {
+        if (_customerQueue.TryPeek(out var nextCustomer))
+        {
             AnimateCustomerSwap(_customerSprite.sprite, nextCustomer.Sprite);
             _iconSprite.enabled = true;
             return;
@@ -227,6 +249,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         StopCustomerTweens();
         ResetTransitionSprite();
         SetRendererState(_customerSprite, sprite, _customerIdleLocalPosition);
+        _isQueueCustomerVisible = false;
         StartCustomerBobbing();
     }
 
@@ -236,6 +259,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         ResetTransitionSprite();
         var customerStartLocalPosition = GetCustomerStartLocalPosition();
         SetRendererState(_customerSprite, sprite, customerStartLocalPosition);
+        _isQueueCustomerVisible = true;
         _customerMoveTween = Tween.Position(
             _customerSprite.transform,
             GetWorldPosition(customerStartLocalPosition),
@@ -250,12 +274,14 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         {
             SetCustomerHoverEnabled(false);
             ResetTransitionSprite();
+            _isQueueCustomerVisible = false;
             return;
         }
 
         StopCustomerTweens();
         ResetTransitionSprite();
         SetRendererState(_customerSprite, _customerSprite.sprite, _customerIdleLocalPosition);
+        _isQueueCustomerVisible = false;
         var customerStartLocalPosition = GetCustomerStartLocalPosition();
         _customerMoveTween = Tween.Position(
             _customerSprite.transform,
@@ -286,6 +312,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
         var customerStartLocalPosition = GetCustomerStartLocalPosition();
         SetRendererState(_customerTransitionSprite, outgoingSprite, _customerIdleLocalPosition);
         SetRendererState(_customerSprite, incomingSprite, customerStartLocalPosition);
+        _isQueueCustomerVisible = true;
 
         _customerTransitionMoveTween = Tween.Position(
             _customerTransitionSprite.transform,
