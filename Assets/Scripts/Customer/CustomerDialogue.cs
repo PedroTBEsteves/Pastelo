@@ -165,7 +165,7 @@ public class CustomerDialogue : MonoBehaviour, ICustomerDialogue
             _dialogueObject.SetActive(true);
             
             orderController.DeliverOrder(order, delivery);
-            if (isCorrect)
+            if (isCorrect && !Application.isMobilePlatform)
                 _happyVisualEffect.Play();
         }))
         .Chain(_dialogueWriter.WriteText(dialogue, _text, _audioSource))

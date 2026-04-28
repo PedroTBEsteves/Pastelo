@@ -12,7 +12,8 @@ public sealed class DraggableInputConfiguration
     {
         get
         {
-            var savedValue = PlayerPrefs.GetInt(PlayerPrefsKey, (int)DraggableInputMode.Click);
+            var defaultInputMode = Application.isMobilePlatform ? DraggableInputMode.Drag : DraggableInputMode.Click;
+            var savedValue = PlayerPrefs.GetInt(PlayerPrefsKey, (int)defaultInputMode);
             return Enum.IsDefined(typeof(DraggableInputMode), savedValue)
                 ? (DraggableInputMode)savedValue
                 : DraggableInputMode.Click;
