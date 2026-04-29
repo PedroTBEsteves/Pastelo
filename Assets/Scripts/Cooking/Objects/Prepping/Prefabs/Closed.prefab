@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 3946908216902818608}
   - component: {fileID: 6912378456123784561}
   - component: {fileID: 5323813328873235002}
+  - component: {fileID: 7753546356225387118}
   m_Layer: 0
   m_Name: Closed
   m_TagString: Untagged
@@ -358,7 +359,7 @@ MonoBehaviour:
       m_TableCollectionName: 
   _localizationKey: 
   _viewPrefabOverride: {fileID: 0}
-  _presenter: {fileID: 0}
+  _presenter: {fileID: 7753546356225387118}
 --- !u!114 &5323813328873235002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +395,18 @@ MonoBehaviour:
   _useRotation: 0
   _hoverLocalEulerAngles: {x: 0, y: 0, z: 0}
   _isTweenEnabled: 1
+--- !u!114 &7753546356225387118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146083446873447655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567cab21a53a5cc44afb275cb599ebb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3160242439812138036
 GameObject:
   m_ObjectHideFlags: 0

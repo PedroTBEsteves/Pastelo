@@ -1,10 +1,8 @@
 using PrimeTween;
-using UnityEngine;
 
-public interface ICustomerDialogue
+public interface ICustomerDeliveryDialogue
 {
-    Sequence OrderDialogue(Order order);
     Sequence DeliveryDialogue(Order order, Delivery delivery, OrderController orderController);
-    
+
     bool IsPlaying { get; }
 }

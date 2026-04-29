@@ -1,6 +1,6 @@
 public class DeliverySequence
 {
-    private readonly ICustomerDialogue _customerDialogue;
+    private readonly ICustomerDeliveryDialogue _customerDeliveryDialogue;
     private readonly TimeController _timeController;
     private readonly CameraController _cameraController;
     private readonly OrderController _orderController;
@@ -8,9 +8,9 @@ public class DeliverySequence
 
     private bool _isFailedOrder;
 
-    public DeliverySequence(ICustomerDialogue customerDialogue, TimeController timeController, CameraController cameraController, OrderController orderController, StrikesController strikesController)
+    public DeliverySequence(ICustomerDeliveryDialogue customerDeliveryDialogue, TimeController timeController, CameraController cameraController, OrderController orderController, StrikesController strikesController)
     {
-        _customerDialogue = customerDialogue;
+        _customerDeliveryDialogue = customerDeliveryDialogue;
         _timeController = timeController;
         _cameraController = cameraController;
         _orderController = orderController;
@@ -24,7 +24,7 @@ public class DeliverySequence
         _timeController.Pause();
         _cameraController.GoImmediatelyToSection(CameraSection.Balcony);
 
-        _customerDialogue.DeliveryDialogue(order, delivery, _orderController).ChainCallback(() =>
+        _customerDeliveryDialogue.DeliveryDialogue(order, delivery, _orderController).ChainCallback(() =>
         {
             _timeController.Resume();
 
