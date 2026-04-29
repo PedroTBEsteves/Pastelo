@@ -76,8 +76,11 @@ public class OrderNoteTaker : MonoBehaviour
 
     private void OnOrderFlowFinished(Order order)
     {
-        if (!_visibleOrders.Remove(order))
+        if (!_visibleOrders.Remove(order, out var visibleOrderState))
             return;
+
+        if (visibleOrderState.OrderNote != null)
+            Destroy(visibleOrderState.OrderNote.gameObject);
 
         ShowQueuedOrdersIfPossible();
     }

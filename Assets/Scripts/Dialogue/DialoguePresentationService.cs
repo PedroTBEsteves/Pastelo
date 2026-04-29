@@ -34,6 +34,6 @@ public class DialoguePresentationService : MonoBehaviour
 
         return Sequence.Create(Tween.Delay(0f, () => dialogue.gameObject.SetActive(true)))
             .Chain(_dialogueWriter.WriteText(text, dialogue.Text, _audioSource))
-            .OnComplete(dialogue, static view => UnityEngine.Object.Destroy(view.gameObject));
+            .OnComplete(dialogue, static view => Destroy(view.gameObject));
     }
 }

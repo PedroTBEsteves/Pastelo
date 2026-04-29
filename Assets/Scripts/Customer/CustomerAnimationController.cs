@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class CustomerAnimationController : MonoBehaviour
 {
+    private enum CustomerAnimationMode
+    {
+        Queue,
+        DeliverySlot,
+    }
+
+    [SerializeField]
+    private CustomerAnimationMode _mode = CustomerAnimationMode.Queue;
+
     [SerializeField]
     private SpriteRenderer _customerSprite;
 
@@ -40,6 +49,7 @@ public class CustomerAnimationController : MonoBehaviour
     private bool _isDialoguePlaying;
 
     public bool IsDialoguePlaying => _isDialoguePlaying;
+    public bool IsVisible => _customerSprite != null && _customerSprite.sprite != null && _customerSprite.enabled;
 
     private void Awake()
     {
@@ -50,11 +60,18 @@ public class CustomerAnimationController : MonoBehaviour
         _isQueueCustomerVisible = _customerSprite.sprite != null;
         SetCustomerHoverEnabled(false);
         StartCustomerBobbing();
-        SetQueuedCustomersIndicator(GetQueuedCustomersCount());
+
+        if (UsesQueueMode())
+            SetQueuedCustomersIndicator(GetQueuedCustomersCount());
+        else
+            SetQueuedCustomersIndicator(0);
     }
 
     private void Start()
     {
+        if (!UsesQueueMode())
+            return;
+
         _customerQueue.CustomerArrived += OnCustomerArrived;
         _customerQueue.CustomerExpired += OnCustomerExpired;
         _customerQueue.CustomersCountChanged += OnCustomersCountChanged;
@@ -65,7 +82,7 @@ public class CustomerAnimationController : MonoBehaviour
     {
         StopCustomerTweens();
 
-        if (_customerQueue == null)
+        if (!UsesQueueMode() || _customerQueue == null)
             return;
 
         _customerQueue.CustomerArrived -= OnCustomerArrived;
@@ -88,6 +105,27 @@ public class CustomerAnimationController : MonoBehaviour
     {
         _isDialoguePlaying = false;
         AnimateNextCustomerAfterDialogue();
+    }
+
+    public void CompleteDialogue()
+    {
+        _isDialoguePlaying = false;
+    }
+
+    public void ShowDeliveryCustomer(Sprite sprite)
+    {
+        _isDialoguePlaying = false;
+        SetQueuedCustomersIndicator(0);
+        SetIconVisible(false);
+        AnimateCustomerSwap(_customerSprite.sprite, sprite);
+    }
+
+    public void HideDeliveryCustomer()
+    {
+        _isDialoguePlaying = false;
+        SetQueuedCustomersIndicator(0);
+        SetIconVisible(false);
+        AnimateCustomerExit();
     }
 
     private void OnCustomerArrived(Customer customer)
@@ -279,7 +317,17 @@ public class CustomerAnimationController : MonoBehaviour
 
     private Vector3 GetCustomerStartLocalPosition() => _customerIdleLocalPosition + _customerStartLocalOffset;
 
-    private void SetQueuedCustomersIndicator(int count) => _queuedCustomersIndicatorSprite.enabled = count > 1;
+    private void SetQueuedCustomersIndicator(int count)
+    {
+        if (_queuedCustomersIndicatorSprite != null)
+            _queuedCustomersIndicatorSprite.enabled = count > 1;
+    }
+
+    private void SetIconVisible(bool visible)
+    {
+        if (_iconSprite != null)
+            _iconSprite.enabled = visible;
+    }
 
     private int GetQueuedCustomersCount()
     {
@@ -307,4 +355,6 @@ public class CustomerAnimationController : MonoBehaviour
 
         return true;
     }
+
+    private bool UsesQueueMode() => _mode == CustomerAnimationMode.Queue;
 }

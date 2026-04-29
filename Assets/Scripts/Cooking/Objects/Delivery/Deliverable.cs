@@ -11,6 +11,12 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private DraggableClosedPastel _closedPastelPrefab;
 
     [SerializeField]
+    private DeliveryCustomerDisplay _customerDisplay;
+
+    [SerializeField]
+    private DeliveryIngredientHint _bagIngredientHint;
+
+    [SerializeField]
     private Sprite _filledSprite;
     
     [SerializeField]
@@ -18,6 +24,12 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     [Inject]
     private readonly DeliverySequence _deliverySequence;
+
+    [Inject]
+    private readonly OrderController _orderController;
+
+    [Inject]
+    private readonly CameraController _cameraController;
 
     [Inject]
     private readonly GameplayTutorialEvents _tutorialEvents;
@@ -29,10 +41,13 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
     
     private ClosedPastelDough _closedPastelDough;
-    private DraggableClosedPastel _draggedPastel;
     private SpriteRenderer _spriteRenderer;
     private Sprite _emptySprite;
     private TutorialTarget _tutorialTarget;
+    private Vector3 _dragStartPosition;
+    private Vector3 _holdOffset;
+    private int _baseSortingOrder;
+    private bool _isDraggingBag;
     
     public Vector3 DiscardPosition => _discardPositionTransform.position;
 
@@ -40,15 +55,27 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _emptySprite = _spriteRenderer != null ? _spriteRenderer.sprite : null;
-        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
-        _tutorialTarget.Configure(TutorialTargetId.DeliveryArea);
-        _tutorialTargetRegistry.Register(_tutorialTarget);
+        _baseSortingOrder = _spriteRenderer != null ? _spriteRenderer.sortingOrder : 0;
+        _tutorialTarget = GetComponent<TutorialTarget>();
+        _bagIngredientHint.SetVisible(false);
+        if (_tutorialTarget != null)
+        {
+            _tutorialTarget.Configure(TutorialTargetId.DeliveryArea);
+            _tutorialTargetRegistry.Register(_tutorialTarget);
+        }
+        else
+        {
+            Debug.LogError($"{nameof(Deliverable)} on '{name}' is missing a scene-prepared {nameof(TutorialTarget)}.", this);
+        }
+
+        ConfigureCustomerDisplay();
         UpdateSprite();
     }
 
     private void OnDestroy()
     {
-        _tutorialTargetRegistry.Unregister(_tutorialTarget);
+        if (_tutorialTarget != null)
+            _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
     
     public bool TryAddPastel(DraggableClosedPastel closedPastel)
@@ -62,62 +89,72 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         _closedPastelDough = closedPastel.GetClosedPastelDough();
         _addedAudioSource.Play();
         _tutorialEvents.PublishPastelPlacedOnDelivery(closedPastel);
+        _bagIngredientHint?.Bind(_closedPastelDough.Recipe);
+        _bagIngredientHint?.SetVisible(false);
         UpdateSprite();
         return true;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_closedPastelDough == null || _closedPastelPrefab == null)
+        if (_closedPastelDough == null || _filledSprite == null || _customerDisplay == null)
             return;
 
-        if (!_interactionGate.CanInteract(TutorialInteractionType.RemoveCookedPastel))
+        if (!_customerDisplay.HasVisibleCustomer())
             return;
 
-        var storedClosedPastelDough = _closedPastelDough;
-        _closedPastelDough = null;
-        UpdateSprite();
+        _isDraggingBag = true;
+        _dragStartPosition = transform.position;
+        _holdOffset = transform.position - GetPointerWorldPosition(eventData);
+        _bagIngredientHint?.SetVisible(true);
+        _customerDisplay.SetHintsVisible(true);
+        _tutorialEvents.PublishDeliveryBagPickedUp(this);
 
-        var position = eventData.pointerCurrentRaycast.worldPosition;
-        _draggedPastel = Instantiate(_closedPastelPrefab, position, Quaternion.identity, transform.parent);
-        _draggedPastel.Initialize(storedClosedPastelDough);
-
-        ExecuteEvents.Execute(_draggedPastel.gameObject, eventData, ExecuteEvents.beginDragHandler);
+        if (_spriteRenderer != null)
+            _spriteRenderer.sortingOrder = 9;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (_draggedPastel == null)
+        if (!_isDraggingBag)
             return;
 
-        ExecuteEvents.Execute(_draggedPastel.gameObject, eventData, ExecuteEvents.dragHandler);
+        transform.position = GetPointerWorldPosition(eventData) + _holdOffset;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_draggedPastel == null)
+        if (!_isDraggingBag)
             return;
 
-        ExecuteEvents.Execute(_draggedPastel.gameObject, eventData, ExecuteEvents.endDragHandler);
-        _draggedPastel = null;
+        _isDraggingBag = false;
+        _bagIngredientHint?.SetVisible(false);
+        _customerDisplay.SetHintsVisible(false);
+
+        var delivered = TryDeliverToCustomer(eventData);
+        if (delivered)
+        {
+            _closedPastelDough = null;
+            _bagIngredientHint?.Bind(null);
+            UpdateSprite();
+        }
+
+        transform.position = _dragStartPosition;
+        _tutorialEvents.PublishDeliveryBagDropped(this);
+
+        if (_spriteRenderer != null)
+            _spriteRenderer.sortingOrder = _baseSortingOrder;
     }
 
-    public bool TryDeliver(OrderNote orderNote)
+    public bool TryRestorePastel(ClosedPastelDough closedPastelDough)
     {
-        if (!_interactionGate.CanInteract(TutorialInteractionType.DeliverOrder, orderNote.Order))
+        if (closedPastelDough == null || _closedPastelDough != null)
             return false;
 
-        if (_closedPastelDough == null)
-            return false;
-
-        var delivery = new Delivery(_closedPastelDough.Finish());
-        _addedAudioSource.Play();
-        _deliverySequence.StartSequence(orderNote.Order, delivery);
-        _tutorialEvents.PublishOrderDelivered(orderNote.Order);
-
-        _closedPastelDough = null;
+        _closedPastelDough = closedPastelDough;
+        _bagIngredientHint?.Bind(_closedPastelDough.Recipe);
+        _bagIngredientHint?.SetVisible(false);
         UpdateSprite();
-        
         return true;
     }
 
@@ -127,5 +164,47 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             return;
 
         _spriteRenderer.sprite = _closedPastelDough == null ? _emptySprite : _filledSprite;
+    }
+
+    private void ConfigureCustomerDisplay()
+    {
+        if (_customerDisplay == null)
+        {
+            Debug.LogError($"{nameof(Deliverable)} on '{name}' is missing a {nameof(DeliveryCustomerDisplay)} reference.", this);
+            return;
+        }
+
+        if (_bagIngredientHint == null)
+            Debug.LogError($"{nameof(Deliverable)} on '{name}' is missing a scene-prepared {nameof(DeliveryIngredientHint)} for the bag.", this);
+
+        _customerDisplay.Configure(
+            _orderController,
+            _deliverySequence,
+            _tutorialEvents,
+            _interactionGate,
+            _tutorialTargetRegistry);
+    }
+
+    private bool TryDeliverToCustomer(PointerEventData eventData)
+    {
+        var mousePosition = GetPointerWorldPosition(eventData);
+        var raycastHits = Physics2D.RaycastAll(
+            mousePosition,
+            Vector2.zero,
+            float.MaxValue,
+            ~LayerMask.GetMask("Draggable"));
+
+        foreach (var raycastHit in raycastHits)
+        {
+            if (raycastHit.collider.TryGetComponent<DeliveryCustomerSlot>(out var slot))
+                return slot.TryDeliver(_closedPastelDough);
+        }
+
+        return false;
+    }
+
+    private Vector3 GetPointerWorldPosition(PointerEventData eventData)
+    {
+        return _cameraController.ScreenToWorldPoint(eventData.position);
     }
 }

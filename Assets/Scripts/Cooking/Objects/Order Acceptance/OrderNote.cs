@@ -3,7 +3,6 @@ using PrimeTween;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Draggable))]
@@ -11,12 +10,6 @@ public class OrderNote : ValidatedMonoBehaviour
 {
     [Inject]
     private readonly OrderController _orderController;
-
-    [Inject]
-    private readonly CameraController _cameraController;
-
-    [Inject]
-    private readonly GameplayInteractionGate _interactionGate;
 
     [Inject]
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
@@ -57,7 +50,6 @@ public class OrderNote : ValidatedMonoBehaviour
     [SerializeField, Self]
     private Draggable _draggable;
 
-    private Vector3 _positionOnHold;
     private TutorialTarget _tutorialTarget;
     private Tween _remainingTimeColorTween;
     private RemainingTimeBand _currentRemainingTimeBand;
@@ -81,8 +73,6 @@ public class OrderNote : ValidatedMonoBehaviour
         _layoutElement = GetComponent<LayoutElement>();
         _baseWidth = Mathf.Max(_rectTransform.sizeDelta.x, _layoutElement != null ? _layoutElement.preferredWidth : 0f);
         _orderController.OrderExpired += OnOrderExpired;
-        _draggable.Held += OnHeld;
-        _draggable.Dropped += OnDropped;
         _draggable.AddCanDragHandler(CanDragOrderNote);
     }
 
@@ -92,8 +82,6 @@ public class OrderNote : ValidatedMonoBehaviour
             _remainingTimeColorTween.Stop();
 
         _orderController.OrderExpired -= OnOrderExpired;
-        _draggable.Held -= OnHeld;
-        _draggable.Dropped -= OnDropped;
         _draggable.RemoveCanDragHandler(CanDragOrderNote);
         _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
@@ -134,34 +122,7 @@ public class OrderNote : ValidatedMonoBehaviour
         ApplyRemainingTimeBand(normalizedRemainingTime, true);
     }
 
-    private void OnHeld(PointerEventData _)
-    {
-        _positionOnHold = transform.position;
-    }
-
-    private void OnDropped(PointerEventData eventData)
-    {
-        var mousePosition = _cameraController.ScreenToWorldPoint(eventData.position);
-        var raycastHit = Physics2D.Raycast(
-            mousePosition,
-            Vector2.zero,
-            float.MaxValue,
-            ~LayerMask.GetMask("Draggable"));
-        
-        if (raycastHit
-            && raycastHit.collider.TryGetComponent<Deliverable>(out var deliverable))
-        {
-            if (deliverable.TryDeliver(this))
-            {
-                Destroy(gameObject);
-                return;
-            }
-        }
-        
-        transform.position = _positionOnHold;
-    }
-
-    private bool CanDragOrderNote() => _interactionGate.CanInteract(TutorialInteractionType.DeliverOrder, Order);
+    private bool CanDragOrderNote() => false;
 
     private void BindRecipe(Recipe recipe)
     {
