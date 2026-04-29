@@ -13,6 +13,9 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
 
     [Inject]
     private readonly DraggableInputConfiguration _inputConfiguration;
+
+    [SerializeField]
+    private bool _forceDraggableLayer = true;
     
     private Vector2 _holdOffset;
     
@@ -36,7 +39,8 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
     
     private void Awake()
     {
-        gameObject.layer = LayerMask.NameToLayer("Draggable");
+        if (_forceDraggableLayer)
+            gameObject.layer = LayerMask.NameToLayer("Draggable");
         _sprite = GetComponent<SpriteRenderer>();
         _order = _sprite != null ? _sprite.sortingOrder : 0;
 

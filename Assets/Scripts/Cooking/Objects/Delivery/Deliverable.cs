@@ -2,7 +2,8 @@ using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+[RequireComponent(typeof(Draggable))]
+public class Deliverable : MonoBehaviour
 {
     [SerializeField] 
     private Transform _discardPositionTransform;
@@ -40,24 +41,26 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     [Inject]
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
     
+    private Draggable _draggable;
     private ClosedPastelDough _closedPastelDough;
     private SpriteRenderer _spriteRenderer;
     private Sprite _emptySprite;
     private TutorialTarget _tutorialTarget;
     private Vector3 _dragStartPosition;
-    private Vector3 _holdOffset;
-    private int _baseSortingOrder;
     private bool _isDraggingBag;
     
     public Vector3 DiscardPosition => _discardPositionTransform.position;
 
     private void Awake()
     {
+        _draggable = GetComponent<Draggable>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _emptySprite = _spriteRenderer != null ? _spriteRenderer.sprite : null;
-        _baseSortingOrder = _spriteRenderer != null ? _spriteRenderer.sortingOrder : 0;
         _tutorialTarget = GetComponent<TutorialTarget>();
         _bagIngredientHint.SetVisible(false);
+        _draggable.Held += OnHeld;
+        _draggable.Dropped += OnDropped;
+        _draggable.AddCanDragHandler(CanDragBag);
         if (_tutorialTarget != null)
         {
             _tutorialTarget.Configure(TutorialTargetId.DeliveryArea);
@@ -74,6 +77,13 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void OnDestroy()
     {
+        if (_draggable != null)
+        {
+            _draggable.Held -= OnHeld;
+            _draggable.Dropped -= OnDropped;
+            _draggable.RemoveCanDragHandler(CanDragBag);
+        }
+
         if (_tutorialTarget != null)
             _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
@@ -95,34 +105,24 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         return true;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    private bool CanDragBag()
     {
         if (_closedPastelDough == null || _filledSprite == null || _customerDisplay == null)
-            return;
+            return false;
 
-        if (!_customerDisplay.HasVisibleCustomer())
-            return;
+        return _customerDisplay.HasVisibleCustomer();
+    }
 
+    private void OnHeld(PointerEventData _)
+    {
         _isDraggingBag = true;
         _dragStartPosition = transform.position;
-        _holdOffset = transform.position - GetPointerWorldPosition(eventData);
         _bagIngredientHint?.SetVisible(true);
         _customerDisplay.SetHintsVisible(true);
         _tutorialEvents.PublishDeliveryBagPickedUp(this);
-
-        if (_spriteRenderer != null)
-            _spriteRenderer.sortingOrder = 9;
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (!_isDraggingBag)
-            return;
-
-        transform.position = GetPointerWorldPosition(eventData) + _holdOffset;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
+    private void OnDropped(PointerEventData eventData)
     {
         if (!_isDraggingBag)
             return;
@@ -141,21 +141,6 @@ public class Deliverable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         transform.position = _dragStartPosition;
         _tutorialEvents.PublishDeliveryBagDropped(this);
-
-        if (_spriteRenderer != null)
-            _spriteRenderer.sortingOrder = _baseSortingOrder;
-    }
-
-    public bool TryRestorePastel(ClosedPastelDough closedPastelDough)
-    {
-        if (closedPastelDough == null || _closedPastelDough != null)
-            return false;
-
-        _closedPastelDough = closedPastelDough;
-        _bagIngredientHint?.Bind(_closedPastelDough.Recipe);
-        _bagIngredientHint?.SetVisible(false);
-        UpdateSprite();
-        return true;
     }
 
     private void UpdateSprite()

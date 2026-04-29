@@ -20,9 +20,6 @@ public class DeliverySequence
         var isCorrect = delivery.IsCorrectFor(order);
         _orderController.DeliverOrder(order, delivery);
 
-        if (!isCorrect)
-            _strikesController.Strike();
-
         return isCorrect;
     }
 

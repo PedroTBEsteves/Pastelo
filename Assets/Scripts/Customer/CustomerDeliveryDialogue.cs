@@ -34,6 +34,9 @@ public class CustomerDeliveryDialogue : MonoBehaviour, ICustomerDeliveryDialogue
     [Inject]
     private readonly DeliverySequence _deliverySequence;
 
+    [Inject]
+    private readonly StrikesController _strikesController;
+
     public Sequence DeliveryDialogue(
         Order order,
         Delivery delivery,
@@ -65,7 +68,14 @@ public class CustomerDeliveryDialogue : MonoBehaviour, ICustomerDeliveryDialogue
                 if (isCorrect && !Application.isMobilePlatform && dialogueContext.HappyVisualEffect != null)
                     dialogueContext.HappyVisualEffect.Play();
             }))
-            .OnComplete(this, dialogueService => dialogueService.PlayDialogue(dialogueContext));
+            .OnComplete(this, dialogueService =>
+            {
+                dialogueService.PlayDialogue(dialogueContext).ChainCallback(() =>
+                {
+                    if (!isCorrect) 
+                        _strikesController.Strike();
+                });
+            });
     }
 
     private string GetRandomDeliveryDialogue(bool isCorrectDelivery)
@@ -75,9 +85,9 @@ public class CustomerDeliveryDialogue : MonoBehaviour, ICustomerDeliveryDialogue
         return CustomerDialogueLocalization.GetRandomLocalizedDialogue(tableReference, nameof(CustomerDeliveryDialogue), fieldName);
     }
 
-    private void PlayDialogue(DeliveryDialogueContext context)
+    private Sequence PlayDialogue(DeliveryDialogueContext context)
     {
-        _dialoguePresentation.Show(context.Dialogue, context.DialogueWorldPosition)
+        return _dialoguePresentation.Show(context.Dialogue, context.DialogueWorldPosition)
             .Chain(Tween.Delay(_delayAfterTextIsDone, () =>
             {
                 context.CustomerAnimation.CompleteDialogue();
