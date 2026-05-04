@@ -15,8 +15,8 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Portuguese (pt)
   m_GUID: baa60c386145d624dad1feea7228b16e
   m_SerializeEntries:
-  - m_GUID: 1d08ecd597db55c4fa796af3ce8f91b9
-    m_Address: UI_Agradecimentos_QRCode
+  - m_GUID: 3e08f94ecbdb0884b92037ea119340a0
+    m_Address: UI_Menu_QRCode 1
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pt
@@ -27,8 +27,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b9f37a858b037304e8f12626c8a11d66
-    m_Address: UI_Menu_QRCode
+  - m_GUID: b2b808c1756997f40a56d828c703ba70
+    m_Address: UI_Agradecimentos_QRCode 1
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pt
