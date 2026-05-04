@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8132711928149732285}
   - component: {fileID: 3951268667979632866}
-  - component: {fileID: 3339887624575026156}
   - component: {fileID: 5117623504447955700}
   - component: {fileID: 7432374342857944573}
+  - component: {fileID: 988898913778710312}
   m_Layer: 5
   m_Name: LevelButton
   m_TagString: Untagged
@@ -48,36 +48,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4864607050215441702}
   m_CullTransparentMesh: 1
---- !u!114 &3339887624575026156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4864607050215441702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -8486453932247200311, guid: e604c88c599d0414b98ea4939eebc982, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &5117623504447955700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +88,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3339887624575026156}
+  m_TargetGraphic: {fileID: 988898913778710312}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -135,9 +105,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelLoadoutEditorView: {fileID: 0}
+  _canvas: {fileID: 0}
   _button: {fileID: 5117623504447955700}
+  _levelInfoPanel: {fileID: 8337345641387866096}
   _levelNameText: {fileID: 6924695101886575887}
+  _levelPriceText: {fileID: 6924695101886575887}
   _level: {fileID: 11400000, guid: b35137822e6d4904e8bac130bd7b2748, type: 2}
+--- !u!114 &988898913778710312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864607050215441702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -375052059968892528, guid: a5be802c6fa01894a94aae0f0cab8788, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8337345641387866096
 GameObject:
   m_ObjectHideFlags: 0

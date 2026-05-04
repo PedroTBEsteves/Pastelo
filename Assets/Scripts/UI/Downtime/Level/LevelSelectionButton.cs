@@ -1,19 +1,31 @@
 using KBCore.Refs;
-using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LevelSelectionButton : ValidatedMonoBehaviour
+public class LevelSelectionButton : ValidatedMonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField, Scene]
     private LevelLoadoutEditorView _levelLoadoutEditorView;
 
+    [SerializeField, Scene]
+    private Canvas _canvas;
+
     [SerializeField, Self]
     private Button _button;
+
+    [SerializeField, Self]
+    private Image _levelImage;
+
+    [SerializeField]
+    private GameObject _levelInfoPanel;
     
-    [SerializeField, Child]
+    [SerializeField]
     private TextMeshProUGUI _levelNameText;
+    
+    [SerializeField]
+    private TextMeshProUGUI _levelPriceText;
 
     [SerializeField]
     private Level _level;
@@ -21,7 +33,10 @@ public class LevelSelectionButton : ValidatedMonoBehaviour
     private void Awake()
     {
         _button.onClick.AddListener(OnButtonClicked);
-        _levelNameText.SetText($"{_level.Name.GetLocalizedString()} ({TextUtils.FormatAsMoney(_level.PriceToPlay)})");
+        _levelNameText.SetText(_level.Name.GetLocalizedString());
+        _levelPriceText.SetText(TextUtils.FormatAsMoney(_level.PriceToPlay));
+        _levelInfoPanel.SetActive(false);
+        _levelImage.alphaHitTestMinimumThreshold = 0.9f;
     }
 
     private void OnDestroy()
@@ -32,5 +47,19 @@ public class LevelSelectionButton : ValidatedMonoBehaviour
     private void OnButtonClicked()
     {
         _levelLoadoutEditorView.Show(_level);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _levelInfoPanel.SetActive(true);
+        _levelInfoPanel.transform.SetParent(_canvas.transform);
+        _levelImage.alphaHitTestMinimumThreshold = 0f;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _levelInfoPanel.SetActive(false);
+        _levelInfoPanel.transform.SetParent(transform);
+        _levelImage.alphaHitTestMinimumThreshold = 0.9f;
     }
 }

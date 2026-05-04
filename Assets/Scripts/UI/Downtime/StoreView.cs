@@ -1,20 +1,22 @@
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class StoreView : ValidatedMonoBehaviour
+public class StoreView : MonoBehaviour
 {
     [SerializeField]
     private Transform _randomIngredientsRoot;
 
     [SerializeField]
-    private IngredientStorePurchaseButton _randomIngredientPrefab;
+    [FormerlySerializedAs("_randomIngredientPrefab")]
+    private IngredientStoreView _ingredientPrefab;
 
     [SerializeField]
     private Transform _fixedIngredientsRoot;
 
     [SerializeField]
-    private FixedStoreIngredientView _fixedIngredientPrefab;
+    private IngredientStorePurchasePrompt _purchasePrompt;
 
     [Inject]
     private readonly Store _store;
@@ -27,29 +29,23 @@ public class StoreView : ValidatedMonoBehaviour
 
     private void BuildRandomIngredients()
     {
-        if (_randomIngredientsRoot == null || _randomIngredientPrefab == null)
-            return;
-
         var randomIngredients = _store.RandomIngredients;
 
         foreach (var ingredient in randomIngredients)
         {
-            var itemView = Instantiate(_randomIngredientPrefab, _randomIngredientsRoot);
-            itemView.Bind(ingredient);
+            var itemView = Instantiate(_ingredientPrefab, _randomIngredientsRoot);
+            itemView.BindDaily(ingredient, _purchasePrompt);
         }
     }
 
     private void BuildFixedIngredients()
     {
-        if (_fixedIngredientsRoot == null || _fixedIngredientPrefab == null)
-            return;
-
         var fixedIngredients = _store.FixedIngredients;
 
         foreach (var fixedIngredientOffer in fixedIngredients)
         {
-            var itemView = Instantiate(_fixedIngredientPrefab, _fixedIngredientsRoot);
-            itemView.Bind(fixedIngredientOffer);
+            var itemView = Instantiate(_ingredientPrefab, _fixedIngredientsRoot);
+            itemView.BindFixed(fixedIngredientOffer, _purchasePrompt);
         }
     }
 }

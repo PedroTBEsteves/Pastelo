@@ -58,18 +58,26 @@ public sealed class Store
         }
     }
 
-    public bool TryBuyIngredient(Ingredient ingredient)
+    public bool TryBuyIngredient(Ingredient ingredient, int quantity)
     {
         if (ingredient == null)
             throw new ArgumentNullException(nameof(ingredient));
 
-        EnsureOffersResolved();
-
-        if (!HasStock(ingredient) || !_moneyManager.TrySpend(ingredient.BuyPrice))
+        if (quantity <= 0)
             return false;
 
-        ConsumeStock(ingredient);
-        _inventory.Add(ingredient);
+        EnsureOffersResolved();
+
+        if (!TryGetRemainingStock(ingredient, out var remainingStock) || remainingStock < quantity)
+            return false;
+
+        var totalPrice = ingredient.BuyPrice * quantity;
+
+        if (!_moneyManager.TrySpend(totalPrice))
+            return false;
+
+        ConsumeStock(ingredient, quantity);
+        _inventory.Add(ingredient, quantity);
         return true;
     }
 
@@ -252,7 +260,7 @@ public sealed class Store
         return false;
     }
 
-    private void ConsumeStock(Ingredient ingredient)
+    private void ConsumeStock(Ingredient ingredient, int quantity)
     {
         for (var i = 0; i < _activeRandomIngredients.Count; i++)
         {
@@ -260,7 +268,7 @@ public sealed class Store
                 continue;
 
             var entry = _activeRandomIngredients[i];
-            _activeRandomIngredients[i] = entry.WithRemainingStock(entry.RemainingStock - 1);
+            _activeRandomIngredients[i] = entry.WithRemainingStock(entry.RemainingStock - quantity);
             RebuildPublicOffers(Mathf.Max(1, _dayManager.CurrentDay));
             return;
         }
@@ -271,7 +279,7 @@ public sealed class Store
                 continue;
 
             var entry = _activeFixedIngredients[i];
-            _activeFixedIngredients[i] = entry.WithRemainingStock(entry.RemainingStock - 1);
+            _activeFixedIngredients[i] = entry.WithRemainingStock(entry.RemainingStock - quantity);
             RebuildPublicOffers(Mathf.Max(1, _dayManager.CurrentDay));
             return;
         }
