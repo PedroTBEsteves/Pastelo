@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: ui.pause
     m_Metadata:
       m_Items: []
+  - m_Id: 10533309535137792
+    m_Key: ui.store.only-today
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - rid: 7724085812380041334
@@ -52,6 +56,10 @@ MonoBehaviour:
           - en
           - pt
         - m_KeyId: 5195083776
+          m_TableCodes:
+          - en
+          - pt
+        - m_KeyId: 10533309535137792
           m_TableCodes:
           - en
           - pt

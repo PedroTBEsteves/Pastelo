@@ -24,6 +24,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 7724086103131029595
+  - m_Id: 5847290776825856
+    m_Localized: Apenas hoje!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5847654464925696
+    m_Localized: '{days:plural:{} dia|{} dias}'
+    m_Metadata:
+      m_Items:
+      - rid: 7724086103131029595
   references:
     version: 2
     RefIds:
@@ -33,3 +42,4 @@ MonoBehaviour:
         m_Entries: 
         m_SharedEntries:
         - id: 13126512640
+        - id: 5847654464925696

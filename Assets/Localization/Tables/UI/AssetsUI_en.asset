@@ -30,6 +30,10 @@ MonoBehaviour:
     m_Localized: '4a0cf4e2d006a914f95520636681e333[UI_Pause_Quadro_Ingles_0]'
     m_Metadata:
       m_Items: []
+  - m_Id: 10533309535137792
+    m_Localized: 'a19c645b40461bb40a0933172e8a81ce[UI_Loja_Comprar_SoHoje]'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

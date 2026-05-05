@@ -38,5 +38,7 @@ MonoBehaviour:
     _durationInDays: 2
   - _ingredient: {fileID: 11400000, guid: 6541dc6c45840224bae68ecd92759648, type: 2}
     _durationInDays: 3
-  <RandomIngredientsCount>k__BackingField: 2
-  <FixedIngredientsCount>k__BackingField: 4
+  <RandomIngredientsCount>k__BackingField: 3
+  <RandomItemMinStock>k__BackingField: 1
+  <RandomItemMaxStock>k__BackingField: 3
+  <FixedIngredientsCount>k__BackingField: 5

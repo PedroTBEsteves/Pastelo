@@ -19,6 +19,14 @@ MonoBehaviour:
     m_Key: ui.loadout.play
     m_Metadata:
       m_Items: []
+  - m_Id: 5847290776825856
+    m_Key: ui.store.daily-available
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5847654464925696
+    m_Key: ui.store.fixed-available
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
