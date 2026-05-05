@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField]
     private LevelLoadoutIngredientSlotType _slotType;
@@ -67,17 +67,22 @@ public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDra
         if (_isPreview)
             return;
 
-        _editor.BeginSlotDrag(this, _ingredient);
+        _editor.HandleLoadoutIngredientBeginDrag(this, _ingredient, eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        _editor?.HandleDrag(eventData);
+        _editor?.HandleDragInput(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        _editor?.EndDrag(eventData);
+        _editor?.HandleEndDragInput(eventData);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        _editor?.HandleLoadoutIngredientPointerClick(this, _ingredient, eventData);
     }
 
     public void UpdateDraggedPosition(Vector2 screenPosition)
@@ -88,13 +93,13 @@ public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDra
             transform.position = screenPosition;
     }
 
-    public void SetDragState(bool isDragging)
+    public void SetDragState(bool isDragging, bool blockRaycasts = false)
     {
         if (_canvasGroup == null)
             return;
 
         _canvasGroup.alpha = isDragging ? 0.5f : 1f;
-        _canvasGroup.blocksRaycasts = !isDragging;
+        _canvasGroup.blocksRaycasts = !isDragging || blockRaycasts;
     }
 
     private void Refresh()

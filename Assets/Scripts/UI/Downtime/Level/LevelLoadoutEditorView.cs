@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Localization;
 
 public class LevelLoadoutEditorView : MonoBehaviour
@@ -78,6 +79,9 @@ public class LevelLoadoutEditorView : MonoBehaviour
     [Inject]
     private readonly MoneyManager _moneyManager;
 
+    [Inject]
+    private readonly DraggableInputConfiguration _inputConfiguration;
+
     private readonly List<SlotAssignment> _slotAssignments = new();
     private readonly List<LevelLoadoutIngredientView> _loadoutSlotViews = new();
     private readonly List<LevelLoadoutInventorySlotView> _inventoryItems = new();
@@ -85,6 +89,9 @@ public class LevelLoadoutEditorView : MonoBehaviour
 
     private Level _selectedLevel;
     private ActiveDrag _activeDrag;
+
+    private bool IsClickInputMode => _inputConfiguration != null && _inputConfiguration.Mode == DraggableInputMode.Click;
+
     private void Awake()
     {
         if (_startLevelButton != null)
@@ -100,6 +107,14 @@ public class LevelLoadoutEditorView : MonoBehaviour
             _moneyManager.MoneyChanged += OnMoneyChanged;
 
         SetVisible(false);
+    }
+
+    private void Update()
+    {
+        if (!_activeDrag.IsActive || !IsClickInputMode || Pointer.current == null)
+            return;
+
+        HandleDrag(Pointer.current.position.ReadValue());
     }
 
     private void OnDestroy()
@@ -124,7 +139,74 @@ public class LevelLoadoutEditorView : MonoBehaviour
         Rebuild();
     }
 
-    public bool TryBeginInventoryPreviewDrag(LevelLoadoutInventorySlotView sourceSlotView, Ingredient ingredient, PointerEventData eventData)
+    public void HandleInventoryBeginDrag(LevelLoadoutInventorySlotView sourceSlotView, Ingredient ingredient, int availableQuantity, PointerEventData eventData)
+    {
+        if (IsClickInputMode || availableQuantity <= 0)
+            return;
+
+        TryBeginInventoryPreviewDrag(sourceSlotView, ingredient, eventData);
+    }
+
+    public void HandleInventoryPointerClick(LevelLoadoutInventorySlotView sourceSlotView, Ingredient ingredient, int availableQuantity, PointerEventData eventData)
+    {
+        if (!IsClickInputMode)
+            return;
+
+        if (_activeDrag.IsActive)
+        {
+            EndDrag(eventData);
+            return;
+        }
+
+        if (availableQuantity <= 0)
+            return;
+
+        TryBeginInventoryPreviewDrag(sourceSlotView, ingredient, eventData);
+    }
+
+    public void HandleLoadoutIngredientBeginDrag(LevelLoadoutIngredientView source, Ingredient ingredient, PointerEventData eventData)
+    {
+        if (IsClickInputMode)
+            return;
+
+        BeginSlotDrag(source, ingredient);
+    }
+
+    public void HandleLoadoutIngredientPointerClick(LevelLoadoutIngredientView source, Ingredient ingredient, PointerEventData eventData)
+    {
+        if (!IsClickInputMode)
+            return;
+
+        if (_activeDrag.IsActive)
+        {
+            EndDrag(eventData);
+            return;
+        }
+
+        if (source == null || source.IsPreview)
+            return;
+
+        BeginSlotDrag(source, ingredient);
+        HandleDrag(eventData.position);
+    }
+
+    public void HandleDragInput(PointerEventData eventData)
+    {
+        if (IsClickInputMode)
+            return;
+
+        HandleDrag(eventData.position);
+    }
+
+    public void HandleEndDragInput(PointerEventData eventData)
+    {
+        if (IsClickInputMode)
+            return;
+
+        EndDrag(eventData);
+    }
+
+    private bool TryBeginInventoryPreviewDrag(LevelLoadoutInventorySlotView sourceSlotView, Ingredient ingredient, PointerEventData eventData)
     {
         if (_selectedLevel == null || ingredient == null || _activeDrag.IsActive || _loadoutIngredientPrefab == null || sourceSlotView == null)
             return false;
@@ -133,7 +215,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
         previewSlot.name = $"Dragged {ingredient.GetDisplayName()}";
         previewSlot.BindPreview(this, GetSlotType(ingredient), ingredient);
         previewSlot.UpdateDraggedPosition(eventData.position);
-        previewSlot.SetDragState(true);
+        previewSlot.SetDragState(true, IsClickInputMode);
 
         _activeDrag = new ActiveDrag
         {
@@ -145,7 +227,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
         return true;
     }
 
-    public void BeginSlotDrag(LevelLoadoutIngredientView source, Ingredient ingredient)
+    private void BeginSlotDrag(LevelLoadoutIngredientView source, Ingredient ingredient)
     {
         if (_selectedLevel == null || source == null || ingredient == null || _activeDrag.IsActive)
             return;
@@ -156,15 +238,15 @@ public class LevelLoadoutEditorView : MonoBehaviour
             Source = source,
             SourceSlot = GetAssignedSlot(source)
         };
-        source.SetDragState(true);
+        source.SetDragState(true, IsClickInputMode);
     }
 
-    public void HandleDrag(PointerEventData eventData)
+    private void HandleDrag(Vector2 screenPosition)
     {
         if (_activeDrag.Preview != null)
-            _activeDrag.Preview.UpdateDraggedPosition(eventData.position);
+            _activeDrag.Preview.UpdateDraggedPosition(screenPosition);
         else if (_activeDrag.Source != null)
-            _activeDrag.Source.UpdateDraggedPosition(eventData.position);
+            _activeDrag.Source.UpdateDraggedPosition(screenPosition);
     }
 
     public void EndDrag(PointerEventData eventData)

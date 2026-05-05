@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LevelLoadoutInventorySlotView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class LevelLoadoutInventorySlotView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField]
     private Image _iconImage;
@@ -37,20 +37,22 @@ public class LevelLoadoutInventorySlotView : MonoBehaviour, IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_editor == null || _entry.Ingredient == null || _entry.AvailableQuantity <= 0)
-            return;
-
-        _editor.TryBeginInventoryPreviewDrag(this, _entry.Ingredient, eventData);
+        _editor?.HandleInventoryBeginDrag(this, _entry.Ingredient, _entry.AvailableQuantity, eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        _editor?.HandleDrag(eventData);
+        _editor?.HandleDragInput(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        _editor?.EndDrag(eventData);
+        _editor?.HandleEndDragInput(eventData);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        _editor?.HandleInventoryPointerClick(this, _entry.Ingredient, _entry.AvailableQuantity, eventData);
     }
 
     public void BeginPendingPreview()

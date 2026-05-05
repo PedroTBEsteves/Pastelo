@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transformTweenSettings:
-    duration: 1
+    duration: 0.8
     ease: 0
     customEase:
       serializedVersion: 2
