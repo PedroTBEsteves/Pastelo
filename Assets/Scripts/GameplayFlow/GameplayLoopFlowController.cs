@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Eflatun.SceneReference;
+using Reflex.Attributes;
 using Reflex.Core;
 using Reflex.Extensions;
 using UnityEngine;
@@ -9,6 +10,9 @@ using UnityEngine.SceneManagement;
 
 public sealed class GameplayLoopFlowController : MonoBehaviour
 {
+    [Inject]
+    private readonly ISceneTransitionService _sceneTransitionService;
+
     [SerializeField]
     private SceneReference _levelGameplayScene;
 
@@ -25,9 +29,9 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
         TryResolveParentContainer(out _parentContainer);
     }
 
-    private async UniTaskVoid Start()
+    private void Start()
     {
-        await LoadDowntime();
+        LoadDowntime().Forget();
     }
 
     public UniTask<bool> LoadLevelGameplay()
@@ -62,49 +66,17 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
 
         try
         {
-            if (!await UnloadCurrentLoadedSceneIfNeededAsync(sceneBuildIndex, cancellationToken))
-                return false;
+            await WaitForSceneTransitionServiceAsync(cancellationToken);
 
             _parentContainer = parentContainer;
             _targetSceneBuildIndex = sceneBuildIndex;
             SceneScope.OnSceneContainerBuilding += OverrideParent;
 
-            var loadOperation = SceneManager.LoadSceneAsync(sceneBuildIndex, LoadSceneMode.Additive);
-            if (loadOperation == null)
-            {
-                Debug.LogError($"Failed to start loading scene with build index '{sceneBuildIndex}'.", this);
-                return false;
-            }
-
-            await loadOperation;
-            await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
-
-            if (!TryGetLoadedSceneByBuildIndex(sceneBuildIndex, out var loadedScene))
-            {
-                Debug.LogError($"Failed to load scene with build index '{sceneBuildIndex}'.", this);
-                return false;
-            }
-
-            if (!loadedScene.IsValid())
-            {
-                Debug.LogError($"Loaded scene with build index '{sceneBuildIndex}' is invalid.", this);
-                return false;
-            }
-
-            if (!loadedScene.isLoaded)
-            {
-                Debug.LogError($"Loaded scene with build index '{sceneBuildIndex}' is not marked as loaded.", this);
-                return false;
-            }
-
-            if (!SceneManager.SetActiveScene(loadedScene))
-            {
-                Debug.LogError($"Failed to set active scene '{loadedScene.name}'.", this);
-                return false;
-            }
-
-            _currentLoadedScene = loadedScene;
-            return true;
+            return await _sceneTransitionService.TryRunTransitionAsync(
+                transitionCancellationToken => LoadLoopSceneAsync(sceneBuildIndex, transitionCancellationToken),
+                useFadeOut: true,
+                useFadeIn: true,
+                cancellationToken);
         }
         catch (OperationCanceledException)
         {
@@ -116,6 +88,57 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
             _targetSceneBuildIndex = -1;
             _isLoading = false;
         }
+    }
+
+    private async UniTask WaitForSceneTransitionServiceAsync(CancellationToken cancellationToken)
+    {
+        while (_sceneTransitionService.IsTransitioning)
+            await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+    }
+
+    private async UniTask<bool> LoadLoopSceneAsync(
+        int sceneBuildIndex,
+        CancellationToken cancellationToken)
+    {
+        if (!await UnloadCurrentLoadedSceneIfNeededAsync(sceneBuildIndex, cancellationToken))
+            return false;
+
+        var loadOperation = SceneManager.LoadSceneAsync(sceneBuildIndex, LoadSceneMode.Additive);
+        if (loadOperation == null)
+        {
+            Debug.LogError($"Failed to start loading scene with build index '{sceneBuildIndex}'.", this);
+            return false;
+        }
+
+        await loadOperation.ToUniTask(cancellationToken: cancellationToken);
+        await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+
+        if (!TryGetLoadedSceneByBuildIndex(sceneBuildIndex, out var loadedScene))
+        {
+            Debug.LogError($"Failed to load scene with build index '{sceneBuildIndex}'.", this);
+            return false;
+        }
+
+        if (!loadedScene.IsValid())
+        {
+            Debug.LogError($"Loaded scene with build index '{sceneBuildIndex}' is invalid.", this);
+            return false;
+        }
+
+        if (!loadedScene.isLoaded)
+        {
+            Debug.LogError($"Loaded scene with build index '{sceneBuildIndex}' is not marked as loaded.", this);
+            return false;
+        }
+
+        if (!SceneManager.SetActiveScene(loadedScene))
+        {
+            Debug.LogError($"Failed to set active scene '{loadedScene.name}'.", this);
+            return false;
+        }
+
+        _currentLoadedScene = loadedScene;
+        return true;
     }
 
     private void OverrideParent(Scene scene, ContainerBuilder builder)

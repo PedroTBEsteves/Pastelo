@@ -639,7 +639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 576478055}
-  _sceneIndex: 1
+  _sceneReference:
+    asset: {fileID: 102900000, guid: ac0ea4cb7f9966a449cec4b9a8674b49, type: 3}
+    guid: ac0ea4cb7f9966a449cec4b9a8674b49
 --- !u!114 &576478059
 MonoBehaviour:
   m_ObjectHideFlags: 0

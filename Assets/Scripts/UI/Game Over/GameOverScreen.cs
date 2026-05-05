@@ -1,3 +1,4 @@
+using Eflatun.SceneReference;
 using PrimeTween;
 using Reflex.Attributes;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class GameOverScreen : MonoBehaviour
     private float _menuLoadDelay = 2f;
 
     [SerializeField]
-    private int _menuSceneIndex;
+    private SceneReference _menuScene;
 
     private CanvasGroup _gameOverCanvasGroup;
     private Sequence _gameOverSequence;
@@ -68,7 +69,7 @@ public class GameOverScreen : MonoBehaviour
 
     private async void LoadMenu()
     {
-        await _sceneTransitionService.TryLoadSceneAsync(_menuSceneIndex);
+        await _sceneTransitionService.TryLoadSceneAsync(_menuScene);
     }
 
     private CanvasGroup GetOrCreateCanvasGroup()

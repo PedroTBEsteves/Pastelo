@@ -1,3 +1,4 @@
+using Eflatun.SceneReference;
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class ChangeSceneButton : ValidatedMonoBehaviour
     private Button _button;
     
     [SerializeField]
-    private int _sceneIndex;
+    private SceneReference _sceneReference;
 
     private void Awake()
     {
@@ -29,9 +30,16 @@ public class ChangeSceneButton : ValidatedMonoBehaviour
         if (_sceneTransitionService.IsTransitioning)
             return;
 
-        if (_sceneIndex == 1)
+        if (IsTutorialScene())
             GameplayTutorialOptions.SetShouldRunTutorial(true);
 
-        await _sceneTransitionService.TryLoadSceneAsync(_sceneIndex);
+        await _sceneTransitionService.TryLoadSceneAsync(_sceneReference);
+    }
+
+    private bool IsTutorialScene()
+    {
+        return _sceneReference != null
+               && _sceneReference.TryGetBuildIndex(out var sceneBuildIndex)
+               && sceneBuildIndex == 1;
     }
 }

@@ -1,4 +1,7 @@
-using System.Threading.Tasks;
+using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Eflatun.SceneReference;
 using PrimeTween;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -7,6 +10,12 @@ using UnityEngine.UI;
 
 public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
 {
+    [SerializeField]
+    private Canvas _canvas;
+
+    [SerializeField]
+    private CanvasGroup _overlayCanvasGroup;
+
     [SerializeField]
     private AudioMixer _masterMixer;
 
@@ -22,9 +31,7 @@ public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
     [SerializeField]
     private TweenSettings<float> _fadeInTweenSettings = new(0f, 0.35f, Ease.OutQuad, useUnscaledTime: true);
 
-    private Canvas _canvas;
-    private CanvasGroup _overlayCanvasGroup;
-    private Image _overlayImage;
+    private Tween _fadeTween;
     private bool _isTransitioning;
     private float _audioFadeFromDb;
     private float _audioFadeToDb;
@@ -33,52 +40,112 @@ public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
 
     private void Awake()
     {
-        ResolveReferences();
         PrepareOverlay();
     }
 
-    public async Task<bool> TryLoadSceneAsync(int sceneIndex)
+    private void OnDestroy()
+    {
+        StopFadeTween();
+    }
+
+    public UniTask<bool> TryLoadSceneAsync(
+        SceneReference sceneReference,
+        LoadSceneMode loadSceneMode = LoadSceneMode.Single,
+        bool useFadeOut = true,
+        bool useFadeIn = true,
+        CancellationToken cancellationToken = default)
+    {
+        if (!TryResolveTargetBuildIndex(sceneReference, out var sceneBuildIndex))
+            return UniTask.FromResult(false);
+
+        return TryRunTransitionAsync(
+            async transitionCancellationToken =>
+            {
+                var loadOperation = SceneManager.LoadSceneAsync(sceneBuildIndex, loadSceneMode);
+                if (loadOperation == null)
+                {
+                    Debug.LogError($"Failed to start loading scene with build index '{sceneBuildIndex}'.", this);
+                    return false;
+                }
+
+                await loadOperation.ToUniTask(cancellationToken: transitionCancellationToken);
+                await UniTask.Yield(PlayerLoopTiming.Update, transitionCancellationToken);
+                return true;
+            },
+            useFadeOut,
+            useFadeIn,
+            cancellationToken);
+    }
+
+    public async UniTask<bool> TryRunTransitionAsync(
+        Func<CancellationToken, UniTask<bool>> transitionOperation,
+        bool useFadeOut = true,
+        bool useFadeIn = true,
+        CancellationToken cancellationToken = default)
     {
         if (IsTransitioning)
             return false;
 
-        if (!TryValidateSetup(out float startingVolumeDb))
+        if (transitionOperation == null)
+        {
+            Debug.LogError($"{nameof(SceneTransitionService)} requires a transition operation.", this);
+            return false;
+        }
+
+        var usesFade = useFadeOut || useFadeIn;
+        if (!TryValidateSetup(usesFade, out var startingVolumeDb))
             return false;
 
         _isTransitioning = true;
 
         try
         {
-            SetOverlayBlocking(true);
-            await PlayFadeAsync(_fadeOutTweenSettings, startingVolumeDb, _fadedVolumeDb);
+            SetOverlayBlocking(usesFade);
+
+            if (useFadeOut)
+                await PlayFadeAsync(_fadeOutTweenSettings, startingVolumeDb, _fadedVolumeDb);
+
+            cancellationToken.ThrowIfCancellationRequested();
             RestoreScaledTime();
 
-            var loadOperation = SceneManager.LoadSceneAsync(sceneIndex);
-            await AwaitAsyncOperation(loadOperation);
-            await Task.Yield();
+            var completed = await transitionOperation(cancellationToken);
+            if (!completed)
+                return false;
 
-            _overlayCanvasGroup.alpha = 1f;
-            await PlayFadeAsync(_fadeInTweenSettings, _fadedVolumeDb, startingVolumeDb);
-            ResetOverlayState();
+            if (useFadeIn)
+            {
+                _overlayCanvasGroup.alpha = 1f;
+                await PlayFadeAsync(_fadeInTweenSettings, _fadedVolumeDb, startingVolumeDb);
+            }
+
             return true;
+        }
+        catch (OperationCanceledException)
+        {
+            return false;
         }
         finally
         {
+            if (usesFade)
+                _masterMixer.SetFloat(_masterVolumeParameter, startingVolumeDb);
+
             ResetOverlayState();
             _isTransitioning = false;
         }
     }
 
-    private async Task PlayFadeAsync(TweenSettings<float> visualSettings, float audioFromDb, float audioToDb)
+    private async UniTask PlayFadeAsync(TweenSettings<float> visualSettings, float audioFromDb, float audioToDb)
     {
+        StopFadeTween();
+
         _audioFadeFromDb = audioFromDb;
         _audioFadeToDb = audioToDb;
         _masterMixer.SetFloat(_masterVolumeParameter, _audioFadeFromDb);
 
-        var tween = Tween.Alpha(_overlayCanvasGroup, visualSettings)
+        _fadeTween = Tween.Alpha(_overlayCanvasGroup, visualSettings)
             .OnUpdate(this, static (service, tween) => service.UpdateAudioFade(tween.interpolationFactor));
 
-        await tween;
+        await _fadeTween;
 
         _masterMixer.SetFloat(_masterVolumeParameter, _audioFadeToDb);
     }
@@ -89,29 +156,24 @@ public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
         _masterMixer.SetFloat(_masterVolumeParameter, volumeDb);
     }
 
-    private bool TryValidateSetup(out float startingVolumeDb)
+    private bool TryValidateSetup(bool usesFade, out float startingVolumeDb)
     {
         startingVolumeDb = 0f;
 
-        ResolveReferences();
-
         if (_canvas == null)
         {
-            Debug.LogError($"{nameof(SceneTransitionService)} requires a {nameof(Canvas)} on the service prefab.", this);
-            return false;
-        }
-
-        if (_overlayImage == null)
-        {
-            Debug.LogError($"{nameof(SceneTransitionService)} requires an overlay {nameof(Image)} in the service prefab.", this);
+            Debug.LogError($"{nameof(SceneTransitionService)} requires a {nameof(Canvas)} reference.", this);
             return false;
         }
 
         if (_overlayCanvasGroup == null)
         {
-            Debug.LogError($"{nameof(SceneTransitionService)} requires a {nameof(CanvasGroup)} on the overlay object.", this);
+            Debug.LogError($"{nameof(SceneTransitionService)} requires an overlay {nameof(CanvasGroup)} reference.", this);
             return false;
         }
+
+        if (!usesFade)
+            return true;
 
         if (_masterMixer == null)
         {
@@ -136,29 +198,28 @@ public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
         return true;
     }
 
-    private void ResolveReferences()
+    private bool TryResolveTargetBuildIndex(SceneReference sceneReference, out int sceneBuildIndex)
     {
-        if (_canvas == null)
-            _canvas = GetComponent<Canvas>();
+        sceneBuildIndex = -1;
 
-        if (_overlayImage == null)
-            _overlayImage = GetComponentInChildren<Image>(true);
+        if (sceneReference == null)
+        {
+            Debug.LogError($"{nameof(SceneTransitionService)} requires a valid {nameof(SceneReference)}.", this);
+            return false;
+        }
 
-        if (_overlayCanvasGroup == null)
-            _overlayCanvasGroup = GetComponentInChildren<CanvasGroup>(true);
+        if (!sceneReference.TryGetBuildIndex(out sceneBuildIndex) || sceneBuildIndex < 0)
+        {
+            Debug.LogError($"{nameof(SceneTransitionService)} could not resolve the target scene build index.", this);
+            return false;
+        }
+
+        return true;
     }
 
     private void PrepareOverlay()
     {
-        if (_canvas != null)
-            _canvas.enabled = true;
-
-        if (_overlayImage != null)
-        {
-            var color = _overlayImage.color;
-            color.a = 1f;
-            _overlayImage.color = color;
-        }
+        _canvas.enabled = true;
 
         if (_overlayCanvasGroup != null)
         {
@@ -193,13 +254,9 @@ public class SceneTransitionService : MonoBehaviour, ISceneTransitionService
             Time.timeScale = 1f;
     }
 
-    private static Task AwaitAsyncOperation(AsyncOperation asyncOperation)
+    private void StopFadeTween()
     {
-        if (asyncOperation == null || asyncOperation.isDone)
-            return Task.CompletedTask;
-
-        var completionSource = new TaskCompletionSource<bool>();
-        asyncOperation.completed += _ => completionSource.TrySetResult(true);
-        return completionSource.Task;
+        if (_fadeTween.isAlive)
+            _fadeTween.Stop();
     }
 }

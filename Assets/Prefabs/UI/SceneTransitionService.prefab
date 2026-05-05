@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76988022293822f40aaa724af9dfcc80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 22300000}
+  _overlayCanvasGroup: {fileID: 22500000}
   _masterMixer: {fileID: 24100000, guid: fe4d2b831b80e2048b6d86048b057d92, type: 2}
   _masterVolumeParameter: MasterVolume
   _fadedVolumeDb: -80
@@ -151,7 +153,7 @@ MonoBehaviour:
     startValue: 0
     endValue: 1
     settings:
-      duration: 1
+      duration: 0.35
       ease: 6
       customEase:
         serializedVersion: 2
@@ -171,7 +173,7 @@ MonoBehaviour:
     startValue: 1
     endValue: 0
     settings:
-      duration: 1
+      duration: 0.35
       ease: 6
       customEase:
         serializedVersion: 2
