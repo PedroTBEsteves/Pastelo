@@ -1,11 +1,10 @@
-using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
-public class TooltipTarget : ValidatedMonoBehaviour, IPointerEnterHandler, IPointerMoveHandler, IPointerExitHandler
+public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerMoveHandler, IPointerExitHandler
 {
     private const float MovementThresholdSqr = 0.01f;
 
