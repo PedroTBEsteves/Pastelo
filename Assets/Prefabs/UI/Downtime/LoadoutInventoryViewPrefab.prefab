@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2842900871955826906}
   - component: {fileID: 3588362093631269630}
   - component: {fileID: 7725681110740660781}
+  - component: {fileID: 438844325948597715}
   m_Layer: 5
   m_Name: LoadoutInventoryViewPrefab
   m_TagString: Untagged
@@ -110,6 +111,41 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &438844325948597715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602458908836569965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023f2cecd89dd1147a0c262eccdcd2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transformTweenSettings:
+    duration: 0.6
+    ease: 18
+    customEase:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    cycles: 1
+    cycleMode: 0
+    startDelay: 0
+    endDelay: 0
+    useUnscaledTime: 1
+    _useFixedUpdate: 0
+    _updateType: 0
+  _useScale: 1
+  _hoverScale: {x: 1.1, y: 1.1, z: 1.1}
+  _usePosition: 0
+  _hoverLocalPosition: {x: 0, y: 0, z: 0}
+  _useRotation: 0
+  _hoverLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _isTweenEnabled: 1
 --- !u!1 &4548706391382269685
 GameObject:
   m_ObjectHideFlags: 0

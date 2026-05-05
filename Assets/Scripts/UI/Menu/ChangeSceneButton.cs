@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Eflatun.SceneReference;
 using KBCore.Refs;
 using Reflex.Attributes;
@@ -14,6 +15,9 @@ public class ChangeSceneButton : ValidatedMonoBehaviour
     
     [SerializeField]
     private SceneReference _sceneReference;
+    
+    [SerializeField]
+    private bool _shouldRunTutorial;
 
     private void Awake()
     {
@@ -25,21 +29,13 @@ public class ChangeSceneButton : ValidatedMonoBehaviour
         _button.onClick.RemoveListener(OnButtonClicked);
     }
 
-    private async void OnButtonClicked()
+    private void OnButtonClicked()
     {
         if (_sceneTransitionService.IsTransitioning)
             return;
 
-        if (IsTutorialScene())
-            GameplayTutorialOptions.SetShouldRunTutorial(true);
+        GameplayTutorialOptions.SetShouldRunTutorial(_shouldRunTutorial);
 
-        await _sceneTransitionService.TryLoadSceneAsync(_sceneReference);
-    }
-
-    private bool IsTutorialScene()
-    {
-        return _sceneReference != null
-               && _sceneReference.TryGetBuildIndex(out var sceneBuildIndex)
-               && sceneBuildIndex == 1;
+        _sceneTransitionService.TryLoadSceneAsync(_sceneReference).Forget();
     }
 }
