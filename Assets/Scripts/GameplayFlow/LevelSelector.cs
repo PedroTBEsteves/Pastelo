@@ -20,7 +20,12 @@ public sealed class LevelSelector
 
     public bool CanPlayLevel(Level level)
     {
-        return _levelLoadoutController.CanConsumeLoadout(level) && _moneyManager.CanSpend(level.PriceToPlay);
+        var loadout = _levelLoadoutController.GetLoadout(level);
+        
+        return loadout.DoughCount > 0 &&
+               loadout.FillingCount > 0 && 
+               _levelLoadoutController.CanConsumeLoadout(level) && 
+               _moneyManager.CanSpend(level.PriceToPlay);
     }
 
     public async UniTask PlayLevel(Level level)

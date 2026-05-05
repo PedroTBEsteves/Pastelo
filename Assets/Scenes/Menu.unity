@@ -642,6 +642,7 @@ MonoBehaviour:
   _sceneReference:
     asset: {fileID: 102900000, guid: ac0ea4cb7f9966a449cec4b9a8674b49, type: 3}
     guid: ac0ea4cb7f9966a449cec4b9a8674b49
+  _shouldRunTutorial: 1
 --- !u!114 &576478059
 MonoBehaviour:
   m_ObjectHideFlags: 0
