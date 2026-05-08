@@ -37,6 +37,16 @@ MonoBehaviour:
   <CustomersToServe>k__BackingField: 10
   <PriceToPlay>k__BackingField: 4
   <SplashImage>k__BackingField: {fileID: 21300000, guid: 0e751f6bc58b5974a9f0c287f73990ca, type: 3}
+  _sectionBackgroundSprites:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: -4693097738008159581, guid: 385d6d621a1fece489d491f2a4f35772, type: 3}
+    - Key: 1
+      Value: {fileID: 5127850945929852623, guid: 3b2816b8756948e4194f753a6436a262, type: 3}
+    - Key: 2
+      Value: {fileID: -8000710076227244249, guid: 3fe9e5a8c649fef44aac4cd0f85e9876, type: 3}
+    - Key: 3
+      Value: {fileID: -3682163729683801064, guid: e6542c1e5964d044c932a012ebb6254f, type: 3}
   _preferredDoughs:
   - {fileID: 11400000, guid: 2d09fa27b83aac644ad79e605f95d924, type: 2}
   _preferredFillings:

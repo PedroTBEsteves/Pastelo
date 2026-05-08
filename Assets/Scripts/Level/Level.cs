@@ -1,3 +1,5 @@
+using AYellowpaper.SerializedCollections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -22,6 +24,9 @@ public class Level : ScriptableObject
     
     [field: SerializeField]
     public Sprite SplashImage { get; private set; }
+
+    [SerializeField]
+    private SerializedDictionary<CameraSection, Sprite> _sectionBackgroundSprites;
     
     [SerializeField]
     private Dough[] _preferredDoughs;
@@ -39,4 +44,17 @@ public class Level : ScriptableObject
     public IReadOnlyList<Filling> PreferredFillings => _preferredFillings;
     
     public IReadOnlyList<FillingTag> PreferredFillingTags => _preferredFillingTags;
+
+    public Sprite GetSectionBackgroundSprite(CameraSection section)
+    {
+        if (_sectionBackgroundSprites != null &&
+            _sectionBackgroundSprites.TryGetValue(section, out var sprite) &&
+            sprite != null)
+        {
+            return sprite;
+        }
+
+        throw new InvalidOperationException(
+            $"{nameof(Level)} '{name}' requires a background sprite configured for {nameof(CameraSection)}.{section}.");
+    }
 }
