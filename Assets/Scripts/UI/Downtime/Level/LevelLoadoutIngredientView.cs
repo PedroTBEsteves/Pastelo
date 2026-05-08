@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+[RequireComponent(typeof(DraggableUI))]
+public class LevelLoadoutIngredientView : MonoBehaviour
 {
     [SerializeField]
     private LevelLoadoutIngredientSlotType _slotType;
@@ -21,6 +22,7 @@ public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDra
 
     private LevelLoadoutEditorView _editor;
     private Ingredient _ingredient;
+    private DraggableUI _draggableUI;
     private bool _isMissing;
     private bool _isPreview;
 
@@ -29,6 +31,32 @@ public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDra
     public bool HasIngredient => _ingredient != null;
     public bool IsPreview => _isPreview;
 
+    private void Awake()
+    {
+        _draggableUI = GetComponent<DraggableUI>();
+        if (_draggableUI == null)
+        {
+            Debug.LogError($"{nameof(LevelLoadoutIngredientView)} on '{name}' requires {nameof(DraggableUI)}.", this);
+            return;
+        }
+
+        _draggableUI.AddCanDragHandler(CanBeginDrag);
+        _draggableUI.Held += OnHeld;
+        _draggableUI.Dragged += OnDragged;
+        _draggableUI.Dropped += OnDropped;
+    }
+
+    private void OnDestroy()
+    {
+        if (_draggableUI == null)
+            return;
+
+        _draggableUI.RemoveCanDragHandler(CanBeginDrag);
+        _draggableUI.Held -= OnHeld;
+        _draggableUI.Dragged -= OnDragged;
+        _draggableUI.Dropped -= OnDropped;
+    }
+
     public void Bind(LevelLoadoutEditorView editor, LevelLoadoutIngredientSlotType slotType, Ingredient ingredient, bool isMissing)
     {
         _editor = editor;
@@ -36,6 +64,7 @@ public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDra
         _ingredient = ingredient;
         _isMissing = isMissing;
         _isPreview = false;
+        _draggableUI?.Configure(editor != null ? editor.InputConfiguration : null);
         Refresh();
     }
 
@@ -46,6 +75,7 @@ public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDra
         _ingredient = ingredient;
         _isMissing = false;
         _isPreview = true;
+        _draggableUI?.Configure(editor != null ? editor.InputConfiguration : null);
         Refresh();
     }
 
@@ -59,30 +89,32 @@ public class LevelLoadoutIngredientView : MonoBehaviour, IBeginDragHandler, IDra
         };
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void BeginExternalDrag(PointerEventData eventData)
     {
-        if (_editor == null || _ingredient == null)
-            return;
+        _draggableUI?.BeginExternalDrag(eventData);
+    }
 
+    private bool CanBeginDrag()
+    {
+        return _editor != null && _ingredient != null;
+    }
+
+    private void OnHeld(PointerEventData eventData)
+    {
         if (_isPreview)
             return;
 
-        _editor.HandleLoadoutIngredientBeginDrag(this, _ingredient, eventData);
+        _editor?.HandleLoadoutIngredientHeld(this, _ingredient, eventData);
     }
 
-    public void OnDrag(PointerEventData eventData)
+    private void OnDragged(Vector2 screenPosition)
     {
-        _editor?.HandleDragInput(eventData);
+        _editor?.HandleDragInput(screenPosition);
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    private void OnDropped(PointerEventData eventData)
     {
         _editor?.HandleEndDragInput(eventData);
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        _editor?.HandleLoadoutIngredientPointerClick(this, _ingredient, eventData);
     }
 
     public void UpdateDraggedPosition(Vector2 screenPosition)

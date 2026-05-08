@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4114327526449264747}
   - component: {fileID: 3871829196534145706}
   - component: {fileID: 2573953066171998753}
+  - component: {fileID: 6911426709237617446}
   m_Layer: 5
   m_Name: LoadoutIngredientView
   m_TagString: Untagged
@@ -142,3 +143,15 @@ MonoBehaviour:
   _useRotation: 0
   _hoverLocalEulerAngles: {x: 0, y: 0, z: 3}
   _isTweenEnabled: 1
+--- !u!114 &6911426709237617446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714320769754922695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38ef8fd69a74c3ab2e1b8bc40b8cb2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -34,10 +34,6 @@ public sealed class ClickDraggableHandler : IDraggableHandler
 
     public void OnEndDrag(Draggable draggable, PointerEventData eventData)
     {
-        if (!draggable.IsDragging)
-            return;
-
-        draggable.EndDrag(eventData);
     }
 
     public void OnPointerClick(Draggable draggable, PointerEventData eventData)

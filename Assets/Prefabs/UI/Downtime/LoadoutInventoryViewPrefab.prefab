@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3588362093631269630}
   - component: {fileID: 7725681110740660781}
   - component: {fileID: 438844325948597715}
+  - component: {fileID: 7308719360797429011}
   m_Layer: 5
   m_Name: LoadoutInventoryViewPrefab
   m_TagString: Untagged
@@ -146,6 +147,18 @@ MonoBehaviour:
   _useRotation: 0
   _hoverLocalEulerAngles: {x: 0, y: 0, z: 0}
   _isTweenEnabled: 1
+--- !u!114 &7308719360797429011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602458908836569965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38ef8fd69a74c3ab2e1b8bc40b8cb2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4548706391382269685
 GameObject:
   m_ObjectHideFlags: 0

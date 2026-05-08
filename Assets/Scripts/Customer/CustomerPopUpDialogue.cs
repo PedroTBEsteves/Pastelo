@@ -1,3 +1,4 @@
+using System;
 using PrimeTween;
 using Reflex.Attributes;
 using TMPro;
@@ -6,6 +7,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CustomerPopUpDialogue : MonoBehaviour, ICustomerPopUpDialogue
 {
@@ -32,6 +34,11 @@ public class CustomerPopUpDialogue : MonoBehaviour, ICustomerPopUpDialogue
     
     [Inject]
     private DialogueWriter _dialogueWriter;
+
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
 
     public Sequence CustomerGaveUpDialogue(Customer customer) =>
         DialogueSequence(customer, _customerGaveUpDialogues, nameof(_customerGaveUpDialogues));

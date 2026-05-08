@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LevelLoadoutInventorySlotView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+[RequireComponent(typeof(DraggableUI))]
+public class LevelLoadoutInventorySlotView : MonoBehaviour
 {
     [SerializeField]
     private Image _iconImage;
@@ -25,34 +26,67 @@ public class LevelLoadoutInventorySlotView : MonoBehaviour, IBeginDragHandler, I
 
     private LevelLoadoutEditorView _editor;
     private LoadoutInventoryProjectionEntry _entry;
+    private DraggableUI _draggableUI;
     private bool _hasPendingPreview;
+
+    private void Awake()
+    {
+        _draggableUI = GetComponent<DraggableUI>();
+        if (_draggableUI == null)
+        {
+            Debug.LogError($"{nameof(LevelLoadoutInventorySlotView)} on '{name}' requires {nameof(DraggableUI)}.", this);
+            return;
+        }
+
+        _draggableUI.AddCanDragHandler(CanBeginDrag);
+        _draggableUI.Held += OnHeld;
+        _draggableUI.Dragged += OnDragged;
+        _draggableUI.Dropped += OnDropped;
+    }
+
+    private void OnDestroy()
+    {
+        if (_draggableUI == null)
+            return;
+
+        _draggableUI.RemoveCanDragHandler(CanBeginDrag);
+        _draggableUI.Held -= OnHeld;
+        _draggableUI.Dragged -= OnDragged;
+        _draggableUI.Dropped -= OnDropped;
+    }
 
     public void Bind(LevelLoadoutEditorView editor, LoadoutInventoryProjectionEntry entry)
     {
         _editor = editor;
         _entry = entry;
         _hasPendingPreview = false;
+        _draggableUI?.Configure(editor != null ? editor.InputConfiguration : null);
         Refresh();
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void CancelDragInput()
     {
-        _editor?.HandleInventoryBeginDrag(this, _entry.Ingredient, _entry.AvailableQuantity, eventData);
+        _draggableUI?.CancelDrag();
     }
 
-    public void OnDrag(PointerEventData eventData)
+    private bool CanBeginDrag()
     {
-        _editor?.HandleDragInput(eventData);
+        return _entry.Ingredient != null && _entry.AvailableQuantity > 0;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    private void OnHeld(PointerEventData eventData)
+    {
+        _editor?.HandleInventoryHeld(this, _entry.Ingredient, _entry.AvailableQuantity, eventData);
+    }
+
+    private void OnDragged(Vector2 screenPosition)
+    {
+        _editor?.HandleDragInput(screenPosition);
+    }
+
+    private void OnDropped(PointerEventData eventData)
     {
         _editor?.HandleEndDragInput(eventData);
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        _editor?.HandleInventoryPointerClick(this, _entry.Ingredient, _entry.AvailableQuantity, eventData);
     }
 
     public void BeginPendingPreview()
