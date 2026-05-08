@@ -11,4 +11,5 @@ public enum TutorialTargetId
     CookedPastel,
     DeliveryArea,
     OrderNote,
+    DeliveryCustomer,
 }

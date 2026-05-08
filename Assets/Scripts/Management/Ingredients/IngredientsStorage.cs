@@ -21,6 +21,7 @@ public class IngredientsStorage
     }
 
     public event Action<float> PriceChanged = delegate { };
+    public event Action<Ingredient> IngredientUnlocked = delegate { };
     
     public IReadOnlyList<Dough> Doughs => _doughs;
     public IReadOnlyList<Filling> Fillings => _fillings;
@@ -62,5 +63,7 @@ public class IngredientsStorage
                 _doughs.Add(dough);
                 break;
         }
+
+        IngredientUnlocked(ingredient);
     }
 }

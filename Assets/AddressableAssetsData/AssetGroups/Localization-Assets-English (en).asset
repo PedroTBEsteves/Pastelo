@@ -15,20 +15,20 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-English (en)
   m_GUID: c15431c7d5bafb64ebf91466109d4161
   m_SerializeEntries:
-  - m_GUID: 1c77622deea50c1479c157fca639c80c
-    m_Address: UI_Agradecimentos_QRCode_Ingles
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4a0cf4e2d006a914f95520636681e333
     m_Address: UI_Pause_Quadro_Ingles
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9a0c8182bcf2bee4f918c2defc0bfa93
-    m_Address: UI_Menu_QRCode_Ingles
+  - m_GUID: 6dd88d9edb9cd514aaaaec1ec93f3b98
+    m_Address: UI_Menu_QRCode_Ingles 1
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 731a1175a5f4f74469c819363a9366d0
+    m_Address: UI_Agradecimentos_QRCode_Ingles 1
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

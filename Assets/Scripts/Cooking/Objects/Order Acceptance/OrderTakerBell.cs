@@ -13,7 +13,7 @@ public class OrderTakerBell : ValidatedMonoBehaviour, IPointerDownHandler
     private readonly OrderController _orderController;
     
     [Inject]
-    private readonly ICustomerDialogue _customerDialogue;
+    private readonly ICustomerServiceDialogue _customerServiceDialogue;
 
     [Inject]
     private readonly GameplayInteractionGate _interactionGate;
@@ -50,12 +50,12 @@ public class OrderTakerBell : ValidatedMonoBehaviour, IPointerDownHandler
         if (!_interactionGate.CanInteract(TutorialInteractionType.TakeOrder))
             return;
 
-        if (_customerDialogue.IsPlaying || !_customerQueue.TryGetNext(out var customer))
+        if (_customerServiceDialogue.IsPlaying || !_customerQueue.TryGetNext(out var customer))
             return;
 
         var order = _orderController.AcceptOrder(customer);
 
-        _customerDialogue.OrderDialogue(order).ChainCallback(() =>
+        _customerServiceDialogue.OrderDialogue(order).ChainCallback(() =>
         {
             if (order.HadMissingIngredients)
             {

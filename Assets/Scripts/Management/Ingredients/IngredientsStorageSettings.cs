@@ -11,9 +11,13 @@ public class IngredientsStorageSettings : ScriptableObject
     private Filling[] _startingFillings;
     
     [SerializeField]
+    private Ingredient[] _ingredients;
+    
+    [SerializeField]
     private float[]  _prices;
     
     public IEnumerable<Dough> StartingDoughs => _startingDoughs;
     public IEnumerable<Filling> StartingFillings => _startingFillings;
+    public IEnumerable<Ingredient> Ingredients => _ingredients;
     public IReadOnlyList<float> Prices => _prices;
 }

@@ -1,11 +1,13 @@
 using KBCore.Refs;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
 {
     [SerializeField, Self]
-    private SpriteRenderer _spriteRenderer;
+    [FormerlySerializedAs("_spriteRenderer")]
+    private SpriteRenderer _fillingSpriteRenderer;
     
     private bool _addedToPastel;
     private Vector3 _slotPosition;
@@ -67,7 +69,7 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
 
     public void SetSortingOrder(int sortingOrder)
     {
-        _spriteRenderer.sortingOrder = sortingOrder;
+        _fillingSpriteRenderer.sortingOrder = sortingOrder;
     }
 
     public Vector3 GetSlotPosition() => _slotPosition;
@@ -84,7 +86,7 @@ public class DraggableFilling : DraggableIngredient<Filling>, IDiscardPolicy
 
     private void RefreshMaskInteraction()
     {
-        _spriteRenderer.maskInteraction = _addedToPastel && !Draggable.IsDragging
+        _fillingSpriteRenderer.maskInteraction = _addedToPastel && !Draggable.IsDragging
             ? SpriteMaskInteraction.VisibleOutsideMask
             : SpriteMaskInteraction.None;
     }

@@ -40,6 +40,8 @@ public class GameplayTutorialController
         _tutorialEvents.PastelReachedCooked += OnPastelReachedCooked;
         _tutorialEvents.PastelRemovedFromFryer += OnPastelRemovedFromFryer;
         _tutorialEvents.PastelPlacedOnDelivery += OnPastelPlacedOnDelivery;
+        _tutorialEvents.DeliveryBagPickedUp += OnDeliveryBagPickedUp;
+        _tutorialEvents.DeliveryBagDropped += OnDeliveryBagDropped;
         _tutorialEvents.OrderDelivered += OnOrderDelivered;
 
         if (!GameplayTutorialOptions.ConsumeShouldRunTutorial())
@@ -88,7 +90,7 @@ public class GameplayTutorialController
             case TutorialStep.MoveCameraToPacking:
                 if (_state.ConsumePendingTutorialPastelDropResult() == TutorialPastelDropResult.PlacedOnDelivery)
                 {
-                    _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.OrderNote, _state.TutorialOrder);
+                    _state.SetStep(TutorialStep.PlaceOnDelivery, TutorialTargetId.DeliveryArea);
                     break;
                 }
 
@@ -177,10 +179,10 @@ public class GameplayTutorialController
         {
             var targetId = currentStep == TutorialStep.MoveCameraToFrying
                 ? TutorialTargetId.FryingArea
-                : TutorialTargetId.DeliveryArea;
+                : TutorialTargetId.CookedPastel;
             var nextStep = currentStep == TutorialStep.MoveCameraToFrying
                 ? TutorialStep.PlaceInFrying
-                : TutorialStep.PlaceOnDelivery;
+                : TutorialStep.RemoveCookedPastel;
             _state.SetStep(nextStep, targetId);
             return;
         }
@@ -230,14 +232,34 @@ public class GameplayTutorialController
 
         if (_state.CurrentStep == TutorialStep.MoveCameraToPacking)
         {
+            if (_cameraController.CurrentSection == CameraSection.Packing)
+            {
+                _state.SetStep(TutorialStep.PlaceOnDelivery, TutorialTargetId.DeliveryArea);
+                return;
+            }
+
             _state.TrySetPendingTutorialPastelDropResult(_state.TutorialPastel, TutorialPastelDropResult.PlacedOnDelivery);
             return;
         }
 
         if (_state.CurrentStep != TutorialStep.PlaceOnDelivery)
             return;
+    }
 
-        _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.OrderNote, _state.TutorialOrder);
+    private void OnDeliveryBagPickedUp(Deliverable _)
+    {
+        if (!_state.IsActive || _state.CurrentStep != TutorialStep.PlaceOnDelivery)
+            return;
+
+        _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
+    }
+
+    private void OnDeliveryBagDropped(Deliverable _)
+    {
+        if (!_state.IsActive || _state.CurrentStep != TutorialStep.DeliverOrder)
+            return;
+
+        _state.SetStep(TutorialStep.PlaceOnDelivery, TutorialTargetId.DeliveryArea);
     }
 
     private void OnOrderDelivered(Order order)

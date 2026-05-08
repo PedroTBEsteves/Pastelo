@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 5195083776
-    m_Localized: '1d08ecd597db55c4fa796af3ce8f91b9[UI_Agradecimentos_QRCode]'
+    m_Localized: 'b2b808c1756997f40a56d828c703ba70[UI_Agradecimentos_QRCode 1_0]'
     m_Metadata:
       m_Items: []
   - m_Id: 2439275524096
-    m_Localized: 'b9f37a858b037304e8f12626c8a11d66[UI_Menu_QRCode]'
+    m_Localized: '3e08f94ecbdb0884b92037ea119340a0[UI_Menu_QRCode 1_0]'
     m_Metadata:
       m_Items: []
   - m_Id: 7643756670976

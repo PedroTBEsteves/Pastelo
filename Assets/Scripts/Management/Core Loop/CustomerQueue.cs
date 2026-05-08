@@ -23,6 +23,7 @@ public class CustomerQueue : ITickable
     private readonly LevelFlowController _levelFlowController;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogue;
     private readonly int _maxCustomers;
+    private readonly int _maxQueueCapacity;
     private readonly int _recentCustomersRepeatWindow;
 
     private int _generatedCustomers;
@@ -32,6 +33,8 @@ public class CustomerQueue : ITickable
 
     private bool HasCustomersLimit => _maxCustomers > 0;
     private bool HasGeneratedAllCustomers => HasCustomersLimit && _generatedCustomers >= _maxCustomers;
+    private bool HasQueueCapacityLimit => _maxQueueCapacity > 0;
+    private bool IsQueueFull => HasQueueCapacityLimit && _queue.Count >= _maxQueueCapacity;
     private bool IsPausedByTutorial => _tutorialState.IsActive && _tutorialState.CurrentStep != TutorialStep.WaitForCustomer;
 
     public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, LevelFlowController levelFlowController, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState, LevelSelector levelSelector)
@@ -51,6 +54,7 @@ public class CustomerQueue : ITickable
         _customerWaitTime = orderLoopSettings.QueueWaitTimeLimit;
         _minCustomerArrivalTime = orderLoopSettings.MinCustomerArrivalTime;
         _maxCustomerArrivalTime = orderLoopSettings.MaxCustomerArrivalTime;
+        _maxQueueCapacity = orderLoopSettings.MaxQueueCapacity;
         _recentCustomersRepeatWindow = Mathf.Max(0, orderLoopSettings.RecentCustomersRepeatWindow);
         _firstCustomerArrivalDelayAfterTutorial = Mathf.Max(0f, orderLoopSettings.FirstCustomerArrivalDelayAfterTutorial);
         _maxCustomers = selectedLevel.CustomersToServe;
@@ -103,6 +107,9 @@ public class CustomerQueue : ITickable
     private void CheckForCustomerArrival(float deltaTime)
     {
         if (HasGeneratedAllCustomers)
+            return;
+
+        if (IsQueueFull)
             return;
 
         _elapsedArrivalTime += deltaTime;

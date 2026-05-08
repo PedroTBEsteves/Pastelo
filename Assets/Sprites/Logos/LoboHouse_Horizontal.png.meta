@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: 02b7c9e1535abd743a2d5a90211d13c7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1044031502564985837
+    second: LoboHouse_Horizontal_0
+  - first:
+      213: 7698528031221529147
+    second: LoboHouse_Horizontal_1
+  - first:
+      213: -1204855297623102523
+    second: LoboHouse_Horizontal_2
+  - first:
+      213: -3689969534893698459
+    second: LoboHouse_Horizontal_3
+  - first:
+      213: -7870336664104592234
+    second: LoboHouse_Horizontal_4
+  - first:
+      213: 4883172634607838200
+    second: LoboHouse_Horizontal_5
+  - first:
+      213: 4836634322896235525
+    second: LoboHouse_Horizontal_6
+  - first:
+      213: -4883566370892170841
+    second: LoboHouse_Horizontal_7
+  - first:
+      213: -4103803664694637818
+    second: LoboHouse_Horizontal_8
+  - first:
+      213: 2866103221535610951
+    second: LoboHouse_Horizontal_9
+  - first:
+      213: 7822694444873784694
+    second: LoboHouse_Horizontal_10
+  - first:
+      213: -7610375106601370318
+    second: LoboHouse_Horizontal_11
+  - first:
+      213: -2113347056689168855
+    second: LoboHouse_Horizontal_12
+  - first:
+      213: -1242396029285490324
+    second: LoboHouse_Horizontal_13
+  - first:
+      213: 6500716244124710233
+    second: LoboHouse_Horizontal_14
+  - first:
+      213: -3015763866388664079
+    second: LoboHouse_Horizontal_15
+  - first:
+      213: 7427375433375300077
+    second: LoboHouse_Horizontal_16
+  - first:
+      213: 5542001603471721307
+    second: LoboHouse_Horizontal_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_0
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 211
+        width: 74
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: deb04bcbe152d7e00800000000000000
+      internalID: 1044031502564985837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_1
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 210
+        width: 109
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3ab852b47aa6da60800000000000000
+      internalID: 7698528031221529147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_2
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 212
+        width: 92
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cb6d6b8d7e774fe0800000000000000
+      internalID: -1204855297623102523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_3
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 210
+        width: 109
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 562d5a022489accc0800000000000000
+      internalID: -3689969534893698459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_4
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 203
+        width: 141
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69c1059b082f6c290800000000000000
+      internalID: -7870336664104592234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_5
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 204
+        width: 248
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f365b693a384c340800000000000000
+      internalID: 4883172634607838200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_6
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 12
+        width: 357
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50c21b48a4d2f1340800000000000000
+      internalID: 4836634322896235525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_7
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 158
+        width: 7
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a9bde982461a3cb0800000000000000
+      internalID: -4883566370892170841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_8
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 158
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60b0ee15f4c5c07c0800000000000000
+      internalID: -4103803664694637818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_9
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 158
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7489b39d1b176c720800000000000000
+      internalID: 2866103221535610951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_10
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 158
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67d9f15b62bcf8c60800000000000000
+      internalID: 7822694444873784694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_11
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 158
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23dbc8b7924826690800000000000000
+      internalID: -7610375106601370318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_12
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 158
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92ebce68c02eba2e0800000000000000
+      internalID: -2113347056689168855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_13
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 158
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c612514d46f12cee0800000000000000
+      internalID: -1242396029285490324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_14
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 158
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9553aa45bfe273a50800000000000000
+      internalID: 6500716244124710233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_15
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 158
+        width: 7
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f0f171edbad526d0800000000000000
+      internalID: -3015763866388664079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_16
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 158
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de93ccfca96531760800000000000000
+      internalID: 7427375433375300077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoboHouse_Horizontal_17
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 158
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b53c397781529ec40800000000000000
+      internalID: 5542001603471721307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LoboHouse_Horizontal_0: 1044031502564985837
+      LoboHouse_Horizontal_1: 7698528031221529147
+      LoboHouse_Horizontal_10: 7822694444873784694
+      LoboHouse_Horizontal_11: -7610375106601370318
+      LoboHouse_Horizontal_12: -2113347056689168855
+      LoboHouse_Horizontal_13: -1242396029285490324
+      LoboHouse_Horizontal_14: 6500716244124710233
+      LoboHouse_Horizontal_15: -3015763866388664079
+      LoboHouse_Horizontal_16: 7427375433375300077
+      LoboHouse_Horizontal_17: 5542001603471721307
+      LoboHouse_Horizontal_2: -1204855297623102523
+      LoboHouse_Horizontal_3: -3689969534893698459
+      LoboHouse_Horizontal_4: -7870336664104592234
+      LoboHouse_Horizontal_5: 4883172634607838200
+      LoboHouse_Horizontal_6: 4836634322896235525
+      LoboHouse_Horizontal_7: -4883566370892170841
+      LoboHouse_Horizontal_8: -4103803664694637818
+      LoboHouse_Horizontal_9: 2866103221535610951
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

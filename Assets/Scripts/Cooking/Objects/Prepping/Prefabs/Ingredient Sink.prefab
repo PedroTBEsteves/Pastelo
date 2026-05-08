@@ -109,7 +109,7 @@ MonoBehaviour:
   _ingredient: {fileID: 11400000, guid: 08ccb2b0efd9aa542b04096cb51be8c5, type: 2}
   _lockedIndicator: {fileID: 5765820812895196427}
   _spriteRenderer: {fileID: 2010317973467851504}
-  _draggableSink: {fileID: 5574255335869514232}
+  _draggableSource: {fileID: 5574255335869514232}
   _purchasePrompt: {fileID: 0}
 --- !u!61 &1611464609268342615
 BoxCollider2D:
