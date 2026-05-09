@@ -36,7 +36,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b973576a91922514a811c30fd9a10ab9, type: 2}
   <CustomersToServe>k__BackingField: 10
   <PriceToPlay>k__BackingField: 4
-  <SplashImage>k__BackingField: {fileID: 21300000, guid: 0e751f6bc58b5974a9f0c287f73990ca, type: 3}
+  <SplashImage>k__BackingField: {fileID: -3682163729683801064, guid: e6542c1e5964d044c932a012ebb6254f, type: 3}
   _sectionBackgroundSprites:
     _serializedList:
     - Key: 0
