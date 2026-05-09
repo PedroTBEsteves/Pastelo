@@ -46,6 +46,34 @@ MonoBehaviour:
     m_Localized: Doughs
     m_Metadata:
       m_Items: []
+  - m_Id: 7329519277355008
+    m_Localized: Money earned---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329620670459904
+    m_Localized: Successful orders---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329719471484928
+    m_Localized: Failed orders---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329811167358976
+    m_Localized: Customers who didn't found what they were after---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330086024294400
+    m_Localized: Customers who gave up in line---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330177976020992
+    m_Localized: Customers who gave up the order---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330456154845184
+    m_Localized: Burnt pastels---
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

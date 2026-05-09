@@ -46,6 +46,34 @@ MonoBehaviour:
     m_Localized: Massas
     m_Metadata:
       m_Items: []
+  - m_Id: 7329519277355008
+    m_Localized: Dinheiro recebido---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329620670459904
+    m_Localized: Pedidos entregues com sucesso---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329719471484928
+    m_Localized: Pedidos entregues com falha---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329811167358976
+    m_Localized: "Clientes que n\xE3o encontraram o que queriam---"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330086024294400
+    m_Localized: Clientes que desistiram na fila---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330177976020992
+    m_Localized: Clientes que desistiram do pedido---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330456154845184
+    m_Localized: Pasteis queimados---
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

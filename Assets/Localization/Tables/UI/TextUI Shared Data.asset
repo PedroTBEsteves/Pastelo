@@ -39,6 +39,34 @@ MonoBehaviour:
     m_Key: ui.upgrade.doughs
     m_Metadata:
       m_Items: []
+  - m_Id: 7329519277355008
+    m_Key: ui.results.money-earned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329620670459904
+    m_Key: ui.results.successes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329719471484928
+    m_Key: ui.results.failures
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329811167358976
+    m_Key: ui.results.missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330086024294400
+    m_Key: ui.results.line-gave-up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330177976020992
+    m_Key: ui.results.order-gave-up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330456154845184
+    m_Key: ui.results.burns
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
