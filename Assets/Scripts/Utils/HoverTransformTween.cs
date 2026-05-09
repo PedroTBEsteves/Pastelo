@@ -175,6 +175,9 @@ public class HoverTransformTween : ValidatedMonoBehaviour, IPointerEnterHandler,
 
     private void ApplyInitialState()
     {
+        if (!_isTweenEnabled)
+            return;
+        
         if (_useScale)
             transform.localScale = _initialLocalScale;
 

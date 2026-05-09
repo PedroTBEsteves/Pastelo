@@ -176,6 +176,7 @@ public class CustomerAnimationController : MonoBehaviour
 
     private void AnimateCustomerArrival(Sprite sprite)
     {
+        _customerHoverTween?.DisableTween();
         StopCustomerTweens();
         ResetTransitionSprite();
         var customerStartLocalPosition = GetCustomerStartLocalPosition();
@@ -186,7 +187,11 @@ public class CustomerAnimationController : MonoBehaviour
                 GetWorldPosition(customerStartLocalPosition),
                 GetWorldPosition(_customerIdleLocalPosition),
                 _customerMoveTweenSettings)
-            .OnComplete(this, static controller => controller.StartCustomerBobbing());
+            .OnComplete(this, static controller =>
+            {
+                controller.StartCustomerBobbing();
+                controller._customerHoverTween?.EnableTween();
+            });
     }
 
     private void AnimateCustomerExit()

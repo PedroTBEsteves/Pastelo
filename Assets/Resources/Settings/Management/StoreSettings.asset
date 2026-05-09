@@ -30,12 +30,16 @@ MonoBehaviour:
   _fixedSequence:
   - _ingredient: {fileID: 11400000, guid: 08ccb2b0efd9aa542b04096cb51be8c5, type: 2}
     _durationInDays: 4
+  - _ingredient: {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
+    _durationInDays: 2
   - _ingredient: {fileID: 11400000, guid: 5489722aeb8179541ad9f796bbbd4ac6, type: 2}
     _durationInDays: 2
   - _ingredient: {fileID: 11400000, guid: 96ea8ebcc43440b46808456f7671d11d, type: 2}
     _durationInDays: 3
   - _ingredient: {fileID: 11400000, guid: 3853b1707a0647d4383213c13de58c44, type: 2}
     _durationInDays: 2
+  - _ingredient: {fileID: 11400000, guid: f76c4bb0d9cca8c488e34f244c8b1ab3, type: 2}
+    _durationInDays: 3
   - _ingredient: {fileID: 11400000, guid: 6541dc6c45840224bae68ecd92759648, type: 2}
     _durationInDays: 3
   <RandomIngredientsCount>k__BackingField: 3
