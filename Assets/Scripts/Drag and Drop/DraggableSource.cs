@@ -26,6 +26,11 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
     public void AddDraggableCreatedHandler(Action<Draggable> handler) => _draggableCreatedHandlers.Add(handler);
 
     public void RemoveDraggableCreatedHandler(Action<Draggable> handler) => _draggableCreatedHandlers.Remove(handler);
+
+    public void Configure(Draggable draggablePrefab)
+    {
+        _draggablePrefab = draggablePrefab;
+    }
     
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -39,6 +44,9 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
             return;
 
         _draggable = CreateDraggable(eventData);
+        if (_draggable == null)
+            return;
+
         _draggable.Dropped += OnDraggableDropped;
         _createdDraggableOnCurrentPress = true;
         ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.pointerDownHandler);
@@ -65,6 +73,8 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
             return;
         
         _draggable = CreateDraggable(eventData);
+        if (_draggable == null)
+            return;
         
         ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.beginDragHandler);
     }
@@ -112,6 +122,12 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private Draggable CreateDraggable(PointerEventData eventData)
     {
+        if (_draggablePrefab == null)
+        {
+            Debug.LogError($"{nameof(DraggableSource)} on '{name}' is missing a draggable prefab.", this);
+            return null;
+        }
+
         var position = eventData.pointerCurrentRaycast.worldPosition;
         var draggable = Instantiate(_draggablePrefab, position, Quaternion.identity);
 

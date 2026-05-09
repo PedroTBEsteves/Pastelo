@@ -103,8 +103,9 @@ GameObject:
   - component: {fileID: 2523472932811461584}
   - component: {fileID: 3553307263284109868}
   - component: {fileID: 4330299773123451787}
+  - component: {fileID: -5787882925764420332}
   m_Layer: 0
-  m_Name: Massa Sink
+  m_Name: Massa Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 7367941062341088989}
   _draggableSource: {fileID: 5520281729689365349}
   _purchasePrompt: {fileID: 0}
+  _tooltipTarget: {fileID: 3553307263284109868}
 --- !u!61 &6598179706461829354
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -329,3 +331,16 @@ MonoBehaviour:
   _useRotation: 0
   _hoverLocalEulerAngles: {x: 0, y: 0, z: 0}
   _isTweenEnabled: 1
+--- !u!114 &-5787882925764420332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142219619040711605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20620ae30fdd0164c9bb5bdc717d3ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _injectionStrategy: 2

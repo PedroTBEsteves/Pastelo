@@ -1,66 +1,54 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Reflex.Attributes;
+using Reflex.Extensions;
+using Reflex.Injectors;
 using UnityEngine;
 
 public sealed class LevelLoadoutLoader : MonoBehaviour
 {
     [SerializeField]
-    private DraggableDoughSource[] _doughSources;
+    private Transform _doughsAreaRoot;
 
     [SerializeField]
-    private DraggableFillingSource[] _fillingSources;
+    private Transform _fillingsAreaRoot;
 
     [Inject]
     private readonly LevelSelector _levelSelector;
 
+    [Inject]
+    private readonly LevelLoadoutController _levelLoadoutController;
+
+    [Inject]
+    private readonly LoadoutSettings _loadoutSettings;
+
     private void Awake()
     {
         var loadout = _levelSelector.GetSelectedLevelLoadout();
-        ConfigureSources(GetOrderedIngredients(loadout.Doughs), _doughSources);
-        ConfigureSources(GetOrderedIngredients(loadout.Fillings), _fillingSources);
+        var doughsArea = InstantiateArea<DoughsArea>(
+            _loadoutSettings.DoughLevels[_levelLoadoutController.CurrentDoughUpgradeLevelIndex].AreaPrefab,
+            _doughsAreaRoot);
+        var fillingsArea = InstantiateArea<FillingsArea>(
+            _loadoutSettings.FillingLevels[_levelLoadoutController.CurrentFillingUpgradeLevelIndex].AreaPrefab,
+            _fillingsAreaRoot);
+
+        doughsArea.Configure(loadout.Doughs);
+        fillingsArea.Configure(loadout.Fillings);
     }
 
-    private static IReadOnlyList<TIngredient> GetOrderedIngredients<TIngredient>(IEnumerable<TIngredient> ingredients)
-        where TIngredient : Ingredient
+    private TArea InstantiateArea<TArea>(GameObject prefab, Transform root)
+        where TArea : MonoBehaviour
     {
-        return ingredients
-            .Where(ingredient => ingredient != null)
-            .OrderBy(ingredient => ingredient.InternalName, StringComparer.Ordinal)
-            .ThenBy(ingredient => ingredient.name, StringComparer.Ordinal)
-            .ToArray();
-    }
+        if (prefab == null)
+            throw new System.InvalidOperationException($"{nameof(LevelLoadoutLoader)} on '{name}' is missing an area prefab for {typeof(TArea).Name}.");
 
-    private void ConfigureSources<TIngredient, TSource>(IReadOnlyList<TIngredient> ingredients, IReadOnlyList<TSource> sources)
-        where TIngredient : Ingredient
-        where TSource : DraggableIngredientSource<TIngredient>
-    {
-        if (sources == null)
-            return;
+        if (root == null)
+            throw new System.InvalidOperationException($"{nameof(LevelLoadoutLoader)} on '{name}' is missing an area root for {typeof(TArea).Name}.");
 
-        var orderedSources = sources.Where(source => source != null).ToArray();
-        var sourceCount = orderedSources.Length;
+        var instance = Instantiate(prefab, root);
+        GameObjectInjector.InjectRecursive(instance, gameObject.scene.GetSceneContainer());
 
-        if (ingredients.Count > sourceCount)
-        {
-            Debug.LogWarning(
-                $"{nameof(LevelLoadoutLoader)} has {ingredients.Count} configured {typeof(TIngredient).Name} ingredients but only {sourceCount} sources available on '{name}'.",
-                this);
-        }
+        if (!instance.TryGetComponent(out TArea area))
+            throw new System.InvalidOperationException($"Area prefab '{prefab.name}' is missing a {typeof(TArea).Name} component.");
 
-        for (var i = 0; i < sourceCount; i++)
-        {
-            var source = orderedSources[i];
-
-            if (i < ingredients.Count)
-            {
-                source.Configure(ingredients[i]);
-                continue;
-            }
-
-            source.gameObject.SetActive(false);
-            Destroy(source.gameObject);
-        }
+        return area;
     }
 }

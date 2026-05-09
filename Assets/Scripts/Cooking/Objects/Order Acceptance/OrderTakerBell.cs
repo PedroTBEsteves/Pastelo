@@ -65,6 +65,7 @@ public class OrderTakerBell : ValidatedMonoBehaviour, IPointerDownHandler
 
             _orderController.StartOrder(order);
         });
-        _bellSound.Play();
+        if (_bellSound != null)
+            _bellSound.Play();
     }
 }

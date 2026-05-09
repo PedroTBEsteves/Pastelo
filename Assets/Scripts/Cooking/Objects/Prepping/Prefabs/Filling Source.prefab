@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: -4323337825458426719}
   - component: {fileID: 9117855999309085369}
   - component: {fileID: 3590547358906861628}
+  - component: {fileID: -5078975212455486557}
   m_Layer: 0
-  m_Name: Ingredient Sink
+  m_Name: Filling Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 2010317973467851504}
   _draggableSource: {fileID: 5574255335869514232}
   _purchasePrompt: {fileID: 0}
+  _tooltipTarget: {fileID: 9117855999309085369}
 --- !u!61 &1611464609268342615
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -242,6 +244,19 @@ MonoBehaviour:
   _useRotation: 0
   _hoverLocalEulerAngles: {x: 0, y: 0, z: 0}
   _isTweenEnabled: 1
+--- !u!114 &-5078975212455486557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556916794420987154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20620ae30fdd0164c9bb5bdc717d3ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _injectionStrategy: 2
 --- !u!1 &8342283531500888329
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5765820812895196427
 Transform:
   m_ObjectHideFlags: 0

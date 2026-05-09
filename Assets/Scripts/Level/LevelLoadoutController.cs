@@ -18,6 +18,9 @@ public sealed class LevelLoadoutController
 
     public event Action<Level> LoadoutChanged = delegate { };
 
+    public int CurrentDoughUpgradeLevelIndex => _doughUpgradeLevelIndex;
+    public int CurrentFillingUpgradeLevelIndex => _fillingUpgradeLevelIndex;
+
     public LevelLoadoutController(Inventory inventory, LoadoutSettings settings, MoneyManager moneyManager)
     {
         _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));

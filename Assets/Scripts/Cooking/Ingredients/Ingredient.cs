@@ -16,6 +16,9 @@ public abstract class Ingredient : ItemDefinition
     
     [field: SerializeField]
     public Sprite SourceSprite { get; private set; }
+
+    [field: SerializeField]
+    public Draggable DraggablePrefab { get; private set; }
     
     public abstract string GetName();
 

@@ -15,18 +15,26 @@ MonoBehaviour:
   _doughLevels:
   - _maxAmount: 2
     _purchasePrice: 0
+    _areaPrefab: {fileID: 5299442572722036023, guid: 1fb735dcf84a9c5498177e6cd0ea77e5, type: 3}
   - _maxAmount: 4
     _purchasePrice: 15
+    _areaPrefab: {fileID: 1977458930839533281, guid: a3d96f22f6a778446a297923f0035639, type: 3}
   - _maxAmount: 6
     _purchasePrice: 50
+    _areaPrefab: {fileID: 5449289057216881304, guid: e25005925773fa84486b6cee63e47d70, type: 3}
   - _maxAmount: 8
     _purchasePrice: 120
+    _areaPrefab: {fileID: 7060724988036967965, guid: 3d21068cca4055942bbc483888f34913, type: 3}
   _fillingLevels:
   - _maxAmount: 3
     _purchasePrice: 0
+    _areaPrefab: {fileID: 4252405937396079369, guid: 02fef8b9ef861d44594fbbe2d56ff256, type: 3}
   - _maxAmount: 6
     _purchasePrice: 20
+    _areaPrefab: {fileID: 6059942755650530537, guid: a3ac807ced2841e468b2f87e457c4540, type: 3}
   - _maxAmount: 9
     _purchasePrice: 60
+    _areaPrefab: {fileID: 2650228176927264936, guid: caa81ad4fd961694c80cceef3e73e28e, type: 3}
   - _maxAmount: 12
     _purchasePrice: 140
+    _areaPrefab: {fileID: 7359320093787539603, guid: 6b668670fb808ce4aa9ed00921b9e0b3, type: 3}

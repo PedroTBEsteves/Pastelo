@@ -18,8 +18,8 @@ public abstract class DraggableIngredientSource<TIngredient> : ValidatedMonoBeha
     [SerializeField, Self]
     private DraggableSource _draggableSource;
 
-    [SerializeField, Scene]
-    private IngredientUnlockPurchasePrompt _purchasePrompt;
+    [SerializeField, Self]
+    private TooltipTarget _tooltipTarget;
 
     [Inject]
     private readonly GameplayInteractionGate _interactionGate;
@@ -92,6 +92,12 @@ public abstract class DraggableIngredientSource<TIngredient> : ValidatedMonoBeha
             if (hasIngredient)
                 _spriteRenderer.sprite = _ingredient.SourceSprite;
         }
+
+        if (_draggableSource != null)
+            _draggableSource.Configure(hasIngredient ? _ingredient.DraggablePrefab : null);
+
+        if (_tooltipTarget != null)
+            _tooltipTarget.Configure(hasIngredient ? _ingredient.GetDisplayName() : string.Empty);
 
         if (!_isInitialized || _tutorialTarget == null || !hasIngredient)
             return;

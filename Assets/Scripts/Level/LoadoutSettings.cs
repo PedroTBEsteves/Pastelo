@@ -24,6 +24,10 @@ public struct LoadoutUpgradeLevel
     [SerializeField, Min(0)]
     private float _purchasePrice;
 
+    [SerializeField]
+    private GameObject _areaPrefab;
+
     public int MaxAmount => Mathf.Max(0, _maxAmount);
     public float PurchasePrice => Mathf.Max(0, _purchasePrice);
+    public GameObject AreaPrefab => _areaPrefab;
 }

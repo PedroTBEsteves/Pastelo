@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f08d0527e13f03a43bca35b50352fb34
+guid: 303defb510b042d42933953325d55564
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1880002699562605852
-    second: cenario_bandeja_massas_0
+      213: 1310159530175181822
+    second: cenario_cesta_ingredientes3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cenario_bandeja_massas_0
+      name: cenario_cesta_ingredientes3_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 59
-        width: 1031
-        height: 450
+        x: 30
+        y: 120
+        width: 699
+        height: 402
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e2abc36183e8e5e0800000000000000
-      internalID: -1880002699562605852
+      spriteID: ef33f23b62f9e2210800000000000000
+      internalID: 1310159530175181822
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cenario_bandeja_massas_0: -1880002699562605852
+      cenario_cesta_ingredientes3_0: 1310159530175181822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
