@@ -9,18 +9,20 @@ public class Recipe : IEquatable<Recipe>
 {
     [SerializeField]
     private SerializedDictionary<Filling, int> _fillings;
+
     public Recipe(Dough dough, IReadOnlyDictionary<Filling, int> fillings)
     {
         Dough = dough;
         _fillings = new SerializedDictionary<Filling, int>(fillings);
-        Value = dough.Value + fillings.Sum(f => f.Key.Value * f.Value);
     }
     
     [field: SerializeField]
     public Dough Dough { get; private set; }
+
     public IReadOnlyDictionary<Filling, int> Fillings => _fillings;
     
-    public float Value { get; }
+    public float Value => (Dough != null ? Dough.Value : 0f)
+        + (_fillings?.Sum(f => (f.Key != null ? f.Key.Value : 0f) * f.Value) ?? 0f);
 
     public bool Equals(Recipe other)
     {
