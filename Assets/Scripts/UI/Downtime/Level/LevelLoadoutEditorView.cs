@@ -141,7 +141,11 @@ public class LevelLoadoutEditorView : MonoBehaviour
 
     public bool CanAddIngredient(Ingredient ingredient)
     {
-        return HasCapacity(ingredient);
+        if (_selectedLevel == null || ingredient == null)
+            return false;
+
+        var loadout = _levelLoadoutController.GetLoadout(_selectedLevel);
+        return !IsInLoadout(loadout, ingredient) && HasCapacity(loadout, ingredient);
     }
 
     public void HandleLoadoutIngredientHeld(LevelLoadoutIngredientView source, Ingredient ingredient, PointerEventData eventData)
@@ -160,13 +164,13 @@ public class LevelLoadoutEditorView : MonoBehaviour
         EndDrag(eventData);
     }
 
-    private bool TryBeginInventoryPreviewDrag(LevelLoadoutInventorySlotView sourceSlotView, Ingredient ingredient, PointerEventData eventData)
+    private void TryBeginInventoryPreviewDrag(LevelLoadoutInventorySlotView sourceSlotView, Ingredient ingredient, PointerEventData eventData)
     {
         if (_selectedLevel == null || ingredient == null || _activeDrag.IsActive || _loadoutIngredientPrefab == null || sourceSlotView == null)
-            return false;
+            return;
 
         if (!CanAddIngredient(ingredient))
-            return false;
+            return;
 
         var previewSlot = Instantiate(_loadoutIngredientPrefab, transform);
         previewSlot.name = $"Dragged {ingredient.GetDisplayName()}";
@@ -187,8 +191,6 @@ public class LevelLoadoutEditorView : MonoBehaviour
             sourceSlotView.CancelDragInput();
             previewSlot.BeginExternalDrag(eventData);
         }
-
-        return true;
     }
 
     private void BeginSlotDrag(LevelLoadoutIngredientView source, Ingredient ingredient)
@@ -518,17 +520,28 @@ public class LevelLoadoutEditorView : MonoBehaviour
         return false;
     }
 
-    private bool HasCapacity(Ingredient ingredient)
+    private static bool HasCapacity(Loadout loadout, Ingredient ingredient)
     {
-        if (_selectedLevel == null)
+        if (loadout == null)
             return false;
-
-        var loadout = _levelLoadoutController.GetLoadout(_selectedLevel);
 
         return ingredient switch
         {
             Dough => loadout.DoughCount < loadout.MaxDoughs,
             Filling => loadout.FillingCount < loadout.MaxFillings,
+            _ => false
+        };
+    }
+
+    private static bool IsInLoadout(Loadout loadout, Ingredient ingredient)
+    {
+        if (loadout == null)
+            return false;
+
+        return ingredient switch
+        {
+            Dough dough => loadout.Doughs.Contains(dough),
+            Filling filling => loadout.Fillings.Contains(filling),
             _ => false
         };
     }
