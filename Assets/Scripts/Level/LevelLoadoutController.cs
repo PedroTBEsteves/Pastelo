@@ -231,6 +231,46 @@ public sealed class LevelLoadoutController
         return missingEntries;
     }
 
+    public void ReplaceLoadout(Level level, IEnumerable<Dough> doughs, IEnumerable<Filling> fillings)
+    {
+        if (level == null)
+            throw new ArgumentNullException(nameof(level));
+
+        if (doughs == null)
+            throw new ArgumentNullException(nameof(doughs));
+
+        if (fillings == null)
+            throw new ArgumentNullException(nameof(fillings));
+
+        var normalizedDoughs = doughs.Where(dough => dough != null).Distinct().ToArray();
+        var normalizedFillings = fillings.Where(filling => filling != null).Distinct().ToArray();
+        var loadout = GetLoadout(level);
+
+        if (normalizedDoughs.Length > loadout.MaxDoughs)
+            throw new InvalidOperationException(
+                $"Configured dough count '{normalizedDoughs.Length}' exceeds max loadout size '{loadout.MaxDoughs}' for level '{level.name}'.");
+
+        if (normalizedFillings.Length > loadout.MaxFillings)
+            throw new InvalidOperationException(
+                $"Configured filling count '{normalizedFillings.Length}' exceeds max loadout size '{loadout.MaxFillings}' for level '{level.name}'.");
+
+        loadout.Clear();
+
+        foreach (var dough in normalizedDoughs)
+        {
+            if (!loadout.AddDough(dough))
+                throw new InvalidOperationException($"Failed to add dough '{dough.name}' to loadout for level '{level.name}'.");
+        }
+
+        foreach (var filling in normalizedFillings)
+        {
+            if (!loadout.AddFilling(filling))
+                throw new InvalidOperationException($"Failed to add filling '{filling.name}' to loadout for level '{level.name}'.");
+        }
+
+        LoadoutChanged(level);
+    }
+
     private Loadout CreateLoadout()
     {
         return new Loadout(GetCurrentMaxDoughs(), GetCurrentMaxFillings());

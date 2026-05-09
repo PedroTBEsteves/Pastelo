@@ -62,4 +62,10 @@ public sealed class Loadout
 
         return _fillings.Remove(filling);
     }
+
+    public void Clear()
+    {
+        _doughs.Clear();
+        _fillings.Clear();
+    }
 }

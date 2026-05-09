@@ -9691,7 +9691,7 @@ MonoBehaviour:
     _useFixedUpdate: 0
     _updateType: 0
   _useScale: 1
-  _hoverScale: {x: 0.55, y: 0.55, z: 0.55}
+  _hoverScale: {x: 1.1, y: 1.1, z: 1.1}
   _usePosition: 0
   _hoverLocalPosition: {x: 0, y: 0, z: 0}
   _useRotation: 1

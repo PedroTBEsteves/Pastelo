@@ -53,10 +53,7 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
             return true;
 
         if (_isLoading)
-        {
-            Debug.LogWarning($"{nameof(GameplayLoopFlowController)} is already loading a scene.", this);
-            return false;
-        }
+            return await WaitForCurrentLoadAndRetryAsync(sceneReference, sceneBuildIndex);
 
         if (!TryResolveParentContainer(out var parentContainer))
             return false;
@@ -88,6 +85,19 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
             _targetSceneBuildIndex = -1;
             _isLoading = false;
         }
+    }
+
+    private async UniTask<bool> WaitForCurrentLoadAndRetryAsync(SceneReference sceneReference, int sceneBuildIndex)
+    {
+        var cancellationToken = this.GetCancellationTokenOnDestroy();
+
+        while (_isLoading)
+            await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+
+        if (TryActivateCurrentScene(sceneBuildIndex))
+            return true;
+
+        return await LoadSceneAsync(sceneReference);
     }
 
     private async UniTask WaitForSceneTransitionServiceAsync(CancellationToken cancellationToken)

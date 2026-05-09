@@ -13,4 +13,9 @@ public static class GameplayTutorialOptions
         _shouldRunTutorial = false;
         return shouldRunTutorial;
     }
+
+    public static bool PeekShouldRunTutorial()
+    {
+        return _shouldRunTutorial;
+    }
 }
