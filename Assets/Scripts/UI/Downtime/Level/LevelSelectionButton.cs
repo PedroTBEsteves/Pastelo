@@ -53,6 +53,7 @@ public class LevelSelectionButton : ValidatedMonoBehaviour, IPointerEnterHandler
     {
         _levelInfoPanel.SetActive(true);
         _levelInfoPanel.transform.SetParent(_canvas.transform);
+        _levelInfoPanel.transform.localScale = Vector3.one;
         _levelImage.alphaHitTestMinimumThreshold = 0f;
     }
 
