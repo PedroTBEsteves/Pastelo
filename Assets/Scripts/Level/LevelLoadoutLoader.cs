@@ -17,18 +17,11 @@ public sealed class LevelLoadoutLoader : MonoBehaviour
     [Inject]
     private readonly LevelLoadoutController _levelLoadoutController;
 
-    [Inject]
-    private readonly LoadoutSettings _loadoutSettings;
-
     private void Awake()
     {
         var loadout = _levelSelector.GetSelectedLevelLoadout();
-        var doughsArea = InstantiateArea<DoughsArea>(
-            _loadoutSettings.DoughLevels[_levelLoadoutController.CurrentDoughUpgradeLevelIndex].AreaPrefab,
-            _doughsAreaRoot);
-        var fillingsArea = InstantiateArea<FillingsArea>(
-            _loadoutSettings.FillingLevels[_levelLoadoutController.CurrentFillingUpgradeLevelIndex].AreaPrefab,
-            _fillingsAreaRoot);
+        var doughsArea = InstantiateArea<DoughsArea>(_levelLoadoutController.CurrentDoughsAreaPrefab, _doughsAreaRoot);
+        var fillingsArea = InstantiateArea<FillingsArea>(_levelLoadoutController.CurrentFillingsAreaPrefab, _fillingsAreaRoot);
 
         doughsArea.Configure(loadout.Doughs);
         fillingsArea.Configure(loadout.Fillings);

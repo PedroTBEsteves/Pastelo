@@ -27,6 +27,18 @@ MonoBehaviour:
     m_Key: ui.store.fixed-available
     m_Metadata:
       m_Items: []
+  - m_Id: 7313459828404224
+    m_Key: ui.buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7313666825695232
+    m_Key: ui.upgrade.fillings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7313753786200064
+    m_Key: ui.upgrade.doughs
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

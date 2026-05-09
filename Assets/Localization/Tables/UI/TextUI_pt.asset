@@ -33,6 +33,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 7724086103131029595
+  - m_Id: 7313459828404224
+    m_Localized: Comprar ({price})
+    m_Metadata:
+      m_Items:
+      - rid: 7724086103131029595
+  - m_Id: 7313666825695232
+    m_Localized: Recheios
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7313753786200064
+    m_Localized: Massas
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -43,3 +56,4 @@ MonoBehaviour:
         m_SharedEntries:
         - id: 13126512640
         - id: 5847654464925696
+        - id: 7313459828404224

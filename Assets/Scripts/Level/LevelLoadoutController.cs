@@ -18,8 +18,10 @@ public sealed class LevelLoadoutController
 
     public event Action<Level> LoadoutChanged = delegate { };
 
-    public int CurrentDoughUpgradeLevelIndex => _doughUpgradeLevelIndex;
-    public int CurrentFillingUpgradeLevelIndex => _fillingUpgradeLevelIndex;
+    public GameObject CurrentDoughsAreaPrefab => _settings.DoughLevels[_doughUpgradeLevelIndex].AreaPrefab;
+    public GameObject CurrentFillingsAreaPrefab => _settings.FillingLevels[_fillingUpgradeLevelIndex].AreaPrefab;
+    public int CurrentDoughUpgradeSize => GetCurrentMaxDoughs();
+    public int CurrentFillingUpgradeSize => GetCurrentMaxFillings();
 
     public LevelLoadoutController(Inventory inventory, LoadoutSettings settings, MoneyManager moneyManager)
     {
@@ -45,6 +47,23 @@ public sealed class LevelLoadoutController
         return HasNextDoughUpgrade() && _moneyManager.CanSpend(GetDoughUpgradePrice());
     }
 
+    public bool HasNextDoughUpgrade()
+    {
+        return _doughUpgradeLevelIndex + 1 < _settings.DoughLevels.Count;
+    }
+
+    public bool TryGetNextDoughUpgradeSize(out int size)
+    {
+        if (!HasNextDoughUpgrade())
+        {
+            size = 0;
+            return false;
+        }
+
+        size = _settings.DoughLevels[_doughUpgradeLevelIndex + 1].MaxAmount;
+        return true;
+    }
+
     public bool TryPurchaseDoughUpgrade()
     {
         if (!HasNextDoughUpgrade())
@@ -67,6 +86,23 @@ public sealed class LevelLoadoutController
     public bool CanPurchaseFillingUpgrade()
     {
         return HasNextFillingUpgrade() && _moneyManager.CanSpend(GetFillingUpgradePrice());
+    }
+
+    public bool HasNextFillingUpgrade()
+    {
+        return _fillingUpgradeLevelIndex + 1 < _settings.FillingLevels.Count;
+    }
+
+    public bool TryGetNextFillingUpgradeSize(out int size)
+    {
+        if (!HasNextFillingUpgrade())
+        {
+            size = 0;
+            return false;
+        }
+
+        size = _settings.FillingLevels[_fillingUpgradeLevelIndex + 1].MaxAmount;
+        return true;
     }
 
     public bool TryPurchaseFillingUpgrade()
@@ -232,16 +268,6 @@ public sealed class LevelLoadoutController
             Filling => 1,
             _ => 2
         };
-    }
-
-    private bool HasNextDoughUpgrade()
-    {
-        return _doughUpgradeLevelIndex + 1 < _settings.DoughLevels.Count;
-    }
-
-    private bool HasNextFillingUpgrade()
-    {
-        return _fillingUpgradeLevelIndex + 1 < _settings.FillingLevels.Count;
     }
 
     private int GetCurrentMaxDoughs()
