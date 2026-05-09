@@ -30,6 +30,8 @@ public class LevelSelectionButton : ValidatedMonoBehaviour, IPointerEnterHandler
     [SerializeField]
     private Level _level;
 
+    private int _siblingIndex;
+
     private void Awake()
     {
         _button.onClick.AddListener(OnButtonClicked);
@@ -37,6 +39,7 @@ public class LevelSelectionButton : ValidatedMonoBehaviour, IPointerEnterHandler
         _levelPriceText.SetText(TextUtils.FormatAsMoney(_level.PriceToPlay));
         _levelInfoPanel.SetActive(false);
         _levelImage.alphaHitTestMinimumThreshold = 0.9f;
+        _siblingIndex = transform.GetSiblingIndex();
     }
 
     private void OnDestroy()
@@ -52,15 +55,14 @@ public class LevelSelectionButton : ValidatedMonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         _levelInfoPanel.SetActive(true);
-        _levelInfoPanel.transform.SetParent(_canvas.transform);
-        _levelInfoPanel.transform.localScale = Vector3.one;
         _levelImage.alphaHitTestMinimumThreshold = 0f;
+        transform.SetAsLastSibling();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _levelInfoPanel.SetActive(false);
-        _levelInfoPanel.transform.SetParent(transform);
         _levelImage.alphaHitTestMinimumThreshold = 0.9f;
+        transform.SetSiblingIndex(_siblingIndex);
     }
 }
