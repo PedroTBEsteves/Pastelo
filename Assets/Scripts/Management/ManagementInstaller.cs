@@ -10,6 +10,7 @@ public class ManagementInstaller : MonoBehaviour, IInstaller
             .AddSingleton(typeof(Inventory))
             .AddSingleton(Resources.Load("Settings/Management/IngredientsStorageSettings"))
             .AddSingleton(typeof(IngredientsStorage))
+            .AddSingleton(Resources.Load("Settings/Management/LoadoutSettings"))
             .AddSingleton(Resources.Load("Settings/Management/MoneySettings"))
             .AddSingleton(typeof(MoneyManager));
     }

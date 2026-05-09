@@ -133,10 +133,15 @@ public class LevelLoadoutEditorView : MonoBehaviour
 
     public void HandleInventoryHeld(LevelLoadoutInventorySlotView sourceSlotView, Ingredient ingredient, int availableQuantity, PointerEventData eventData)
     {
-        if (availableQuantity <= 0)
+        if (availableQuantity <= 0 || !CanAddIngredient(ingredient))
             return;
 
         TryBeginInventoryPreviewDrag(sourceSlotView, ingredient, eventData);
+    }
+
+    public bool CanAddIngredient(Ingredient ingredient)
+    {
+        return HasCapacity(ingredient);
     }
 
     public void HandleLoadoutIngredientHeld(LevelLoadoutIngredientView source, Ingredient ingredient, PointerEventData eventData)
@@ -158,6 +163,9 @@ public class LevelLoadoutEditorView : MonoBehaviour
     private bool TryBeginInventoryPreviewDrag(LevelLoadoutInventorySlotView sourceSlotView, Ingredient ingredient, PointerEventData eventData)
     {
         if (_selectedLevel == null || ingredient == null || _activeDrag.IsActive || _loadoutIngredientPrefab == null || sourceSlotView == null)
+            return false;
+
+        if (!CanAddIngredient(ingredient))
             return false;
 
         var previewSlot = Instantiate(_loadoutIngredientPrefab, transform);
@@ -462,7 +470,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
         if (slot.Ingredient != null)
             return false;
 
-        if (!HasCapacity(_activeDrag.Ingredient))
+        if (!CanAddIngredient(_activeDrag.Ingredient))
             return false;
 
         slot.Ingredient = _activeDrag.Ingredient;

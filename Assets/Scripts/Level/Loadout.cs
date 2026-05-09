@@ -16,8 +16,14 @@ public sealed class Loadout
     public IReadOnlyCollection<Filling> Fillings => _fillings;
     public int DoughCount => _doughs.Count;
     public int FillingCount => _fillings.Count;
-    public int MaxDoughs { get; }
-    public int MaxFillings { get; }
+    public int MaxDoughs { get; private set; }
+    public int MaxFillings { get; private set; }
+
+    public void SetLimits(int maxDoughs, int maxFillings)
+    {
+        MaxDoughs = Math.Max(0, maxDoughs);
+        MaxFillings = Math.Max(0, maxFillings);
+    }
 
     public bool AddDough(Dough dough)
     {

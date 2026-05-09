@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd4abdd1e8a48d4be6a8729236044d0, type: 3}
+  m_Name: LoadoutSettings
+  m_EditorClassIdentifier: 
+  _doughLevels:
+  - _maxAmount: 2
+    _purchasePrice: 0
+  - _maxAmount: 4
+    _purchasePrice: 15
+  - _maxAmount: 6
+    _purchasePrice: 50
+  - _maxAmount: 8
+    _purchasePrice: 120
+  _fillingLevels:
+  - _maxAmount: 3
+    _purchasePrice: 0
+  - _maxAmount: 6
+    _purchasePrice: 20
+  - _maxAmount: 9
+    _purchasePrice: 60
+  - _maxAmount: 12
+    _purchasePrice: 140

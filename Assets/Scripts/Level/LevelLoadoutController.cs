@@ -10,15 +10,22 @@ public sealed class LevelLoadoutController
     private readonly Dictionary<Level, Loadout> _loadoutsByLevel = new();
     
     private readonly Inventory _inventory;
-    
-    private int _maxDoughsPerLoadout = 3;
-    private int _maxFillingsPerLoadout = 6;
+    private readonly LoadoutSettings _settings;
+    private readonly MoneyManager _moneyManager;
+
+    private int _doughUpgradeLevelIndex;
+    private int _fillingUpgradeLevelIndex;
 
     public event Action<Level> LoadoutChanged = delegate { };
 
-    public LevelLoadoutController(Inventory inventory)
+    public LevelLoadoutController(Inventory inventory, LoadoutSettings settings, MoneyManager moneyManager)
     {
-        _inventory = inventory;
+        _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
+        _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+        _moneyManager = moneyManager ?? throw new ArgumentNullException(nameof(moneyManager));
+
+        ValidateSettings();
+
         var levels = Resources.LoadAll<Level>(LevelsResourcePath);
 
         foreach (var level in levels)
@@ -28,6 +35,54 @@ public sealed class LevelLoadoutController
 
             _loadoutsByLevel.Add(level, CreateLoadout());
         }
+    }
+
+    public bool CanPurchaseDoughUpgrade()
+    {
+        return HasNextDoughUpgrade() && _moneyManager.CanSpend(GetDoughUpgradePrice());
+    }
+
+    public bool TryPurchaseDoughUpgrade()
+    {
+        if (!HasNextDoughUpgrade())
+            return false;
+
+        if (!_moneyManager.TrySpend(GetDoughUpgradePrice()))
+            return false;
+
+        _doughUpgradeLevelIndex++;
+        ApplyCurrentLimitsToLoadouts();
+        NotifyAllLoadoutsChanged();
+        return true;
+    }
+
+    public float GetDoughUpgradePrice()
+    {
+        return HasNextDoughUpgrade() ? _settings.DoughLevels[_doughUpgradeLevelIndex + 1].PurchasePrice : 0f;
+    }
+
+    public bool CanPurchaseFillingUpgrade()
+    {
+        return HasNextFillingUpgrade() && _moneyManager.CanSpend(GetFillingUpgradePrice());
+    }
+
+    public bool TryPurchaseFillingUpgrade()
+    {
+        if (!HasNextFillingUpgrade())
+            return false;
+
+        if (!_moneyManager.TrySpend(GetFillingUpgradePrice()))
+            return false;
+
+        _fillingUpgradeLevelIndex++;
+        ApplyCurrentLimitsToLoadouts();
+        NotifyAllLoadoutsChanged();
+        return true;
+    }
+
+    public float GetFillingUpgradePrice()
+    {
+        return HasNextFillingUpgrade() ? _settings.FillingLevels[_fillingUpgradeLevelIndex + 1].PurchasePrice : 0f;
     }
     
     public Loadout GetLoadout(Level level)
@@ -139,7 +194,7 @@ public sealed class LevelLoadoutController
 
     private Loadout CreateLoadout()
     {
-        return new Loadout(_maxDoughsPerLoadout, _maxFillingsPerLoadout);
+        return new Loadout(GetCurrentMaxDoughs(), GetCurrentMaxFillings());
     }
 
     private bool ChangeLoadout(Level level, Func<Loadout, bool> mutator)
@@ -174,5 +229,49 @@ public sealed class LevelLoadoutController
             Filling => 1,
             _ => 2
         };
+    }
+
+    private bool HasNextDoughUpgrade()
+    {
+        return _doughUpgradeLevelIndex + 1 < _settings.DoughLevels.Count;
+    }
+
+    private bool HasNextFillingUpgrade()
+    {
+        return _fillingUpgradeLevelIndex + 1 < _settings.FillingLevels.Count;
+    }
+
+    private int GetCurrentMaxDoughs()
+    {
+        return _settings.DoughLevels[_doughUpgradeLevelIndex].MaxAmount;
+    }
+
+    private int GetCurrentMaxFillings()
+    {
+        return _settings.FillingLevels[_fillingUpgradeLevelIndex].MaxAmount;
+    }
+
+    private void ApplyCurrentLimitsToLoadouts()
+    {
+        var maxDoughs = GetCurrentMaxDoughs();
+        var maxFillings = GetCurrentMaxFillings();
+
+        foreach (var loadout in _loadoutsByLevel.Values)
+            loadout.SetLimits(maxDoughs, maxFillings);
+    }
+
+    private void NotifyAllLoadoutsChanged()
+    {
+        foreach (var level in _loadoutsByLevel.Keys)
+            LoadoutChanged(level);
+    }
+
+    private void ValidateSettings()
+    {
+        if (_settings.DoughLevels == null || _settings.DoughLevels.Count == 0)
+            throw new InvalidOperationException($"{nameof(LoadoutSettings)} must have at least one dough level.");
+
+        if (_settings.FillingLevels == null || _settings.FillingLevels.Count == 0)
+            throw new InvalidOperationException($"{nameof(LoadoutSettings)} must have at least one filling level.");
     }
 }

@@ -24,6 +24,9 @@ public class LevelLoadoutInventorySlotView : MonoBehaviour
     [SerializeField]
     private Color _depletedIconColor = Color.gray;
 
+    [SerializeField]
+    private Color _cantAddIconColor = Color.red;
+
     private LevelLoadoutEditorView _editor;
     private LoadoutInventoryProjectionEntry _entry;
     private DraggableUI _draggableUI;
@@ -71,7 +74,7 @@ public class LevelLoadoutInventorySlotView : MonoBehaviour
 
     private bool CanBeginDrag()
     {
-        return _entry.Ingredient != null && _entry.AvailableQuantity > 0;
+        return _entry.Ingredient != null && _entry.AvailableQuantity > 0 && (_editor == null || _editor.CanAddIngredient(_entry.Ingredient));
     }
 
     private void OnHeld(PointerEventData eventData)
@@ -119,13 +122,17 @@ public class LevelLoadoutInventorySlotView : MonoBehaviour
     private void Refresh()
     {
         var displayedQuantity = GetDisplayedQuantity();
+        var canAddIngredient = _editor == null || _editor.CanAddIngredient(_entry.Ingredient);
 
         if (_iconImage != null)
         {
+            var color = displayedQuantity <= 0 ? 
+                _depletedIconColor : 
+                !canAddIngredient ? 
+                    _cantAddIconColor : 
+                    _defaultIconColor;
             _iconImage.sprite = _entry.Ingredient != null ? _entry.Ingredient.Icon : null;
-            _iconImage.color = _entry.Ingredient != null && displayedQuantity <= 0
-                ? _depletedIconColor
-                : _defaultIconColor;
+            _iconImage.color = color;
         }
 
         if (_nameText != null)

@@ -1,4 +1,3 @@
-using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.Serialization;
