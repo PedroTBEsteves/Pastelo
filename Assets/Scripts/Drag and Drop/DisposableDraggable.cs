@@ -8,6 +8,11 @@ public interface IDiscardPolicy
     bool CanBeDiscarded();
 }
 
+public interface IDiscardHandler
+{
+    void Discard();
+}
+
 [RequireComponent(typeof(Draggable))]
 public class DisposableDraggable : ValidatedMonoBehaviour
 {
@@ -52,5 +57,11 @@ public class DisposableDraggable : ValidatedMonoBehaviour
     {
         var discardPolicy = GetComponent(typeof(IDiscardPolicy)) as IDiscardPolicy;
         return discardPolicy?.CanBeDiscarded() ?? true;
+    }
+
+    public bool TryGetDiscardHandler(out IDiscardHandler discardHandler)
+    {
+        discardHandler = GetComponent(typeof(IDiscardHandler)) as IDiscardHandler;
+        return discardHandler != null;
     }
 }

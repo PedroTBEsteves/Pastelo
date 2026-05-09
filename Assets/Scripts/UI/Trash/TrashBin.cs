@@ -38,7 +38,12 @@ public class TrashBin : MonoBehaviour
 
         if (IsInside(eventData))
         {
-            Destroy(draggable.gameObject);
+            var disposableDraggable = draggable.GetComponent<DisposableDraggable>();
+            if (disposableDraggable != null && disposableDraggable.TryGetDiscardHandler(out var discardHandler))
+                discardHandler.Discard();
+            else
+                Destroy(draggable.gameObject);
+
             PlayDiscardSound();
         }
         

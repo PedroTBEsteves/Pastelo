@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Draggable))]
-public class Deliverable : MonoBehaviour
+[RequireComponent(typeof(DisposableDraggable))]
+public class Deliverable : MonoBehaviour, IDiscardPolicy, IDiscardHandler
 {
     [SerializeField] 
     private Transform _discardPositionTransform;
@@ -105,12 +106,23 @@ public class Deliverable : MonoBehaviour
         return true;
     }
 
+    public bool CanBeDiscarded() => _closedPastelDough != null;
+
+    public void Discard()
+    {
+        if (_closedPastelDough == null)
+            return;
+
+        ClearPastel();
+        transform.position = _dragStartPosition;
+    }
+
     private bool CanDragBag()
     {
-        if (_closedPastelDough == null || _filledSprite == null || _customerDisplay == null)
+        if (_closedPastelDough == null || _filledSprite == null)
             return false;
 
-        return _customerDisplay.HasVisibleCustomer();
+        return CanBeDiscarded() || (_customerDisplay != null && _customerDisplay.HasVisibleCustomer());
     }
 
     private void OnHeld(PointerEventData _)
@@ -133,11 +145,7 @@ public class Deliverable : MonoBehaviour
 
         var delivered = TryDeliverToCustomer(eventData);
         if (delivered)
-        {
-            _closedPastelDough = null;
-            _bagIngredientHint?.Bind(null);
-            UpdateSprite();
-        }
+            ClearPastel();
 
         transform.position = _dragStartPosition;
         _tutorialEvents.PublishDeliveryBagDropped(this);
@@ -168,6 +176,14 @@ public class Deliverable : MonoBehaviour
             _tutorialEvents,
             _interactionGate,
             _tutorialTargetRegistry);
+    }
+
+    private void ClearPastel()
+    {
+        _closedPastelDough = null;
+        _bagIngredientHint?.Bind(null);
+        _bagIngredientHint?.SetVisible(false);
+        UpdateSprite();
     }
 
     private bool TryDeliverToCustomer(PointerEventData eventData)
