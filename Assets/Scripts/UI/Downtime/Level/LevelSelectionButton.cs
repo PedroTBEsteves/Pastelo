@@ -55,14 +55,12 @@ public class LevelSelectionButton : ValidatedMonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         _levelInfoPanel.SetActive(true);
-        _levelImage.alphaHitTestMinimumThreshold = 0f;
         transform.SetAsLastSibling();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _levelInfoPanel.SetActive(false);
-        _levelImage.alphaHitTestMinimumThreshold = 0.9f;
         transform.SetSiblingIndex(_siblingIndex);
     }
 }
