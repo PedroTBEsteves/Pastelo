@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public sealed class DraggableUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
-    private DraggableInputConfiguration _inputConfiguration;
+    [Inject]
+    private readonly DraggableInputConfiguration _inputConfiguration;
+    
     private bool _isDragging;
     private bool _createdDragOnCurrentPress;
     private bool _pendingPointerClickIgnore;
@@ -29,11 +32,6 @@ public sealed class DraggableUI : MonoBehaviour, IPointerDownHandler, IPointerUp
             return;
 
         Dragged(Pointer.current.position.ReadValue());
-    }
-
-    public void Configure(DraggableInputConfiguration inputConfiguration)
-    {
-        _inputConfiguration = inputConfiguration;
     }
 
     public void AddCanDragHandler(Func<bool> handler) => _canDragHandlers.Add(handler);

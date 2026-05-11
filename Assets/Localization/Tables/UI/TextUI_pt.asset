@@ -74,6 +74,22 @@ MonoBehaviour:
     m_Localized: Pasteis queimados---
     m_Metadata:
       m_Items: []
+  - m_Id: 8049288028794880
+    m_Localized: Recheios e Massas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8049387190530048
+    m_Localized: Clique e adicione para levar ao local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8055621910179840
+    m_Localized: Voltar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8056409617248256
+    m_Localized: Recomendado
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

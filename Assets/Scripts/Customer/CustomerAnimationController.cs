@@ -312,6 +312,7 @@ public class CustomerAnimationController : MonoBehaviour
         renderer.sprite = sprite;
         renderer.enabled = sprite != null;
         renderer.transform.localPosition = localPosition;
+        renderer.transform.localScale =  Vector3.one;
     }
 
     private Vector3 GetWorldPosition(Vector3 localPosition)

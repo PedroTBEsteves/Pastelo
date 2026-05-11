@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7725681110740660781}
   - component: {fileID: 438844325948597715}
   - component: {fileID: 7308719360797429011}
+  - component: {fileID: 461776308511524632}
   m_Layer: 5
   m_Name: LoadoutInventoryViewPrefab
   m_TagString: Untagged
@@ -160,6 +161,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38ef8fd69a74c3ab2e1b8bc40b8cb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &461776308511524632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602458908836569965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20620ae30fdd0164c9bb5bdc717d3ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _injectionStrategy: 2
 --- !u!1 &4548706391382269685
 GameObject:
   m_ObjectHideFlags: 0

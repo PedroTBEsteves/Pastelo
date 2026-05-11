@@ -67,6 +67,22 @@ MonoBehaviour:
     m_Key: ui.results.burns
     m_Metadata:
       m_Items: []
+  - m_Id: 8049288028794880
+    m_Key: ui.loadout.inventory-title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8049387190530048
+    m_Key: ui.loadout.inventory-legend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8055621910179840
+    m_Key: ui.return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8056409617248256
+    m_Key: ui.loadout.recommended
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

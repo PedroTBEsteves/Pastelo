@@ -64,7 +64,6 @@ public class LevelLoadoutIngredientView : MonoBehaviour
         _ingredient = ingredient;
         _isMissing = isMissing;
         _isPreview = false;
-        _draggableUI?.Configure(editor != null ? editor.InputConfiguration : null);
         Refresh();
     }
 
@@ -75,7 +74,6 @@ public class LevelLoadoutIngredientView : MonoBehaviour
         _ingredient = ingredient;
         _isMissing = false;
         _isPreview = true;
-        _draggableUI?.Configure(editor != null ? editor.InputConfiguration : null);
         Refresh();
     }
 

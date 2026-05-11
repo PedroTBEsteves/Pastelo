@@ -13,6 +13,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
     private sealed class SlotAssignment
     {
         public Transform Root;
+        public LevelLoadoutIngredientSlotType SlotType;
         public Ingredient Ingredient;
         public LevelLoadoutIngredientView View;
     }
@@ -39,8 +40,17 @@ public class LevelLoadoutEditorView : MonoBehaviour
     [SerializeField]
     private Image _levelSplashImage;
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private Transform[] _ingredientSlotRoots = System.Array.Empty<Transform>();
+
+    [SerializeField]
+    private Transform _doughSlotRoot;
+
+    [SerializeField]
+    private Transform _fillingSlotRoot;
+
+    [SerializeField]
+    private Transform _loadoutSlotPrefab;
 
     [SerializeField]
     private Transform _inventoryRoot;
@@ -85,6 +95,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
     private readonly List<LevelLoadoutIngredientView> _loadoutSlotViews = new();
     private readonly List<LevelLoadoutInventorySlotView> _inventoryItems = new();
     private readonly List<LevelPreferenceView> _preferenceItems = new();
+    private readonly List<Transform> _instantiatedSlotRoots = new();
 
     private Level _selectedLevel;
     private ActiveDrag _activeDrag;
@@ -298,50 +309,21 @@ public class LevelLoadoutEditorView : MonoBehaviour
 
     private void RebuildSlots()
     {
-        SyncSlotAssignments();
-        ClearViews(_loadoutSlotViews);
-
-        for (var slotIndex = 0; slotIndex < _slotAssignments.Count; slotIndex++)
-            _slotAssignments[slotIndex].View = null;
+        var previousAssignments = SnapshotAssignments();
+        ClearInstantiatedSlots();
 
         if (_selectedLevel == null || _loadoutIngredientPrefab == null)
             return;
 
         var loadout = _levelLoadoutController.GetLoadout(_selectedLevel);
+        if (!TryBuildSlotAssignments(loadout))
+            return;
+
         var missingLookup = _levelLoadoutController.GetMissingIngredients(_selectedLevel)
             .ToDictionary(entry => entry.Ingredient, entry => entry.IsMissing);
-
-        var assignedIngredients = new HashSet<Ingredient>();
-        var loadoutIngredients = loadout.Doughs
-            .OrderBy(dough => dough.GetDisplayName())
-            .Cast<Ingredient>()
-            .Concat(loadout.Fillings.OrderBy(filling => filling.GetDisplayName()))
-            .ToArray();
-        var loadoutIngredientLookup = new HashSet<Ingredient>(loadoutIngredients);
-
-        for (var slotIndex = 0; slotIndex < _slotAssignments.Count; slotIndex++)
-        {
-            var assignment = _slotAssignments[slotIndex];
-            if (assignment.Ingredient == null)
-                continue;
-
-            if (!loadoutIngredientLookup.Contains(assignment.Ingredient) || !assignedIngredients.Add(assignment.Ingredient))
-                assignment.Ingredient = null;
-        }
-
-        for (var ingredientIndex = 0; ingredientIndex < loadoutIngredients.Length; ingredientIndex++)
-        {
-            var ingredient = loadoutIngredients[ingredientIndex];
-            if (ingredient == null || assignedIngredients.Contains(ingredient))
-                continue;
-
-            var emptySlot = GetFirstEmptySlot();
-            if (emptySlot == null)
-                break;
-
-            emptySlot.Ingredient = ingredient;
-            assignedIngredients.Add(ingredient);
-        }
+        RestoreSlotAssignments(previousAssignments, loadout);
+        AssignIngredientsToSlots(loadout.Doughs.OrderBy(dough => dough.GetDisplayName()), LevelLoadoutIngredientSlotType.Dough);
+        AssignIngredientsToSlots(loadout.Fillings.OrderBy(filling => filling.GetDisplayName()), LevelLoadoutIngredientSlotType.Filling);
 
         BuildAssignedSlots(missingLookup);
     }
@@ -469,6 +451,9 @@ public class LevelLoadoutEditorView : MonoBehaviour
         if (!TryGetDropSlot(eventData, out var slot))
             return false;
 
+        if (!AcceptsIngredient(slot, _activeDrag.Ingredient))
+            return false;
+
         if (slot.Ingredient != null)
             return false;
 
@@ -491,6 +476,9 @@ public class LevelLoadoutEditorView : MonoBehaviour
         if (!TryGetDropSlot(eventData, out var targetSlot))
             return false;
 
+        if (!AcceptsIngredient(targetSlot, _activeDrag.Ingredient))
+            return false;
+
         if (targetSlot == _activeDrag.SourceSlot)
             return true;
 
@@ -504,8 +492,6 @@ public class LevelLoadoutEditorView : MonoBehaviour
 
     private bool TryGetDropSlot(PointerEventData eventData, out SlotAssignment slot)
     {
-        SyncSlotAssignments();
-
         for (var slotIndex = _slotAssignments.Count - 1; slotIndex >= 0; slotIndex--)
         {
             var assignment = _slotAssignments[slotIndex];
@@ -546,40 +532,127 @@ public class LevelLoadoutEditorView : MonoBehaviour
         };
     }
 
-    private void SyncSlotAssignments()
+    private bool TryBuildSlotAssignments(Loadout loadout)
     {
-        var configuredRoots = GetConfiguredSlotRoots();
+        if (loadout == null)
+            return false;
 
-        for (var index = _slotAssignments.Count - 1; index >= 0; index--)
+        if (_doughSlotRoot == null)
         {
-            if (!_slotAssignments[index].Root || !configuredRoots.Contains(_slotAssignments[index].Root))
-                _slotAssignments.RemoveAt(index);
+            Debug.LogError($"{nameof(LevelLoadoutEditorView)} on '{name}' is missing {nameof(_doughSlotRoot)}.", this);
+            return false;
         }
 
-        for (var index = 0; index < configuredRoots.Count; index++)
+        if (_fillingSlotRoot == null)
         {
-            var root = configuredRoots[index];
-            if (GetAssignedSlot(root) == null)
-                _slotAssignments.Add(new SlotAssignment { Root = root });
+            Debug.LogError($"{nameof(LevelLoadoutEditorView)} on '{name}' is missing {nameof(_fillingSlotRoot)}.", this);
+            return false;
+        }
+
+        if (_loadoutSlotPrefab == null)
+        {
+            Debug.LogError($"{nameof(LevelLoadoutEditorView)} on '{name}' is missing {nameof(_loadoutSlotPrefab)}.", this);
+            return false;
+        }
+
+        _slotAssignments.Clear();
+        CreateSlots(_doughSlotRoot, loadout.MaxDoughs, LevelLoadoutIngredientSlotType.Dough);
+        CreateSlots(_fillingSlotRoot, loadout.MaxFillings, LevelLoadoutIngredientSlotType.Filling);
+        return true;
+    }
+
+    private void CreateSlots(Transform parent, int count, LevelLoadoutIngredientSlotType slotType)
+    {
+        for (var slotIndex = 0; slotIndex < count; slotIndex++)
+        {
+            var slotRoot = Instantiate(_loadoutSlotPrefab, parent, false);
+            slotRoot.name = $"{slotType} Slot {slotIndex}";
+            _instantiatedSlotRoots.Add(slotRoot);
+            _slotAssignments.Add(new SlotAssignment
+            {
+                Root = slotRoot,
+                SlotType = slotType
+            });
         }
     }
 
-    private IReadOnlyList<Transform> GetConfiguredSlotRoots()
+    private void AssignIngredientsToSlots<TIngredient>(IEnumerable<TIngredient> ingredients, LevelLoadoutIngredientSlotType slotType)
+        where TIngredient : Ingredient
     {
-        return _ingredientSlotRoots == null
-            ? System.Array.Empty<Transform>()
-            : _ingredientSlotRoots.Where(root => root != null).Distinct().ToArray();
+        foreach (var ingredient in ingredients)
+        {
+            if (ingredient == null || HasAssignedIngredient(ingredient))
+                continue;
+
+            var emptySlot = GetFirstEmptySlot(slotType);
+            if (emptySlot == null)
+                break;
+
+            emptySlot.Ingredient = ingredient;
+        }
     }
 
-    private SlotAssignment GetFirstEmptySlot()
+    private SlotAssignment GetFirstEmptySlot(LevelLoadoutIngredientSlotType slotType)
     {
         for (var slotIndex = 0; slotIndex < _slotAssignments.Count; slotIndex++)
         {
-            if (_slotAssignments[slotIndex].Root != null && _slotAssignments[slotIndex].Ingredient == null)
-                return _slotAssignments[slotIndex];
+            var slotAssignment = _slotAssignments[slotIndex];
+            if (slotAssignment.Root != null &&
+                slotAssignment.SlotType == slotType &&
+                slotAssignment.Ingredient == null)
+            {
+                return slotAssignment;
+            }
         }
 
         return null;
+    }
+
+    private List<Ingredient> SnapshotAssignments()
+    {
+        var assignments = new List<Ingredient>(_slotAssignments.Count);
+
+        for (var slotIndex = 0; slotIndex < _slotAssignments.Count; slotIndex++)
+            assignments.Add(_slotAssignments[slotIndex].Ingredient);
+
+        return assignments;
+    }
+
+    private void RestoreSlotAssignments(IReadOnlyList<Ingredient> previousAssignments, Loadout loadout)
+    {
+        if (previousAssignments == null || loadout == null)
+            return;
+
+        var maxSlots = Mathf.Min(previousAssignments.Count, _slotAssignments.Count);
+        for (var slotIndex = 0; slotIndex < maxSlots; slotIndex++)
+        {
+            var ingredient = previousAssignments[slotIndex];
+            if (ingredient == null)
+                continue;
+
+            var slotAssignment = _slotAssignments[slotIndex];
+            if (!AcceptsIngredient(slotAssignment, ingredient))
+                continue;
+
+            if (!IsInLoadout(loadout, ingredient))
+                continue;
+
+            slotAssignment.Ingredient = ingredient;
+        }
+    }
+
+    private bool HasAssignedIngredient(Ingredient ingredient)
+    {
+        if (ingredient == null)
+            return false;
+
+        for (var slotIndex = 0; slotIndex < _slotAssignments.Count; slotIndex++)
+        {
+            if (_slotAssignments[slotIndex].Ingredient == ingredient)
+                return true;
+        }
+
+        return false;
     }
 
     private SlotAssignment GetAssignedSlot(LevelLoadoutIngredientView view)
@@ -617,6 +690,27 @@ public class LevelLoadoutEditorView : MonoBehaviour
 
         slot.Ingredient = null;
         slot.View = null;
+    }
+
+    private void ClearInstantiatedSlots()
+    {
+        for (var index = 0; index < _instantiatedSlotRoots.Count; index++)
+        {
+            if (_instantiatedSlotRoots[index] != null)
+                Destroy(_instantiatedSlotRoots[index].gameObject);
+        }
+
+        _instantiatedSlotRoots.Clear();
+        _slotAssignments.Clear();
+        _loadoutSlotViews.Clear();
+    }
+
+    private static bool AcceptsIngredient(SlotAssignment slot, Ingredient ingredient)
+    {
+        if (slot == null || ingredient == null)
+            return false;
+
+        return slot.SlotType == GetSlotType(ingredient);
     }
 
     private static void ResetSlotViewTransform(LevelLoadoutIngredientView slotView)

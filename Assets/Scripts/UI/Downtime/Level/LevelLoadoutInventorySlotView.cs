@@ -63,7 +63,6 @@ public class LevelLoadoutInventorySlotView : MonoBehaviour
         _editor = editor;
         _entry = entry;
         _hasPendingPreview = false;
-        _draggableUI?.Configure(editor != null ? editor.InputConfiguration : null);
         Refresh();
     }
 
