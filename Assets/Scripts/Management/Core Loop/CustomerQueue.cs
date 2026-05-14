@@ -19,25 +19,18 @@ public class CustomerQueue : ITickable
     private readonly HashSet<Customer> _recentCustomersLookup = new();
 
     private readonly CustomersDatabase _customers;
-    private readonly OrderController _orderController;
-    private readonly LevelFlowController _levelFlowController;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogue;
-    private readonly int _maxCustomers;
     private readonly int _maxQueueCapacity;
     private readonly int _recentCustomersRepeatWindow;
 
-    private int _generatedCustomers;
-    private int _resolvedCustomers;
+    private bool _arrivalsEnabled = true;
     private bool _hasTutorialStarted;
     private bool _hasConfiguredFirstCustomerAfterTutorial;
-
-    private bool HasCustomersLimit => _maxCustomers > 0;
-    private bool HasGeneratedAllCustomers => HasCustomersLimit && _generatedCustomers >= _maxCustomers;
     private bool HasQueueCapacityLimit => _maxQueueCapacity > 0;
     private bool IsQueueFull => HasQueueCapacityLimit && _queue.Count >= _maxQueueCapacity;
     private bool IsPausedByTutorial => _tutorialState.IsActive && _tutorialState.CurrentStep != TutorialStep.WaitForCustomer;
 
-    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, OrderController orderController, LevelFlowController levelFlowController, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState, LevelSelector levelSelector)
+    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState, LevelSelector levelSelector)
     {
         if (levelSelector == null)
             throw new ArgumentNullException(nameof(levelSelector));
@@ -47,8 +40,6 @@ public class CustomerQueue : ITickable
             throw new InvalidOperationException($"{nameof(CustomerQueue)} requires a selected {nameof(Level)}.");
 
         _customers = customers;
-        _orderController = orderController;
-        _levelFlowController = levelFlowController;
         _customerPopUpDialogue = customerPopUpDialogue;
         _tutorialState = tutorialState;
         _customerWaitTime = orderLoopSettings.QueueWaitTimeLimit;
@@ -57,14 +48,12 @@ public class CustomerQueue : ITickable
         _maxQueueCapacity = orderLoopSettings.MaxQueueCapacity;
         _recentCustomersRepeatWindow = Mathf.Max(0, orderLoopSettings.RecentCustomersRepeatWindow);
         _firstCustomerArrivalDelayAfterTutorial = Mathf.Max(0f, orderLoopSettings.FirstCustomerArrivalDelayAfterTutorial);
-        _maxCustomers = selectedLevel.CustomersToServe;
         _nextArrivalTime = 1f;
-
-        _orderController.OrderFlowFinished += OnOrderFinished;
     }
     
     public event Action<Customer> CustomerArrived = delegate { };
     public event Action<Customer> CustomerExpired = delegate { };
+    public event Action<Customer> CustomerFlowFinished = delegate { };
     public event Action<int> CustomersCountChanged = delegate { };
     public event Action<CustomerWaitStatus> QueueEntryAdded = delegate { };
     public event Action<CustomerWaitStatus, CustomerQueueEntryRemovedReason> QueueEntryRemoved = delegate { };
@@ -92,6 +81,11 @@ public class CustomerQueue : ITickable
         customer = hasNext ? status.Customer : null;
         return hasNext;
     }
+
+    public void StopArrivals()
+    {
+        _arrivalsEnabled = false;
+    }
     
     public void Tick(float deltaTime)
     {
@@ -106,7 +100,7 @@ public class CustomerQueue : ITickable
 
     private void CheckForCustomerArrival(float deltaTime)
     {
-        if (HasGeneratedAllCustomers)
+        if (!_arrivalsEnabled)
             return;
 
         if (IsQueueFull)
@@ -121,13 +115,12 @@ public class CustomerQueue : ITickable
         var waitStatus = new CustomerWaitStatus(customer, _customerWaitTime);
         _queue.Enqueue(waitStatus);
         RememberRecentCustomer(customer);
-        _generatedCustomers++;
         QueueEntryAdded(waitStatus);
         CustomersCountChanged(_queue.Count);
         _elapsedArrivalTime -= _nextArrivalTime;
         CustomerArrived(customer);
 
-        if (!HasGeneratedAllCustomers)
+        if (_arrivalsEnabled)
             _nextArrivalTime = GetNextArrivalTime();
     }
 
@@ -148,24 +141,9 @@ public class CustomerQueue : ITickable
             _customerPopUpDialogue.CustomerGaveUpDialogue(first.Customer)
                 .ChainCallback(() =>
                 {
-                    ResolveCustomerFlow();
+                    CustomerFlowFinished(first.Customer);
                 });
         }
-    }
-
-    private void OnOrderFinished(Order _)
-    {
-        ResolveCustomerFlow();
-    }
-
-    private void ResolveCustomerFlow()
-    {
-        _resolvedCustomers++;
-
-        if (!HasGeneratedAllCustomers || _resolvedCustomers < _generatedCustomers)
-            return;
-
-        _levelFlowController.EndLevel();
     }
 
     private void SyncTutorialArrivalDelay()

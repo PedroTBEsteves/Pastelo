@@ -34,7 +34,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9b0206a27d8811743890da2dff77c3d1, type: 2}
   - {fileID: 11400000, guid: 167acfb3ccf39f644b0b60a57cc0b6a1, type: 2}
   - {fileID: 11400000, guid: 646b54cc94825624cb585d8a0ed22313, type: 2}
-  <CustomersToServe>k__BackingField: 10
+  <LevelDurationSeconds>k__BackingField: 180
   <PriceToPlay>k__BackingField: 3
   <SplashImage>k__BackingField: {fileID: -4469045583345088929, guid: 521aab6bf3ab82f42aaf7625005a9396, type: 3}
   _sectionBackgroundSprites:

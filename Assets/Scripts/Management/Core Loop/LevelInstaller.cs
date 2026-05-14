@@ -16,7 +16,7 @@ public class LevelInstaller : MonoBehaviour, IInstaller
             .AddScoped(typeof(TutorialTargetRegistry))
             .AddScoped(typeof(GameplayInteractionGate))
             .AddScoped(typeof(LevelMoneyManager))
-            .AddScoped(typeof(LevelFlowController))
+            .AddScoped(typeof(LevelFlowController), typeof(LevelFlowController), typeof(ITickable))
             .AddScoped(typeof(TimeController))
             .AddScoped(typeof(LevelPerformanceTracker))
             .AddSingleton(Resources.Load("Settings/Management/OrderLoopSettings"))

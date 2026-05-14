@@ -6,12 +6,13 @@ public class LevelMoneyManager
     private float _amount;
     private bool _hasTransferred;
 
-    public LevelMoneyManager(MoneyManager moneyManager, LevelFlowController levelFlowController)
+    public LevelMoneyManager(MoneyManager moneyManager, LevelFlowController levelFlowController, OrderController orderController)
     {
         _moneyManager = moneyManager;
         levelFlowController.LevelEnded += TransferToMoneyManager;
+        orderController.OrderSucceeded += GainOrderMoney;
     }
-
+    
     public float Amount
     {
         get => _amount;
@@ -42,4 +43,6 @@ public class LevelMoneyManager
 
         _moneyManager.Gain(_amount);
     }
+    
+    private void GainOrderMoney(Order order) => Gain(order.GetValue());
 }

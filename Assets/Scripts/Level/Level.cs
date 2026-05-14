@@ -16,8 +16,9 @@ public class Level : ScriptableObject
     [SerializeField]
     private Customer[] _customers;
     
+    [field: Min(0f)]
     [field: SerializeField]
-    public int CustomersToServe { get; private set; }
+    public float LevelDurationSeconds { get; private set; }
     
     [field: SerializeField]
     public float PriceToPlay { get; private set; }

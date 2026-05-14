@@ -18,6 +18,5 @@ MonoBehaviour:
   <MaxQueueCapacity>k__BackingField: 3
   <RecentCustomersRepeatWindow>k__BackingField: 2
   <FirstCustomerArrivalDelayAfterTutorial>k__BackingField: 3
-  <MaxCustomers>k__BackingField: 15
   <OrderCompletionTimeLimit>k__BackingField: 120
   <StrikesToFail>k__BackingField: 3

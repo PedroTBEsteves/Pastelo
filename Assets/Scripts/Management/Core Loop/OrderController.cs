@@ -8,7 +8,6 @@ public class OrderController : ITickable
 
     private readonly float _orderCompletionTimeLimit;
     private readonly RecipeGenerator _recipeGenerator;
-    private readonly LevelMoneyManager _levelMoneyManager;
     private readonly PastelCookingSettings _pastelCookingSettings;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogues;
     private readonly GameplayTutorialState _tutorialState;
@@ -20,13 +19,11 @@ public class OrderController : ITickable
     public OrderController(
         OrderLoopSettings orderLoopSettings,
         RecipeGenerator recipeGenerator,
-        LevelMoneyManager levelMoneyManager,
         PastelCookingSettings pastelCookingSettings,
         ICustomerPopUpDialogue customerPopUpDialogues,
         GameplayTutorialState tutorialState)
     {
         _recipeGenerator = recipeGenerator;
-        _levelMoneyManager = levelMoneyManager;
         _pastelCookingSettings = pastelCookingSettings;
         _customerPopUpDialogues = customerPopUpDialogues;
         _tutorialState = tutorialState;
@@ -78,7 +75,6 @@ public class OrderController : ITickable
         if (delivery.IsCorrectFor(order))
         {
             OrderSucceeded(order);
-            _levelMoneyManager.Gain(order.GetValue());
         }
         else
         {
