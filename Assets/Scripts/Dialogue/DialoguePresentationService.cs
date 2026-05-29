@@ -32,8 +32,29 @@ public class DialoguePresentationService : MonoBehaviour
         if (dialogue.Text == null)
             throw new InvalidOperationException($"{nameof(DialoguePresentationView)} requires a text reference.");
 
-        return Sequence.Create(Tween.Delay(0f, () => dialogue.gameObject.SetActive(true)))
-            .Chain(_dialogueWriter.WriteText(text, dialogue.Text, _audioSource))
+        var writeHandle = _dialogueWriter.CreateWriteHandle(text, dialogue.Text, _audioSource);
+        var sequence = Sequence.Create(Tween.Delay(0f, () => dialogue.gameObject.SetActive(true)))
+            .Chain(writeHandle.Sequence)
             .OnComplete(dialogue, static view => Destroy(view.gameObject));
+
+        dialogue.Clicked += HandleDialogueClicked;
+
+        return sequence;
+
+        void HandleDialogueClicked()
+        {
+            if (!sequence.isAlive)
+                return;
+
+            if (!writeHandle.IsTextFullyVisible)
+            {
+                writeHandle.RevealTextImmediately();
+                sequence.elapsedTime = Mathf.Min(writeHandle.WriteDuration, sequence.duration);
+                return;
+            }
+
+            dialogue.Clicked -= HandleDialogueClicked;
+            sequence.Complete();
+        }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OrderLoopSettings
   m_EditorClassIdentifier: 
   <QueueWaitTimeLimit>k__BackingField: 60
-  <MinCustomerArrivalTime>k__BackingField: 5
+  <MinCustomerArrivalTime>k__BackingField: 8
   <MaxCustomerArrivalTime>k__BackingField: 15
   <MaxQueueCapacity>k__BackingField: 3
   <RecentCustomersRepeatWindow>k__BackingField: 2

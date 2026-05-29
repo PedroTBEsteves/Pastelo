@@ -19,11 +19,31 @@ public class CustomerPopUpDialogue : MonoBehaviour, ICustomerPopUpDialogue
     public Sequence ShowDialogue(Customer customer, string dialogue)
     {
         var popupView = Instantiate(_popupViewPrefab, _popupRoot);
-
-        popupView.CustomerImage.sprite = customer.Icone;
-
-        return _dialogueWriter.WriteText(dialogue, popupView.Text, popupView.AudioSource)
+        var writeHandle = _dialogueWriter.CreateWriteHandle(dialogue, popupView.Text, popupView.AudioSource);
+        var sequence = Sequence.Create()
+            .Chain(writeHandle.Sequence)
             .Chain(Tween.Delay(_delayAfterWritingIsDone))
             .OnComplete(popupView, static view => Destroy(view.gameObject));
+
+        popupView.CustomerImage.sprite = customer.Icone;
+        popupView.Clicked += HandlePopupClicked;
+
+        return sequence;
+
+        void HandlePopupClicked()
+        {
+            if (!sequence.isAlive)
+                return;
+
+            if (!writeHandle.IsTextFullyVisible)
+            {
+                writeHandle.RevealTextImmediately();
+                sequence.elapsedTime = Mathf.Min(writeHandle.WriteDuration, sequence.duration);
+                return;
+            }
+
+            popupView.Clicked -= HandlePopupClicked;
+            sequence.Complete();
+        }
     }
 }

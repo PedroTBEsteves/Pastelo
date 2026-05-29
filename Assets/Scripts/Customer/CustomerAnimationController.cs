@@ -182,10 +182,10 @@ public class CustomerAnimationController : MonoBehaviour
         var customerStartLocalPosition = GetCustomerStartLocalPosition();
         SetRendererState(_customerSprite, sprite, customerStartLocalPosition);
         _isQueueCustomerVisible = true;
-        _customerMoveTween = Tween.Position(
+        _customerMoveTween = Tween.LocalPosition(
                 _customerSprite.transform,
-                GetWorldPosition(customerStartLocalPosition),
-                GetWorldPosition(_customerIdleLocalPosition),
+                customerStartLocalPosition,
+                _customerIdleLocalPosition,
                 _customerMoveTweenSettings)
             .OnComplete(this, static controller =>
             {
@@ -209,10 +209,10 @@ public class CustomerAnimationController : MonoBehaviour
         SetRendererState(_customerSprite, _customerSprite.sprite, _customerIdleLocalPosition);
         _isQueueCustomerVisible = false;
         var customerStartLocalPosition = GetCustomerStartLocalPosition();
-        _customerMoveTween = Tween.Position(
+        _customerMoveTween = Tween.LocalPosition(
                 _customerSprite.transform,
-                GetWorldPosition(_customerIdleLocalPosition),
-                GetWorldPosition(customerStartLocalPosition),
+                _customerIdleLocalPosition,
+                customerStartLocalPosition,
                 _customerMoveTweenSettings)
             .OnComplete(this, static controller =>
             {
@@ -240,17 +240,17 @@ public class CustomerAnimationController : MonoBehaviour
         SetRendererState(_customerSprite, incomingSprite, customerStartLocalPosition);
         _isQueueCustomerVisible = true;
 
-        _customerTransitionMoveTween = Tween.Position(
+        _customerTransitionMoveTween = Tween.LocalPosition(
                 _customerTransitionSprite.transform,
-                GetWorldPosition(_customerIdleLocalPosition),
-                GetWorldPosition(customerStartLocalPosition),
+                _customerIdleLocalPosition,
+                customerStartLocalPosition,
                 _customerMoveTweenSettings)
             .OnComplete(this, static controller => controller.ResetTransitionSprite());
 
-        _customerMoveTween = Tween.Position(
+        _customerMoveTween = Tween.LocalPosition(
                 _customerSprite.transform,
-                GetWorldPosition(customerStartLocalPosition),
-                GetWorldPosition(_customerIdleLocalPosition),
+                customerStartLocalPosition,
+                _customerIdleLocalPosition,
                 _customerMoveTweenSettings)
             .OnComplete(this, static controller => controller.StartCustomerBobbing());
     }
@@ -313,12 +313,6 @@ public class CustomerAnimationController : MonoBehaviour
         renderer.enabled = sprite != null;
         renderer.transform.localPosition = localPosition;
         renderer.transform.localScale =  Vector3.one;
-    }
-
-    private Vector3 GetWorldPosition(Vector3 localPosition)
-    {
-        var parent = _customerSprite.transform.parent;
-        return parent == null ? localPosition : parent.TransformPoint(localPosition);
     }
 
     private Vector3 GetCustomerStartLocalPosition() => _customerIdleLocalPosition + _customerStartLocalOffset;
