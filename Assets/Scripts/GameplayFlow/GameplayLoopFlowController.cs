@@ -29,11 +29,6 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
         TryResolveParentContainer(out _parentContainer);
     }
 
-    private void Start()
-    {
-        LoadDowntime().Forget();
-    }
-
     public UniTask<bool> LoadLevelGameplay()
     {
         return LoadSceneAsync(_levelGameplayScene);

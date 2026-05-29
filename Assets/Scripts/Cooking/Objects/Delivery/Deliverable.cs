@@ -1,10 +1,11 @@
+using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Draggable))]
 [RequireComponent(typeof(DisposableDraggable))]
-public class Deliverable : MonoBehaviour, IDiscardPolicy, IDiscardHandler
+public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandler
 {
     [SerializeField] 
     private Transform _discardPositionTransform;
@@ -23,6 +24,9 @@ public class Deliverable : MonoBehaviour, IDiscardPolicy, IDiscardHandler
     
     [SerializeField]
     private AudioSource _addedAudioSource;
+    
+    [SerializeField, Child(Flag.ExcludeSelf)]
+    private SpriteRenderer _spriteRenderer;
 
     [Inject]
     private readonly DeliverySequence _deliverySequence;
@@ -44,19 +48,15 @@ public class Deliverable : MonoBehaviour, IDiscardPolicy, IDiscardHandler
     
     private Draggable _draggable;
     private ClosedPastelDough _closedPastelDough;
-    private SpriteRenderer _spriteRenderer;
     private Sprite _emptySprite;
     private TutorialTarget _tutorialTarget;
     private Vector3 _dragStartPosition;
     private bool _isDraggingBag;
     
-    public Vector3 DiscardPosition => _discardPositionTransform.position;
-
     private void Awake()
     {
         _draggable = GetComponent<Draggable>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _emptySprite = _spriteRenderer != null ? _spriteRenderer.sprite : null;
+        _emptySprite = _spriteRenderer.sprite;
         _tutorialTarget = GetComponent<TutorialTarget>();
         _bagIngredientHint.SetVisible(false);
         _draggable.Held += OnHeld;
@@ -153,9 +153,6 @@ public class Deliverable : MonoBehaviour, IDiscardPolicy, IDiscardHandler
 
     private void UpdateSprite()
     {
-        if (_spriteRenderer == null)
-            return;
-
         _spriteRenderer.sprite = _closedPastelDough == null ? _emptySprite : _filledSprite;
     }
 

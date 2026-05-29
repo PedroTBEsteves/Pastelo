@@ -3876,9 +3876,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 841503156}
     m_Modifications:
-    - target: {fileID: 3669651469034226470, guid: cb9cb414c47ae4e468e245bb195b0255, type: 3}
-      propertyPath: m_Name
-      value: Canvas
+    - target: {fileID: 576127005977930203, guid: cb9cb414c47ae4e468e245bb195b0255, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3841276515933802584, guid: cb9cb414c47ae4e468e245bb195b0255, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3948,9 +3948,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Deliver
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6731871229047963568, guid: cb9cb414c47ae4e468e245bb195b0255, type: 3}
-    - {fileID: 3295286055832384421, guid: cb9cb414c47ae4e468e245bb195b0255, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -8783,6 +8781,7 @@ GameObject:
   - component: {fileID: 1464197133}
   - component: {fileID: 1464197134}
   - component: {fileID: 1464197135}
+  - component: {fileID: 1464197136}
   m_Layer: 0
   m_Name: SceneScope
   m_TagString: Untagged
@@ -9030,6 +9029,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2022ea5bbfa31f4faaa3f2918fe054d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1464197136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464197125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d61a0a4d4f452f812a4da9a403c20e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _gameplayBootstrapScene:
+    asset: {fileID: 102900000, guid: ac0ea4cb7f9966a449cec4b9a8674b49, type: 3}
+    guid: ac0ea4cb7f9966a449cec4b9a8674b49
+  _sceneScope: {fileID: 1464197127}
+  _level: {fileID: 11400000, guid: b35137822e6d4904e8bac130bd7b2748, type: 2}
+  _doughs:
+  - {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
+  _fillings:
+  - {fileID: 11400000, guid: 28414d76e6b91e140b382b3f199e0986, type: 2}
+  - {fileID: 11400000, guid: 7356f64bd7c066147b19e9e08518dffa, type: 2}
 --- !u!1 &1477266192
 GameObject:
   m_ObjectHideFlags: 0

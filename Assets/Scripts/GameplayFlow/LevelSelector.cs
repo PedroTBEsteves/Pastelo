@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 
 public sealed class LevelSelector
@@ -47,6 +49,40 @@ public sealed class LevelSelector
         _levelLoadoutController.ConsumeLoadout(level);
         _moneyManager.TrySpend(level.PriceToPlay);
         LevelStarted(level);
+    }
+
+    public async UniTask<bool> StartConfiguredLevel(Level level, IEnumerable<Dough> doughs, IEnumerable<Filling> fillings)
+    {
+        if (level == null)
+            throw new ArgumentNullException(nameof(level));
+
+        if (doughs == null)
+            throw new ArgumentNullException(nameof(doughs));
+
+        if (fillings == null)
+            throw new ArgumentNullException(nameof(fillings));
+
+        var configuredDoughs = doughs.Where(dough => dough != null).Distinct().ToArray();
+        var configuredFillings = fillings.Where(filling => filling != null).Distinct().ToArray();
+
+        if (configuredDoughs.Length == 0)
+            throw new InvalidOperationException($"{nameof(StartConfiguredLevel)} requires at least one configured {nameof(Dough)}.");
+
+        if (configuredFillings.Length == 0)
+            throw new InvalidOperationException($"{nameof(StartConfiguredLevel)} requires at least one configured {nameof(Filling)}.");
+
+        _levelLoadoutController.ReplaceLoadout(level, configuredDoughs, configuredFillings);
+
+        SelectedLevel = level;
+        var loaded = await _gameplayLoopFlowController.LoadLevelGameplay();
+        if (!loaded)
+        {
+            SelectedLevel = null;
+            return false;
+        }
+
+        LevelStarted(level);
+        return true;
     }
 
     public void ClearSelectedLevel()
