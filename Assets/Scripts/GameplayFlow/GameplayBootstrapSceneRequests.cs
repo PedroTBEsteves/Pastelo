@@ -47,6 +47,11 @@ internal static class GameplayBootstrapSceneRequests
         _fillings = fillings ?? Array.Empty<Filling>();
     }
 
+    public static bool HasPendingRequestForBootstrap(int bootstrapBuildIndex)
+    {
+        return _requestType != RequestType.None && _bootstrapBuildIndex == bootstrapBuildIndex;
+    }
+
     private static void OnSceneLoaded(Scene scene, LoadSceneMode _)
     {
         if (_requestType == RequestType.None || _isProcessing)

@@ -154,6 +154,12 @@ MonoBehaviour:
   _downtimeScene:
     asset: {fileID: 102900000, guid: 65991fcfaaaf65d49a72493f7f360847, type: 3}
     guid: 65991fcfaaaf65d49a72493f7f360847
+  _tutorialLevel: {fileID: 11400000, guid: b35137822e6d4904e8bac130bd7b2748, type: 2}
+  _tutorialDoughs:
+  - {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
+  _tutorialFillings:
+  - {fileID: 11400000, guid: 7356f64bd7c066147b19e9e08518dffa, type: 2}
+  - {fileID: 11400000, guid: 28414d76e6b91e140b382b3f199e0986, type: 2}
 --- !u!4 &320911602
 Transform:
   m_ObjectHideFlags: 0

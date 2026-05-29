@@ -19,6 +19,16 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
     [SerializeField]
     private SceneReference _downtimeScene;
 
+    [Header("Tutorial Autostart")]
+    [SerializeField]
+    private Level _tutorialLevel;
+
+    [SerializeField]
+    private Dough[] _tutorialDoughs = Array.Empty<Dough>();
+
+    [SerializeField]
+    private Filling[] _tutorialFillings = Array.Empty<Filling>();
+
     private Scene _currentLoadedScene;
     private int _targetSceneBuildIndex = -1;
     private Container _parentContainer;
@@ -29,6 +39,11 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
         TryResolveParentContainer(out _parentContainer);
     }
 
+    private void Start()
+    {
+        LoadInitialLoopSceneAsync().Forget();
+    }
+
     public UniTask<bool> LoadLevelGameplay()
     {
         return LoadSceneAsync(_levelGameplayScene);
@@ -37,6 +52,62 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
     public UniTask<bool> LoadDowntime()
     {
         return LoadSceneAsync(_downtimeScene);
+    }
+
+    private async UniTaskVoid LoadInitialLoopSceneAsync()
+    {
+        try
+        {
+            await UniTask.Yield(PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy());
+
+            if (GameplayBootstrapSceneRequests.HasPendingRequestForBootstrap(gameObject.scene.buildIndex))
+                return;
+
+            if (!GameplayTutorialOptions.PeekShouldRunTutorial())
+            {
+                await LoadDowntime();
+                return;
+            }
+
+            if (!TryValidateTutorialAutostartSettings())
+                return;
+
+            if (!TryResolveParentContainer(out var parentContainer))
+                return;
+
+            _parentContainer = parentContainer;
+
+            LevelSelector levelSelector;
+            try
+            {
+                levelSelector = _parentContainer.Resolve<LevelSelector>();
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError(
+                    $"{nameof(GameplayLoopFlowController)} could not resolve {nameof(LevelSelector)} for tutorial autostart.\n{exception}",
+                    this);
+                return;
+            }
+
+            try
+            {
+                await levelSelector.StartConfiguredLevel(_tutorialLevel, _tutorialDoughs, _tutorialFillings);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError(
+                    $"{nameof(GameplayLoopFlowController)} failed to start tutorial level '{_tutorialLevel.name}'.\n{exception}",
+                    this);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
     }
 
     private async UniTask<bool> LoadSceneAsync(SceneReference sceneReference)
@@ -171,6 +242,43 @@ public sealed class GameplayLoopFlowController : MonoBehaviour
         }
 
         return true;
+    }
+
+    private bool TryValidateTutorialAutostartSettings()
+    {
+        if (_tutorialLevel == null)
+        {
+            Debug.LogError($"{nameof(GameplayLoopFlowController)} requires a configured tutorial {nameof(Level)}.", this);
+            return false;
+        }
+
+        if (!HasConfiguredEntry(_tutorialDoughs))
+        {
+            Debug.LogError($"{nameof(GameplayLoopFlowController)} requires at least one configured tutorial {nameof(Dough)}.", this);
+            return false;
+        }
+
+        if (!HasConfiguredEntry(_tutorialFillings))
+        {
+            Debug.LogError($"{nameof(GameplayLoopFlowController)} requires at least one configured tutorial {nameof(Filling)}.", this);
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool HasConfiguredEntry<T>(T[] entries) where T : UnityEngine.Object
+    {
+        if (entries == null)
+            return false;
+
+        for (var i = 0; i < entries.Length; i++)
+        {
+            if (entries[i] != null)
+                return true;
+        }
+
+        return false;
     }
 
     private bool TryResolveParentContainer(out Container parentContainer)
