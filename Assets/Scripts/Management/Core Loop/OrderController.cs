@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class OrderController : ITickable
 {
@@ -10,6 +11,7 @@ public class OrderController : ITickable
     private readonly RecipeGenerator _recipeGenerator;
     private readonly PastelCookingSettings _pastelCookingSettings;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogues;
+    private readonly LocalizedStringTable _customerOrderExpiredDialoguesTable;
     private readonly GameplayTutorialState _tutorialState;
     private readonly List<Order> _activeOrders = new();
     private readonly List<Order> _expiredOrders = new();
@@ -21,11 +23,13 @@ public class OrderController : ITickable
         RecipeGenerator recipeGenerator,
         PastelCookingSettings pastelCookingSettings,
         ICustomerPopUpDialogue customerPopUpDialogues,
+        LocalizedStringTable customerOrderExpiredDialoguesTable,
         GameplayTutorialState tutorialState)
     {
         _recipeGenerator = recipeGenerator;
         _pastelCookingSettings = pastelCookingSettings;
         _customerPopUpDialogues = customerPopUpDialogues;
+        _customerOrderExpiredDialoguesTable = customerOrderExpiredDialoguesTable;
         _tutorialState = tutorialState;
         _orderCompletionTimeLimit = orderLoopSettings.OrderCompletionTimeLimit;
     }
@@ -99,7 +103,11 @@ public class OrderController : ITickable
             _activeOrders.Remove(order);
             OrderExpired(order);
             Debug.Log($"{order} expirou!");
-            _customerPopUpDialogues.CustomerOrderExpiredDialogue(order.Customer)
+            var dialogue = CustomerDialogueLocalization.GetRandomLocalizedDialogue(
+                _customerOrderExpiredDialoguesTable,
+                nameof(OrderController),
+                nameof(_customerOrderExpiredDialoguesTable));
+            _customerPopUpDialogues.ShowDialogue(order.Customer, dialogue)
                 .ChainCallback(() =>
                 {
                     OrderFlowFinished(order);

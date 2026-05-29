@@ -8863,6 +8863,12 @@ MonoBehaviour:
       - Key: {fileID: 11400000, guid: 7356f64bd7c066147b19e9e08518dffa, type: 2}
         Value: 2
     <Dough>k__BackingField: {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
+  _customerOrderExpiredDialoguesTableName:
+    m_TableReference:
+      m_TableCollectionName: GUID:190d5a78372d24045ba36df6a0634436
+  _customerGaveUpDialoguesTableName:
+    m_TableReference:
+      m_TableCollectionName: GUID:7bdb7eacfbf7e7d4cb7f473be95b1703
 --- !u!114 &1464197130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9039,8 +9045,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73d61a0a4d4f452f812a4da9a403c20e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   _gameplayBootstrapScene:
     asset: {fileID: 102900000, guid: ac0ea4cb7f9966a449cec4b9a8674b49, type: 3}
     guid: ac0ea4cb7f9966a449cec4b9a8674b49
@@ -11472,12 +11478,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _popupViewPrefab: {fileID: 1134926882814576460, guid: 7296ce3286ab4bce8ae9e09e4045d3f0, type: 3}
   _popupRoot: {fileID: 1842843258}
-  _customerGaveUpDialogues:
-    m_TableReference:
-      m_TableCollectionName: GUID:7bdb7eacfbf7e7d4cb7f473be95b1703
-  _customerOrderExpiredDialogues:
-    m_TableReference:
-      m_TableCollectionName: GUID:190d5a78372d24045ba36df6a0634436
   _delayAfterWritingIsDone: 2
 --- !u!222 &1842843261
 CanvasRenderer:

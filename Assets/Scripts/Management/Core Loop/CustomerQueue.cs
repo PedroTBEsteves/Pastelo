@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
 using Random = UnityEngine.Random;
 
 public class CustomerQueue : ITickable
@@ -20,6 +21,7 @@ public class CustomerQueue : ITickable
 
     private readonly CustomersDatabase _customers;
     private readonly ICustomerPopUpDialogue _customerPopUpDialogue;
+    private readonly LocalizedStringTable _customerGaveUpDialoguesTable;
     private readonly int _maxQueueCapacity;
     private readonly int _recentCustomersRepeatWindow;
 
@@ -30,7 +32,13 @@ public class CustomerQueue : ITickable
     private bool IsQueueFull => HasQueueCapacityLimit && _queue.Count >= _maxQueueCapacity;
     private bool IsPausedByTutorial => _tutorialState.IsActive && _tutorialState.CurrentStep != TutorialStep.WaitForCustomer;
 
-    public CustomerQueue(OrderLoopSettings orderLoopSettings, CustomersDatabase customers, ICustomerPopUpDialogue customerPopUpDialogue, GameplayTutorialState tutorialState, LevelSelector levelSelector)
+    public CustomerQueue(
+        OrderLoopSettings orderLoopSettings,
+        CustomersDatabase customers,
+        ICustomerPopUpDialogue customerPopUpDialogue,
+        LocalizedStringTable customerGaveUpDialoguesTable,
+        GameplayTutorialState tutorialState,
+        LevelSelector levelSelector)
     {
         if (levelSelector == null)
             throw new ArgumentNullException(nameof(levelSelector));
@@ -41,6 +49,7 @@ public class CustomerQueue : ITickable
 
         _customers = customers;
         _customerPopUpDialogue = customerPopUpDialogue;
+        _customerGaveUpDialoguesTable = customerGaveUpDialoguesTable;
         _tutorialState = tutorialState;
         _customerWaitTime = orderLoopSettings.QueueWaitTimeLimit;
         _minCustomerArrivalTime = orderLoopSettings.MinCustomerArrivalTime;
@@ -138,7 +147,11 @@ public class CustomerQueue : ITickable
             _queue.Dequeue();
             QueueEntryRemoved(first, CustomerQueueEntryRemovedReason.Expired);
             CustomersCountChanged(_queue.Count);
-            _customerPopUpDialogue.CustomerGaveUpDialogue(first.Customer)
+            var dialogue = CustomerDialogueLocalization.GetRandomLocalizedDialogue(
+                _customerGaveUpDialoguesTable,
+                nameof(CustomerQueue),
+                nameof(_customerGaveUpDialoguesTable));
+            _customerPopUpDialogue.ShowDialogue(first.Customer, dialogue)
                 .ChainCallback(() =>
                 {
                     CustomerFlowFinished(first.Customer);

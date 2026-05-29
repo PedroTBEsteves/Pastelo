@@ -1,10 +1,18 @@
 using Reflex.Core;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
 
 public class LevelInstaller : MonoBehaviour, IInstaller
 {
     [SerializeField]
     private Recipe _tutorialRecipe;
+    
+    [SerializeField]
+    private LocalizedStringTable _customerOrderExpiredDialoguesTableName;
+    
+    [SerializeField]
+    private LocalizedStringTable _customerGaveUpDialoguesTableName;
 
     public void InstallBindings(ContainerBuilder containerBuilder)
     {
@@ -20,8 +28,24 @@ public class LevelInstaller : MonoBehaviour, IInstaller
             .AddScoped(typeof(TimeController))
             .AddScoped(typeof(LevelPerformanceTracker))
             .AddSingleton(Resources.Load("Settings/Management/OrderLoopSettings"))
-            .AddScoped(typeof(OrderController), typeof(OrderController), typeof(ITickable))
-            .AddScoped(typeof(CustomerQueue), typeof(CustomerQueue), typeof(ITickable))
+            .AddScoped(container => new OrderController(
+                    container.Resolve<OrderLoopSettings>(),
+                    container.Resolve<RecipeGenerator>(),
+                    container.Resolve<PastelCookingSettings>(),
+                    container.Resolve<ICustomerPopUpDialogue>(),
+                    _customerOrderExpiredDialoguesTableName,
+                    container.Resolve<GameplayTutorialState>()),
+                typeof(OrderController),
+                typeof(ITickable))
+            .AddScoped(container => new CustomerQueue(
+                    container.Resolve<OrderLoopSettings>(),
+                    container.Resolve<CustomersDatabase>(),
+                    container.Resolve<ICustomerPopUpDialogue>(),
+                    _customerGaveUpDialoguesTableName,
+                    container.Resolve<GameplayTutorialState>(),
+                    container.Resolve<LevelSelector>()),
+                typeof(CustomerQueue),
+                typeof(ITickable))
             .AddScoped(typeof(GameplayTutorialController));
     }
 }
