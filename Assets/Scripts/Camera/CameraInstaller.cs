@@ -1,4 +1,5 @@
 using AYellowpaper.SerializedCollections;
+using System;
 using KBCore.Refs;
 using PrimeTween;
 using Reflex.Core;
@@ -42,5 +43,10 @@ public class CameraInstaller : ValidatedMonoBehaviour, IInstaller
     private void Awake()
     {
         _cameraController.GoImmediatelyToSection(CameraSection.Balcony);
+    }
+
+    private void OnDestroy()
+    {
+        (_cameraController as IDisposable)?.Dispose();
     }
 }

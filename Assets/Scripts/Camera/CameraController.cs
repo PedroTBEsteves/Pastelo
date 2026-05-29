@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using PrimeTween;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class CameraController
+public class CameraController : InputSystem_Actions.IGameplayActions, IDisposable
 {
     private readonly Camera _currentCamera;
+    private readonly InputSystem_Actions _inputActions;
     private readonly Dictionary<CameraSection, Vector3> _sectionPositions;
     private readonly CameraSection[] _orderedSections;
     private readonly float _transitionDuration;
@@ -21,6 +23,7 @@ public class CameraController
     public CameraController(IReadOnlyDictionary<CameraSection, Vector3> sectionPositions, float transitionDuration, Ease transitionEase, SectionController sectionController)
     {
         _currentCamera = Camera.main;
+        _inputActions = new InputSystem_Actions();
         _sectionPositions = new Dictionary<CameraSection, Vector3>(sectionPositions);
         _orderedSections = _sectionPositions
             .OrderBy(pair => pair.Value.x)
@@ -29,6 +32,9 @@ public class CameraController
         _transitionDuration = transitionDuration;
         _transitionEase = transitionEase;
         _sectionController = sectionController;
+
+        _inputActions.Gameplay.SetCallbacks(this);
+        _inputActions.Gameplay.Enable();
     }
     
     public event Action CameraBeganMoving = delegate { };
@@ -38,6 +44,13 @@ public class CameraController
 
     public CameraSection CurrentSection => _orderedSections.Length == 0 ? default : _orderedSections[_currentSectionIndex];
     public bool IsMoving => _isMoving;
+
+    public void Dispose()
+    {
+        _inputActions.Gameplay.RemoveCallbacks(this);
+        _inputActions.Gameplay.Disable();
+        _inputActions.Dispose();
+    }
 
     private Rect GetViewRect()
     {
@@ -150,6 +163,54 @@ public class CameraController
     public void GoToSectionAnimated(CameraSection section) => GoToSessionAnimated(section);
     
     public Vector2 ScreenToWorldPoint(Vector2 screenPosition) => _currentCamera.ScreenToWorldPoint(screenPosition);
+
+    public void OnMovePrevious(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        GoToPreviousSection();
+    }
+
+    public void OnMoveNext(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        GoToNextSection();
+    }
+
+    public void OnMoveBalcony(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        GoToSectionAnimated(CameraSection.Balcony);
+    }
+
+    public void OnMovePrepping(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        GoToSectionAnimated(CameraSection.Prepping);
+    }
+
+    public void OnMoveFrying(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        GoToSectionAnimated(CameraSection.Frying);
+    }
+
+    public void OnMovePacking(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        GoToSectionAnimated(CameraSection.Packing);
+    }
 
     private void QueueDirection(int direction)
     {

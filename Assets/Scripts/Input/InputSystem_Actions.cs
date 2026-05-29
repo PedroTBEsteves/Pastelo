@@ -93,86 +93,146 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""id"": ""c5b1370f-c993-4431-82ca-eb104b3df73c"",
             ""actions"": [
                 {
-                    ""name"": ""Press"",
+                    ""name"": ""MovePrevious"",
                     ""type"": ""Button"",
-                    ""id"": ""084d2be6-9d5c-4178-9f29-642d6c80d389"",
+                    ""id"": ""0e853ec4-1743-45a3-981e-95c3b2a882c3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""51b0b3f8-ec37-42ad-a41f-cd686717719a"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""MoveNext"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ea76ae1-1687-4b25-b95b-7d813d0e1b2c"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Drag"",
-                    ""type"": ""Value"",
-                    ""id"": ""1012a013-99d5-4c30-8bf5-00568e0e77ba"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""MoveBalcony"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a4d5ab7-dff0-4e2f-bafb-53aa96eab803"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MovePrepping"",
+                    ""type"": ""Button"",
+                    ""id"": ""35c9089e-ab5c-4dcb-9b28-e65e5de0c4fc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveFrying"",
+                    ""type"": ""Button"",
+                    ""id"": ""35189fbf-294a-4757-9dc8-cab497d276d7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MovePacking"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cd91d60-0f31-40fd-ad72-7cf57da06725"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""7433edf4-eb74-4413-9e0f-1d119cd038c7"",
-                    ""path"": ""<Pointer>/press"",
+                    ""id"": ""cb70edb9-a169-4086-84c7-6e39acf4626b"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Press"",
+                    ""action"": ""MovePrevious"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""One Modifier"",
-                    ""id"": ""e2f1e07a-568b-4009-b5a1-31ede63751b1"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drag"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""80917340-b24d-44a2-a599-03199b3cedf3"",
-                    ""path"": ""<Pointer>/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drag"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""1dace67e-ca55-4c75-bfda-f3e4cd7470db"",
-                    ""path"": ""<Pointer>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Drag"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
-                    ""id"": ""52254c01-44b8-40b8-952e-23c9aa11749b"",
-                    ""path"": ""<Pointer>/position"",
+                    ""id"": ""1dd9b0af-f1c3-4226-b01a-4b17d465cba2"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MovePrevious"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13853f62-4a2b-4c3c-b1e8-0a7d128f87a4"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c68ebcd-f238-45ef-8cac-012e539e0435"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebafc1ac-a4f3-4f0b-a65b-3fb0dcd8748f"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveBalcony"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3fa21af-2d1a-47c9-8682-04839fe24304"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovePrepping"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4854da12-71e9-476d-8a49-9e650503f6e3"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveFrying"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd8fa1cb-53ea-47cb-9666-530ddb9b9b7e"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovePacking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -244,9 +304,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Press = m_Gameplay.FindAction("Press", throwIfNotFound: true);
-        m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_Drag = m_Gameplay.FindAction("Drag", throwIfNotFound: true);
+        m_Gameplay_MovePrevious = m_Gameplay.FindAction("MovePrevious", throwIfNotFound: true);
+        m_Gameplay_MoveNext = m_Gameplay.FindAction("MoveNext", throwIfNotFound: true);
+        m_Gameplay_MoveBalcony = m_Gameplay.FindAction("MoveBalcony", throwIfNotFound: true);
+        m_Gameplay_MovePrepping = m_Gameplay.FindAction("MovePrepping", throwIfNotFound: true);
+        m_Gameplay_MoveFrying = m_Gameplay.FindAction("MoveFrying", throwIfNotFound: true);
+        m_Gameplay_MovePacking = m_Gameplay.FindAction("MovePacking", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -327,9 +390,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_Gameplay_Press;
-    private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_Drag;
+    private readonly InputAction m_Gameplay_MovePrevious;
+    private readonly InputAction m_Gameplay_MoveNext;
+    private readonly InputAction m_Gameplay_MoveBalcony;
+    private readonly InputAction m_Gameplay_MovePrepping;
+    private readonly InputAction m_Gameplay_MoveFrying;
+    private readonly InputAction m_Gameplay_MovePacking;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -342,17 +408,29 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public GameplayActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/Press".
+        /// Provides access to the underlying input action "Gameplay/MovePrevious".
         /// </summary>
-        public InputAction @Press => m_Wrapper.m_Gameplay_Press;
+        public InputAction @MovePrevious => m_Wrapper.m_Gameplay_MovePrevious;
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/Move".
+        /// Provides access to the underlying input action "Gameplay/MoveNext".
         /// </summary>
-        public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @MoveNext => m_Wrapper.m_Gameplay_MoveNext;
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/Drag".
+        /// Provides access to the underlying input action "Gameplay/MoveBalcony".
         /// </summary>
-        public InputAction @Drag => m_Wrapper.m_Gameplay_Drag;
+        public InputAction @MoveBalcony => m_Wrapper.m_Gameplay_MoveBalcony;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/MovePrepping".
+        /// </summary>
+        public InputAction @MovePrepping => m_Wrapper.m_Gameplay_MovePrepping;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/MoveFrying".
+        /// </summary>
+        public InputAction @MoveFrying => m_Wrapper.m_Gameplay_MoveFrying;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/MovePacking".
+        /// </summary>
+        public InputAction @MovePacking => m_Wrapper.m_Gameplay_MovePacking;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -379,15 +457,24 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @Press.started += instance.OnPress;
-            @Press.performed += instance.OnPress;
-            @Press.canceled += instance.OnPress;
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @Drag.started += instance.OnDrag;
-            @Drag.performed += instance.OnDrag;
-            @Drag.canceled += instance.OnDrag;
+            @MovePrevious.started += instance.OnMovePrevious;
+            @MovePrevious.performed += instance.OnMovePrevious;
+            @MovePrevious.canceled += instance.OnMovePrevious;
+            @MoveNext.started += instance.OnMoveNext;
+            @MoveNext.performed += instance.OnMoveNext;
+            @MoveNext.canceled += instance.OnMoveNext;
+            @MoveBalcony.started += instance.OnMoveBalcony;
+            @MoveBalcony.performed += instance.OnMoveBalcony;
+            @MoveBalcony.canceled += instance.OnMoveBalcony;
+            @MovePrepping.started += instance.OnMovePrepping;
+            @MovePrepping.performed += instance.OnMovePrepping;
+            @MovePrepping.canceled += instance.OnMovePrepping;
+            @MoveFrying.started += instance.OnMoveFrying;
+            @MoveFrying.performed += instance.OnMoveFrying;
+            @MoveFrying.canceled += instance.OnMoveFrying;
+            @MovePacking.started += instance.OnMovePacking;
+            @MovePacking.performed += instance.OnMovePacking;
+            @MovePacking.canceled += instance.OnMovePacking;
         }
 
         /// <summary>
@@ -399,15 +486,24 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="GameplayActions" />
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @Press.started -= instance.OnPress;
-            @Press.performed -= instance.OnPress;
-            @Press.canceled -= instance.OnPress;
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @Drag.started -= instance.OnDrag;
-            @Drag.performed -= instance.OnDrag;
-            @Drag.canceled -= instance.OnDrag;
+            @MovePrevious.started -= instance.OnMovePrevious;
+            @MovePrevious.performed -= instance.OnMovePrevious;
+            @MovePrevious.canceled -= instance.OnMovePrevious;
+            @MoveNext.started -= instance.OnMoveNext;
+            @MoveNext.performed -= instance.OnMoveNext;
+            @MoveNext.canceled -= instance.OnMoveNext;
+            @MoveBalcony.started -= instance.OnMoveBalcony;
+            @MoveBalcony.performed -= instance.OnMoveBalcony;
+            @MoveBalcony.canceled -= instance.OnMoveBalcony;
+            @MovePrepping.started -= instance.OnMovePrepping;
+            @MovePrepping.performed -= instance.OnMovePrepping;
+            @MovePrepping.canceled -= instance.OnMovePrepping;
+            @MoveFrying.started -= instance.OnMoveFrying;
+            @MoveFrying.performed -= instance.OnMoveFrying;
+            @MoveFrying.canceled -= instance.OnMoveFrying;
+            @MovePacking.started -= instance.OnMovePacking;
+            @MovePacking.performed -= instance.OnMovePacking;
+            @MovePacking.canceled -= instance.OnMovePacking;
         }
 
         /// <summary>
@@ -514,25 +610,46 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Press" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "MovePrevious" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPress(InputAction.CallbackContext context);
+        void OnMovePrevious(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "MoveNext" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMove(InputAction.CallbackContext context);
+        void OnMoveNext(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Drag" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "MoveBalcony" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDrag(InputAction.CallbackContext context);
+        void OnMoveBalcony(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MovePrepping" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMovePrepping(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MoveFrying" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMoveFrying(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MovePacking" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMovePacking(InputAction.CallbackContext context);
     }
 }
