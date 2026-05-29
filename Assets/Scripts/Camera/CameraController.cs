@@ -29,7 +29,6 @@ public class CameraController
         _transitionDuration = transitionDuration;
         _transitionEase = transitionEase;
         _sectionController = sectionController;
-        _currentSectionIndex = GetNearestSectionIndex(_currentCamera.transform.position);
     }
     
     public event Action CameraBeganMoving = delegate { };

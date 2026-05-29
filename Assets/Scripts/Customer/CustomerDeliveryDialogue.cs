@@ -9,11 +9,11 @@ public class CustomerDeliveryDialogue : MonoBehaviour, ICustomerDeliveryDialogue
     private sealed class DeliveryDialogueContext
     {
         public Order Order;
+        public Customer Customer;
         public CustomerAnimationController CustomerAnimation;
         public GameObject DeliveryBag;
         public VisualEffect HappyVisualEffect;
         public string Dialogue;
-        public Vector3 DialogueWorldPosition;
     }
 
     [SerializeField]
@@ -25,11 +25,8 @@ public class CustomerDeliveryDialogue : MonoBehaviour, ICustomerDeliveryDialogue
     [SerializeField]
     private float _delayBeforeText = 2f;
 
-    [SerializeField]
-    private float _delayAfterTextIsDone = 2f;
-
     [Inject]
-    private readonly DialoguePresentationService _dialoguePresentation;
+    private readonly ICustomerPopUpDialogue _customerPopUpDialogue;
 
     [Inject]
     private readonly DeliverySequence _deliverySequence;
@@ -51,11 +48,11 @@ public class CustomerDeliveryDialogue : MonoBehaviour, ICustomerDeliveryDialogue
         var dialogueContext = new DeliveryDialogueContext
         {
             Order = order,
+            Customer = order.Customer,
             CustomerAnimation = customerAnimation,
             DeliveryBag = deliveryBag,
             HappyVisualEffect = happyVisualEffect,
             Dialogue = GetRandomDeliveryDialogue(isCorrect),
-            DialogueWorldPosition = dialogueWorldPosition,
         };
 
         _deliverySequence.Deliver(order, delivery);
@@ -77,8 +74,8 @@ public class CustomerDeliveryDialogue : MonoBehaviour, ICustomerDeliveryDialogue
 
     private Sequence PlayDialogue(DeliveryDialogueContext context)
     {
-        return _dialoguePresentation.Show(context.Dialogue, context.DialogueWorldPosition)
-            .Chain(Tween.Delay(_delayAfterTextIsDone, () =>
+        return _customerPopUpDialogue.ShowDialogue(context.Customer, context.Dialogue)
+            .ChainCallback(() =>
             {
                 context.CustomerAnimation.CompleteDialogue();
 
@@ -89,6 +86,6 @@ public class CustomerDeliveryDialogue : MonoBehaviour, ICustomerDeliveryDialogue
                     context.HappyVisualEffect.Stop();
 
                 _deliverySequence.FinishOrderFlow(context.Order);
-            }));
+            });
     }
 }
