@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Draggable))]
 public class OrderNote : ValidatedMonoBehaviour
 {
     [Inject]
@@ -46,9 +45,6 @@ public class OrderNote : ValidatedMonoBehaviour
 
     [SerializeField]
     private TweenSettings _remainingTimeColorTweenSettings;
-    
-    [SerializeField, Self]
-    private Draggable _draggable;
 
     private TutorialTarget _tutorialTarget;
     private Tween _remainingTimeColorTween;
@@ -73,7 +69,6 @@ public class OrderNote : ValidatedMonoBehaviour
         _layoutElement = GetComponent<LayoutElement>();
         _baseWidth = Mathf.Max(_rectTransform.sizeDelta.x, _layoutElement != null ? _layoutElement.preferredWidth : 0f);
         _orderController.OrderExpired += OnOrderExpired;
-        _draggable.AddCanDragHandler(CanDragOrderNote);
     }
 
     private void OnDestroy()
@@ -82,7 +77,6 @@ public class OrderNote : ValidatedMonoBehaviour
             _remainingTimeColorTween.Stop();
 
         _orderController.OrderExpired -= OnOrderExpired;
-        _draggable.RemoveCanDragHandler(CanDragOrderNote);
         _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
 
