@@ -12,6 +12,9 @@ public class GameOverScreen : MonoBehaviour
 
     [Inject]
     private readonly ISceneTransitionService _sceneTransitionService;
+
+    [Inject]
+    private readonly LevelRunContext _runContext;
     
     [SerializeField]
     private GameObject _gameOverScreen;
@@ -48,6 +51,9 @@ public class GameOverScreen : MonoBehaviour
 
     private void OnGameOver()
     {
+        if (_runContext.IsArcade)
+            return;
+
         StopGameOverSequence();
 
         _gameOverScreen.SetActive(true);

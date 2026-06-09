@@ -15,6 +15,12 @@ public class Ticker : MonoBehaviour
 
     [Inject]
     private LevelPerformanceTracker _levelPerformanceTracker;
+
+    [Inject]
+    private ArcadeIngredientProgression _arcadeIngredientProgression;
+
+    [Inject]
+    private ArcadeFailureStrikeController _arcadeFailureStrikeController;
     
     private void Update()
     {

@@ -27,6 +27,9 @@ public class LevelInstaller : MonoBehaviour, IInstaller
             .AddScoped(typeof(LevelFlowController), typeof(LevelFlowController), typeof(ITickable))
             .AddScoped(typeof(TimeController))
             .AddScoped(typeof(LevelPerformanceTracker))
+            .AddScoped(typeof(StrikesController))
+            .AddScoped(typeof(ArcadeIngredientProgression))
+            .AddScoped(typeof(ArcadeFailureStrikeController))
             .AddSingleton(Resources.Load("Settings/Management/OrderLoopSettings"))
             .AddScoped(container => new OrderController(
                     container.Resolve<OrderLoopSettings>(),

@@ -20,8 +20,12 @@ public sealed class LevelLoadoutController
 
     public GameObject CurrentDoughsAreaPrefab => _settings.DoughLevels[_doughUpgradeLevelIndex].AreaPrefab;
     public GameObject CurrentFillingsAreaPrefab => _settings.FillingLevels[_fillingUpgradeLevelIndex].AreaPrefab;
+    public GameObject MaxDoughsAreaPrefab => _settings.DoughLevels[^1].AreaPrefab;
+    public GameObject MaxFillingsAreaPrefab => _settings.FillingLevels[^1].AreaPrefab;
     public int CurrentDoughUpgradeSize => GetCurrentMaxDoughs();
     public int CurrentFillingUpgradeSize => GetCurrentMaxFillings();
+    public int MaxDoughUpgradeSize => _settings.DoughLevels[^1].MaxAmount;
+    public int MaxFillingUpgradeSize => _settings.FillingLevels[^1].MaxAmount;
 
     public LevelLoadoutController(Inventory inventory, LoadoutSettings settings, MoneyManager moneyManager)
     {

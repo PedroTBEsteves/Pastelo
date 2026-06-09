@@ -11,6 +11,7 @@ public class GameplayFlowInstaller : ValidatedMonoBehaviour, IInstaller
     {
         containerBuilder
             .AddSingleton(_ => _gameplayLoopFlowController, typeof(GameplayLoopFlowController))
+            .AddSingleton(typeof(LevelRunContext))
             .AddSingleton(typeof(LevelLoadoutController))
             .AddSingleton(typeof(LevelSelector));
     }

@@ -11,7 +11,8 @@ internal static class GameplayBootstrapSceneRequests
     {
         None,
         Downtime,
-        LevelGameplay
+        LevelGameplay,
+        ArcadeLevel
     }
 
     private static RequestType _requestType;
@@ -45,6 +46,15 @@ internal static class GameplayBootstrapSceneRequests
         _level = level;
         _doughs = doughs ?? Array.Empty<Dough>();
         _fillings = fillings ?? Array.Empty<Filling>();
+    }
+
+    public static void RequestArcadeLevel(int bootstrapBuildIndex, Level level)
+    {
+        _bootstrapBuildIndex = bootstrapBuildIndex;
+        _requestType = RequestType.ArcadeLevel;
+        _level = level;
+        _doughs = Array.Empty<Dough>();
+        _fillings = Array.Empty<Filling>();
     }
 
     public static bool HasPendingRequestForBootstrap(int bootstrapBuildIndex)
@@ -83,6 +93,9 @@ internal static class GameplayBootstrapSceneRequests
                     break;
                 case RequestType.LevelGameplay:
                     await container.Resolve<LevelSelector>().StartConfiguredLevel(_level, _doughs, _fillings);
+                    break;
+                case RequestType.ArcadeLevel:
+                    await container.Resolve<LevelSelector>().PlayArcadeLevel(_level);
                     break;
             }
         }

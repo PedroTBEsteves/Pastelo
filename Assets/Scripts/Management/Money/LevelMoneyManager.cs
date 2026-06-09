@@ -3,12 +3,18 @@ using System;
 public class LevelMoneyManager
 {
     private readonly MoneyManager _moneyManager;
+    private readonly LevelRunContext _runContext;
     private float _amount;
     private bool _hasTransferred;
 
-    public LevelMoneyManager(MoneyManager moneyManager, LevelFlowController levelFlowController, OrderController orderController)
+    public LevelMoneyManager(
+        MoneyManager moneyManager,
+        LevelRunContext runContext,
+        LevelFlowController levelFlowController,
+        OrderController orderController)
     {
         _moneyManager = moneyManager;
+        _runContext = runContext;
         levelFlowController.LevelEnded += TransferToMoneyManager;
         orderController.OrderSucceeded += GainOrderMoney;
     }
@@ -37,6 +43,9 @@ public class LevelMoneyManager
             return;
 
         _hasTransferred = true;
+
+        if (_runContext.IsArcade)
+            return;
 
         if (_amount <= 0f)
             return;

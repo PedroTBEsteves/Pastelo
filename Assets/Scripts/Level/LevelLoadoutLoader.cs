@@ -1,3 +1,4 @@
+using System.Linq;
 using Reflex.Attributes;
 using Reflex.Extensions;
 using Reflex.Injectors;
@@ -17,14 +18,71 @@ public sealed class LevelLoadoutLoader : MonoBehaviour
     [Inject]
     private readonly LevelLoadoutController _levelLoadoutController;
 
+    [Inject]
+    private readonly LevelRunContext _runContext;
+
+    [Inject]
+    private readonly GameplayTutorialState _tutorialState;
+
+    private DoughsArea _doughsArea;
+    private FillingsArea _fillingsArea;
+
     private void Awake()
     {
-        var loadout = _levelSelector.GetSelectedLevelLoadout();
-        var doughsArea = InstantiateArea<DoughsArea>(_levelLoadoutController.CurrentDoughsAreaPrefab, _doughsAreaRoot);
-        var fillingsArea = InstantiateArea<FillingsArea>(_levelLoadoutController.CurrentFillingsAreaPrefab, _fillingsAreaRoot);
+        var doughsAreaPrefab = _runContext.IsArcade
+            ? _levelLoadoutController.MaxDoughsAreaPrefab
+            : _levelLoadoutController.CurrentDoughsAreaPrefab;
+        var fillingsAreaPrefab = _runContext.IsArcade
+            ? _levelLoadoutController.MaxFillingsAreaPrefab
+            : _levelLoadoutController.CurrentFillingsAreaPrefab;
 
-        doughsArea.Configure(loadout.Doughs);
-        fillingsArea.Configure(loadout.Fillings);
+        _doughsArea = InstantiateArea<DoughsArea>(doughsAreaPrefab, _doughsAreaRoot);
+        _fillingsArea = InstantiateArea<FillingsArea>(fillingsAreaPrefab, _fillingsAreaRoot);
+        _runContext.LoadoutChanged += RefreshAreas;
+        EnsureArcadeTutorialIngredientsAvailable();
+        RefreshAreas();
+    }
+
+    private void OnDestroy()
+    {
+        if (_runContext != null)
+            _runContext.LoadoutChanged -= RefreshAreas;
+    }
+
+    private void RefreshAreas()
+    {
+        var loadout = _levelSelector.GetSelectedLevelLoadout();
+        _doughsArea.Configure(loadout.Doughs);
+        _fillingsArea.Configure(loadout.Fillings);
+    }
+
+    private void EnsureArcadeTutorialIngredientsAvailable()
+    {
+        if (!_runContext.IsArcade)
+            return;
+
+        if (!_tutorialState.IsActive && !GameplayTutorialOptions.PeekShouldRunTutorial())
+            return;
+
+        var recipe = _tutorialState.TutorialRecipe;
+        if (recipe == null)
+            return;
+
+        var loadout = _levelSelector.GetSelectedLevelLoadout();
+        if (recipe.Dough != null && !loadout.Doughs.Contains(recipe.Dough) && !loadout.AddDough(recipe.Dough))
+            Debug.LogError($"Arcade tutorial loadout does not have capacity for tutorial dough '{recipe.Dough.name}'.", this);
+
+        foreach (var filling in recipe.Fillings.Keys)
+        {
+            if (filling == null)
+                continue;
+
+            if (loadout.Fillings.Contains(filling))
+                continue;
+
+            if (!loadout.AddFilling(filling))
+                Debug.LogError($"Arcade tutorial loadout does not have capacity for tutorial filling '{filling.name}'.", this);
+        }
     }
 
     private TArea InstantiateArea<TArea>(GameObject prefab, Transform root)

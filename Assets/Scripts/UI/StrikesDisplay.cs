@@ -19,21 +19,32 @@ public class StrikesDisplay : ValidatedMonoBehaviour
     [Inject]
     private readonly StrikesController _strikesController;
 
+    [Inject]
+    private readonly LevelRunContext _runContext;
+
     private readonly List<StrikeIcon> _icons = new();
+    private bool _isSubscribed;
 
 
     private void Awake()
     {
+        if (!_runContext.IsArcade)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         ConfigureLayout();
         BuildIcons();
         UpdateIcons(_strikesController.RemainingStrikes);
 
         _strikesController.RemainingStrikesChanged += UpdateIcons;
+        _isSubscribed = true;
     }
 
     private void OnDestroy()
     {
-        if (_strikesController == null)
+        if (_strikesController == null || !_isSubscribed)
             return;
 
         _strikesController.RemainingStrikesChanged -= UpdateIcons;

@@ -6,6 +6,7 @@ public class LevelFlowController : ITickable, IDisposable
     private readonly GameplayTutorialState _tutorialState;
     private readonly CustomerQueue _customerQueue;
     private readonly OrderController _orderController;
+    private readonly StrikesController _strikesController;
     private readonly float _levelDurationSeconds;
 
     private float _elapsedTimeSeconds;
@@ -16,7 +17,8 @@ public class LevelFlowController : ITickable, IDisposable
         LevelSelector levelSelector,
         GameplayTutorialState tutorialState,
         CustomerQueue customerQueue,
-        OrderController orderController)
+        OrderController orderController,
+        StrikesController strikesController)
     {
         if (levelSelector == null)
             throw new ArgumentNullException(nameof(levelSelector));
@@ -28,12 +30,14 @@ public class LevelFlowController : ITickable, IDisposable
         _tutorialState = tutorialState ?? throw new ArgumentNullException(nameof(tutorialState));
         _customerQueue = customerQueue ?? throw new ArgumentNullException(nameof(customerQueue));
         _orderController = orderController ?? throw new ArgumentNullException(nameof(orderController));
+        _strikesController = strikesController ?? throw new ArgumentNullException(nameof(strikesController));
 
         _levelDurationSeconds = Mathf.Max(0f, selectedLevel.LevelDurationSeconds);
 
         _customerQueue.QueueEntryAdded += OnQueueEntryAdded;
         _customerQueue.CustomerFlowFinished += OnCustomerFlowFinished;
         _orderController.OrderFlowFinished += OnOrderFlowFinished;
+        _strikesController.GameOver += OnGameOver;
     }
 
     public bool IsLevelEnded { get; private set; }
@@ -68,6 +72,7 @@ public class LevelFlowController : ITickable, IDisposable
         _customerQueue.QueueEntryAdded -= OnQueueEntryAdded;
         _customerQueue.CustomerFlowFinished -= OnCustomerFlowFinished;
         _orderController.OrderFlowFinished -= OnOrderFlowFinished;
+        _strikesController.GameOver -= OnGameOver;
     }
 
     private void EndLevel()
@@ -106,5 +111,11 @@ public class LevelFlowController : ITickable, IDisposable
 
         if (_hasTimeExpired && _pendingCustomerFlows == 0)
             EndLevel();
+    }
+
+    private void OnGameOver()
+    {
+        _customerQueue.StopArrivals();
+        EndLevel();
     }
 }

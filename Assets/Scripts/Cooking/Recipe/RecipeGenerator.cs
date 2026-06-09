@@ -10,11 +10,17 @@ public class RecipeGenerator
     private readonly int _maxFillingsInclusive;
 
     private readonly LevelSelector _levelSelector;
+    private readonly LevelRunContext _runContext;
     private readonly GameplayTutorialState _tutorialState;
     
-    public RecipeGenerator(RecipeGeneratorSettings settings, LevelSelector levelSelector, GameplayTutorialState tutorialState)
+    public RecipeGenerator(
+        RecipeGeneratorSettings settings,
+        LevelSelector levelSelector,
+        LevelRunContext runContext,
+        GameplayTutorialState tutorialState)
     {
         _levelSelector = levelSelector;
+        _runContext = runContext;
         _tutorialState = tutorialState;
 
         var minFillings = Mathf.Max(0, settings.MinFillings);
@@ -28,6 +34,9 @@ public class RecipeGenerator
     {
         if (_tutorialState.IsActive)
             return new RecipeGenerationResult(_tutorialState.TutorialRecipe, false, null);
+
+        if (_runContext.IsArcade)
+            return GenerateArcadeRecipe();
 
         var level = _levelSelector.SelectedLevel;
         if (level == null)
@@ -51,6 +60,28 @@ public class RecipeGenerator
 
         if (missingIngredients.Count > 0)
             return FailedGeneration(missingIngredients.ToArray());
+
+        return new RecipeGenerationResult(new Recipe(dough, fillings), false, null);
+    }
+
+    private RecipeGenerationResult GenerateArcadeRecipe()
+    {
+        var loadout = _levelSelector.GetSelectedLevelLoadout();
+
+        var availableDoughs = loadout.Doughs.Where(dough => dough != null).ToArray();
+        if (availableDoughs.Length == 0)
+            throw new InvalidOperationException($"{nameof(RecipeGenerator)} requires at least one unlocked arcade {nameof(Dough)}.");
+
+        var dough = availableDoughs.GetRandomElement();
+        var fillings = new Dictionary<Filling, int>();
+        var fillingsCount = GetFillingsCount();
+        var availableFillings = loadout.Fillings.Where(filling => filling != null).ToArray();
+
+        for (var i = 0; i < fillingsCount && availableFillings.Length > 0; i++)
+        {
+            var filling = availableFillings.GetRandomElement();
+            fillings[filling] = fillings.GetValueOrDefault(filling) + 1;
+        }
 
         return new RecipeGenerationResult(new Recipe(dough, fillings), false, null);
     }
