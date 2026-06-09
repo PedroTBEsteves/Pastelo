@@ -32,6 +32,8 @@ public class LevelLoadoutInventorySlotView : MonoBehaviour
     private DraggableUI _draggableUI;
     private bool _hasPendingPreview;
 
+    public bool IsUsingClickGesture => _draggableUI != null && _draggableUI.IsUsingClickGesture;
+
     private void Awake()
     {
         _draggableUI = GetComponent<DraggableUI>();

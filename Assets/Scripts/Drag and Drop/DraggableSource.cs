@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,11 +9,8 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
     [SerializeField]
     private Draggable _draggablePrefab;
 
-    [Inject]
-    private readonly DraggableInputConfiguration _inputConfiguration;
-
     private Draggable _draggable;
-    private bool _createdDraggableOnCurrentPress;
+    private bool _hasPendingPress;
 
     private readonly List<Func<bool>> _canCreateDraggableHandlers = new();
     private readonly List<Action<Draggable>> _draggableCreatedHandlers = new();
@@ -34,39 +30,22 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
     
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_inputConfiguration.Mode != DraggableInputMode.Click)
-            return;
-
         if (_draggable != null)
             return;
 
         if (!CanCreateDraggable())
             return;
 
-        _draggable = CreateDraggable(eventData);
-        if (_draggable == null)
-            return;
-
-        _draggable.Dropped += OnDraggableDropped;
-        _createdDraggableOnCurrentPress = true;
-        ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.pointerDownHandler);
+        _hasPendingPress = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (_inputConfiguration.Mode != DraggableInputMode.Click)
-            return;
-
-        if (!_createdDraggableOnCurrentPress || _draggable == null)
-            return;
-
-        _createdDraggableOnCurrentPress = false;
-        _draggable.FinalizePendingPointerClickIgnore(eventData.eligibleForClick);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (_inputConfiguration.Mode != DraggableInputMode.Drag)
+        if (!_hasPendingPress || _draggable != null)
             return;
 
         if (!CanCreateDraggable())
@@ -75,15 +54,16 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
         _draggable = CreateDraggable(eventData);
         if (_draggable == null)
             return;
-        
-        ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.beginDragHandler);
+
+        _hasPendingPress = false;
+        _draggable.BeginPointerDrag(eventData);
+
+        if (!_draggable.IsDragging)
+            ClearCurrentDraggable(_draggable);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (_inputConfiguration.Mode != DraggableInputMode.Drag)
-            return;
-
         if (_draggable == null)
             return;
         
@@ -92,30 +72,30 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_inputConfiguration.Mode != DraggableInputMode.Drag)
-            return;
-
         if (_draggable == null)
             return;
         
         ExecuteEvents.Execute(_draggable.gameObject, eventData, ExecuteEvents.endDragHandler);
-        _draggable = null;
+        _hasPendingPress = false;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_inputConfiguration.Mode != DraggableInputMode.Click)
+        if (_draggable != null || !_hasPendingPress)
             return;
 
+        if (!CanCreateDraggable())
+            return;
+
+        _draggable = CreateDraggable(eventData);
         if (_draggable == null)
             return;
 
-        var currentDraggable = _draggable;
+        _hasPendingPress = false;
+        _draggable.BeginClickDrag(eventData);
 
-        ExecuteEvents.Execute(currentDraggable.gameObject, eventData, ExecuteEvents.pointerClickHandler);
-
-        if (_draggable == currentDraggable && !currentDraggable.IsDragging)
-            ClearCurrentDraggable(currentDraggable);
+        if (!_draggable.IsDragging)
+            ClearCurrentDraggable(_draggable);
     }
     
     private bool CanCreateDraggable() => _canCreateDraggableHandlers.Aggregate(true, (agg, handler) => agg && handler());
@@ -130,6 +110,7 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
 
         var position = eventData.pointerCurrentRaycast.worldPosition;
         var draggable = Instantiate(_draggablePrefab, position, Quaternion.identity);
+        draggable.Dropped += OnDraggableDropped;
 
         foreach (var handler in _draggableCreatedHandlers)
             handler?.Invoke(draggable);
@@ -139,7 +120,7 @@ public sealed class DraggableSource : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private void OnDraggableDropped(PointerEventData eventData)
     {
-        _createdDraggableOnCurrentPress = false;
+        _hasPendingPress = false;
 
         if (_draggable == null)
             return;

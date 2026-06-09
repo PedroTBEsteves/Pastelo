@@ -30,6 +30,7 @@ public class LevelLoadoutIngredientView : MonoBehaviour
     public Ingredient Ingredient => _ingredient;
     public bool HasIngredient => _ingredient != null;
     public bool IsPreview => _isPreview;
+    public bool IsUsingClickGesture => _draggableUI != null && _draggableUI.IsUsingClickGesture;
 
     private void Awake()
     {

@@ -88,9 +88,6 @@ public class LevelLoadoutEditorView : MonoBehaviour
     [Inject]
     private readonly MoneyManager _moneyManager;
 
-    [Inject]
-    private readonly DraggableInputConfiguration _inputConfiguration;
-
     private readonly List<SlotAssignment> _slotAssignments = new();
     private readonly List<LevelLoadoutIngredientView> _loadoutSlotViews = new();
     private readonly List<LevelLoadoutInventorySlotView> _inventoryItems = new();
@@ -99,9 +96,6 @@ public class LevelLoadoutEditorView : MonoBehaviour
 
     private Level _selectedLevel;
     private ActiveDrag _activeDrag;
-
-    private bool IsClickInputMode => _inputConfiguration != null && _inputConfiguration.Mode == DraggableInputMode.Click;
-    public DraggableInputConfiguration InputConfiguration => _inputConfiguration;
 
     private void Awake()
     {
@@ -187,7 +181,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
         previewSlot.name = $"Dragged {ingredient.GetDisplayName()}";
         previewSlot.BindPreview(this, GetSlotType(ingredient), ingredient);
         previewSlot.UpdateDraggedPosition(eventData.position);
-        previewSlot.SetDragState(true, IsClickInputMode);
+        previewSlot.SetDragState(true, sourceSlotView.IsUsingClickGesture);
 
         _activeDrag = new ActiveDrag
         {
@@ -197,7 +191,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
         };
         sourceSlotView.BeginPendingPreview();
 
-        if (IsClickInputMode)
+        if (sourceSlotView.IsUsingClickGesture)
         {
             sourceSlotView.CancelDragInput();
             previewSlot.BeginExternalDrag(eventData);
@@ -215,7 +209,7 @@ public class LevelLoadoutEditorView : MonoBehaviour
             Source = source,
             SourceSlot = GetAssignedSlot(source)
         };
-        source.SetDragState(true, IsClickInputMode);
+        source.SetDragState(true, source.IsUsingClickGesture);
     }
 
     private void HandleDrag(Vector2 screenPosition)

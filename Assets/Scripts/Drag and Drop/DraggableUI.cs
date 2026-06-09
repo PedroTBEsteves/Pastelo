@@ -1,20 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public sealed class DraggableUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
-    [Inject]
-    private readonly DraggableInputConfiguration _inputConfiguration;
+    private enum InteractionGesture
+    {
+        None,
+        Pending,
+        Drag,
+        Click
+    }
     
     private bool _isDragging;
     private bool _createdDragOnCurrentPress;
-    private bool _pendingPointerClickIgnore;
-    private bool _ignoreNextPointerClick;
+    private InteractionGesture _activeGesture;
 
     private readonly List<Func<bool>> _canDragHandlers = new();
 
@@ -23,12 +26,11 @@ public sealed class DraggableUI : MonoBehaviour, IPointerDownHandler, IPointerUp
     public event Action<PointerEventData> Dropped = delegate { };
 
     public bool IsDragging => _isDragging;
-
-    private bool IsClickInputMode => _inputConfiguration != null && _inputConfiguration.Mode == DraggableInputMode.Click;
+    public bool IsUsingClickGesture => _activeGesture == InteractionGesture.Click;
 
     private void Update()
     {
-        if (!_isDragging || !IsClickInputMode || Pointer.current == null)
+        if (!_isDragging || _activeGesture != InteractionGesture.Click || Pointer.current == null)
             return;
 
         Dragged(Pointer.current.position.ReadValue());
@@ -43,46 +45,41 @@ public sealed class DraggableUI : MonoBehaviour, IPointerDownHandler, IPointerUp
         if (!CanDrag())
             return;
 
-        BeginDrag(eventData, notifyHeld, ignoreNextEligibleClick);
+        BeginDrag(eventData, InteractionGesture.Click, notifyHeld);
     }
 
     public void CancelDrag()
     {
         _isDragging = false;
         _createdDragOnCurrentPress = false;
-        _pendingPointerClickIgnore = false;
-        _ignoreNextPointerClick = false;
+        _activeGesture = InteractionGesture.None;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!EnsureConfigured() || !IsClickInputMode || _isDragging || !CanDrag())
+        if (_isDragging || !CanDrag())
             return;
 
-        BeginDrag(eventData, notifyHeld: true, ignoreNextEligibleClick: true);
+        _activeGesture = InteractionGesture.Pending;
         _createdDragOnCurrentPress = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!EnsureConfigured() || !IsClickInputMode || !_createdDragOnCurrentPress)
-            return;
-
-        _createdDragOnCurrentPress = false;
-        FinalizePendingPointerClickIgnore(eventData.eligibleForClick);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!EnsureConfigured() || IsClickInputMode || !CanDrag())
+        if (_isDragging || _activeGesture != InteractionGesture.Pending || !CanDrag())
             return;
 
-        BeginDrag(eventData, notifyHeld: true, ignoreNextEligibleClick: false);
+        _createdDragOnCurrentPress = false;
+        BeginDrag(eventData, InteractionGesture.Drag, notifyHeld: true);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!EnsureConfigured() || !_isDragging)
+        if (!_isDragging)
             return;
 
         Dragged(eventData.position);
@@ -90,7 +87,7 @@ public sealed class DraggableUI : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!EnsureConfigured() || IsClickInputMode || !_isDragging)
+        if (!_isDragging || _activeGesture != InteractionGesture.Drag)
             return;
 
         EndDrag(eventData);
@@ -98,21 +95,24 @@ public sealed class DraggableUI : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!EnsureConfigured() || !IsClickInputMode)
-            return;
-
-        if (TryConsumeIgnoredPointerClick())
-            return;
-
         if (_isDragging)
-            EndDrag(eventData);
+        {
+            if (_activeGesture == InteractionGesture.Click)
+                EndDrag(eventData);
+            return;
+        }
+
+        if (_activeGesture != InteractionGesture.Pending || !_createdDragOnCurrentPress)
+            return;
+
+        _createdDragOnCurrentPress = false;
+        BeginDrag(eventData, InteractionGesture.Click, notifyHeld: true);
     }
 
-    private void BeginDrag(PointerEventData eventData, bool notifyHeld, bool ignoreNextEligibleClick)
+    private void BeginDrag(PointerEventData eventData, InteractionGesture gesture, bool notifyHeld)
     {
         _isDragging = true;
-        _pendingPointerClickIgnore = ignoreNextEligibleClick;
-        _ignoreNextPointerClick = false;
+        _activeGesture = gesture;
 
         if (notifyHeld)
             Held(eventData);
@@ -127,28 +127,4 @@ public sealed class DraggableUI : MonoBehaviour, IPointerDownHandler, IPointerUp
     }
 
     private bool CanDrag() => _canDragHandlers.Aggregate(true, (agg, handler) => agg && handler());
-
-    private void FinalizePendingPointerClickIgnore(bool shouldIgnore)
-    {
-        _ignoreNextPointerClick = _pendingPointerClickIgnore && shouldIgnore;
-        _pendingPointerClickIgnore = false;
-    }
-
-    private bool TryConsumeIgnoredPointerClick()
-    {
-        if (!_ignoreNextPointerClick)
-            return false;
-
-        _ignoreNextPointerClick = false;
-        return true;
-    }
-
-    private bool EnsureConfigured()
-    {
-        if (_inputConfiguration != null)
-            return true;
-
-        Debug.LogError($"{nameof(DraggableUI)} on '{name}' needs {nameof(DraggableInputConfiguration)} configured before handling input.", this);
-        return false;
-    }
 }

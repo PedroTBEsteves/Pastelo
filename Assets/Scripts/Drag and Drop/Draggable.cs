@@ -8,11 +8,16 @@ using UnityEngine.InputSystem;
 
 public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
-    [Inject]
-    private readonly CameraController _cameraController;
+    private enum InteractionGesture
+    {
+        None,
+        Pending,
+        Drag,
+        Click
+    }
 
     [Inject]
-    private readonly DraggableInputConfiguration _inputConfiguration;
+    private readonly CameraController _cameraController;
 
     [SerializeField]
     private bool _forceDraggableLayer = true;
@@ -26,9 +31,8 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
     private bool _followPointerContinuously;
     private bool _transitioning;
     private bool _pendingEndDrag;
-    private bool _pendingPointerClickIgnore;
-    private bool _ignoreNextPointerClick;
     private PointerEventData _pendingEndDragEventData;
+    private InteractionGesture _activeGesture;
     
     private readonly List<Func<bool>> _canDragHandlers = new();
     
@@ -36,6 +40,7 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
     public event Action<PointerEventData> Dropped = delegate { };
     
     public bool IsDragging => _dragging;
+    public bool IsUsingClickGesture => _activeGesture == InteractionGesture.Click;
     
     private void Awake()
     {
@@ -64,17 +69,57 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
         _cameraController.CameraEndedMoving -= OnCameraTransitionFinished;
     }
 
-    public void OnPointerDown(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnPointerDown(this, eventData);
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (_dragging)
+            return;
 
-    public void OnPointerUp(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnPointerUp(this, eventData);
+        _activeGesture = InteractionGesture.Pending;
+    }
 
-    public void OnDrag(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnDrag(this, eventData);
+    public void OnPointerUp(PointerEventData eventData)
+    {
+    }
 
-    public void OnBeginDrag(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnBeginDrag(this, eventData);
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (!_dragging)
+            return;
 
-    public void OnEndDrag(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnEndDrag(this, eventData);
+        UpdateDragPosition(eventData.position);
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (_dragging || _activeGesture != InteractionGesture.Pending || !CanDrag())
+            return;
+
+        BeginPointerDrag(eventData);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (!_dragging || _activeGesture != InteractionGesture.Drag)
+            return;
+
+        EndDrag(eventData);
+    }
     
-    public void OnPointerClick(PointerEventData eventData) => _inputConfiguration.CurrentHandler.OnPointerClick(this, eventData);
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (_dragging)
+        {
+            if (_activeGesture == InteractionGesture.Click)
+                EndDrag(eventData);
+
+            return;
+        }
+
+        if (_activeGesture != InteractionGesture.Pending)
+            return;
+
+        BeginClickDrag(eventData);
+    }
     
     public void AddCanDragHandler(Func<bool> handler) => _canDragHandlers.Add(handler);
     
@@ -98,22 +143,28 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
         Held(eventData);
     }
 
-    public void BeginPendingPointerClickIgnore() => _pendingPointerClickIgnore = true;
-
-    public void FinalizePendingPointerClickIgnore(bool shouldIgnore)
+    public void BeginPointerDrag(PointerEventData eventData)
     {
-        _ignoreNextPointerClick = _pendingPointerClickIgnore && shouldIgnore;
-        _pendingPointerClickIgnore = false;
+        BeginDrag(eventData);
+        if (_dragging)
+            _activeGesture = InteractionGesture.Drag;
     }
 
-    public bool TryConsumeIgnoredPointerClick()
+    public void BeginClickDrag(PointerEventData eventData)
     {
-        if (!_ignoreNextPointerClick)
-            return false;
+        BeginDrag(eventData, followPointerContinuously: true);
+        if (!_dragging)
+            return;
 
-        _ignoreNextPointerClick = false;
-        return true;
+        _activeGesture = InteractionGesture.Click;
+        UpdateDragPosition(eventData.position);
     }
+
+    public void BeginPendingPointerClickIgnore() { }
+
+    public void FinalizePendingPointerClickIgnore(bool shouldIgnore) { }
+
+    public bool TryConsumeIgnoredPointerClick() => false;
 
     public void UpdateDragPosition(Vector2 screenPosition)
     {
@@ -148,10 +199,9 @@ public sealed class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, 
         _followPointerContinuously = false;
         _pendingEndDrag = false;
         _pendingEndDragEventData = null;
-        _pendingPointerClickIgnore = false;
-        _ignoreNextPointerClick = false;
         _transitioning = false;
         _dragging = false;
+        _activeGesture = InteractionGesture.None;
         Dropped(eventData);
     }
 
