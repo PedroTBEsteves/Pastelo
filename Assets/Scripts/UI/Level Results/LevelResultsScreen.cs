@@ -1,3 +1,4 @@
+using System;
 using PrimeTween;
 using Reflex.Attributes;
 using TMPro;
@@ -10,28 +11,52 @@ public class LevelResultsScreen : MonoBehaviour
     private GameObject _screen;
 
     [SerializeField]
+    private TextMeshProUGUI _moneyGainedLegend;
+    
+    [SerializeField]
     private TextMeshProUGUI _moneyGainedText;
 
+    [SerializeField]
+    private TextMeshProUGUI _successfulOrdersLegend;
+    
     [SerializeField]
     private TextMeshProUGUI _successfulOrdersText;
 
     [SerializeField]
+    private TextMeshProUGUI _failedOrdersLegend;
+    
+    [SerializeField]
     private TextMeshProUGUI _failedOrdersText;
-
+    
     [SerializeField]
-    private TextMeshProUGUI _burntPastelsText;
-
-    [SerializeField]
-    private TextMeshProUGUI _queueAbandonmentsText;
-
-    [SerializeField]
-    private TextMeshProUGUI _postServiceAbandonmentsText;
-
+    private TextMeshProUGUI _ordersMissingIngredientsLegend;
+    
     [SerializeField]
     private TextMeshProUGUI _ordersMissingIngredientsText;
 
     [SerializeField]
+    private TextMeshProUGUI _queueAbandonmentsLegend;
+    
+    [SerializeField]
+    private TextMeshProUGUI _queueAbandonmentsText;
+
+    [SerializeField]
+    private TextMeshProUGUI _postServiceAbandonmentsLegend;
+    
+    [SerializeField]
+    private TextMeshProUGUI _postServiceAbandonmentsText;
+    
+    [SerializeField]
+    private TextMeshProUGUI _burntPastelsLegend;
+    
+    [SerializeField]
+    private TextMeshProUGUI _burntPastelsText;
+
+    [SerializeField]
     private TweenSettings _countTweenSettings = new(1f, Ease.OutQuad, useUnscaledTime: true);
+    
+    [SerializeField]
+    private TweenSettings _legendTweenSettings = new(1f, Ease.OutQuad, useUnscaledTime: true);
 
     [Inject]
     private readonly LevelFlowController _levelFlowController;
@@ -47,7 +72,6 @@ public class LevelResultsScreen : MonoBehaviour
     private void Awake()
     {
         _levelFlowController.LevelEnded += OnLevelEnded;
-        SetAllTextsToZero();
         HideScreen();
     }
 
@@ -63,19 +87,32 @@ public class LevelResultsScreen : MonoBehaviour
     {
         StopCountSequence();
         ShowScreen();
-        SetAllTextsToZero();
+        EmptyAllTexts();
 
         var snapshot = LevelResultsSnapshot.Capture(_levelMoneyManager, _levelPerformanceTracker);
 
         _countSequence = Sequence.Create(useUnscaledTime: _countTweenSettings.useUnscaledTime)
-            .Group(Tween.Custom(0f, snapshot.MoneyGained, _countTweenSettings, SetMoney))
-            .Group(Tween.Custom(0f, snapshot.SuccessfulOrdersCount, _countTweenSettings, value => SetCount(_successfulOrdersText, value)))
-            .Group(Tween.Custom(0f, snapshot.FailedOrdersCount, _countTweenSettings, value => SetCount(_failedOrdersText, value)))
-            .Group(Tween.Custom(0f, snapshot.BurntPastelsCount, _countTweenSettings, value => SetCount(_burntPastelsText, value)))
-            .Group(Tween.Custom(0f, snapshot.QueueAbandonmentsCount, _countTweenSettings, value => SetCount(_queueAbandonmentsText, value)))
-            .Group(Tween.Custom(0f, snapshot.PostServiceAbandonmentsCount, _countTweenSettings, value => SetCount(_postServiceAbandonmentsText, value)))
-            .Group(Tween.Custom(0f, snapshot.OrdersMissingIngredientsCount, _countTweenSettings, value => SetCount(_ordersMissingIngredientsText, value)))
+            .Chain(TextAnimationSequence(_moneyGainedLegend, snapshot.MoneyGained, SetMoney))
+            .Chain(TextAnimationSequence(_successfulOrdersLegend, snapshot.SuccessfulOrdersCount, value => SetCount(_successfulOrdersText, value)))
+            .Chain(TextAnimationSequence(_failedOrdersLegend, snapshot.FailedOrdersCount, value => SetCount(_failedOrdersText, value)))
+            .Chain(TextAnimationSequence(_ordersMissingIngredientsLegend, snapshot.OrdersMissingIngredientsCount, value => SetCount(_ordersMissingIngredientsText, value)))
+            .Chain(TextAnimationSequence(_queueAbandonmentsLegend, snapshot.QueueAbandonmentsCount, value => SetCount(_queueAbandonmentsText, value)))
+            .Chain(TextAnimationSequence(_postServiceAbandonmentsLegend, snapshot.PostServiceAbandonmentsCount, value => SetCount(_postServiceAbandonmentsText, value)))
+            .Chain(TextAnimationSequence(_burntPastelsLegend, snapshot.BurntPastelsCount, value => SetCount(_burntPastelsText, value)))
             .OnComplete(this, screen => screen.ApplySnapshot(snapshot));
+    }
+
+    private Sequence TextAnimationSequence(TextMeshProUGUI legendText, float initialValue, Action<float> onValueChange)
+    {
+        return Sequence.Create(useUnscaledTime: _countTweenSettings.useUnscaledTime)
+            .Chain(LegendAnimationTween(legendText))
+            .Chain(Tween.Custom(0f, initialValue, _countTweenSettings, onValueChange));
+    }
+    
+    private Tween LegendAnimationTween(TextMeshProUGUI legendText)
+    {
+        legendText.maxVisibleCharacters = 0;
+        return Tween.TextMaxVisibleCharacters(legendText, legendText.text.Length, _legendTweenSettings);
     }
 
     private void ApplySnapshot(LevelResultsSnapshot snapshot)
@@ -89,17 +126,22 @@ public class LevelResultsScreen : MonoBehaviour
         SetCount(_ordersMissingIngredientsText, snapshot.OrdersMissingIngredientsCount);
     }
 
-    private void SetAllTextsToZero()
+    private void EmptyAllTexts()
     {
-        SetMoney(0f);
-        SetCount(_successfulOrdersText, 0f);
-        SetCount(_failedOrdersText, 0f);
-        SetCount(_burntPastelsText, 0f);
-        SetCount(_queueAbandonmentsText, 0f);
-        SetCount(_postServiceAbandonmentsText, 0f);
-        SetCount(_ordersMissingIngredientsText, 0f);
+        EmptyText(_moneyGainedText);
+        EmptyText(_successfulOrdersText);
+        EmptyText(_failedOrdersText);
+        EmptyText(_burntPastelsText);
+        EmptyText(_queueAbandonmentsText);
+        EmptyText(_postServiceAbandonmentsText);
+        EmptyText(_ordersMissingIngredientsText);
     }
 
+    private void EmptyText(TextMeshProUGUI text)
+    {
+        text.SetText(string.Empty);
+    }
+    
     private void SetMoney(float value)
     {
         _moneyGainedText.SetText(TextUtils.FormatAsMoney(value));
