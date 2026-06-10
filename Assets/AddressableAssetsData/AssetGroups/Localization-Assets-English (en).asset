@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-English (en)
   m_GUID: c15431c7d5bafb64ebf91466109d4161
   m_SerializeEntries:
+  - m_GUID: 139049b3602a40245bc16649b66b0197
+    m_Address: UI_Menu_Botao_CAMPANHA_INGLES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4a0cf4e2d006a914f95520636681e333
     m_Address: UI_Pause_Quadro_Ingles
     m_ReadOnly: 1

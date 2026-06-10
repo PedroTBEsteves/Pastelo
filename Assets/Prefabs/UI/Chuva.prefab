@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8623938051098370723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2504850124884210815}
+  - component: {fileID: 5905792491660923420}
+  - component: {fileID: 2664123782110197146}
+  m_Layer: 5
+  m_Name: Chuva
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2504850124884210815
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623938051098370723}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 500, y: 1080}
+  m_Pivot: {x: 0, y: 1}
+--- !u!222 &5905792491660923420
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623938051098370723}
+  m_CullTransparentMesh: 1
+--- !u!114 &2664123782110197146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623938051098370723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657110d199d55d641b4c0d34625917f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ingredientPrefab: {fileID: 5080786685254443392, guid: 41ea1ed83dfda87488c7cabe86726dac, type: 3}
+  _spawnRoot: {fileID: 2504850124884210815}
+  _ingredientSprites:
+  - {fileID: 7094018986122487484, guid: aaaa952c6c70f1043b67f08449015bc4, type: 3}
+  - {fileID: 2765890307910868761, guid: 0a4efc39f3f9cc44e8a28a436a6a88ad, type: 3}
+  - {fileID: 7590320427900475201, guid: 26bbe267d3ec08446915ffd8d3cf3d5f, type: 3}
+  - {fileID: -2744386507665659717, guid: 8294f71a656a1e744b70abae9994de5f, type: 3}
+  - {fileID: -2380449057780921004, guid: 764a945c8d855a643aeb55f55e8bf902, type: 3}
+  - {fileID: 365603805366478496, guid: 3c7640de82d2f1148a149073004a1a25, type: 3}
+  - {fileID: -6010558184916818172, guid: 2b183236842c8144da6fccb91aa12802, type: 3}
+  - {fileID: 204562589398037907, guid: ceff6ad6205ccab4fb1827b64618f953, type: 3}
+  - {fileID: -6977464587672051905, guid: 7eefeee40cfbea048a6ef476578ffb1a, type: 3}
+  - {fileID: -6389559659260161797, guid: 6824ee85009ee6b4c95575c794e70e31, type: 3}
+  - {fileID: -1899758367821576830, guid: b07b3e45785f605478fa577c487b7b94, type: 3}
+  - {fileID: -8601570835046681118, guid: b43aa24c64b16444ea2b3b1dec7aa3d2, type: 3}
+  - {fileID: -2575876139857980733, guid: c7090dba99789e74e8a08103e9b455ab, type: 3}
+  - {fileID: 1394955401386578300, guid: f265c8884852447488653865a5ae9dd3, type: 3}
+  - {fileID: 5435832490908719703, guid: 0cb8525d98757f447b5c8b3ca95d48ff, type: 3}
+  - {fileID: -4810762285029421708, guid: d411f40d95aea8b45a1361b529c7239d, type: 3}
+  - {fileID: -5647656978846785272, guid: 8897a27548e89a643b46173bc8bd21b0, type: 3}
+  _spawnHeight: 800
+  _spawnIntervalRange: {x: 0.2, y: 0.8}
+  _speedRange: {x: 150, y: 260}
+  _directionAngleRange: {x: 270, y: 270}
+  _angularSpeedRange: {x: -180, y: 180}
+  _ingredientLifetime: 15
+  _defaultCapacity: 16
+  _maxSize: 64

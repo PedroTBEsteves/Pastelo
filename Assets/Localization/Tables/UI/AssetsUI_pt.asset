@@ -34,6 +34,10 @@ MonoBehaviour:
     m_Localized: 'a19c645b40461bb40a0933172e8a81ce[UI_Loja_Comprar_SoHoje]'
     m_Metadata:
       m_Items: []
+  - m_Id: 23576555651772416
+    m_Localized: '3db41ac08c947a94aabaa9c7468eefd3[UI_Menu_Botao_CAMPANHA_0]'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

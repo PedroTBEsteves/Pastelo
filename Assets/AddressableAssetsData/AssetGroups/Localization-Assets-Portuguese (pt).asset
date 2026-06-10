@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Portuguese (pt)
   m_GUID: baa60c386145d624dad1feea7228b16e
   m_SerializeEntries:
+  - m_GUID: 3db41ac08c947a94aabaa9c7468eefd3
+    m_Address: UI_Menu_Botao_CAMPANHA
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3e08f94ecbdb0884b92037ea119340a0
     m_Address: UI_Menu_QRCode 1
     m_ReadOnly: 1
