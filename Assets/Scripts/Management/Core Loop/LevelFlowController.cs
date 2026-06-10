@@ -46,6 +46,7 @@ public class LevelFlowController : ITickable, IDisposable
     public float RemainingTimeSeconds => Mathf.Max(0f, _levelDurationSeconds - _elapsedTimeSeconds);
 
     public event Action LevelEnded = delegate { };
+    public event Action<float> LevelTimeChanged = delegate { };
     public event Action LevelTimeExpired = delegate { };
 
     public void Tick(float deltaTime)
@@ -54,6 +55,7 @@ public class LevelFlowController : ITickable, IDisposable
             return;
 
         _elapsedTimeSeconds += deltaTime;
+        LevelTimeChanged(_elapsedTimeSeconds / _levelDurationSeconds);
 
         if (_elapsedTimeSeconds < _levelDurationSeconds)
             return;
