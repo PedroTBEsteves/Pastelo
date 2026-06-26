@@ -43,13 +43,9 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
     [Inject]
     private readonly GameplayInteractionGate _interactionGate;
 
-    [Inject]
-    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
-    
     private Draggable _draggable;
     private ClosedPastelDough _closedPastelDough;
     private Sprite _emptySprite;
-    private TutorialTarget _tutorialTarget;
     private Vector3 _dragStartPosition;
     private bool _isDraggingBag;
     
@@ -57,20 +53,10 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
     {
         _draggable = GetComponent<Draggable>();
         _emptySprite = _spriteRenderer.sprite;
-        _tutorialTarget = GetComponent<TutorialTarget>();
         _bagIngredientHint.SetVisible(false);
         _draggable.Held += OnHeld;
         _draggable.Dropped += OnDropped;
         _draggable.AddCanDragHandler(CanDragBag);
-        if (_tutorialTarget != null)
-        {
-            _tutorialTarget.Configure(TutorialTargetId.DeliveryArea);
-            _tutorialTargetRegistry.Register(_tutorialTarget);
-        }
-        else
-        {
-            Debug.LogError($"{nameof(Deliverable)} on '{name}' is missing a scene-prepared {nameof(TutorialTarget)}.", this);
-        }
 
         ConfigureCustomerDisplay();
         UpdateSprite();
@@ -84,9 +70,6 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
             _draggable.Dropped -= OnDropped;
             _draggable.RemoveCanDragHandler(CanDragBag);
         }
-
-        if (_tutorialTarget != null)
-            _tutorialTargetRegistry.Unregister(_tutorialTarget);
     }
     
     public bool TryAddPastel(DraggableClosedPastel closedPastel)
@@ -161,12 +144,7 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
         if (_bagIngredientHint == null)
             Debug.LogError($"{nameof(Deliverable)} on '{name}' is missing a scene-prepared {nameof(DeliveryIngredientHint)} for the bag.", this);
 
-        _customerDisplay.Configure(
-            _orderController,
-            _deliverySequence,
-            _tutorialEvents,
-            _interactionGate,
-            _tutorialTargetRegistry);
+        // CustomerDisplay now configures itself through scene DI.
     }
 
     private void ClearPastel()

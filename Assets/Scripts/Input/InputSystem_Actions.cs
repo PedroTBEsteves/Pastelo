@@ -136,15 +136,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MovePacking"",
-                    ""type"": ""Button"",
-                    ""id"": ""9cd91d60-0f31-40fd-ad72-7cf57da06725"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -224,17 +215,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""MoveFrying"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dd8fa1cb-53ea-47cb-9666-530ddb9b9b7e"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MovePacking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -309,7 +289,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Gameplay_MoveBalcony = m_Gameplay.FindAction("MoveBalcony", throwIfNotFound: true);
         m_Gameplay_MovePrepping = m_Gameplay.FindAction("MovePrepping", throwIfNotFound: true);
         m_Gameplay_MoveFrying = m_Gameplay.FindAction("MoveFrying", throwIfNotFound: true);
-        m_Gameplay_MovePacking = m_Gameplay.FindAction("MovePacking", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -395,7 +374,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_MoveBalcony;
     private readonly InputAction m_Gameplay_MovePrepping;
     private readonly InputAction m_Gameplay_MoveFrying;
-    private readonly InputAction m_Gameplay_MovePacking;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -427,10 +405,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/MoveFrying".
         /// </summary>
         public InputAction @MoveFrying => m_Wrapper.m_Gameplay_MoveFrying;
-        /// <summary>
-        /// Provides access to the underlying input action "Gameplay/MovePacking".
-        /// </summary>
-        public InputAction @MovePacking => m_Wrapper.m_Gameplay_MovePacking;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -472,9 +446,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MoveFrying.started += instance.OnMoveFrying;
             @MoveFrying.performed += instance.OnMoveFrying;
             @MoveFrying.canceled += instance.OnMoveFrying;
-            @MovePacking.started += instance.OnMovePacking;
-            @MovePacking.performed += instance.OnMovePacking;
-            @MovePacking.canceled += instance.OnMovePacking;
         }
 
         /// <summary>
@@ -501,9 +472,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MoveFrying.started -= instance.OnMoveFrying;
             @MoveFrying.performed -= instance.OnMoveFrying;
             @MoveFrying.canceled -= instance.OnMoveFrying;
-            @MovePacking.started -= instance.OnMovePacking;
-            @MovePacking.performed -= instance.OnMovePacking;
-            @MovePacking.canceled -= instance.OnMovePacking;
         }
 
         /// <summary>
@@ -644,12 +612,5 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveFrying(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "MovePacking" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMovePacking(InputAction.CallbackContext context);
     }
 }

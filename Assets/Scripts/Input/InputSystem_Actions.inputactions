@@ -50,15 +50,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "MovePacking",
-                    "type": "Button",
-                    "id": "9cd91d60-0f31-40fd-ad72-7cf57da06725",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -136,17 +127,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveFrying",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dd8fa1cb-53ea-47cb-9666-530ddb9b9b7e",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MovePacking",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

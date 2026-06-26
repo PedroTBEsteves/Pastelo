@@ -23,7 +23,7 @@ public class GameplayInteractionGate
             TutorialInteractionType.ClosePastel => _state.CurrentStep == TutorialStep.ClosePastel,
             TutorialInteractionType.PlaceInFryer => _state.CurrentStep == TutorialStep.PlaceInFrying,
             TutorialInteractionType.RemoveCookedPastel => _state.CurrentStep is TutorialStep.RemoveCookedPastel
-                or TutorialStep.MoveCameraToPacking
+                or TutorialStep.MoveCameraToDelivery
                 or TutorialStep.DeliverOrder,
             TutorialInteractionType.DeliverOrder => _state.CurrentStep == TutorialStep.DeliverOrder
                 && (_state.TutorialOrder == null || Equals(_state.TutorialOrder, context)),
@@ -38,11 +38,11 @@ public class GameplayInteractionGate
         if (context is not CameraSection targetSection || _state.ExpectedCameraSection != targetSection)
             return false;
 
-        if (_state.CurrentStep is TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToPacking)
+        if (_state.CurrentStep is TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToDelivery)
             return _state.IsTutorialPastelBeingDragged;
 
         return _state.CurrentStep is TutorialStep.MoveCameraToPrepping
             or TutorialStep.MoveCameraToFrying
-            or TutorialStep.MoveCameraToPacking;
+            or TutorialStep.MoveCameraToDelivery;
     }
 }

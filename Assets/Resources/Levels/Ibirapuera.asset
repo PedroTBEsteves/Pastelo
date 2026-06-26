@@ -45,8 +45,6 @@ MonoBehaviour:
       Value: {fileID: -4469045583345088929, guid: 521aab6bf3ab82f42aaf7625005a9396, type: 3}
     - Key: 2
       Value: {fileID: 5187134154614781812, guid: 28a7cd9a03e1cb349bbd6d2884da559c, type: 3}
-    - Key: 3
-      Value: {fileID: 4958553713781198775, guid: 898a5172d937d5d43b79e59cde01309f, type: 3}
   _preferredDoughs:
   - {fileID: 11400000, guid: c3b7c01342114ee4c9bb0b6851efff46, type: 2}
   - {fileID: 11400000, guid: 17765e907fe5dc1489a3063745c7d9f8, type: 2}

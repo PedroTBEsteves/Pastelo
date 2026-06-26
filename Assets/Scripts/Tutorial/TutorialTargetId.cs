@@ -9,7 +9,6 @@ public enum TutorialTargetId
     ClosePastelArea,
     FryingArea,
     CookedPastel,
-    DeliveryArea,
     OrderNote,
     DeliveryCustomer,
 }

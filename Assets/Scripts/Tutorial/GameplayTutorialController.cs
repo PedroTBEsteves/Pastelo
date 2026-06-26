@@ -87,7 +87,7 @@ public class GameplayTutorialController
 
                 _state.SetStep(TutorialStep.PlaceInFrying, TutorialTargetId.FryingArea);
                 break;
-            case TutorialStep.MoveCameraToPacking:
+            case TutorialStep.MoveCameraToDelivery:
                 _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
                 break;
         }
@@ -148,13 +148,13 @@ public class GameplayTutorialController
         {
             _state.TryBeginDraggingTutorialPastel(pastel);
             _state.SetStep(
-                TutorialStep.MoveCameraToPacking,
+                TutorialStep.MoveCameraToDelivery,
                 GetCameraMoveTargetId(CameraSection.Balcony),
                 expectedCameraSection: CameraSection.Balcony);
             return;
         }
 
-        if (_state.CurrentStep is not (TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToPacking))
+        if (_state.CurrentStep is not (TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToDelivery))
             return;
 
         _state.TryBeginDraggingTutorialPastel(pastel);
@@ -162,7 +162,7 @@ public class GameplayTutorialController
 
     private void OnPastelDropped(DraggableClosedPastel pastel)
     {
-        if (!_state.IsActive || _state.CurrentStep is not (TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToPacking))
+        if (!_state.IsActive || _state.CurrentStep is not (TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToDelivery))
             return;
 
         var currentStep = _state.CurrentStep;
@@ -177,7 +177,7 @@ public class GameplayTutorialController
 
         if (expectedSection.HasValue && _cameraController.CurrentSection == expectedSection.Value)
         {
-            if (currentStep == TutorialStep.MoveCameraToPacking)
+            if (currentStep == TutorialStep.MoveCameraToDelivery)
             {
                 _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
                 return;
@@ -222,7 +222,7 @@ public class GameplayTutorialController
 
     private void OnPastelRemovedFromFryer(DraggableClosedPastel _)
     {
-        // Advancing to packing is now driven by the drag state, not just by removing from the fryer.
+        // Advancing to delivery is now driven by the drag state, not just by removing from the fryer.
     }
 
     private void OnOrderDelivered(Order order)
