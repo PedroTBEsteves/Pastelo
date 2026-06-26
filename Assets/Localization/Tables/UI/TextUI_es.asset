@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TextUI_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 25774af7f7401844da02d4d43cc16f46, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 1025773489429676124
+  m_TableData:
+  - m_Id: 13126512640
+    m_Localized: Jogar ({price})
+    m_Metadata:
+      m_Items:
+      - rid: 1025773489429676124
+  - m_Id: 5847654464925696
+    m_Localized: '{days:plural:{} dia|{} dias}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773489429676124
+  - m_Id: 7313459828404224
+    m_Localized: Comprar ({price})
+    m_Metadata:
+      m_Items:
+      - rid: 1025773489429676124
+  - m_Id: 5847290776825856
+    m_Localized: Apenas hoje!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7313666825695232
+    m_Localized: Recheios
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7313753786200064
+    m_Localized: Massas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329519277355008
+    m_Localized: Dinheiro recebido---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329620670459904
+    m_Localized: Pedidos entregues com sucesso---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329719471484928
+    m_Localized: Pedidos entregues com falha---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7329811167358976
+    m_Localized: "Clientes que n\xE3o encontraram o que queriam---"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330086024294400
+    m_Localized: Clientes que desistiram na fila---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330177976020992
+    m_Localized: Clientes que desistiram do pedido---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7330456154845184
+    m_Localized: Pasteis queimados---
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8049288028794880
+    m_Localized: Recheios e Massas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8049387190530048
+    m_Localized: Clique e adicione para levar ao local
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8055621910179840
+    m_Localized: Voltar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8056409617248256
+    m_Localized: Recomendado
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1025773489429676124
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 13126512640
+        - id: 5847654464925696
+        - id: 7313459828404224

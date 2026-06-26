@@ -16,12 +16,20 @@ MonoBehaviour:
     m_Code: pt
   m_SharedData: {fileID: 11400000, guid: ff00ff5a140098f429392c6cd8956e59, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1025773459433324545
   m_TableData:
   - m_Id: 1001
     m_Localized: Oi, eu gostaria de um pastel de {dough} com {fillings}.
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1025773459433324545
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1025773459433324545
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 1001

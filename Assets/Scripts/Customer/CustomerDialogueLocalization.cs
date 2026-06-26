@@ -7,7 +7,8 @@ using UnityEngine.Localization.Tables;
 
 public static class CustomerDialogueLocalization
 {
-    private const string PortugueseLanguageCode = "pt";
+    private const string ListSeparatorKey = "dialogue.list.separator";
+    private const string ListFinalSeparatorKey = "dialogue.list.final-separator";
 
     public static string GetRandomLocalizedDialogue(LocalizedStringTable tableReference, string ownerName, string fieldName) =>
         GetRandomLocalizedEntry(tableReference, ownerName, fieldName).GetLocalizedString();
@@ -38,7 +39,11 @@ public static class CustomerDialogueLocalization
         return entry.GetLocalizedString(new { amount });
     }
 
-    public static string JoinLocalizedList(IReadOnlyList<string> items)
+    public static string JoinLocalizedList(
+        LocalizedStringTable formattingTableReference,
+        IReadOnlyList<string> items,
+        string ownerName,
+        string fieldName)
     {
         if (items.Count == 0)
             return string.Empty;
@@ -46,8 +51,10 @@ public static class CustomerDialogueLocalization
         if (items.Count == 1)
             return items[0];
 
-        var separator = ", ";
-        var finalSeparator = IsPortugueseSelected() ? " e " : " and ";
+        var separator = GetLocalizedEntry(formattingTableReference, ListSeparatorKey, ownerName, fieldName)
+            .GetLocalizedString();
+        var finalSeparator = GetLocalizedEntry(formattingTableReference, ListFinalSeparatorKey, ownerName, fieldName)
+            .GetLocalizedString();
 
         if (items.Count == 2)
             return $"{items[0]}{finalSeparator}{items[1]}";
@@ -84,9 +91,4 @@ public static class CustomerDialogueLocalization
         return table;
     }
 
-    private static bool IsPortugueseSelected()
-    {
-        var localeCode = LocalizationSettings.SelectedLocale?.Identifier.Code;
-        return !string.IsNullOrEmpty(localeCode) && localeCode.StartsWith(PortugueseLanguageCode, StringComparison.OrdinalIgnoreCase);
-    }
 }

@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3fba1075436a4fd79141c8ef110a7d3c
+    m_Address: DialogueFormatting_pt
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1c8d4d97649f180409107e57378691ab
     m_Address: EmptyPastelDialogues_pt
     m_ReadOnly: 1
@@ -80,6 +86,7 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pt
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: da993a52efbd6f746ae952f9c156d2b6
     m_Address: TextUI_pt

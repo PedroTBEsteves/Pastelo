@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: SuccessDialogues_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: d177c4ae2c36a5544b3f6a1b0f16ceab, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 84018638848
+    m_Localized: Nunca he confiado en nadie tanto como en este pastel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 96295366656
+    m_Localized: Este pastel está tan bueno que hasta el aceite debe ser gourmet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 100380618752
+    m_Localized: Ya estoy pensando en casarme con quien lo cocinó.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 104432316416
+    m_Localized: Este pastel curó traumas que ni la terapia pudo resolver.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 107779371008
+    m_Localized: El pastel llegó calientito y destruyó mi dieta en tres segundos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113324240896
+    m_Localized: Este pastel es mi nueva razón para creer en la humanidad.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120328728576
+    m_Localized: Lo comí y olvidé todos mis problemas, incluso las cuentas por pagar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 133473677312
+    m_Localized: Este pastel demuestra que Dios existe y fríe bastante bien.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144441782272
+    m_Localized: Este pastel está tan bueno que debería venir con banda sonora de telenovela.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

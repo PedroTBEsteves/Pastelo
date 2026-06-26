@@ -545,9 +545,15 @@ MonoBehaviour:
   _emptyPastelDialogueTable:
     m_TableReference:
       m_TableCollectionName: GUID:74c918ebdcf48de42a9ac1f467b14562
+  _failedOrderDialoguesTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:71b3c9eb770db7d41834cd2f679ab657
   _ingredientsTable:
     m_TableReference:
       m_TableCollectionName: GUID:b2d0e1f2435465768798a9bacbdced0f
+  _dialogueFormattingTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:4a914ef748264b6f8fce03ea89cb28e5
   _delayAfterTextIsDone: 2
 --- !u!114 &492160833232763615
 MonoBehaviour:

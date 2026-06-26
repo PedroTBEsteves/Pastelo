@@ -25,6 +25,9 @@ public class CustomerServiceDialogue : MonoBehaviour, ICustomerServiceDialogue
     private LocalizedStringTable _ingredientsTable;
 
     [SerializeField]
+    private LocalizedStringTable _dialogueFormattingTable;
+
+    [SerializeField]
     private float _delayAfterTextIsDone = 1f;
 
     [Inject]
@@ -119,10 +122,14 @@ public class CustomerServiceDialogue : MonoBehaviour, ICustomerServiceDialogue
             fillingsParts.Add($"{amount} {ingredientName}");
         }
 
-        return CustomerDialogueLocalization.JoinLocalizedList(fillingsParts);
+        return CustomerDialogueLocalization.JoinLocalizedList(
+            _dialogueFormattingTable,
+            fillingsParts,
+            nameof(CustomerServiceDialogue),
+            nameof(_dialogueFormattingTable));
     }
 
-    private static string GetMissingIngredientsText(IReadOnlyList<Ingredient> ingredients)
+    private string GetMissingIngredientsText(IReadOnlyList<Ingredient> ingredients)
     {
         if (ingredients == null || ingredients.Count == 0)
             return string.Empty;
@@ -135,9 +142,17 @@ public class CustomerServiceDialogue : MonoBehaviour, ICustomerServiceDialogue
             if (ingredient == null || !seenIngredients.Add(ingredient))
                 continue;
 
-            ingredientParts.Add(ingredient.GetDisplayName());
+            ingredientParts.Add(CustomerDialogueLocalization.GetLocalizedIngredientName(
+                _ingredientsTable,
+                ingredient,
+                nameof(CustomerServiceDialogue),
+                nameof(_ingredientsTable)));
         }
 
-        return CustomerDialogueLocalization.JoinLocalizedList(ingredientParts);
+        return CustomerDialogueLocalization.JoinLocalizedList(
+            _dialogueFormattingTable,
+            ingredientParts,
+            nameof(CustomerServiceDialogue),
+            nameof(_dialogueFormattingTable));
     }
 }

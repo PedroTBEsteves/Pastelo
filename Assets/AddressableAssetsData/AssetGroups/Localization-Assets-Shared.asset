@@ -30,6 +30,32 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3db41ac08c947a94aabaa9c7468eefd3
+    m_Address: UI_Menu_Botao_CAMPANHA
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e08f94ecbdb0884b92037ea119340a0
+    m_Address: UI_Menu_QRCode 1
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a914ef748264b6f8fce03ea89cb28e5
+    m_Address: Assets/Dialogues/DialogueFormatting Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71551dc5480db1b4eb24ad8b8f7ab875
+    m_Address: UI_Pause_Quadro
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 71b3c9eb770db7d41834cd2f679ab657
     m_Address: Assets/Dialogues/MissingIngredients/MissingIngredientsDialogues Shared
       Data.asset
@@ -66,6 +92,14 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
+    - Locale-es
+    - Locale-pt
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2b808c1756997f40a56d828c703ba70
+    m_Address: UI_Agradecimentos_QRCode 1
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
     - Locale-pt
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b2d0e1f2435465768798a9bacbdced0f

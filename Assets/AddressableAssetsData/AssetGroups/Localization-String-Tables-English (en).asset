@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f4cc0b51552485da0a4ad907b791afb
+    m_Address: DialogueFormatting_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 361dd1902930ba24f8a40c14df87d0a6
     m_Address: Prompts_en
     m_ReadOnly: 1
@@ -74,6 +80,7 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d1f601ad81350c74f807cfe676a55a1b
     m_Address: TextUI_en

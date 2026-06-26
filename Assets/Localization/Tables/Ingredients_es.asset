@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Ingredients_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: b2d0e1f2435465768798a9bacbdced0f, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 1025773263783985152
+  m_TableData:
+  - m_Id: 1008
+    m_Localized: '{amount:plural:Tocino|Tocinos}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1009
+    m_Localized: '{amount:plural:Salchicha Calabresa|Salchichas Calabresas}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1010
+    m_Localized: "{amount:plural:Camar\xF3n|Camarones}"
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1011
+    m_Localized: '{amount:plural:Carne|Carnes}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1012
+    m_Localized: '{amount:plural:Pollo|Pollos}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1013
+    m_Localized: "{amount:plural:Jam\xF3n|Jamones}"
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1014
+    m_Localized: '{amount:plural:Aceituna|Aceitunas}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1015
+    m_Localized: '{amount:plural:Cebolla|Cebollas}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1016
+    m_Localized: "{amount:plural:Ma\xEDz|Ma\xEDces}"
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1017
+    m_Localized: "{amount:plural:Aj\xED|Aj\xEDes}"
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1018
+    m_Localized: '{amount:plural:Queso|Quesos}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1019
+    m_Localized: '{amount:plural:Tomate|Tomates}'
+    m_Metadata:
+      m_Items:
+      - rid: 1025773263783985152
+  - m_Id: 1002
+    m_Localized: Masa de Chocolate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1003
+    m_Localized: Masa de Barbacoa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1004
+    m_Localized: Masa de Finas Hierbas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1005
+    m_Localized: Masa Picante
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1006
+    m_Localized: Masa de Queso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1007
+    m_Localized: Masa Tradicional
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4761572402966528
+    m_Localized: Quesos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4761628589862912
+    m_Localized: Carnes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4761675113082880
+    m_Localized: Verduras
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1025773263783985152
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 1008
+        - id: 1009
+        - id: 1010
+        - id: 1011
+        - id: 1012
+        - id: 1013
+        - id: 1014
+        - id: 1015
+        - id: 1016
+        - id: 1017
+        - id: 1018
+        - id: 1019

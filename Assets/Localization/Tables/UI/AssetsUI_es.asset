@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
+  m_Name: AssetsUI_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 266d133b17876384aafe1ff1aa1cca55, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 23576555651772416
+    m_Localized: '3db41ac08c947a94aabaa9c7468eefd3[UI_Menu_Botao_CAMPANHA_0]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10533309535137792
+    m_Localized: 'a19c645b40461bb40a0933172e8a81ce[UI_Loja_Comprar_SoHoje]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2439275524096
+    m_Localized: '3e08f94ecbdb0884b92037ea119340a0[UI_Menu_QRCode 1_0]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5195083776
+    m_Localized: 'b2b808c1756997f40a56d828c703ba70[UI_Agradecimentos_QRCode 1_0]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7643756670976
+    m_Localized: '71551dc5480db1b4eb24ad8b8f7ab875[UI_Pause_Quadro_0]'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
