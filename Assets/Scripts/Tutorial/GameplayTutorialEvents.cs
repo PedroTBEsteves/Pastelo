@@ -10,9 +10,6 @@ public class GameplayTutorialEvents
     public event Action<DraggableClosedPastel> PastelPlacedInFryer = delegate { };
     public event Action<DraggableClosedPastel> PastelReachedCooked = delegate { };
     public event Action<DraggableClosedPastel> PastelRemovedFromFryer = delegate { };
-    public event Action<DraggableClosedPastel> PastelPlacedOnDelivery = delegate { };
-    public event Action<Deliverable> DeliveryBagPickedUp = delegate { };
-    public event Action<Deliverable> DeliveryBagDropped = delegate { };
     public event Action<Order> OrderDelivered = delegate { };
 
     public void PublishDoughOpened(Dough dough) => DoughOpened(dough);
@@ -23,8 +20,5 @@ public class GameplayTutorialEvents
     public void PublishPastelPlacedInFryer(DraggableClosedPastel pastel) => PastelPlacedInFryer(pastel);
     public void PublishPastelReachedCooked(DraggableClosedPastel pastel) => PastelReachedCooked(pastel);
     public void PublishPastelRemovedFromFryer(DraggableClosedPastel pastel) => PastelRemovedFromFryer(pastel);
-    public void PublishPastelPlacedOnDelivery(DraggableClosedPastel pastel) => PastelPlacedOnDelivery(pastel);
-    public void PublishDeliveryBagPickedUp(Deliverable deliverable) => DeliveryBagPickedUp(deliverable);
-    public void PublishDeliveryBagDropped(Deliverable deliverable) => DeliveryBagDropped(deliverable);
     public void PublishOrderDelivered(Order order) => OrderDelivered(order);
 }

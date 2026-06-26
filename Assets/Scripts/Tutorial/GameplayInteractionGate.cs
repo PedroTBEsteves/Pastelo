@@ -24,8 +24,7 @@ public class GameplayInteractionGate
             TutorialInteractionType.PlaceInFryer => _state.CurrentStep == TutorialStep.PlaceInFrying,
             TutorialInteractionType.RemoveCookedPastel => _state.CurrentStep is TutorialStep.RemoveCookedPastel
                 or TutorialStep.MoveCameraToPacking
-                or TutorialStep.PlaceOnDelivery,
-            TutorialInteractionType.PlaceOnDelivery => _state.CurrentStep == TutorialStep.PlaceOnDelivery,
+                or TutorialStep.DeliverOrder,
             TutorialInteractionType.DeliverOrder => _state.CurrentStep == TutorialStep.DeliverOrder
                 && (_state.TutorialOrder == null || Equals(_state.TutorialOrder, context)),
             TutorialInteractionType.DiscardItem => false,

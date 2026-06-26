@@ -1,3 +1,4 @@
+using System;
 using PrimeTween;
 using Reflex.Attributes;
 using UnityEngine;
@@ -112,12 +113,12 @@ public class CustomerAnimationController : MonoBehaviour
         _isDialoguePlaying = false;
     }
 
-    public void ShowDeliveryCustomer(Sprite sprite)
+    public void ShowDeliveryCustomer(Sprite sprite, Action arrivalCompleted = null)
     {
         _isDialoguePlaying = false;
         SetQueuedCustomersIndicator(0);
         SetIconVisible(false);
-        AnimateCustomerSwap(_customerSprite.sprite, sprite);
+        AnimateCustomerSwap(_customerSprite.sprite, sprite, arrivalCompleted);
     }
 
     public void HideDeliveryCustomer()
@@ -174,7 +175,7 @@ public class CustomerAnimationController : MonoBehaviour
         _iconSprite.enabled = false;
     }
 
-    private void AnimateCustomerArrival(Sprite sprite)
+    private void AnimateCustomerArrival(Sprite sprite, Action completed = null)
     {
         _customerHoverTween?.DisableTween();
         StopCustomerTweens();
@@ -187,10 +188,11 @@ public class CustomerAnimationController : MonoBehaviour
                 customerStartLocalPosition,
                 _customerIdleLocalPosition,
                 _customerMoveTweenSettings)
-            .OnComplete(this, static controller =>
+            .OnComplete(this, controller =>
             {
                 controller.StartCustomerBobbing();
                 controller._customerHoverTween?.EnableTween();
+                completed?.Invoke();
             });
     }
 
@@ -220,7 +222,7 @@ public class CustomerAnimationController : MonoBehaviour
             });
     }
 
-    private void AnimateCustomerSwap(Sprite outgoingSprite, Sprite incomingSprite)
+    private void AnimateCustomerSwap(Sprite outgoingSprite, Sprite incomingSprite, Action completed = null)
     {
         if (incomingSprite == null)
         {
@@ -230,7 +232,7 @@ public class CustomerAnimationController : MonoBehaviour
 
         if (outgoingSprite == null)
         {
-            AnimateCustomerArrival(incomingSprite);
+            AnimateCustomerArrival(incomingSprite, completed);
             return;
         }
 
@@ -252,7 +254,11 @@ public class CustomerAnimationController : MonoBehaviour
                 customerStartLocalPosition,
                 _customerIdleLocalPosition,
                 _customerMoveTweenSettings)
-            .OnComplete(this, static controller => controller.StartCustomerBobbing());
+            .OnComplete(this, controller =>
+            {
+                controller.StartCustomerBobbing();
+                completed?.Invoke();
+            });
     }
 
     private void StopCustomerTweens()

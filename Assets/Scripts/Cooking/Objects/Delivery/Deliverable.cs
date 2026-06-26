@@ -14,7 +14,7 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
     private DraggableClosedPastel _closedPastelPrefab;
 
     [SerializeField]
-    private DeliveryCustomerDisplay _customerDisplay;
+    private CustomerDisplay _customerDisplay;
 
     [SerializeField]
     private DeliveryIngredientHint _bagIngredientHint;
@@ -91,15 +91,11 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
     
     public bool TryAddPastel(DraggableClosedPastel closedPastel)
     {
-        if (!_interactionGate.CanInteract(TutorialInteractionType.PlaceOnDelivery))
-            return false;
-
         if (_closedPastelDough != null)
             return false;
 
         _closedPastelDough = closedPastel.GetClosedPastelDough();
         _addedAudioSource.Play();
-        _tutorialEvents.PublishPastelPlacedOnDelivery(closedPastel);
         _bagIngredientHint?.Bind(_closedPastelDough.Recipe);
         _bagIngredientHint?.SetVisible(false);
         UpdateSprite();
@@ -131,7 +127,6 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
         _dragStartPosition = transform.position;
         _bagIngredientHint?.SetVisible(true);
         _customerDisplay.SetHintsVisible(true);
-        _tutorialEvents.PublishDeliveryBagPickedUp(this);
     }
 
     private void OnDropped(PointerEventData eventData)
@@ -148,7 +143,6 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
             ClearPastel();
 
         transform.position = _dragStartPosition;
-        _tutorialEvents.PublishDeliveryBagDropped(this);
     }
 
     private void UpdateSprite()
@@ -160,7 +154,7 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
     {
         if (_customerDisplay == null)
         {
-            Debug.LogError($"{nameof(Deliverable)} on '{name}' is missing a {nameof(DeliveryCustomerDisplay)} reference.", this);
+            Debug.LogError($"{nameof(Deliverable)} on '{name}' is missing a {nameof(CustomerDisplay)} reference.", this);
             return;
         }
 
@@ -194,7 +188,7 @@ public class Deliverable : ValidatedMonoBehaviour, IDiscardPolicy, IDiscardHandl
 
         foreach (var raycastHit in raycastHits)
         {
-            if (raycastHit.collider.TryGetComponent<DeliveryCustomerSlot>(out var slot))
+            if (raycastHit.collider.TryGetComponent<CustomerDisplaySlot>(out var slot))
                 return slot.TryDeliver(_closedPastelDough);
         }
 

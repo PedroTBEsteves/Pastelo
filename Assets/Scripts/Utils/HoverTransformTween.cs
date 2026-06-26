@@ -1,4 +1,3 @@
-using KBCore.Refs;
 using PrimeTween;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,7 +5,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
 [DisallowMultipleComponent]
-public class HoverTransformTween : ValidatedMonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HoverTransformTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private TweenSettings _transformTweenSettings;

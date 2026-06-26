@@ -7,7 +7,6 @@ public enum TutorialInteractionType
     ClosePastel,
     PlaceInFryer,
     RemoveCookedPastel,
-    PlaceOnDelivery,
     DeliverOrder,
     DiscardItem,
     BuyIngredient,

@@ -153,5 +153,4 @@ public enum TutorialPastelDropResult
 {
     None,
     PlacedInFryer,
-    PlacedOnDelivery,
 }

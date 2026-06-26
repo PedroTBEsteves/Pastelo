@@ -1,8 +1,9 @@
 using PrimeTween;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.VFX;
 
-public class DeliveryCustomerSlot : MonoBehaviour
+public class CustomerDisplaySlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
     private BoxCollider2D _collider;
@@ -25,16 +26,25 @@ public class DeliveryCustomerSlot : MonoBehaviour
     [SerializeField]
     private VisualEffect _happyVisualEffect;
 
+    [SerializeField]
+    private GameObject _waitingServiceIcon;
+
     private bool _isResolving;
     private GameplayTutorialEvents _tutorialEvents;
     private GameplayInteractionGate _interactionGate;
     private TutorialTargetRegistry _tutorialTargetRegistry;
     private ICustomerDeliveryDialogue _customerDeliveryDialogue;
+    private CustomerDisplay _customerDisplay;
+    private CustomerWaitStatus _waitStatus;
+    private bool _canReceiveDelivery;
+    private int _waitingServiceIconVersion;
 
     public Order Order { get; private set; }
-    public bool IsAvailable => Order == null;
+    public bool IsAvailable => Order == null && _waitStatus == null;
+    public bool HasCustomer => Order != null || _waitStatus != null;
 
     public void Configure(
+        CustomerDisplay customerDisplay,
         GameplayTutorialEvents tutorialEvents,
         GameplayInteractionGate interactionGate,
         TutorialTargetRegistry tutorialTargetRegistry,
@@ -42,6 +52,7 @@ public class DeliveryCustomerSlot : MonoBehaviour
         ICustomerDeliveryDialogue customerDeliveryDialogue,
         int sortingOrder)
     {
+        _customerDisplay = customerDisplay;
         _tutorialEvents = tutorialEvents;
         _interactionGate = interactionGate;
         _tutorialTargetRegistry = tutorialTargetRegistry;
@@ -52,6 +63,7 @@ public class DeliveryCustomerSlot : MonoBehaviour
 
         _collider.enabled = false;
         _hint.SetVisible(false);
+        SetWaitingServiceIconVisible(false);
     }
 
     private void OnDestroy()
@@ -60,32 +72,73 @@ public class DeliveryCustomerSlot : MonoBehaviour
             _tutorialTargetRegistry?.Unregister(_tutorialTarget);
     }
 
-    public void Show(Order order, TweenSettings moveTweenSettings)
+    public void ShowWaitingCustomer(CustomerWaitStatus waitStatus, TweenSettings moveTweenSettings)
+    {
+        _waitStatus = waitStatus;
+        Order = null;
+        _isResolving = false;
+        _canReceiveDelivery = false;
+        SetWaitingServiceIconVisible(false);
+        var iconVersion = ++_waitingServiceIconVersion;
+        _customerAnimation.ShowDeliveryCustomer(
+            waitStatus.Customer.Sprite,
+            () => ShowWaitingServiceIconIfCurrent(iconVersion));
+        _collider.enabled = true;
+        _hint.Bind(null);
+        _hint.SetVisible(false);
+        _tutorialTarget.Configure(TutorialTargetId.DeliveryCustomer);
+        _tutorialTargetRegistry.Register(_tutorialTarget);
+    }
+
+    public void StartOrder(Order order)
     {
         Order = order;
-        _isResolving = false;
-        _customerAnimation.ShowDeliveryCustomer(order.Customer.Sprite);
-        _collider.enabled = true;
+        _waitStatus = null;
+        _canReceiveDelivery = false;
+        _waitingServiceIconVersion++;
+        SetWaitingServiceIconVisible(false);
+        _collider.enabled = false;
         _hint.Bind(order.Recipe);
+        _hint.SetVisible(false);
         _tutorialTarget.Configure(TutorialTargetId.DeliveryCustomer, order);
-        _tutorialTargetRegistry.Register(_tutorialTarget);
+    }
+
+    public void EnableDelivery()
+    {
+        if (Order == null)
+            return;
+
+        _canReceiveDelivery = true;
+        _collider.enabled = true;
+    }
+
+    public void DisableDelivery()
+    {
+        _canReceiveDelivery = false;
+        _collider.enabled = false;
+        SetHintsVisible(false);
     }
 
     public void Hide(TweenSettings moveTweenSettings)
     {
-        if (Order != null)
+        if (HasCustomer)
             _tutorialTargetRegistry.Unregister(_tutorialTarget);
 
         Order = null;
+        _waitStatus = null;
         _isResolving = false;
+        _canReceiveDelivery = false;
+        _waitingServiceIconVersion++;
         _collider.enabled = false;
         _hint.SetVisible(false);
+        SetWaitingServiceIconVisible(false);
         _customerAnimation.HideDeliveryCustomer();
     }
 
     public bool CanReceiveDelivery()
     {
         return Order != null
+            && _canReceiveDelivery
             && !_isResolving
             && _interactionGate.CanInteract(TutorialInteractionType.DeliverOrder, Order);
     }
@@ -112,6 +165,20 @@ public class DeliveryCustomerSlot : MonoBehaviour
         return true;
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (_waitStatus == null || _customerDisplay == null)
+            return;
+
+        _customerDisplay.TakeOrder(this, _waitStatus);
+    }
+
+    public void HideWaitingServiceIcon()
+    {
+        _waitingServiceIconVersion++;
+        SetWaitingServiceIconVisible(false);
+    }
+
     public void SetHintsVisible(bool visible)
     {
         if (Order != null)
@@ -136,28 +203,42 @@ public class DeliveryCustomerSlot : MonoBehaviour
         if (_collider == null)
         {
             hasReferences = false;
-            Debug.LogError($"{nameof(DeliveryCustomerSlot)} on '{name}' is missing a scene-prepared {nameof(BoxCollider2D)}.", this);
+            Debug.LogError($"{nameof(CustomerDisplaySlot)} on '{name}' is missing a scene-prepared {nameof(BoxCollider2D)}.", this);
         }
 
         if (_hint == null)
         {
             hasReferences = false;
-            Debug.LogError($"{nameof(DeliveryCustomerSlot)} on '{name}' is missing a scene-prepared {nameof(DeliveryIngredientHint)} child.", this);
+            Debug.LogError($"{nameof(CustomerDisplaySlot)} on '{name}' is missing a scene-prepared {nameof(DeliveryIngredientHint)} child.", this);
         }
 
         if (_tutorialTarget == null)
         {
             hasReferences = false;
-            Debug.LogError($"{nameof(DeliveryCustomerSlot)} on '{name}' is missing a scene-prepared {nameof(TutorialTarget)}.", this);
+            Debug.LogError($"{nameof(CustomerDisplaySlot)} on '{name}' is missing a scene-prepared {nameof(TutorialTarget)}.", this);
         }
 
         if (_customerAnimation == null)
         {
             hasReferences = false;
-            Debug.LogError($"{nameof(DeliveryCustomerSlot)} on '{name}' is missing a scene-prepared {nameof(CustomerAnimationController)}.", this);
+            Debug.LogError($"{nameof(CustomerDisplaySlot)} on '{name}' is missing a scene-prepared {nameof(CustomerAnimationController)}.", this);
         }
 
         return hasReferences;
+    }
+
+    private void ShowWaitingServiceIconIfCurrent(int iconVersion)
+    {
+        if (iconVersion != _waitingServiceIconVersion || _waitStatus == null)
+            return;
+
+        SetWaitingServiceIconVisible(true);
+    }
+
+    private void SetWaitingServiceIconVisible(bool visible)
+    {
+        if (_waitingServiceIcon != null)
+            _waitingServiceIcon.SetActive(visible);
     }
 
     private Vector3 GetDialogueWorldPosition()

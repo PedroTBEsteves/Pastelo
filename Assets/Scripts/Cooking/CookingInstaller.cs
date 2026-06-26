@@ -9,6 +9,7 @@ public class CookingInstaller : MonoBehaviour, IInstaller
             .AddSingleton(Resources.Load("Settings/Cooking/RecipeGeneratorSettings"))
             .AddScoped(typeof(RecipeGenerator))
             .AddSingleton(Resources.Load("Settings/Cooking/PastelCookingSettings"))
+            .AddScoped(typeof(CustomerDeliveryHintService))
             .AddScoped(typeof(DeliverySequence));
     }
 }

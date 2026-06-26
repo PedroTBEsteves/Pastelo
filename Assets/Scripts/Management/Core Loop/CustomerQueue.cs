@@ -84,6 +84,38 @@ public class CustomerQueue : ITickable
         return hasCustomer;
     }
 
+    public bool TryTake(CustomerWaitStatus targetWaitStatus, out Customer customer)
+    {
+        customer = null;
+
+        if (targetWaitStatus == null || _queue.Count == 0)
+            return false;
+
+        var removed = false;
+        var remainingEntries = new Queue<CustomerWaitStatus>(_queue.Count);
+        while (_queue.Count > 0)
+        {
+            var waitStatus = _queue.Dequeue();
+            if (!removed && waitStatus == targetWaitStatus)
+            {
+                removed = true;
+                customer = waitStatus.Customer;
+                QueueEntryRemoved(waitStatus, CustomerQueueEntryRemovedReason.TakenForService);
+                continue;
+            }
+
+            remainingEntries.Enqueue(waitStatus);
+        }
+
+        while (remainingEntries.Count > 0)
+            _queue.Enqueue(remainingEntries.Dequeue());
+
+        if (removed)
+            CustomersCountChanged(_queue.Count);
+
+        return removed;
+    }
+
     public bool TryPeek(out Customer customer)
     {
         var hasNext =  _queue.TryPeek(out var status);

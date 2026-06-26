@@ -12,7 +12,6 @@ public enum TutorialStep
     WaitUntilCooked,
     RemoveCookedPastel,
     MoveCameraToPacking,
-    PlaceOnDelivery,
     DeliverOrder,
     Finished,
 }

@@ -7,12 +7,6 @@ using UnityEngine.Localization;
 public class CustomerServiceDialogue : MonoBehaviour, ICustomerServiceDialogue
 {
     [SerializeField]
-    private CustomerAnimationController _customerAnimation;
-
-    [SerializeField]
-    private Transform _dialoguePosition;
-
-    [SerializeField]
     private LocalizedStringTable _orderDialogueTable;
 
     [SerializeField]
@@ -27,46 +21,19 @@ public class CustomerServiceDialogue : MonoBehaviour, ICustomerServiceDialogue
     [SerializeField]
     private LocalizedStringTable _dialogueFormattingTable;
 
-    [SerializeField]
-    private float _delayAfterTextIsDone = 1f;
-
     [Inject]
-    private readonly TutorialTargetRegistry _tutorialTargetRegistry;
-
-    [Inject]
-    private readonly DialoguePresentationService _dialoguePresentation;
+    private readonly ICustomerPopUpDialogue _customerPopUpDialogue;
 
     private Sequence _dialogueSequence;
-    private TutorialTarget _tutorialTarget;
-
-    public bool IsPlaying => _dialogueSequence.isAlive || (_customerAnimation != null && _customerAnimation.IsDialoguePlaying);
-
-    private void Awake()
-    {
-        _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
-        _tutorialTarget.Configure(TutorialTargetId.OrderBell);
-        _tutorialTargetRegistry.Register(_tutorialTarget);
-    }
-
-    private void OnDestroy()
-    {
-        if (_tutorialTarget != null)
-            _tutorialTargetRegistry.Unregister(_tutorialTarget);
-    }
+    public bool IsPlaying => _dialogueSequence.isAlive;
 
     public Sequence OrderDialogue(Order order)
     {
-        _customerAnimation.ShowDialogueCustomer(order.Customer.Sprite);
-
         var text = GetOrderDialogueText(order);
-        _dialogueSequence = _dialoguePresentation
-            .Show(text, GetDialogueWorldPosition())
-            .Chain(Tween.Delay(_delayAfterTextIsDone, _customerAnimation.ShowNextCustomerAfterDialogue));
+        _dialogueSequence = _customerPopUpDialogue.ShowDialogue(order.Customer, text);
 
         return _dialogueSequence;
     }
-
-    private Vector3 GetDialogueWorldPosition() => _dialoguePosition == null ? transform.position : _dialoguePosition.position;
 
     private string GetOrderDialogueText(Order order)
     {

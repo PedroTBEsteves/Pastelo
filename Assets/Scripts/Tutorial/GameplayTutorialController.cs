@@ -39,9 +39,6 @@ public class GameplayTutorialController
         _tutorialEvents.PastelPlacedInFryer += OnPastelPlacedInFryer;
         _tutorialEvents.PastelReachedCooked += OnPastelReachedCooked;
         _tutorialEvents.PastelRemovedFromFryer += OnPastelRemovedFromFryer;
-        _tutorialEvents.PastelPlacedOnDelivery += OnPastelPlacedOnDelivery;
-        _tutorialEvents.DeliveryBagPickedUp += OnDeliveryBagPickedUp;
-        _tutorialEvents.DeliveryBagDropped += OnDeliveryBagDropped;
         _tutorialEvents.OrderDelivered += OnOrderDelivered;
 
         if (!GameplayTutorialOptions.ConsumeShouldRunTutorial())
@@ -55,7 +52,7 @@ public class GameplayTutorialController
         if (!_state.IsActive || _state.TutorialOrder != null || _state.CurrentStep != TutorialStep.WaitForCustomer)
             return;
 
-        _state.SetStep(TutorialStep.TakeOrder, TutorialTargetId.OrderBell);
+        _state.SetStep(TutorialStep.TakeOrder, TutorialTargetId.DeliveryCustomer);
     }
 
     private void OnOrderStarted(Order order)
@@ -64,7 +61,10 @@ public class GameplayTutorialController
             return;
 
         _state.BeginOrder(order);
-        _state.SetStep(TutorialStep.MoveCameraToPrepping, TutorialTargetId.CameraMoveRight, expectedCameraSection: CameraSection.Prepping);
+        _state.SetStep(
+            TutorialStep.MoveCameraToPrepping,
+            GetCameraMoveTargetId(CameraSection.Prepping),
+            expectedCameraSection: CameraSection.Prepping);
     }
 
     private void OnCameraSectionChanged(CameraSection section)
@@ -88,13 +88,7 @@ public class GameplayTutorialController
                 _state.SetStep(TutorialStep.PlaceInFrying, TutorialTargetId.FryingArea);
                 break;
             case TutorialStep.MoveCameraToPacking:
-                if (_state.ConsumePendingTutorialPastelDropResult() == TutorialPastelDropResult.PlacedOnDelivery)
-                {
-                    _state.SetStep(TutorialStep.PlaceOnDelivery, TutorialTargetId.DeliveryArea);
-                    break;
-                }
-
-                _state.SetStep(TutorialStep.PlaceOnDelivery, TutorialTargetId.DeliveryArea);
+                _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
                 break;
         }
     }
@@ -143,14 +137,20 @@ public class GameplayTutorialController
         if (_state.CurrentStep == TutorialStep.ClosePastel && _state.TutorialPastel == pastel)
         {
             _state.TryBeginDraggingTutorialPastel(pastel);
-            _state.SetStep(TutorialStep.MoveCameraToFrying, TutorialTargetId.CameraMoveRight, expectedCameraSection: CameraSection.Frying);
+            _state.SetStep(
+                TutorialStep.MoveCameraToFrying,
+                GetCameraMoveTargetId(CameraSection.Frying),
+                expectedCameraSection: CameraSection.Frying);
             return;
         }
 
         if (_state.CurrentStep == TutorialStep.RemoveCookedPastel && _state.TutorialPastel == pastel)
         {
             _state.TryBeginDraggingTutorialPastel(pastel);
-            _state.SetStep(TutorialStep.MoveCameraToPacking, TutorialTargetId.CameraMoveRight, expectedCameraSection: CameraSection.Packing);
+            _state.SetStep(
+                TutorialStep.MoveCameraToPacking,
+                GetCameraMoveTargetId(CameraSection.Balcony),
+                expectedCameraSection: CameraSection.Balcony);
             return;
         }
 
@@ -177,13 +177,13 @@ public class GameplayTutorialController
 
         if (expectedSection.HasValue && _cameraController.CurrentSection == expectedSection.Value)
         {
-            var targetId = currentStep == TutorialStep.MoveCameraToFrying
-                ? TutorialTargetId.FryingArea
-                : TutorialTargetId.CookedPastel;
-            var nextStep = currentStep == TutorialStep.MoveCameraToFrying
-                ? TutorialStep.PlaceInFrying
-                : TutorialStep.RemoveCookedPastel;
-            _state.SetStep(nextStep, targetId);
+            if (currentStep == TutorialStep.MoveCameraToPacking)
+            {
+                _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
+                return;
+            }
+
+            _state.SetStep(TutorialStep.PlaceInFrying, TutorialTargetId.FryingArea);
             return;
         }
 
@@ -225,43 +225,6 @@ public class GameplayTutorialController
         // Advancing to packing is now driven by the drag state, not just by removing from the fryer.
     }
 
-    private void OnPastelPlacedOnDelivery(DraggableClosedPastel _)
-    {
-        if (!_state.IsActive)
-            return;
-
-        if (_state.CurrentStep == TutorialStep.MoveCameraToPacking)
-        {
-            if (_cameraController.CurrentSection == CameraSection.Packing)
-            {
-                _state.SetStep(TutorialStep.PlaceOnDelivery, TutorialTargetId.DeliveryArea);
-                return;
-            }
-
-            _state.TrySetPendingTutorialPastelDropResult(_state.TutorialPastel, TutorialPastelDropResult.PlacedOnDelivery);
-            return;
-        }
-
-        if (_state.CurrentStep != TutorialStep.PlaceOnDelivery)
-            return;
-    }
-
-    private void OnDeliveryBagPickedUp(Deliverable _)
-    {
-        if (!_state.IsActive || _state.CurrentStep != TutorialStep.PlaceOnDelivery)
-            return;
-
-        _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
-    }
-
-    private void OnDeliveryBagDropped(Deliverable _)
-    {
-        if (!_state.IsActive || _state.CurrentStep != TutorialStep.DeliverOrder)
-            return;
-
-        _state.SetStep(TutorialStep.PlaceOnDelivery, TutorialTargetId.DeliveryArea);
-    }
-
     private void OnOrderDelivered(Order order)
     {
         if (!_state.IsActive || order != _state.TutorialOrder || _state.CurrentStep != TutorialStep.DeliverOrder)
@@ -283,5 +246,12 @@ public class GameplayTutorialController
             return;
 
         _shownTarget.Show();
+    }
+
+    private TutorialTargetId GetCameraMoveTargetId(CameraSection section)
+    {
+        return _cameraController.GetDirectionToSection(section) > 0
+            ? TutorialTargetId.CameraMoveRight
+            : TutorialTargetId.CameraMoveLeft;
     }
 }

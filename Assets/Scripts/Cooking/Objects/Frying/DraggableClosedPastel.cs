@@ -42,6 +42,9 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
     [Inject]
     private readonly GameplayTutorialState _tutorialState;
+
+    [Inject]
+    private readonly CustomerDeliveryHintService _customerDeliveryHintService;
     
     private ClosedPastelDough _closedPastelDough;
 
@@ -153,6 +156,7 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     private void OnHeld(PointerEventData eventData)
     {
         _tutorialEvents.PublishPastelPickedUp(this);
+        _customerDeliveryHintService.SetHintsVisible(true);
 
         if (_frying && _interactionGate.CanInteract(TutorialInteractionType.RemoveCookedPastel, this))
             _tutorialEvents.PublishPastelRemovedFromFryer(this);
@@ -164,6 +168,7 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     private void OnDropped(PointerEventData eventData)
     {
         _tutorialEvents.PublishPastelDropped(this);
+        _customerDeliveryHintService.SetHintsVisible(false);
 
         var mousePosition = _cameraController.ScreenToWorldPoint(eventData.position);
         var raycastHit = Physics2D.Raycast(
@@ -182,7 +187,7 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         }
             
 
-        if (CheckDelivery(raycastHit))
+        if (TryDeliver(eventData))
         {
             Destroy(gameObject);
             return;
@@ -200,15 +205,39 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         return true;
     }
 
-    private bool CheckDelivery(RaycastHit2D raycastHit2D)
+    private bool TryDeliver(PointerEventData eventData)
     {
-        if (!raycastHit2D.collider.TryGetComponent<Deliverable>(out var deliverable))
+        var mousePosition = _cameraController.ScreenToWorldPoint(eventData.position);
+        var raycastHits = Physics2D.RaycastAll(
+            mousePosition,
+            Vector2.zero,
+            float.MaxValue,
+            ~LayerMask.GetMask("Draggable"));
+
+        foreach (var raycastHit in raycastHits)
+        {
+            if (!raycastHit.collider.TryGetComponent<CustomerDisplaySlot>(out var slot))
+                continue;
+
+            if (slot.TryDeliver(_closedPastelDough))
+                return true;
+
+            MoveToFryingDiscardPosition();
             return false;
-        
-        if (!deliverable.TryAddPastel(this))
-            transform.position = _fryingArea.DiscardPosition;
-        
-        return true;
+        }
+
+        return false;
+    }
+
+    private void MoveToFryingDiscardPosition()
+    {
+        if (_fryingArea == null)
+        {
+            Debug.LogError($"{nameof(DraggableClosedPastel)} on '{name}' cannot move to discard position because it was not assigned to a {nameof(FryingArea)}.", this);
+            return;
+        }
+
+        transform.position = _fryingArea.DiscardPosition;
     }
 
     private bool CanDragPastel()
