@@ -3,13 +3,22 @@ using System.Linq;
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.VFX;
 
 public class FryingArea : ValidatedMonoBehaviour
 {
-    [SerializeField, Self]
-    private BoxCollider2D _collider;
+    [Serializable]
+    private struct FryingSlot
+    {
+        [SerializeField]
+        private Transform _pastelTransform;
+
+        [SerializeField]
+        private int _sortingOrder;
+
+        public Transform PastelTransform => _pastelTransform;
+        public int SortingOrder => _sortingOrder;
+    }
     
     [SerializeField, Child(Flag.ExcludeSelf)]
     private Animator _animator;
@@ -24,7 +33,7 @@ public class FryingArea : ValidatedMonoBehaviour
     private AudioSource _stoveSound;
     
     [SerializeField]
-    private Transform _heightTransform;
+    private FryingSlot[] _slots;
     
     [SerializeField]
     private VisualEffect[] _visualEffects;
@@ -38,7 +47,7 @@ public class FryingArea : ValidatedMonoBehaviour
     [Inject]
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
     
-    private readonly DraggableClosedPastel[] _fryingPastels = new DraggableClosedPastel[4];
+    private DraggableClosedPastel[] _fryingPastels;
 
     private TutorialTarget _tutorialTarget;
     
@@ -46,6 +55,9 @@ public class FryingArea : ValidatedMonoBehaviour
 
     private void Awake()
     {
+        _slots ??= Array.Empty<FryingSlot>();
+        _fryingPastels = new DraggableClosedPastel[_slots.Length];
+
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(TutorialTargetId.FryingArea);
         _tutorialTargetRegistry.Register(_tutorialTarget);
@@ -61,15 +73,20 @@ public class FryingArea : ValidatedMonoBehaviour
         if (!_interactionGate.CanInteract(TutorialInteractionType.PlaceInFryer))
             return false;
 
-        if (_fryingPastels.All(closed => closed != null))
+        var index = GetNearestSlotIndex(position);
+        if (index == -1)
             return false;
 
         if (_fryingPastels.All(closed => closed == null))
             StartFrying();
         
-        var index = GetNearestSlotIndex(position);
-        var newPosition = GetPositionForSlot(index);
-        draggableClosedPastel.transform.position = newPosition;
+        var slot = _slots[index];
+        var slotTransform = slot.PastelTransform;
+        draggableClosedPastel.transform.SetParent(slotTransform, false);
+        draggableClosedPastel.transform.localPosition = Vector3.zero;
+        draggableClosedPastel.transform.localRotation = Quaternion.identity;
+        draggableClosedPastel.SetSortingOrder(slot.SortingOrder);
+
         _fryingPastels[index] = draggableClosedPastel;
         _tutorialEvents.PublishPastelPlacedInFryer(draggableClosedPastel);
         return true;
@@ -82,6 +99,7 @@ public class FryingArea : ValidatedMonoBehaviour
         if (index != -1)
         {
             _fryingPastels[index] = null;
+            draggableClosedPastel.ReleaseFromFryingSlot();
             
             if (_fryingPastels.All(pastel => pastel == null))
                 StopFrying();
@@ -109,15 +127,26 @@ public class FryingArea : ValidatedMonoBehaviour
 
     private int GetNearestSlotIndex(Vector3 position)
     {
-        return Array.IndexOf(_fryingPastels, null);
-    }
+        var nearestIndex = -1;
+        var nearestDistance = float.MaxValue;
 
-    private Vector3 GetPositionForSlot(int index)
-    {
-        var size = _collider.size.x * 0.7f;
+        for (var index = 0; index < _slots.Length; index++)
+        {
+            if (_fryingPastels[index] != null)
+                continue;
+            
+            var slotTransform = _slots[index].PastelTransform;
 
-        var offset = new Vector3(size/4 * (index - 2) + size/8, _heightTransform.position.y, -1);
-        return transform.position + offset;
+            
+            var distance = Mathf.Abs(slotTransform.position.y - position.y);
+            if (distance >= nearestDistance)
+                continue;
+            
+            nearestIndex = index;
+            nearestDistance = distance;
+        }
+        
+        return nearestIndex;
     }
 
     private void Update()

@@ -1,11 +1,10 @@
-using KBCore.Refs;
 using PrimeTween;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OrderNote : ValidatedMonoBehaviour
+public class OrderNote : MonoBehaviour
 {
     [Inject]
     private readonly OrderController _orderController;

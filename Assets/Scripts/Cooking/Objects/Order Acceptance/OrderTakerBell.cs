@@ -1,10 +1,8 @@
-using KBCore.Refs;
-using PrimeTween;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class OrderTakerBell : ValidatedMonoBehaviour, IPointerDownHandler
+public class OrderTakerBell : MonoBehaviour, IPointerDownHandler
 {
     [Inject]
     private readonly CustomerQueue _customerQueue;

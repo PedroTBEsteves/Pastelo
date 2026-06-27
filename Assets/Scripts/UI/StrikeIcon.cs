@@ -1,7 +1,6 @@
-using KBCore.Refs;
 using UnityEngine;
 
-public class StrikeIcon : ValidatedMonoBehaviour
+public class StrikeIcon : MonoBehaviour
 {
     [SerializeField]
     private GameObject _target;

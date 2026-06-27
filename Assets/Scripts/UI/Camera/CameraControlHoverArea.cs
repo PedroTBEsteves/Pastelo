@@ -1,11 +1,10 @@
 using System;
-using KBCore.Refs;
 using PrimeTween;
 using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CameraControlHoverArea : ValidatedMonoBehaviour, IPointerEnterHandler, IPointerMoveHandler, IPointerExitHandler
+public class CameraControlHoverArea : MonoBehaviour, IPointerEnterHandler, IPointerMoveHandler, IPointerExitHandler
 {
     [SerializeField]
     private Direction _direction;

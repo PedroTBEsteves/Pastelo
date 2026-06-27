@@ -297,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bff05f1d2d97d4409d168375c457744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forceDraggableLayer: 1
 --- !u!114 &3628853816251220452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +707,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 12
   m_TargetDisplay: 0
 --- !u!114 &5137932469037149481
 MonoBehaviour:

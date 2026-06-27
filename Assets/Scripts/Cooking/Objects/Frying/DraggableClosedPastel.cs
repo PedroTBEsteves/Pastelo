@@ -54,11 +54,13 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     private Slider _activeSlider;
     private TutorialTarget _tutorialTarget;
     private TooltipTarget _tooltipTarget;
+    private Transform _defaultParent;
     private bool _hasInitializedFriedLevelState;
     private bool _hasPublishedBurntEvent;
 
     private void Awake()
     {
+        _defaultParent = transform.parent;
         _tutorialTarget = GetComponent<TutorialTarget>() ?? gameObject.AddComponent<TutorialTarget>();
         _tutorialTarget.Configure(TutorialTargetId.CookedPastel, this);
         _tutorialTargetRegistry.Register(_tutorialTarget);
@@ -100,6 +102,8 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
     public ClosedPastelDough GetClosedPastelDough() => _closedPastelDough;
     public Pastel GetPastel() => _closedPastelDough.Finish();
+    public void SetSortingOrder(int sortingOrder) => _spriteRenderer.sortingOrder = sortingOrder;
+    public void ReleaseFromFryingSlot() => transform.SetParent(_defaultParent, true);
 
     private void OnFriedLevelChanged(FriedLevel level)
     {
@@ -150,7 +154,9 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         _frying = frying;
         _rawSlider.gameObject.SetActive(_frying);
         _cookedSlider.gameObject.SetActive(_frying);
-        _spriteRenderer.sortingOrder = frying ? 2 : 9;
+        
+        if (!frying)
+            _spriteRenderer.sortingOrder = 15;
     }
     
     private void OnHeld(PointerEventData eventData)
@@ -163,6 +169,7 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
 
         SetFrying(false);
         _fryingArea?.Remove(this);
+        transform.localRotation = Quaternion.identity;
     }
 
     private void OnDropped(PointerEventData eventData)
@@ -199,10 +206,11 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         if (!raycastHit2D.collider.TryGetComponent(out _fryingArea))
             return false;
 
-        if (!_fryingArea.TryAdd(this, mousePosition))
-            transform.position = _fryingArea.DiscardPosition;
-        
-        return true;
+        if (_fryingArea.TryAdd(this, mousePosition))
+            return true;
+            
+        transform.position = _fryingArea.DiscardPosition;
+        return false;
     }
 
     private bool TryDeliver(PointerEventData eventData)

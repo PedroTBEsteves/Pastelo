@@ -1,5 +1,4 @@
 using System;
-using KBCore.Refs;
 using Reflex.Attributes;
 using TMPro;
 using UnityEngine;
@@ -8,7 +7,7 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
 
-public class IngredientUnlockPurchasePrompt : ValidatedMonoBehaviour
+public class IngredientUnlockPurchasePrompt : MonoBehaviour
 {
     [SerializeField]
     private GameObject _panel;
