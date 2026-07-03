@@ -7,7 +7,6 @@ public enum TutorialStep
     AddDough,
     AddFilling,
     ClosePastel,
-    MoveCameraToFrying,
     PlaceInFrying,
     WaitUntilCooked,
     RemoveCookedPastel,

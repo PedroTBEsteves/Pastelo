@@ -127,15 +127,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MoveFrying"",
-                    ""type"": ""Button"",
-                    ""id"": ""35189fbf-294a-4757-9dc8-cab497d276d7"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -202,17 +193,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MovePrepping"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4854da12-71e9-476d-8a49-9e650503f6e3"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveFrying"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -288,7 +268,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Gameplay_MoveNext = m_Gameplay.FindAction("MoveNext", throwIfNotFound: true);
         m_Gameplay_MoveBalcony = m_Gameplay.FindAction("MoveBalcony", throwIfNotFound: true);
         m_Gameplay_MovePrepping = m_Gameplay.FindAction("MovePrepping", throwIfNotFound: true);
-        m_Gameplay_MoveFrying = m_Gameplay.FindAction("MoveFrying", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -373,7 +352,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_MoveNext;
     private readonly InputAction m_Gameplay_MoveBalcony;
     private readonly InputAction m_Gameplay_MovePrepping;
-    private readonly InputAction m_Gameplay_MoveFrying;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -401,10 +379,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/MovePrepping".
         /// </summary>
         public InputAction @MovePrepping => m_Wrapper.m_Gameplay_MovePrepping;
-        /// <summary>
-        /// Provides access to the underlying input action "Gameplay/MoveFrying".
-        /// </summary>
-        public InputAction @MoveFrying => m_Wrapper.m_Gameplay_MoveFrying;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -443,9 +417,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MovePrepping.started += instance.OnMovePrepping;
             @MovePrepping.performed += instance.OnMovePrepping;
             @MovePrepping.canceled += instance.OnMovePrepping;
-            @MoveFrying.started += instance.OnMoveFrying;
-            @MoveFrying.performed += instance.OnMoveFrying;
-            @MoveFrying.canceled += instance.OnMoveFrying;
         }
 
         /// <summary>
@@ -469,9 +440,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MovePrepping.started -= instance.OnMovePrepping;
             @MovePrepping.performed -= instance.OnMovePrepping;
             @MovePrepping.canceled -= instance.OnMovePrepping;
-            @MoveFrying.started -= instance.OnMoveFrying;
-            @MoveFrying.performed -= instance.OnMoveFrying;
-            @MoveFrying.canceled -= instance.OnMoveFrying;
         }
 
         /// <summary>
@@ -605,12 +573,5 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMovePrepping(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "MoveFrying" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMoveFrying(InputAction.CallbackContext context);
     }
 }

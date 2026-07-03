@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: _draggablePrefab
       value: 
       objectReference: {fileID: 5769682229061544907, guid: b19dd8fb4314df949a7c52ebef199f49, type: 3}
+    - target: {fileID: 5855518017253450324, guid: 593c8ccca2b5d8445a7c57ab38b0bd5a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6556916794420987154, guid: 593c8ccca2b5d8445a7c57ab38b0bd5a, type: 3}
       propertyPath: m_Name
       value: Frango Sink

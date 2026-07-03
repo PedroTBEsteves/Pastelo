@@ -27,7 +27,7 @@ public class CustomerDisplaySlot : MonoBehaviour, IPointerClickHandler
     private VisualEffect _happyVisualEffect;
 
     [SerializeField]
-    private GameObject _waitingServiceIcon;
+    private SpriteRenderer _waitingServiceIcon;
 
     private bool _isResolving;
     private GameplayTutorialEvents _tutorialEvents;
@@ -238,7 +238,7 @@ public class CustomerDisplaySlot : MonoBehaviour, IPointerClickHandler
     private void SetWaitingServiceIconVisible(bool visible)
     {
         if (_waitingServiceIcon != null)
-            _waitingServiceIcon.SetActive(visible);
+            _waitingServiceIcon.enabled = visible;
     }
 
     private Vector3 GetDialogueWorldPosition()

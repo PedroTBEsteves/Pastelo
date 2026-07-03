@@ -77,16 +77,6 @@ public class GameplayTutorialController
             case TutorialStep.MoveCameraToPrepping:
                 _state.SetStep(TutorialStep.AddDough, TutorialTargetId.DoughSource, _state.ExpectedDough);
                 break;
-            case TutorialStep.MoveCameraToFrying:
-                if (_state.ConsumePendingTutorialPastelDropResult() == TutorialPastelDropResult.PlacedInFryer)
-                {
-                    _state.ClearTutorialPastelDrag();
-                    _state.SetStep(TutorialStep.WaitUntilCooked);
-                    break;
-                }
-
-                _state.SetStep(TutorialStep.PlaceInFrying, TutorialTargetId.FryingArea);
-                break;
             case TutorialStep.MoveCameraToDelivery:
                 _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
                 break;
@@ -137,24 +127,18 @@ public class GameplayTutorialController
         if (_state.CurrentStep == TutorialStep.ClosePastel && _state.TutorialPastel == pastel)
         {
             _state.TryBeginDraggingTutorialPastel(pastel);
-            _state.SetStep(
-                TutorialStep.MoveCameraToFrying,
-                GetCameraMoveTargetId(CameraSection.Frying),
-                expectedCameraSection: CameraSection.Frying);
+            _state.SetStep(TutorialStep.PlaceInFrying, TutorialTargetId.FryingArea);
             return;
         }
 
         if (_state.CurrentStep == TutorialStep.RemoveCookedPastel && _state.TutorialPastel == pastel)
         {
             _state.TryBeginDraggingTutorialPastel(pastel);
-            _state.SetStep(
-                TutorialStep.MoveCameraToDelivery,
-                GetCameraMoveTargetId(CameraSection.Balcony),
-                expectedCameraSection: CameraSection.Balcony);
+            SetMoveCameraToDeliveryStep();
             return;
         }
 
-        if (_state.CurrentStep is not (TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToDelivery))
+        if (_state.CurrentStep != TutorialStep.MoveCameraToDelivery)
             return;
 
         _state.TryBeginDraggingTutorialPastel(pastel);
@@ -162,47 +146,27 @@ public class GameplayTutorialController
 
     private void OnPastelDropped(DraggableClosedPastel pastel)
     {
-        if (!_state.IsActive || _state.CurrentStep is not (TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToDelivery))
+        if (!_state.IsActive || _state.CurrentStep != TutorialStep.MoveCameraToDelivery)
             return;
 
-        var currentStep = _state.CurrentStep;
         var expectedSection = _state.ExpectedCameraSection;
 
         if (!_state.TryEndDraggingTutorialPastel(pastel))
             return;
 
-        var pendingResult = _state.PendingTutorialPastelDropResult;
-        if (pendingResult != TutorialPastelDropResult.None)
-            return;
-
         if (expectedSection.HasValue && _cameraController.CurrentSection == expectedSection.Value)
         {
-            if (currentStep == TutorialStep.MoveCameraToDelivery)
-            {
-                _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
-                return;
-            }
-
-            _state.SetStep(TutorialStep.PlaceInFrying, TutorialTargetId.FryingArea);
+            _state.SetStep(TutorialStep.DeliverOrder, TutorialTargetId.DeliveryCustomer, _state.TutorialOrder);
             return;
         }
 
-        var returnStep = currentStep == TutorialStep.MoveCameraToFrying
-            ? TutorialStep.ClosePastel
-            : TutorialStep.RemoveCookedPastel;
-        _state.SetStep(returnStep, TutorialTargetId.CookedPastel, pastel);
+        _state.SetStep(TutorialStep.RemoveCookedPastel, TutorialTargetId.CookedPastel, pastel);
     }
 
     private void OnPastelPlacedInFryer(DraggableClosedPastel _)
     {
         if (!_state.IsActive)
             return;
-
-        if (_state.CurrentStep == TutorialStep.MoveCameraToFrying)
-        {
-            _state.TrySetPendingTutorialPastelDropResult(_state.TutorialPastel, TutorialPastelDropResult.PlacedInFryer);
-            return;
-        }
 
         if (_state.CurrentStep != TutorialStep.PlaceInFrying)
             return;
@@ -220,9 +184,17 @@ public class GameplayTutorialController
         _state.SetStep(TutorialStep.RemoveCookedPastel, TutorialTargetId.CookedPastel, pastel);
     }
 
-    private void OnPastelRemovedFromFryer(DraggableClosedPastel _)
+    private void OnPastelRemovedFromFryer(DraggableClosedPastel pastel)
     {
-        // Advancing to delivery is now driven by the drag state, not just by removing from the fryer.
+        if (!_state.IsActive
+            || _state.CurrentStep != TutorialStep.RemoveCookedPastel
+            || _state.TutorialPastel != pastel)
+        {
+            return;
+        }
+
+        _state.TryBeginDraggingTutorialPastel(pastel);
+        SetMoveCameraToDeliveryStep();
     }
 
     private void OnOrderDelivered(Order order)
@@ -253,5 +225,13 @@ public class GameplayTutorialController
         return _cameraController.GetDirectionToSection(section) > 0
             ? TutorialTargetId.CameraMoveRight
             : TutorialTargetId.CameraMoveLeft;
+    }
+
+    private void SetMoveCameraToDeliveryStep()
+    {
+        _state.SetStep(
+            TutorialStep.MoveCameraToDelivery,
+            GetCameraMoveTargetId(CameraSection.Balcony),
+            expectedCameraSection: CameraSection.Balcony);
     }
 }

@@ -310,7 +310,7 @@ MonoBehaviour:
     asset: {fileID: 102900000, guid: ac0ea4cb7f9966a449cec4b9a8674b49, type: 3}
     guid: ac0ea4cb7f9966a449cec4b9a8674b49
   _arcadeLevel: {fileID: 11400000, guid: b35137822e6d4904e8bac130bd7b2748, type: 2}
-  _runTutorial: 0
+  _runTutorial: 1
 --- !u!114 &81969916
 MonoBehaviour:
   m_ObjectHideFlags: 0

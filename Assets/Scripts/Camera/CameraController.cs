@@ -196,14 +196,6 @@ public class CameraController : InputSystem_Actions.IGameplayActions, IDisposabl
         GoToSectionAnimated(CameraSection.Prepping);
     }
 
-    public void OnMoveFrying(InputAction.CallbackContext context)
-    {
-        if (!context.performed)
-            return;
-
-        GoToSectionAnimated(CameraSection.Frying);
-    }
-
     private void QueueDirection(int direction)
     {
         if (direction == 0 || _orderedSections.Length == 0)

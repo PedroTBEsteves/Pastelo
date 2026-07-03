@@ -1,7 +1,9 @@
+using System;
 using Cysharp.Threading.Tasks;
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -12,9 +14,22 @@ public class DowntimeButton : ValidatedMonoBehaviour
 
     [Inject]
     private GameplayLoopFlowController _gameplayLoopFlowController;
+    
+    [Inject]
+    private readonly LevelRunContext _levelRunContext;
 
     private void Awake()
     {
-        _button.onClick.AddListener(() => _gameplayLoopFlowController.LoadDowntime().Forget());
+        switch (_levelRunContext.Mode)
+        {
+            case LevelRunMode.Normal:
+                _button.onClick.AddListener(() => _gameplayLoopFlowController.LoadDowntime().Forget());
+                break;
+            case LevelRunMode.Arcade:
+                SceneManager.LoadScene(0);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 }

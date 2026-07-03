@@ -41,15 +41,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "MoveFrying",
-                    "type": "Button",
-                    "id": "35189fbf-294a-4757-9dc8-cab497d276d7",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -116,17 +107,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "MovePrepping",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4854da12-71e9-476d-8a49-9e650503f6e3",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveFrying",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

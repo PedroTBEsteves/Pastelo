@@ -38,11 +38,10 @@ public class GameplayInteractionGate
         if (context is not CameraSection targetSection || _state.ExpectedCameraSection != targetSection)
             return false;
 
-        if (_state.CurrentStep is TutorialStep.MoveCameraToFrying or TutorialStep.MoveCameraToDelivery)
+        if (_state.CurrentStep == TutorialStep.MoveCameraToDelivery)
             return _state.IsTutorialPastelBeingDragged;
 
         return _state.CurrentStep is TutorialStep.MoveCameraToPrepping
-            or TutorialStep.MoveCameraToFrying
             or TutorialStep.MoveCameraToDelivery;
     }
 }
