@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 6912378456123784561}
   - component: {fileID: 5323813328873235002}
   - component: {fileID: 7753546356225387118}
+  - component: {fileID: 8287756614680922673}
   m_Layer: 0
   m_Name: Closed
   m_TagString: Untagged
@@ -297,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bff05f1d2d97d4409d168375c457744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forceDraggableLayer: 1
 --- !u!114 &3628853816251220452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +409,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567cab21a53a5cc44afb275cb599ebb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8287756614680922673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146083446873447655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3632c8a0b9864489c0c1e67f7339df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _draggable: {fileID: 188576179777124358}
+  _collider: {fileID: 7201732260102892679}
 --- !u!1 &3160242439812138036
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,6 +36,9 @@ public class FryingArea : ValidatedMonoBehaviour
     private readonly GameplayInteractionGate _interactionGate;
 
     [Inject]
+    private readonly GameplayTutorialState _tutorialState;
+
+    [Inject]
     private readonly TutorialTargetRegistry _tutorialTargetRegistry;
     
     private readonly DraggableClosedPastel[] _fryingPastels = new DraggableClosedPastel[4];
@@ -123,6 +126,16 @@ public class FryingArea : ValidatedMonoBehaviour
     private void Update()
     {
         foreach (var pastel in _fryingPastels.Where(pastel => pastel != null))
-            pastel.Fry(Time.deltaTime);
+            pastel.Fry(GetFryDeltaTime());
+    }
+
+    private float GetFryDeltaTime()
+    {
+        var deltaTime = Time.deltaTime;
+
+        if (_tutorialState.IsActive)
+            deltaTime *= 2f;
+        
+        return deltaTime;
     }
 }

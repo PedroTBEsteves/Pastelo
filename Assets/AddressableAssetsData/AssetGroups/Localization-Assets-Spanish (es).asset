@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Assets-Spanish (es)
   m_GUID: 5223ebf6721ffa643b39c8489d6827c2
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 50ed561f3cb0abe488c60d02aaf8db46
+    m_Address: UI_Agradecimentos_QRCode_Espanhol
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 00cef732978168249bd2c406a8c1e2c3, type: 2}
   m_SchemaSet:

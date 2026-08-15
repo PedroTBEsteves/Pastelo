@@ -20,12 +20,12 @@ MonoBehaviour:
     - rid: 1025773489429676124
   m_TableData:
   - m_Id: 13126512640
-    m_Localized: Jogar ({price})
+    m_Localized: Jugar ({price})
     m_Metadata:
       m_Items:
       - rid: 1025773489429676124
   - m_Id: 5847654464925696
-    m_Localized: '{days:plural:{} dia|{} dias}'
+    m_Localized: "{days:plural:{} d\xEDa|{} d\xEDas}"
     m_Metadata:
       m_Items:
       - rid: 1025773489429676124
@@ -35,55 +35,55 @@ MonoBehaviour:
       m_Items:
       - rid: 1025773489429676124
   - m_Id: 5847290776825856
-    m_Localized: Apenas hoje!
+    m_Localized: Solo hoy!
     m_Metadata:
       m_Items: []
   - m_Id: 7313666825695232
-    m_Localized: Recheios
+    m_Localized: Rellenos
     m_Metadata:
       m_Items: []
   - m_Id: 7313753786200064
-    m_Localized: Massas
+    m_Localized: Masas
     m_Metadata:
       m_Items: []
   - m_Id: 7329519277355008
-    m_Localized: Dinheiro recebido---
+    m_Localized: Dinero recibido---
     m_Metadata:
       m_Items: []
   - m_Id: 7329620670459904
-    m_Localized: Pedidos entregues com sucesso---
+    m_Localized: "Pedidos entregados con \xE9xito---"
     m_Metadata:
       m_Items: []
   - m_Id: 7329719471484928
-    m_Localized: Pedidos entregues com falha---
+    m_Localized: Pedidos fallidos---
     m_Metadata:
       m_Items: []
   - m_Id: 7329811167358976
-    m_Localized: "Clientes que n\xE3o encontraram o que queriam---"
+    m_Localized: "Clientes que no encontraron lo que quer\xEDan---"
     m_Metadata:
       m_Items: []
   - m_Id: 7330086024294400
-    m_Localized: Clientes que desistiram na fila---
+    m_Localized: Clientes que abandonaron la fila---
     m_Metadata:
       m_Items: []
   - m_Id: 7330177976020992
-    m_Localized: Clientes que desistiram do pedido---
+    m_Localized: Clientes que cancelaron el pedido---
     m_Metadata:
       m_Items: []
   - m_Id: 7330456154845184
-    m_Localized: Pasteis queimados---
+    m_Localized: Pasteles quemados---
     m_Metadata:
       m_Items: []
   - m_Id: 8049288028794880
-    m_Localized: Recheios e Massas
+    m_Localized: Rellenos y Masas
     m_Metadata:
       m_Items: []
   - m_Id: 8049387190530048
-    m_Localized: Clique e adicione para levar ao local
+    m_Localized: "Haz clic y a\xF1ade para llevar al local"
     m_Metadata:
       m_Items: []
   - m_Id: 8055621910179840
-    m_Localized: Voltar
+    m_Localized: Volver
     m_Metadata:
       m_Items: []
   - m_Id: 8056409617248256

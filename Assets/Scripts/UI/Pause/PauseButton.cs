@@ -18,7 +18,6 @@ public class PauseButton : ValidatedMonoBehaviour
     private void Awake()
     {
         _button.onClick.AddListener(TogglePause);
-        _pausePanel.gameObject.SetActive(false);
     }
 
     private void TogglePause()

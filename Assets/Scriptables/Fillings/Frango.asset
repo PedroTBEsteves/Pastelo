@@ -37,7 +37,7 @@ MonoBehaviour:
   <InternalName>k__BackingField: Frango
   <LocalizationKey>k__BackingField: filling.main.chicken
   <Value>k__BackingField: 0.7
-  <OrderIcon>k__BackingField: {fileID: -9067579133424131347, guid: 1c98568b2e92c754daef3ffa7a17d764, type: 3}
+  <OrderIcon>k__BackingField: {fileID: -6010558184916818172, guid: 2b183236842c8144da6fccb91aa12802, type: 3}
   <SourceSprite>k__BackingField: {fileID: 958791561105770483, guid: ebd81afff30f81f42b1e19390cd5153f, type: 3}
   <DraggablePrefab>k__BackingField: {fileID: 3095736115967226448, guid: 4edae10b43ea76e4aaf1ed2cf160c055, type: 3}
   _tags:

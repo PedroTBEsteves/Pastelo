@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using KBCore.Refs;
 using Reflex.Attributes;
 using UnityEngine;
@@ -53,6 +55,8 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
     private TooltipTarget _tooltipTarget;
     private bool _hasInitializedFriedLevelState;
     private bool _hasPublishedBurntEvent;
+
+    private List<Collider2D> _overlapColliders = new();
 
     private void Awake()
     {
@@ -166,32 +170,33 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         _tutorialEvents.PublishPastelDropped(this);
 
         var mousePosition = _cameraController.ScreenToWorldPoint(eventData.position);
-        var raycastHit = Physics2D.Raycast(
-            mousePosition,
-            Vector2.zero,
-            float.MaxValue,
-            ~LayerMask.GetMask("Draggable"));
+        var filter = new ContactFilter2D();
+        filter.SetLayerMask(~LayerMask.GetMask("Draggable"));
+        _overlapColliders.Clear();
+        var hits = _collider.Overlap(filter, _overlapColliders);
         
-        if (!raycastHit)
+        if (hits == 0)
             return;
 
-        if (CheckFryingArea(raycastHit, mousePosition))
+        if (CheckFryingArea(mousePosition))
         {
             SetFrying(true);
             return;
         }
             
 
-        if (CheckDelivery(raycastHit))
+        if (CheckDelivery())
         {
             Destroy(gameObject);
             return;
         }
     }
 
-    private bool CheckFryingArea(RaycastHit2D raycastHit2D, Vector2 mousePosition)
+    private bool CheckFryingArea(Vector2 mousePosition)
     {
-        if (!raycastHit2D.collider.TryGetComponent(out _fryingArea))
+        var hitFryingArea = _overlapColliders.Any(collider => collider.TryGetComponent(out _fryingArea));
+        
+        if (!hitFryingArea)
             return false;
 
         if (!_fryingArea.TryAdd(this, mousePosition))
@@ -200,9 +205,12 @@ public class DraggableClosedPastel : ValidatedMonoBehaviour
         return true;
     }
 
-    private bool CheckDelivery(RaycastHit2D raycastHit2D)
+    private bool CheckDelivery()
     {
-        if (!raycastHit2D.collider.TryGetComponent<Deliverable>(out var deliverable))
+        Deliverable deliverable = null;
+        var hitDelivery = _overlapColliders.Any(collider => collider.TryGetComponent(out deliverable));
+        
+        if (!hitDelivery)
             return false;
         
         if (!deliverable.TryAddPastel(this))

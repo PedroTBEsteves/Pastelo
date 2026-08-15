@@ -97,7 +97,7 @@ public class CustomerAnimationController : MonoBehaviour
         SetRendererState(_customerSprite, sprite, _customerIdleLocalPosition);
         _isQueueCustomerVisible = false;
         _isDialoguePlaying = true;
-        _iconSprite.enabled = false;
+        SetIconVisible(false);
         StartCustomerBobbing();
     }
 
@@ -134,7 +134,6 @@ public class CustomerAnimationController : MonoBehaviour
             return;
 
         AnimateCustomerArrival(customer.Sprite);
-        _iconSprite.enabled = true;
     }
 
     private void OnCustomerExpired(Customer customer)
@@ -151,12 +150,10 @@ public class CustomerAnimationController : MonoBehaviour
         if (nextCustomer != null)
         {
             AnimateCustomerSwap(currentCustomer.Sprite, nextCustomer.Sprite);
-            _iconSprite.enabled = true;
             return;
         }
 
         AnimateCustomerExit();
-        _iconSprite.enabled = false;
     }
 
     private void OnCustomersCountChanged(int count) => SetQueuedCustomersIndicator(count);
@@ -166,12 +163,10 @@ public class CustomerAnimationController : MonoBehaviour
         if (_customerQueue.TryPeek(out var nextCustomer))
         {
             AnimateCustomerSwap(_customerSprite.sprite, nextCustomer.Sprite);
-            _iconSprite.enabled = true;
             return;
         }
 
         AnimateCustomerExit();
-        _iconSprite.enabled = false;
     }
 
     private void AnimateCustomerArrival(Sprite sprite)
@@ -191,6 +186,7 @@ public class CustomerAnimationController : MonoBehaviour
             {
                 controller.StartCustomerBobbing();
                 controller._customerHoverTween?.EnableTween();
+                controller.SetIconVisible(true);
             });
     }
 
@@ -203,7 +199,8 @@ public class CustomerAnimationController : MonoBehaviour
             _isQueueCustomerVisible = false;
             return;
         }
-
+        
+        SetIconVisible(false);
         StopCustomerTweens();
         ResetTransitionSprite();
         SetRendererState(_customerSprite, _customerSprite.sprite, _customerIdleLocalPosition);
@@ -239,7 +236,8 @@ public class CustomerAnimationController : MonoBehaviour
         SetRendererState(_customerTransitionSprite, outgoingSprite, _customerIdleLocalPosition);
         SetRendererState(_customerSprite, incomingSprite, customerStartLocalPosition);
         _isQueueCustomerVisible = true;
-
+        SetIconVisible(false);
+        
         _customerTransitionMoveTween = Tween.LocalPosition(
                 _customerTransitionSprite.transform,
                 _customerIdleLocalPosition,
@@ -252,7 +250,11 @@ public class CustomerAnimationController : MonoBehaviour
                 customerStartLocalPosition,
                 _customerIdleLocalPosition,
                 _customerMoveTweenSettings)
-            .OnComplete(this, static controller => controller.StartCustomerBobbing());
+            .OnComplete(this, static controller =>
+            {
+                controller.StartCustomerBobbing();
+                controller.SetIconVisible(true);
+            });
     }
 
     private void StopCustomerTweens()
@@ -326,7 +328,7 @@ public class CustomerAnimationController : MonoBehaviour
     private void SetIconVisible(bool visible)
     {
         if (_iconSprite != null)
-            _iconSprite.enabled = visible;
+            _iconSprite.gameObject.SetActive(visible);
     }
 
     private int GetQueuedCustomersCount()
